@@ -7,7 +7,7 @@ let canvas
 // fonts
 let font
 let timeHeader;
-let [ width, height ] = [ 500, 500 ]
+// let [ width, height ] = [ 500, 500 ]
 
 // shaders
 let Shader
@@ -65,7 +65,7 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas( width, height, WEBGL)
+  canvas = createCanvas( windowWidth, windowHeight, WEBGL)
 
   // text options
   // textSize( 24 )
@@ -154,5 +154,5 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas( width, height )
+  resizeCanvas( windowWidth, windowHeight )
 }
