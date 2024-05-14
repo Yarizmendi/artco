@@ -1,12 +1,12 @@
 precision mediump float;
 
 uniform float u_time;
-uniform float u_waves_cnt;
-uniform vec2 u_resolution;
-uniform float u_transit_opacity;
-uniform sampler2D u_noise_tex;
+uniform sampler2D u_noise;
 uniform sampler2D u_foreground;
-uniform sampler2D u_tree_tex;
+uniform sampler2D u_background;
+uniform bool u_is_transition;
+uniform vec2 u_resolution;
+
 varying vec2 vTexCoord;
 
 mat2 scale(vec2 _scale) {
@@ -30,12 +30,12 @@ void main () {
   pos = increasingWaves( pos );
   color = texture2D( u_foreground, pos );
 
-  if ( u_time / 1000.0 > 3.0 ) {
-    vec4 colour2 = texture2D( u_tree_tex, pos );
+  if ( u_is_transition ) {
+    vec4 bg = texture2D( u_background, pos );
 
     float noise = texture2D(
-      u_noise_tex,
-      fract( vTexCoord / u_time   )
+      u_noise,
+      fract( vTexCoord / u_time )
     ).r;
 
     float t = smoothstep(
@@ -44,7 +44,7 @@ void main () {
       noise
     );
 
-    color = mix(color, colour2, t );
+    color = mix(color, bg, t );
 
   }
 

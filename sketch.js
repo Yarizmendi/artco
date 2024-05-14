@@ -9,13 +9,15 @@ let timeHeader;
 let [ width, height ] = [ 500, 500 ]
 
 // shaders
-let OceansShader
-let TreeTransitionShader
+let Shader
 
 // textures
 let oceanTexture
 let treeTexture
 let noiseTexture
+
+// booleans
+let isTransition
 
 
 function preload() {
@@ -25,7 +27,7 @@ function preload() {
   oceanTexture = loadImage( 'images/nature/oceans/red_ocean.png' )
   treeTexture = loadImage( 'images/nature/plants/sunset_tree.jpg' )
 
-  OceansShader = loadShader( 'shaders/stan.vert', 'shaders/main.frag' )
+  Shader = loadShader( 'shaders/stan.vert', 'shaders/main.frag' )
 
 }
 
@@ -38,6 +40,7 @@ function setup() {
   timeHeader = createP("").position( 10, 10 )
   timeHeader.style("background-color", "white")
 
+  isTransition = false
 
 }
 
@@ -46,29 +49,33 @@ function draw() {
   timer = round( millis() / 1000 )
   timeHeader.html(` time elapsed: ${ timer } seconds ` )
 
+  // ocean tide function
+  Shader.setUniform( 'u_time', millis() )
+  Shader.setUniform( 'u_resolution', [ width, height ])
+  Shader.setUniform( 'u_foreground', oceanTexture )
+  Shader.setUniform( 'u_is_transition', isTransition )
 
-  // if ( timer < 45 ) {
-    oceanTide()
-  // } 
-
+  if ( timer % 4 == 0 ) {
+    isTransition = true
+    Shader.setUniform( 'u_background', treeTexture )
+    Shader.setUniform( 'u_is_transition', isTransition )
+    Shader.setUniform( 'u_noise', noiseTexture )
+  }
+  
+  shader( Shader )
+  // ocean tide function
 
   rect( 0, 0, 0 )
 }
 
-// function keyPressed() {
-//   if (key === 's') {
-//     saveCanvas( canvas );
-//   }
-// }
 
 function oceanTide() {
-  OceansShader.setUniform( 'u_time', millis() )
-  OceansShader.setUniform( 'u_resolution', [ width, height ])
-  OceansShader.setUniform( 'u_foreground', oceanTexture )
-  OceansShader.setUniform( 'u_noise_tex', noiseTexture )
-  OceansShader.setUniform( 'u_tree_tex', treeTexture )
-  OceansShader.setUniform( 'u_waves_cnt', 15 )
-  shader( OceansShader )
+  Shader.setUniform( 'u_time', millis() )
+  Shader.setUniform( 'u_resolution', [ width, height ])
+  Shader.setUniform( 'u_foreground', oceanTexture )
+  Shader.setUniform( 'u_background', treeTexture )
+  Shader.setUniform( 'u_noise', noiseTexture )
+  shader( Shader )
 }
 
 function windowResized() {
