@@ -11,23 +11,22 @@ let [ width, height ] = [ 500, 500 ]
 
 // shaders
 let OceansShader
-let oceanTexture
-
-let treeTexture
 let TreeTransitionShader
-let treeTransitionTexture
-let treeTransitionNoiseTexture
 
-let transitOpacity
+// textures
+let oceanTexture
+let treeTexture
+let noiseTexture
+
 
 function preload() {
   font = loadFont('fonts/cabalFont.ttf')
 
-  oceanTexture = loadImage( 'images/ocean.png' )
-  OceansShader = loadShader( 'oceans.vert', 'oceans.frag' )
+  noiseTexture = loadImage( 'images/noise/perlin.png' )
+  oceanTexture = loadImage( 'images/nature/oceans/red_ocean.png' )
+  treeTexture = loadImage( 'images/nature/plants/sunset_tree.jpg' )
 
-  treeTexture = loadImage( 'images/tree.jpg' )
-  treeTransitionNoiseTexture = loadImage( 'images/perlin.png' )
+  OceansShader = loadShader( 'shaders/oceans.vert', 'shaders/oceans.frag' )
 
 }
 
@@ -68,11 +67,10 @@ function keyPressed() {
 }
 
 function oceanTide() {
-  transitOpacity += 0.1;
   OceansShader.setUniform( 'u_time', millis() )
   OceansShader.setUniform( 'u_resolution', [ width, height ])
   OceansShader.setUniform( 'u_foreground', oceanTexture )
-  OceansShader.setUniform( 'u_noise_tex', treeTransitionNoiseTexture )
+  OceansShader.setUniform( 'u_noise_tex', noiseTexture )
   OceansShader.setUniform( 'u_tree_tex', treeTexture )
   OceansShader.setUniform( 'u_waves_cnt', 15 )
   shader( OceansShader )
