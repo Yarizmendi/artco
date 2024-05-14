@@ -1,5 +1,6 @@
 
 // html
+// let slider
 let timer 
 let canvas
 
@@ -25,7 +26,7 @@ function preload() {
   oceanTexture = loadImage( 'images/nature/oceans/red_ocean.png' )
   treeTexture = loadImage( 'images/nature/plants/sunset_tree.jpg' )
 
-  OceansShader = loadShader( 'shaders/stan.vert', 'shaders/main.frag' )
+  OceansShader = loadShader( 'shaders/oceans.vert', 'shaders/oceans.frag' )
 
 }
 
@@ -38,7 +39,11 @@ function setup() {
   timeHeader = createP("").position( 10, 10 )
   timeHeader.style("background-color", "white")
 
-
+  // slider options
+  // slider = createSlider( 15.0, 100.0, 1.0 )
+  // slider.position(10, 10)
+  // slider.size(80)
+  
 }
 
 function draw() {
