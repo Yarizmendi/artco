@@ -1,6 +1,6 @@
 
 // html
-let slider
+// let slider
 let timer 
 let canvas
 
@@ -40,9 +40,9 @@ function setup() {
   timeHeader.style("background-color", "white")
 
   // slider options
-  slider = createSlider( 15.0, 100.0, 1.0 )
-  slider.position(10, 10)
-  slider.size(80)
+  // slider = createSlider( 15.0, 100.0, 1.0 )
+  // slider.position(10, 10)
+  // slider.size(80)
   
 }
 
@@ -60,11 +60,11 @@ function draw() {
   rect( 0, 0, 0 )
 }
 
-function keyPressed() {
-  if (key === 's') {
-    saveCanvas( canvas );
-  }
-}
+// function keyPressed() {
+//   if (key === 's') {
+//     saveCanvas( canvas );
+//   }
+// }
 
 function oceanTide() {
   OceansShader.setUniform( 'u_time', millis() )

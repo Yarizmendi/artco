@@ -1,0 +1,11 @@
+body {
+  display: flex-col;
+  justify-content: center;
+  align-items: center;
+}
+canvas {
+  display: block;
+  border-width: 5px;
+  border-style: solid;
+  border-color: burlywood;
+}
