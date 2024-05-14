@@ -23,13 +23,12 @@ let transitOpacity
 function preload() {
   font = loadFont('fonts/cabalFont.ttf')
 
-  oceanTexture = loadImage( 'ocean.png' )
+  oceanTexture = loadImage( 'images/ocean.png' )
   OceansShader = loadShader( 'oceans.vert', 'oceans.frag' )
 
-  treeTexture = loadImage( 'tree.jpg' )
-  treeTransitionTexture = loadImage( 'transition_one.png' )
-  treeTransitionNoiseTexture = loadImage( 'perlin.png' )
-  TreeTransitionShader = loadShader( 'oceans.vert', 'noiseMix.frag' )
+  treeTexture = loadImage( 'images/tree.jpg' )
+  treeTransitionNoiseTexture = loadImage( 'images/perlin.png' )
+
 }
 
 function setup() {
@@ -80,5 +79,5 @@ function oceanTide() {
 }
 
 function windowResized() {
-  resizeCanvas( width, height );
+  resizeCanvas( width, height )
 }

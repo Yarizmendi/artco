@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "browser-sync start --server"
+    "start": "p5 serve sketch.js"
   },
   "author": "",
   "license": "ISC",
