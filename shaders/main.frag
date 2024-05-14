@@ -15,8 +15,8 @@ mat2 scale(vec2 _scale) {
 }
 
 vec2 increasingWaves( vec2 pos ) {
-  float numer = 15.0 + ( u_time / 1000.0 );
-  pos.y += ( sin( pos.y * numer ) / ( 30.0 + numer ));
+  float numer = 10.0 + ( u_time / 1000.0 );
+  pos.y += ( sin( pos.y * numer ) / ( 25.0 + numer ));
   return pos;
 }
 
@@ -47,7 +47,11 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float tyme ) {
 void main () {
   vec2 pos = vTexCoord;
 
-  pos = increasingWaves( vTexCoord );
+  pos.y = pos.y + (sin(pos.y * 50.)/100.) * (cos(u_time/1000.));
+  pos.x = pos.x + (sin(pos.x * 50.)/100.) * (cos(u_time/1000.));
+
+  pos = increasingWaves( pos );
+
 
   vec4 col;
 

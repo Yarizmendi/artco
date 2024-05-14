@@ -7,7 +7,7 @@ let canvas
 // fonts
 let font
 let timeHeader;
-// let [ width, height ] = [ 500, 500 ]
+let [ width, height ] = [ 700, 500 ]
 
 // shaders
 let Shader
@@ -46,7 +46,7 @@ function preload() {
   firstTexture = loadImage("images/stem/ballerina.png")
   secondTexture = loadImage("images/stem/blue_red_stem.jpg")
 
-  thirdTexture = loadImage("images/stem/glimmer_stem.jpg")
+  thirdTexture = loadImage("images/stem/patents_stem.jpg")
   fourthTexture = loadImage("images/stem/pink_glimpses.png")
 
   fifthTexture = loadImage("images/stem/predicting-the-present.png")
@@ -65,7 +65,7 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas( windowWidth, windowHeight, WEBGL)
+  canvas = createCanvas( width, height, WEBGL)
 
   // text options
   // textSize( 24 )
@@ -154,5 +154,5 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas( windowWidth, windowHeight )
+  resizeCanvas( windowWidth/2, windowHeight/2 )
 }
