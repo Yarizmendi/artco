@@ -14,39 +14,44 @@ mat2 scale(vec2 _scale) {
 }
 
 vec2 increasingWaves( vec2 pos ) {
-  float numer = 50.0 + ( u_time / 1000.0 );
-  pos.y += ( sin( pos.y * numer ) / ( 80.0 + numer ));
+  float numer = 25.0 + ( u_time / 1000.0 );
+  pos.y += ( sin( pos.y * numer ) / ( 30.0 + numer ));
   return pos;
 }
 
 vec2 rollingWaves( vec2 pos ) {
-  return scale( abs( vec2 ( cos( u_time * .00005  )))) * pos;
+  return scale( abs( vec2 ( cos( u_time / 60000.0 )))) * pos;
 }
 
 void main () {
   vec2 pos = vTexCoord;
   vec4 color;
 
-  pos = increasingWaves( pos );
+    pos = increasingWaves( pos );
+
+  // if ( u_time / 1000.0 < 60.0 ) {
+    // pos = rollingWaves( pos );
+  // }
+
+
   color = texture2D( u_foreground, pos );
 
-  if ( u_time / 1000.0 > 3.0 ) {
-    vec4 colour2 = texture2D( u_tree_tex, pos );
 
-    float noise = texture2D(
-      u_noise_tex,
-      fract( vTexCoord / u_time   )
-    ).r;
+  // if ( u_time / 1000.0 > 60.0 ) {
+  //   vec4 colour2 = texture2D( u_tree_tex, pos );
+ 
 
-    float t = smoothstep(
-      0.0 - 0.5,
-      0.0 + 0.5,
-      noise
-    );
+  //   vec4 noise = texture2D( u_noise_tex, fract(pos * 1.5 ));
 
-    color = mix(color, colour2, t );
+  //   float t = smoothstep(
+  //     ( 1.0 - 0.2  ) / ( ( u_time ) / 2500.0 ),
+  //     ( 1.0 + 0.2  ) / ( ( u_time ) / 2500.0 ),
+  //     noise.r
+  //   );
 
-  }
+  //   color = mix(color, colour2, t );
+
+  // }
 
   gl_FragColor = vec4( color );
 
