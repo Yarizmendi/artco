@@ -59,7 +59,7 @@ function preload() {
 
 
   noiseTexture = loadImage( 'images/noise/perlin.png' )
-  Shader = loadShader( 'shaders/stan.vert', 'shaders/main.frag' )
+  Shader = loadShader( 'shaders/standard.vert', 'shaders/stem-trans.frag' )
 
 }
 
@@ -153,5 +153,5 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas( windowWidth/2, windowHeight/2 )
+  resizeCanvas( windowWidth, windowHeight )
 }
