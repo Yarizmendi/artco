@@ -17,7 +17,6 @@ let texturesArray
 
 let changeEvery = 1
 
-
 function preload() {
   font = loadFont('fonts/cabalFont.ttf')
   Shader = loadShader( 'shaders/standard.vert', 'shaders/stem-trans.frag' )
@@ -46,7 +45,7 @@ function preload() {
 
 
 function setup() {
-  canvas = createCanvas( width, height, WEBGL)
+  canvas = createCanvas( windowWidth, windowHeight, WEBGL)
 
   textSize( 24 )
   textFont( font)
@@ -61,10 +60,10 @@ function setup() {
 function draw() {
   background( 0 )
   timer = round( millis() / 1000 ) 
-  timeHeader.html( `${ timer - changeEvery }` )
+  timeHeader.html( `${ timer } seconds` )
 
   Shader.setUniform( 'u_time', millis() )
-  Shader.setUniform( 'u_range', 0.2 )
+  Shader.setUniform( 'u_range', 0.45 )
   Shader.setUniform( 'u_threshold', 1.0 )
   Shader.setUniform( 'u_noise', noiseTexture )
 

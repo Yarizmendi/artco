@@ -11,16 +11,6 @@ uniform sampler2D u_background;
 
 varying vec2 vTexCoord;
 
-mat2 scale(vec2 _scale) {
-  return mat2( _scale.x, 0.0, 0.0, _scale.y );
-}
-
-vec2 increasingWaves( vec2 pos ) {
-  float numer = 10.0 + ( u_time / 1000.0 );
-  pos.y += ( sin( pos.y * numer ) / ( 25.0 + numer ));
-  return pos;
-}
-
 vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float tyme ) {
   vec4 res;
 
@@ -29,8 +19,8 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float tyme ) {
   vec4 noise = texture2D( u_noise, fract(pos * 1.5 ));
 
   float t = smoothstep(
-    ( u_threshold - u_range  ) / ( ( u_time - tyme ) / 2000.0 ),
-    ( u_threshold + u_range  ) / ( ( u_time  - tyme ) / 2000.0 ),
+    ( u_threshold - u_range  ) / ( ( u_time - tyme ) / 1500.0 ),
+    ( u_threshold + u_range  ) / ( ( u_time  - tyme ) / 1500.0 ),
     noise.r
   );
 
@@ -42,17 +32,14 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float tyme ) {
 void main () {
   vec2 pos = vTexCoord;
 
-  pos.y = pos.y + (sin(pos.y * 15.)/100.) * (cos(u_time/1000.));
-  pos.x = pos.x + (cos(pos.x * 15.)/100.) * (sin(u_time/1000.));
+  pos.y = pos.y + (sin(pos.y * 10.)/100.) * (cos(u_time/1000.));
+  pos.x = pos.x + (cos(pos.x * 25.)/100.) * (sin(u_time/1000.));
 
-  pos = increasingWaves( pos );
+  float numer = -10.0 + ( u_time / 1500.0 );
+  pos.y += ( sin( pos.y * numer ) / ( 25.0 + numer ));
+  pos.x += ( cos( pos.x * numer ) / ( 22.0 + numer ));
 
-
-  vec4 col;
-
-  col = transition( pos, u_background, u_foreground, u_tyme );
-
-
+  vec4 col = transition( pos, u_background, u_foreground, u_tyme );
   gl_FragColor = vec4( col );
  
 }
