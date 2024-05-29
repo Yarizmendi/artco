@@ -1,5 +1,7 @@
 precision mediump float;
 
+#define PI 3.14159265359
+
 uniform float u_time;
 uniform float u_waves_cnt;
 uniform vec2 u_resolution;
@@ -8,6 +10,11 @@ uniform sampler2D u_noise_tex;
 uniform sampler2D u_foreground;
 uniform sampler2D u_tree_tex;
 varying vec2 vTexCoord;
+
+mat2 rotate2d(float _angle){
+    return mat2(cos(_angle),-sin(_angle),
+                sin(_angle),cos(_angle));
+}
 
 mat2 scale(vec2 _scale) {
   return mat2( _scale.x, 0.0, 0.0, _scale.y );
@@ -29,10 +36,9 @@ void main () {
 
     pos = increasingWaves( pos );
 
-  // if ( u_time / 1000.0 < 60.0 ) {
-    // pos = rollingWaves( pos );
-  // }
-
+    if ( u_time / 1000.0 < 60.0 ) {
+      pos = rollingWaves( pos );
+    }
 
   color = texture2D( u_foreground, pos );
 
@@ -48,7 +54,7 @@ void main () {
   //     ( 1.0 + 0.2  ) / ( ( u_time ) / 2500.0 ),
   //     noise.r
   //   );
-
+ 
   //   color = mix(color, colour2, t );
 
   // }

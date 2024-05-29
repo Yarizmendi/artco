@@ -1,12 +1,13 @@
 precision mediump float;
 
 uniform float u_time;
+uniform float u_tyme;
+uniform float u_range;
+uniform float u_threshold;
+
 uniform sampler2D u_noise;
 uniform sampler2D u_foreground;
 uniform sampler2D u_background;
-uniform float u_threshold;
-uniform float u_range;
-uniform float u_tyme;
 
 varying vec2 vTexCoord;
 
@@ -20,10 +21,6 @@ vec2 increasingWaves( vec2 pos ) {
   return pos;
 }
 
-vec2 rollingWaves( vec2 pos ) {
-  return scale( abs( vec2 ( cos( u_time * .00005  )))) * pos;
-}
-
 vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float tyme ) {
   vec4 res;
 
@@ -32,14 +29,12 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float tyme ) {
   vec4 noise = texture2D( u_noise, fract(pos * 1.5 ));
 
   float t = smoothstep(
-    ( u_threshold - u_range  ) / ( ( u_time - tyme ) / 2500.0 ),
-    ( u_threshold + u_range  ) / ( ( u_time  - tyme ) / 2500.0 ),
+    ( u_threshold - u_range  ) / ( ( u_time - tyme ) / 2000.0 ),
+    ( u_threshold + u_range  ) / ( ( u_time  - tyme ) / 2000.0 ),
     noise.r
   );
 
   res = mix( color1, color2, t  );
-
-
   return res;
 }
 
@@ -47,8 +42,8 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float tyme ) {
 void main () {
   vec2 pos = vTexCoord;
 
-  pos.y = pos.y + (sin(pos.y * 50.)/100.) * (cos(u_time/1000.));
-  pos.x = pos.x + (sin(pos.x * 50.)/100.) * (cos(u_time/1000.));
+  pos.y = pos.y + (sin(pos.y * 15.)/100.) * (cos(u_time/1000.));
+  pos.x = pos.x + (cos(pos.x * 15.)/100.) * (sin(u_time/1000.));
 
   pos = increasingWaves( pos );
 
