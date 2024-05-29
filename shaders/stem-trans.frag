@@ -40,7 +40,7 @@ void main () {
   }
 
   if ( u_advanced == true ) {
-    float numer = -10.0 + ( u_time / 1000.0 );
+    float numer = ( u_time / 1000.0 );
     pos.y += ( cos( pos.y * numer ) / ( 25.0 + numer ));
     pos.x += ( sin( pos.x * numer ) / ( 22.0 + numer ));
   }

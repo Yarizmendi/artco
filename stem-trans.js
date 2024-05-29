@@ -26,39 +26,38 @@ function preload() {
   Shader = loadShader( 'shaders/standard.vert', 'shaders/stem-trans.frag' )
 
   textures = {
-    "abstract-toon": loadImage("images/stem/abstract_toon_stem.jpg"),
-    "ballerina" : loadImage("images/stem/ballerina.png"),
-
-    "blue_red_stem" : loadImage("images/stem/blue_red_stem.jpg"),
-    "sunset_circles_stem": loadImage("images/stem/sunset_circles_stem.jpg"),
-
-    "pareto" : loadImage("images/stem/in-search-of-pareto.png"),
-    "neon_acts" : loadImage("images/stem/neon_acts.jpg"),
-
-    "orange_acts" : loadImage("images/stem/orange_actuality.png"),
-    "patents_stem" : loadImage("images/stem/patents_stem.jpg"),
-
-    "person_stem" : loadImage("images/stem/person_stem.jpg"),
-    "pink_glimpses" : loadImage("images/stem/pink_glimpses.png"),
-
-    "predicting" : loadImage("images/stem/predicting-the-present.png"),
-    "quantum_ballerina" : loadImage("images/stem/quantum_ballerina.png"),
-
-    "quantum_computer" : loadImage("images/stem/quantum-computer.png"),
-    "reclamation" : loadImage("images/stem/Reclamation.png"),
-
-    "recon_form" : loadImage("images/stem/reconfiguring-formality.jpg"),
-    "resistance" : loadImage("images/stem/resistance.png"),
-    
-    "sid" : loadImage("images/stem/sid.jpg"),
-    "thoughts" : loadImage("images/stem/thoughts_wb.png"),
 
     "yellow_act" : loadImage("images/stem/yellow_actuality.png"),
     "yellow_org" : loadImage("images/stem/yellow_org_collab.jpg"),
 
-    "yellow_stem" : loadImage("images/stem/yellow_org_stem.jpg"),
-    "yellow_red" : loadImage("images/stem/yellow_red_stem.jpg"),
+    "ballerina" : loadImage("images/stem/ballerina.png"),
+    "reclamation" : loadImage("images/stem/Reclamation.png"),
 
+    "yellow_stem" : loadImage("images/stem/yellow_org_stem.jpg"),
+    "orange_acts" : loadImage("images/stem/orange_actuality.png"),
+ 
+    "yellow_red" : loadImage("images/stem/yellow_red_stem.jpg"),
+    "blue_red_stem" : loadImage("images/stem/blue_red_stem.jpg"),
+
+    "sunset_circles_stem": loadImage("images/stem/sunset_circles_stem.jpg"),
+    "pareto" : loadImage("images/stem/in-search-of-pareto.png"),
+
+    "patents_stem" : loadImage("images/stem/patents_stem.jpg"),
+    "person_stem" : loadImage("images/stem/person_stem.jpg"),
+
+    "pink_glimpses" : loadImage("images/stem/pink_glimpses.png"),
+    "predicting" : loadImage("images/stem/predicting-the-present.png"),
+
+    "quantum_ballerina" : loadImage("images/stem/quantum_ballerina.png"),
+    "quantum_computer" : loadImage("images/stem/quantum-computer.png"),
+ 
+    "recon_form" : loadImage("images/stem/reconfiguring-formality.jpg"),
+    "resistance" : loadImage("images/stem/resistance.png"),
+
+    "abstract-toon": loadImage("images/stem/abstract_toon_stem.jpg"),
+    "sid" : loadImage("images/stem/sid.jpg"),
+
+    "thoughts" : loadImage("images/stem/thoughts_wb.png"),
     "perlinNoise" : loadImage( 'images/noise/perlin.png' ),
 
   }
@@ -73,11 +72,11 @@ function setup() {
   timeHeader = createP("").position( windowWidth - 100, 0 )
   timeHeader.style("background-color", "white")
 
-  basicMotion = createCheckbox()
+  basicMotion = createCheckbox( 'basic', true )
   basicMotion.position(0, 10)
 
-  advancedMotion = createCheckbox()
-  advancedMotion.position(10, 10)
+  advancedMotion = createCheckbox( 'advanced', false )
+  advancedMotion.position(0, 30)
 
   texturesArray = Object.values( textures )
   noiseTexture = texturesArray.pop()
@@ -106,6 +105,11 @@ function draw() {
     uTyme += 7000
   }
 
+  if (texture == texturesArray.length-1) {
+    texturesArray = shuffle( texturesArray )
+    texture = 0
+  }
+
   shader( Shader )
   rect( 0, 0, 0 )
 
@@ -114,3 +118,4 @@ function draw() {
 function windowResized() {
   resizeCanvas( windowWidth, windowHeight )
 }
+
