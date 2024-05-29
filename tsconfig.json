@@ -2,12 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      // components
       "@comps": [
         "src/comps"
-      ],
-      "@shaders": [
-        "src/shaders"
       ],
       "@sketches": [
         "src/sketches"
@@ -54,6 +50,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
+    "src/sketches/test.js",
   ],
   "exclude": [
     "node_modules"

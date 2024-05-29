@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-import { AspectRatio, Center } from '@chakra-ui/react'
-import { preload, setup, draw, windowResized } from 'app/sketches/sketch'
+
+import { preload, setup, draw, windowResized } from '../sketches/test'
 
 const importFunction = () => import('react-p5').then((mod) => mod.default)
 let Sketch: any = null
@@ -19,11 +19,9 @@ export function P5jsContainer() {
   return (
     <>
       {mounted && (
-        <Center minW="100vw">
-          <AspectRatio width="100vw" maxW="container.sm" ratio={1}>
-            <Sketch preload={preload} setup={setup} draw={draw} windowResized={windowResized} />
-          </AspectRatio>
-        </Center>
+
+        <Sketch preload={preload} setup={setup} draw={draw} windowResized={windowResized} />
+
       )}
     </>
   )
