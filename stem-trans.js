@@ -17,25 +17,47 @@ let texturesArray
 
 let changeEvery = 1
 
+let basicMotion
+let advancedMotion
+let transitionMotion
+
 function preload() {
   font = loadFont('fonts/cabalFont.ttf')
   Shader = loadShader( 'shaders/standard.vert', 'shaders/stem-trans.frag' )
 
   textures = {
+    "abstract-toon": loadImage("images/stem/abstract_toon_stem.jpg"),
     "ballerina" : loadImage("images/stem/ballerina.png"),
+
     "blue_red_stem" : loadImage("images/stem/blue_red_stem.jpg"),
-    
+    "sunset_circles_stem": loadImage("images/stem/sunset_circles_stem.jpg"),
+
+    "pareto" : loadImage("images/stem/in-search-of-pareto.png"),
+    "neon_acts" : loadImage("images/stem/neon_acts.jpg"),
+
+    "orange_acts" : loadImage("images/stem/orange_actuality.png"),
     "patents_stem" : loadImage("images/stem/patents_stem.jpg"),
+
+    "person_stem" : loadImage("images/stem/person_stem.jpg"),
     "pink_glimpses" : loadImage("images/stem/pink_glimpses.png"),
 
     "predicting" : loadImage("images/stem/predicting-the-present.png"),
+    "quantum_ballerina" : loadImage("images/stem/quantum_ballerina.png"),
+
+    "quantum_computer" : loadImage("images/stem/quantum-computer.png"),
+    "reclamation" : loadImage("images/stem/Reclamation.png"),
+
+    "recon_form" : loadImage("images/stem/reconfiguring-formality.jpg"),
+    "resistance" : loadImage("images/stem/resistance.png"),
+    
+    "sid" : loadImage("images/stem/sid.jpg"),
     "thoughts" : loadImage("images/stem/thoughts_wb.png"),
 
-    "resistance" : loadImage("images/stem/resistance.png"),
+    "yellow_act" : loadImage("images/stem/yellow_actuality.png"),
     "yellow_org" : loadImage("images/stem/yellow_org_collab.jpg"),
 
-    "yellow_act" : loadImage("images/stem/yellow_actuality.png"),
-    "quantum_computer" : loadImage("images/stem/quantum-computer.png"),
+    "yellow_stem" : loadImage("images/stem/yellow_org_stem.jpg"),
+    "yellow_red" : loadImage("images/stem/yellow_red_stem.jpg"),
 
     "perlinNoise" : loadImage( 'images/noise/perlin.png' ),
 
@@ -43,14 +65,19 @@ function preload() {
 
 }
 
-
 function setup() {
   canvas = createCanvas( windowWidth, windowHeight, WEBGL)
 
-  textSize( 24 )
+  textSize( 32 )
   textFont( font)
-  timeHeader = createP("").position( 10, 10 )
+  timeHeader = createP("").position( windowWidth - 100, 0 )
   timeHeader.style("background-color", "white")
+
+  basicMotion = createCheckbox()
+  basicMotion.position(0, 10)
+
+  advancedMotion = createCheckbox()
+  advancedMotion.position(10, 10)
 
   texturesArray = Object.values( textures )
   noiseTexture = texturesArray.pop()
@@ -63,17 +90,20 @@ function draw() {
   timeHeader.html( `${ timer } seconds` )
 
   Shader.setUniform( 'u_time', millis() )
-  Shader.setUniform( 'u_range', 0.45 )
+  Shader.setUniform( 'u_range', 0.25 )
   Shader.setUniform( 'u_threshold', 1.0 )
   Shader.setUniform( 'u_noise', noiseTexture )
+
+  Shader.setUniform( 'u_basic', basicMotion.checked() )
+  Shader.setUniform( 'u_advanced', advancedMotion.checked() )
 
   if ( timer - changeEvery == 0 && texture < texturesArray.length-1  ) {
     Shader.setUniform( 'u_tyme', uTyme )
     Shader.setUniform( 'u_background', texturesArray[ texture ] )
     Shader.setUniform( 'u_foreground', texturesArray[ texture + 1 ] )
-    changeEvery += 10
+    changeEvery += 7
     texture += 1
-    uTyme += 10000
+    uTyme += 7000
   }
 
   shader( Shader )
