@@ -1,27 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@comps": [
-        "src/comps"
-      ],
-      "@sketches": [
-        "src/sketches"
-      ],
-      // hooks
-      // "@hooks": [
-      //   "src/hooks"
-      // ],
-      // "@effects": ["src/hooks/effects"],
-      // "@contexts": ["src/hooks/contexts"],
-      // logic
-      // "@utils": ["src/logic/utilities"],
-      // "@actions": ["src/logic/actions"],
-      // database
-      // "@data": ["src/data/examples"],
-      // "@types": ["src/data/types"],
-      // "@mongo": ["src/data/mongo"],
-    },
     "lib": [
       "dom",
       "dom.iterable",
