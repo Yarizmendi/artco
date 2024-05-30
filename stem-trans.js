@@ -1,24 +1,21 @@
-let timer
-let canvas
 
 let font
-let timeHeader;
-let [width, height] = [700, 500]
+let timer
+let canvas
+let timeHeader
+let randomizeBtn
 
 let Shader
-
 let texture = 0
 let textures = {}
+let texturesArray
+let changeEvery = 1
 let noiseTexture = null
 
-let texturesArray
-
-let changeEvery = 1
-
 let transitionMotion
-
 let [ basicX, basicY ] = []
 let [ advX, advY ] = []
+
 
 function preload() {
   font = loadFont('fonts/cabalFont.ttf')
@@ -64,22 +61,24 @@ function preload() {
 }
 
 function setup() {
-
-  canvas = createCanvas( windowWidth * 3/4 , windowHeight, WEBGL )
-  canvas.position( windowWidth * 1/4, 0 )
-  canvas.style( "border", "solid black 5px" )
+  canvas = createCanvas( windowWidth * 3 / 4 , windowHeight - 20, WEBGL )
+  canvas.position( windowWidth * 1 / 5, 0 )
+  canvas.style( "border", "solid black 10px" )
 
   textSize( 32 )
   textFont( font)
 
-  timeHeader = createP("").position( 10, 0 )
-  transitionMotion = createCheckbox( 'transition', true ).position( 10, 60 )
+  timeHeader = createP("").position( 10, 10 )
+  transitionMotion = createCheckbox( 'transition', true ).position( 5, 60 )
 
-  basicX = createCheckbox( 'basic x', false ).position( 10, 80 )
-  basicY = createCheckbox( 'basic y', false ).position( 10, 100 )
+  basicX = createCheckbox( 'basic x', true ).position( 5, 80 )
+  basicY = createCheckbox( 'basic y', true ).position( 5, 100 )
 
-  advX = createCheckbox( 'adv x', false ).position( 10, 120 )
-  advY = createCheckbox( 'adv y', false ).position( 10, 140 )
+  advX = createCheckbox( 'adv x', true ).position( 5, 120 )
+  advY = createCheckbox( 'adv y', true ).position( 5, 140 )
+
+  randomizeBtn = createButton('random')
+  randomizeBtn.position(  10, 175 )
 
   texturesArray = Object.values( textures ) 
   noiseTexture = texturesArray.pop()
@@ -87,9 +86,9 @@ function setup() {
 }
 
 function draw() {
-  background( 0 )
-  timer = round(millis() / 1000 )
-  timeHeader.html(`${timer} seconds` )
+
+  timer = round( millis() / 1000 )
+  timeHeader.html(`${ timer } seconds` )
 
   Shader.setUniform('u_time', millis() )
   Shader.setUniform('u_range', 0.25 )
@@ -102,30 +101,30 @@ function draw() {
   Shader.setUniform( 'u_advX', advX.checked() )
   Shader.setUniform( 'u_advY', advY.checked() )
 
-  if ( transitionMotion.checked() ) {
-    if ( timer - changeEvery == 0 && texture < texturesArray.length ) {
-      Shader.setUniform('u_tyme', changeEvery * 1000 )
-      Shader.setUniform('u_background', texturesArray[ texture ])
-      Shader.setUniform('u_foreground', texturesArray[texture + 1])
-      changeEvery += 9
-      texture += 1
-    }
-  } else { 
-    changeEvery = timer
-    Shader.setUniform('u_foreground', texturesArray[ texture ])
+  if ( !transitionMotion.checked() ) changeEvery = timer
+  else if ( timer - changeEvery == 0 ) {
+    Shader.setUniform('u_tyme', changeEvery * 1000 )
+    Shader.setUniform('u_background', texturesArray[ texture ])
+    Shader.setUniform('u_foreground', texturesArray[texture + 1])
+    changeEvery += 9
+    texture += 1
   }
 
-  if (texture == texturesArray.length - 1) {
-    texturesArray = shuffle(texturesArray)
-    texture = 0
-  }
-
+  randomizeBtn.mousePressed( randomizeImgs )
+  
   shader(Shader)
   rect(0, 0, 0)
 
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth * 3/4, windowHeight )
+  resizeCanvas(windowWidth * 3 / 4 , windowHeight - 20 )
 }
+
+function randomizeImgs() {
+  texture = 0
+  texturesArray = shuffle(texturesArray)
+  changeEvery = timer
+}
+
 
