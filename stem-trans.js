@@ -64,19 +64,22 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth - 100, windowHeight, WEBGL).position(100, 0)
+
+  canvas = createCanvas( windowWidth * 3/4 , windowHeight, WEBGL )
+  canvas.position( windowWidth * 1/4, 0 )
+  canvas.style( "border", "solid black 5px" )
 
   textSize( 32 )
   textFont( font)
-  timeHeader = createP("").position( 10, 0 ).style("background-color", "white")
 
-  transitionMotion = createCheckbox( 'transition', true ).position( 10, 40 )
+  timeHeader = createP("").position( 10, 0 )
+  transitionMotion = createCheckbox( 'transition', true ).position( 10, 60 )
 
-  basicX = createCheckbox( 'basic x', false ).position( 10, 60 )
-  basicY = createCheckbox( 'basic y', false ).position( 10, 80 )
+  basicX = createCheckbox( 'basic x', false ).position( 10, 80 )
+  basicY = createCheckbox( 'basic y', false ).position( 10, 100 )
 
-  advX = createCheckbox( 'adv x', false ).position( 10, 100 )
-  advY = createCheckbox( 'adv y', false ).position( 10, 120 )
+  advX = createCheckbox( 'adv x', false ).position( 10, 120 )
+  advY = createCheckbox( 'adv y', false ).position( 10, 140 )
 
   texturesArray = Object.values( textures ) 
   noiseTexture = texturesArray.pop()
@@ -123,6 +126,6 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth - 100, windowHeight )
+  resizeCanvas(windowWidth * 3/4, windowHeight )
 }
 
