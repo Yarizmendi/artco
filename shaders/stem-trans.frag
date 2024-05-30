@@ -35,8 +35,8 @@ void main () {
   vec2 pos = vTexCoord;
 
   if ( u_basic == true ) {
-    pos.y = pos.y + (sin(pos.y * 10.)/100.) * (cos(u_time/1000.));
-    pos.x = pos.x + (sin(pos.x * 25.)/100.) * (cos(u_time/1000.));
+    pos.y = pos.y + (sin(pos.y * 10.) /100.) * (cos(u_time/1000.));
+    pos.x = pos.x + (cos(pos.x * 25.) /100.) * (sin(u_time/1000.));
   }
 
   if ( u_advanced == true ) {
