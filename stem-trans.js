@@ -17,8 +17,8 @@ let changeEvery = 1
 
 let transitionMotion
 
-let basicToggle
-let advToggle
+let [ basicX, basicY ] = []
+let [ advX, advY ] = []
 
 function preload() {
   font = loadFont('fonts/cabalFont.ttf')
@@ -70,38 +70,45 @@ function setup() {
   textFont( font)
   timeHeader = createP("").position( 10, 0 ).style("background-color", "white")
 
-  transitionMotion = createCheckbox( 'transition', false ).position( 10, 40 )
-  basicToggle = createCheckbox( 'basic', false ).position( 10, 60 )
-  advToggle = createCheckbox( 'advanced', false ).position( 10, 80 )
+  transitionMotion = createCheckbox( 'transition', true ).position( 10, 40 )
 
-  texturesArray = Object.values(textures)
+  basicX = createCheckbox( 'basic x', false ).position( 10, 60 )
+  basicY = createCheckbox( 'basic y', false ).position( 10, 80 )
+
+  advX = createCheckbox( 'adv x', false ).position( 10, 100 )
+  advY = createCheckbox( 'adv y', false ).position( 10, 120 )
+
+  texturesArray = Object.values( textures ) 
   noiseTexture = texturesArray.pop()
 
 }
 
 function draw() {
-  background(0)
-  timer = round(millis() / 1000)
-  timeHeader.html(`${timer} seconds`)
+  background( 0 )
+  timer = round(millis() / 1000 )
+  timeHeader.html(`${timer} seconds` )
 
-  Shader.setUniform('u_time', millis())
-  Shader.setUniform('u_range', 0.25)
-  Shader.setUniform('u_threshold', 1.0)
-  Shader.setUniform('u_noise', noiseTexture)
-  Shader.setUniform( 'u_basic', basicToggle.checked() )
-  Shader.setUniform( 'u_advanced', advToggle.checked() )
+  Shader.setUniform('u_time', millis() )
+  Shader.setUniform('u_range', 0.25 )
+  Shader.setUniform('u_threshold', 1.0 )
+  Shader.setUniform('u_noise', noiseTexture )
+
+  Shader.setUniform( 'u_basicX', basicX.checked() )
+  Shader.setUniform( 'u_basicY', basicY.checked() )
+
+  Shader.setUniform( 'u_advX', advX.checked() )
+  Shader.setUniform( 'u_advY', advY.checked() )
 
   if ( transitionMotion.checked() ) {
-    if ( timer - changeEvery == 0 && texture < texturesArray.length - 1 ) {
+    if ( timer - changeEvery == 0 && texture < texturesArray.length ) {
       Shader.setUniform('u_tyme', changeEvery * 1000 )
       Shader.setUniform('u_background', texturesArray[ texture ])
       Shader.setUniform('u_foreground', texturesArray[texture + 1])
-      changeEvery += 7
+      changeEvery += 9
       texture += 1
     }
   } else { 
     changeEvery = timer
-    Shader.setUniform('u_background', texturesArray[ texture ])
     Shader.setUniform('u_foreground', texturesArray[ texture ])
   }
 
