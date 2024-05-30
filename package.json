@@ -7,30 +7,24 @@
     "start": "next start"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/react": "^2.8.2",
-    "@chakra-ui/theme-tools": "^2.1.2",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@next/mdx": "^13.4.10",
-    "@types/mdx": "^2.0.5",
-    "@types/node": "^18.16.16",
-    "@types/react": "^18.2.7",
-    "@types/react-dom": "^18.2.4",
+    "@next/mdx": "^14.2.3",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^20.12.13",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "classnames": "^2.5.1",
-    "mongodb": "^6.2.0",
-    "next": "^13.4.4",
+    "mongodb": "^6.7.0",
+    "next": "^14.2.3",
     "p5": "^1.9.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-p5": "^1.4.1"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.9",
-    "autoprefixer": "^10.4.14",
+    "@tailwindcss/typography": "^0.5.13",
+    "autoprefixer": "^10.4.19",
     "encoding": "^0.1.13",
-    "postcss": "^8.4.24",
-    "tailwindcss": "^3.3.2",
-    "typescript": "^4.9.5"
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
   }
 }
