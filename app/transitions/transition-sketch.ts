@@ -1,6 +1,5 @@
 
-export const transitionSketch = ( p5, parentRef ) => {
-
+export function transitionSketch ( p5, parentRef ) {
   let Shader: any
   let textures = {}
   let texturesArr: any[]
@@ -48,21 +47,19 @@ export const transitionSketch = ( p5, parentRef ) => {
 
   p5.setup = () => {
     p5.createCanvas( p5.windowWidth, p5.windowHeight, p5.WEBGL )
+    p5.shader( Shader )
+    Shader.setUniform( "u_range", 0.25 )
+    Shader.setUniform( "u_threshold", 1.0 )
+    Shader.setUniform( "u_timeout", 3000.0 )
   }
 
   p5.draw = () => {
     texturesArr = Object.values( textures )
     Shader.setUniform( "u_noise", texturesArr.pop() )
-    Shader.setUniform( "u_range", 0.25 )
-    Shader.setUniform( "u_threshold", 1.0 )
-    Shader.setUniform( "u_timeout", 10000.0 )
     Shader.setUniform( "u_time", p5.millis() )
     Shader.setUniform( "u_background", texturesArr[ 0 ] )
     Shader.setUniform( "u_foreground", texturesArr[ 1 ] )
-
-    p5.shader( Shader )
     p5.rect( 0, 0, 0 )
-
   }
 
 }
