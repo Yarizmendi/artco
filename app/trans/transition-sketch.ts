@@ -7,8 +7,9 @@ export function transitionSketch ( p5, parentRef ) {
   let timer: number
   let canvas
   let timeHeader
-
-  let idx = 1
+  let changeEvery = 1
+  let idx = 0
+  let noiseTexture
 
   let [ width, height ] = [
     p5.windowWidth / 1.75,
@@ -20,7 +21,7 @@ export function transitionSketch ( p5, parentRef ) {
     Shader = p5.loadShader( 'shaders/standard.vert', 'shaders/transitions.frag' )
 
     textures = {
-      "perlinNoise": p5.loadImage('images/noise/perlin.png'),
+
 
       "yellow_act": p5.loadImage("images/stem/yellow_actuality.png"),
       "yellow_org": p5.loadImage("images/stem/yellow_org_collab.jpg"),
@@ -53,6 +54,7 @@ export function transitionSketch ( p5, parentRef ) {
       "sid": p5.loadImage("images/stem/sid.jpg"),
   
       "thoughts": p5.loadImage("images/stem/thoughts_wb.png"),
+      "perlinNoise": p5.loadImage('images/noise/perlin.png'),
 
     }
 
@@ -61,22 +63,30 @@ export function transitionSketch ( p5, parentRef ) {
   p5.setup = ( parentRef ) => {
     canvas = p5.createCanvas( width, height, p5.WEBGL ).parent( parentRef )
     texturesArr = Object.values( textures )
-    timeHeader = p5.createP("").parent( parentRef )
-    p5.shader( Shader )
+    noiseTexture = texturesArr.pop()
   }
 
   p5.draw = ( parentRef ) => {
+
     timer = p5.round( p5.millis() / 1000  )
-    // timeHeader
-    Shader.setUniform( "u_range", 0.25 )
-    Shader.setUniform( "u_threshold", 1.0 )
-    Shader.setUniform( "u_timeout", 6000.0 )
 
     Shader.setUniform( "u_time", p5.millis() )
-    Shader.setUniform( "u_noise", texturesArr[ 0 ] )
-    Shader.setUniform( "u_foreground", texturesArr[ idx ] )
-    Shader.setUniform( "u_background",  texturesArr[ idx + 1 ] )
+    Shader.setUniform( "u_range", 0.25 )
+    Shader.setUniform( "u_threshold", 1.0 )
+    Shader.setUniform( "u_noise", noiseTexture )
 
+    // Shader.setUniform( "u_background",  texturesArr[ idx ] )
+
+    // changeEvery = timer
+    if ( timer - changeEvery == 0 ) {
+      Shader.setUniform( "u_timeout", changeEvery * 1000.5 )
+      Shader.setUniform( "u_background",  texturesArr[ idx ] )
+      Shader.setUniform( "u_foreground", texturesArr[ idx + 1 ] )
+      changeEvery += 7
+      idx += 1
+    }
+
+    p5.shader( Shader )
     p5.rect( 0, 0, 0 )
 
   }
