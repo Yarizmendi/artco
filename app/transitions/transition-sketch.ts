@@ -1,11 +1,11 @@
 
-export function transitionSketch  ( p5, parentRef )  {
+export const transitionSketch = ( p5, parentRef ) => {
 
   let Shader: any
   let textures = {}
   let texturesArr: any[]
 
-  p5.preload = function () {
+  p5.preload = () => {
     p5.loadFont('fonts/cabalFont.ttf')
     Shader = p5.loadShader( 'shaders/standard.vert', 'shaders/transitions.frag' )
 
@@ -46,19 +46,17 @@ export function transitionSketch  ( p5, parentRef )  {
 
   }
 
-  p5.setup = function () {
+  p5.setup = () => {
     p5.createCanvas( p5.windowWidth, p5.windowHeight, p5.WEBGL )
-
-    texturesArr = Object.values( textures )
-    Shader.setUniform( "u_noise", texturesArr.pop() )
   }
 
-  p5.draw = function () {
-    Shader.setUniform( "u_time", p5.millis() )
+  p5.draw = () => {
+    texturesArr = Object.values( textures )
+    Shader.setUniform( "u_noise", texturesArr.pop() )
     Shader.setUniform( "u_range", 0.25 )
     Shader.setUniform( "u_threshold", 1.0 )
-    Shader.setUniform( "u_timeout", 3000.0 )
-
+    Shader.setUniform( "u_timeout", 10000.0 )
+    Shader.setUniform( "u_time", p5.millis() )
     Shader.setUniform( "u_background", texturesArr[ 0 ] )
     Shader.setUniform( "u_foreground", texturesArr[ 1 ] )
 

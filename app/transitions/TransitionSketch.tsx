@@ -27,10 +27,9 @@ export function TransitionSketch () {
       }
     }
 
-    initP5()
-
-    if ( p5Instance ) return p5Instance.remove()
-
+    if ( !p5Instance ) initP5()
+    else p5Instance.remove()
+    
   }, [ isMounted, sketch ] )
 
   return ( 
