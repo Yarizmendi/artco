@@ -1,14 +1,25 @@
 
 export function transitionSketch ( p5, parentRef ) {
+
   let Shader: any
   let textures = {}
   let texturesArr: any[]
+  let timer: number
+  let canvas
+  let timeHeader
 
-  p5.preload = () => {
+  let [ width, height ] = [
+    p5.windowWidth / 1.75,
+    p5.windowHeight / 1.25
+  ]
+
+  p5.preload = ( parentRef ) => {
     p5.loadFont('fonts/cabalFont.ttf')
     Shader = p5.loadShader( 'shaders/standard.vert', 'shaders/transitions.frag' )
 
     textures = {
+      "perlinNoise": p5.loadImage('images/noise/perlin.png'),
+
       "yellow_act": p5.loadImage("images/stem/yellow_actuality.png"),
       "yellow_org": p5.loadImage("images/stem/yellow_org_collab.jpg"),
   
@@ -40,26 +51,35 @@ export function transitionSketch ( p5, parentRef ) {
       "sid": p5.loadImage("images/stem/sid.jpg"),
   
       "thoughts": p5.loadImage("images/stem/thoughts_wb.png"),
-      "perlinNoise": p5.loadImage('images/noise/perlin.png'),
+
     }
 
   }
 
-  p5.setup = () => {
-    p5.createCanvas( p5.windowWidth, p5.windowHeight, p5.WEBGL )
+  p5.setup = ( parentRef ) => {
+    canvas = p5.createCanvas( width, height, p5.WEBGL )
+    texturesArr = Object.values( textures )
     p5.shader( Shader )
-    Shader.setUniform( "u_range", 0.25 )
-    Shader.setUniform( "u_threshold", 1.0 )
-    Shader.setUniform( "u_timeout", 3000.0 )
   }
 
-  p5.draw = () => {
-    texturesArr = Object.values( textures )
-    Shader.setUniform( "u_noise", texturesArr.pop() )
+  p5.draw = ( parentRef ) => {
+
+    // timer = p5.round( p5.millis() / 1000  )
+    // timeHeader = p5.createP(`${ timer }`).position( 500, 50 )
+    // timeHeader.style("background", "black")
+
+    Shader.setUniform( "u_range", 0.25 )
+    Shader.setUniform( "u_threshold", 1.0 )
+    Shader.setUniform( "u_timeout", 6000.0 )
+
     Shader.setUniform( "u_time", p5.millis() )
-    Shader.setUniform( "u_background", texturesArr[ 0 ] )
+    Shader.setUniform( "u_noise", texturesArr[ 0 ] )
     Shader.setUniform( "u_foreground", texturesArr[ 1 ] )
+    Shader.setUniform( "u_background",  texturesArr[ 2 ] )
+
     p5.rect( 0, 0, 0 )
   }
+
+
 
 }

@@ -12,7 +12,6 @@ export default function SketchContainer() {
   async function initSketch() {
     const p5 = ( await import( "p5" )).default
     const mp5 = new p5( sketch, parentRef.current )
-    // p5Instance = new p5( p => sketch( p, parentRef.current ))
     return mp5.remove
   }
 
@@ -21,5 +20,7 @@ export default function SketchContainer() {
     initSketch()
   }, [ isMounted ] )
 
-  return <div className="border-4 border-black" ref={ parentRef } />
+  return ( 
+    <div className="border-4 border-purple-500 min-w-[300px] max-w-[1200px]" ref={ parentRef } /> 
+  )
 }
