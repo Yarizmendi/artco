@@ -1,8 +1,8 @@
 precision mediump float;
 
 uniform float u_time;
-uniform float u_timeout;
 uniform float u_range;
+uniform float u_timeout;
 uniform float u_threshold;
 
 uniform sampler2D u_noise;
@@ -18,7 +18,7 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
   vec4 noise = texture2D( u_noise, fract(pos * 1.5 ));
 
   float t = smoothstep(
-    ( u_threshold - u_range  ) / ( ( u_time - timeout ) / 1300.0 ),
+    ( u_threshold - u_range  ) / ( ( u_time - timeout ) /  1300.0 ),
     ( u_threshold + u_range  ) / ( ( u_time  - timeout ) / 1300.0 ),
     noise.r
   );

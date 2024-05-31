@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "@shaders": [ "public/shaders" ]
+    },
     "lib": [
       "dom",
       "dom.iterable",

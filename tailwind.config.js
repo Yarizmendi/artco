@@ -2,8 +2,7 @@
 module.exports = {
   darkMode: 'class',
   content: [
-    "./src/app/**/*.{jsx,tsx,mdx}",
-    "./src/comps/**/*.{jsx,tsx,mdx}",
+    "./app/**/*.{jsx,tsx,mdx}",
   ],
   plugins: [
     require('@tailwindcss/typography'),
