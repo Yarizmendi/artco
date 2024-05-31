@@ -8,6 +8,8 @@ export function transitionSketch ( p5, parentRef ) {
   let canvas
   let timeHeader
 
+  let idx = 1
+
   let [ width, height ] = [
     p5.windowWidth / 1.75,
     p5.windowHeight / 1.25
@@ -57,29 +59,34 @@ export function transitionSketch ( p5, parentRef ) {
   }
 
   p5.setup = ( parentRef ) => {
-    canvas = p5.createCanvas( width, height, p5.WEBGL )
+    canvas = p5.createCanvas( width, height, p5.WEBGL ).parent( parentRef )
     texturesArr = Object.values( textures )
+    timeHeader = p5.createP("").parent( parentRef )
     p5.shader( Shader )
   }
 
   p5.draw = ( parentRef ) => {
-
-    // timer = p5.round( p5.millis() / 1000  )
-    // timeHeader = p5.createP(`${ timer }`).position( 500, 50 )
-    // timeHeader.style("background", "black")
-
+    timer = p5.round( p5.millis() / 1000  )
+    // timeHeader
     Shader.setUniform( "u_range", 0.25 )
     Shader.setUniform( "u_threshold", 1.0 )
     Shader.setUniform( "u_timeout", 6000.0 )
 
     Shader.setUniform( "u_time", p5.millis() )
     Shader.setUniform( "u_noise", texturesArr[ 0 ] )
-    Shader.setUniform( "u_foreground", texturesArr[ 1 ] )
-    Shader.setUniform( "u_background",  texturesArr[ 2 ] )
+    Shader.setUniform( "u_foreground", texturesArr[ idx ] )
+    Shader.setUniform( "u_background",  texturesArr[ idx + 1 ] )
 
     p5.rect( 0, 0, 0 )
+
   }
 
+  p5.windowResized = function ( parentRef )  {
+    p5.resizeCanvas( 
+      p5.windowWidth / 1.75, 
+      p5.windowHeight / 1.25
+    )
+  }
 
 
 }
