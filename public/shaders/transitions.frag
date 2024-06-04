@@ -30,8 +30,8 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
 void main () {
   vec2 pos = vTexCoord;
 
-  // pos.x = pos.x + ( sin( pos.x * 25. ) / 100. ) * ( cos( u_time / 1000. ));
-  // pos.y = pos.y + ( sin( pos.y * 10. ) / 100. ) * ( cos( u_time / 1000. ));
+  pos.x = pos.x + ( sin( pos.x * 25. ) / 100. ) * ( cos( u_time / 1000. ));
+  pos.y = pos.y + ( sin( pos.y * 10. ) / 100. ) * ( cos( u_time / 1000. ));
 
   vec4 col = transition( pos, u_background, u_foreground, u_timeout );
   gl_FragColor = vec4( col );
