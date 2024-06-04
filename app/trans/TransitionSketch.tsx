@@ -86,19 +86,22 @@ function sketch ( p5, parentRef ) {
     timeHeader.html(`${ timer } seconds`)
 
     Shader.setUniform( "u_time", p5.millis() )
-    Shader.setUniform( "u_range", 0.2 )
+    Shader.setUniform( "u_range", 0.5 )
     Shader.setUniform( "u_threshold", 1.0 )
 
     Shader.setUniform( "u_time", p5.millis() )
     Shader.setUniform( "u_noise", noiseTexture )
-    Shader.setUniform( "u_background",  texturesArr[ idx  ] )
-    Shader.setUniform( "u_foreground", texturesArr[ idx + 1 ] ) 
 
-   
+    Shader.setUniform( "u_foreground", texturesArr[ idx +1 ] ) 
+    Shader.setUniform( "u_background",  texturesArr[ idx ] )
+
     if ( timer > changeEvery ) {
-      Shader.setUniform( "u_timeout", p5.millis() )
-      if ( idx < texturesArr.length-1) idx++
-      changeEvery += 7
+      if ( idx < texturesArr.length-1) {
+        changeEvery += 9
+        Shader.setUniform( "u_timeout", p5.millis() )
+        idx += 1
+      }
+      
     }
 
     Shader.setUniform( "u_basicX", basicX.checked() ) 

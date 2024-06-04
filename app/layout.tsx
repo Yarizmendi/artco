@@ -13,7 +13,7 @@ export default function RootLayout({
         <nav className=" border-2 w-full flex justify-around items-center mb-4" >
             <Link href={"/noise"}> Noise </Link>
             <Link href={"/mixes"}> Mixes </Link>
-            <Link href={"/blends"}> Blends </Link>
+            <Link href={"/ocean"}> Ocean </Link>
             <Link href={"/rotate"}> Rotate </Link>
             <Link href={"/trans"}> Transitions </Link>
         </nav>

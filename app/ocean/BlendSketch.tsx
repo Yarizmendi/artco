@@ -24,11 +24,14 @@ function sketch( p5, ref ) {
 
     p5.draw = () => {
         Shader.setUniform( "u_time", p5.millis() )
-        Shader.setUniform( "u_waves", 10.0 )
-        Shader.setUniform( "u_speed", 1000.0 )
         Shader.setUniform( "u_duration", 60000.0 )
         Shader.setUniform( "u_texture", texture)
+        Shader.setUniform( "u_waves", p5.noise(25, 150 ))
+        Shader.setUniform( "u_speed", p5.noise(500,1500 ))
 
+       
+
+       
         p5.shader( Shader )
         p5.rect( 0, 0, 0 )
 

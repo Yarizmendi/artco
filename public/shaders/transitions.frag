@@ -19,7 +19,7 @@ uniform bool u_transition;
 varying vec2 vTexCoord;
 
 vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
-  vec4 res;
+
   vec4 color1 = texture2D( bg, pos );
   vec4 color2 = texture2D( fg, pos );
   vec4 noise = texture2D( u_noise, ( pos ) );
@@ -30,7 +30,7 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
     noise.r
   );
 
-  res = mix( color1, color2, t  );
+  vec4 res = mix( color1, color2, t  );
   return res;
 }
 
