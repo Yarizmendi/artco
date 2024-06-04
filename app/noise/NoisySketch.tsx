@@ -8,8 +8,6 @@ function sketch( p5, ref ) {
     let background: any
     let foreground: any
     let noise: any
-    let timeHeader: any
-    let timer: any
 
 
     let [ width, height ] = [
@@ -18,23 +16,17 @@ function sketch( p5, ref ) {
     ]
 
     p5.preload = () => {
-        p5.loadFont('fonts/cabalFont.ttf')
-        Shader = p5.loadShader( 'shaders/standard.vert', 'shaders/mix.frag' )
-        background = p5.loadImage("images/stem/thoughts_wb.png")
+        Shader = p5.loadShader( 'shaders/standard.vert', 'shaders/noise.frag' )
+        background = p5.loadImage("images/stem/yellow_actuality.png"),
         foreground = p5.loadImage("images/stem/ballerina.png")
         noise = p5.loadImage("images/noise/perlin.png")
     }
 
     p5.setup = () => {
-        p5.createCanvas( width, height, p5.WEBGL ).parent( ref )
-        timeHeader = p5.createP("")
+      p5.createCanvas( width, height, p5.WEBGL ).parent( ref )
     }
 
     p5.draw = () => {
-
-      timer = p5.round( p5.millis() / 1000 )
-      timeHeader.html(`${ timer } seconds`)
-
         Shader.setUniform( "u_time", p5.millis() )
         Shader.setUniform( "u_noise", noise )
         Shader.setUniform( "u_background", background)
@@ -48,8 +40,8 @@ function sketch( p5, ref ) {
     
 }
 
-export default function MixSketch() {
-    const mixSketchRef = useRef()
+export default function NoisySketch() {
+    const noisySketchRef = useRef()
     const [ isMounted, setIsMounted ] = useState( false )
     useEffect(() => { setIsMounted( true ) }, [])
 
@@ -57,7 +49,7 @@ export default function MixSketch() {
 
     async function initSketch() {
         const p5 = ( await import( "p5" )).default
-        return new p5( sketch, mixSketchRef.current )
+        return new p5( sketch, noisySketchRef.current )
       }
     
 
@@ -70,6 +62,6 @@ export default function MixSketch() {
     useEffect(() => {}, [ sketch ])
 
   return(
-    <div className="border-4 border-black min-w-[300px] max-w-[1200px]" ref={ mixSketchRef } /> 
+    <div className="border-4 border-black min-w-[300px] max-w-[1200px]" ref={ noisySketchRef } /> 
   )
 }

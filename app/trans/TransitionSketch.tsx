@@ -10,11 +10,17 @@ function sketch ( p5, parentRef ) {
   let texturesArr: any[]
   let timer: number
 
-  let timeHeader
+  let timeHeader: any
 
-  let changeEvery = 6
+  let changeEvery = 0
   let idx = 0
-  let noiseTexture
+  let noiseTexture: any
+
+  let basicX: any
+  let basicY: any
+  let advX: any
+  let advY: any
+
 
   let [ width, height ] = [
     p5.windowWidth / 1.15,
@@ -68,6 +74,10 @@ function sketch ( p5, parentRef ) {
   p5.setup = ( parentRef ) => {
     p5.createCanvas( width, height, p5.WEBGL ).parent( parentRef )
     timeHeader = p5.createP("")
+    basicX = p5.createCheckbox('basicX', false )
+    basicY = p5.createCheckbox('basicY', false )
+    advX = p5.createCheckbox('advX', false )
+    advY = p5.createCheckbox('advY', false )
   }
 
   p5.draw = ( parentRef ) => {
@@ -76,18 +86,25 @@ function sketch ( p5, parentRef ) {
     timeHeader.html(`${ timer } seconds`)
 
     Shader.setUniform( "u_time", p5.millis() )
-    Shader.setUniform( "u_range", 0.0 )
+    Shader.setUniform( "u_range", 0.2 )
     Shader.setUniform( "u_threshold", 1.0 )
 
     Shader.setUniform( "u_time", p5.millis() )
     Shader.setUniform( "u_noise", noiseTexture )
-    Shader.setUniform( "u_background",  texturesArr[ idx ] )
+    Shader.setUniform( "u_background",  texturesArr[ idx  ] )
     Shader.setUniform( "u_foreground", texturesArr[ idx + 1 ] ) 
 
+   
     if ( timer > changeEvery ) {
-      changeEvery = changeEvery + 6
+      Shader.setUniform( "u_timeout", p5.millis() )
       if ( idx < texturesArr.length-1) idx++
+      changeEvery += 7
     }
+
+    Shader.setUniform( "u_basicX", basicX.checked() ) 
+    Shader.setUniform( "u_basicY", basicY.checked() ) 
+    Shader.setUniform( "u_advX", advX.checked() ) 
+    Shader.setUniform( "u_advY", advY.checked() ) 
 
     p5.shader( Shader )
     p5.rect( 0, 0, 0 )
@@ -96,7 +113,7 @@ function sketch ( p5, parentRef ) {
 
   p5.windowResized = function ( parentRef )  {
     p5.resizeCanvas( 
-      p5.windowWidth / 1.75, 
+      p5.windowWidth / 1.15, 
       p5.windowHeight / 1.25
     )
   }

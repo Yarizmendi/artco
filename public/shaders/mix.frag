@@ -12,8 +12,8 @@ void main() {
 
   vec4 color1 = texture2D( u_background, pos );
   vec4 color2 = texture2D( u_foreground, pos );
-  vec4 noise = texture2D( u_noise, fract(pos * 1.5 ));
+  vec4 noise = texture2D( u_noise, fract(pos * 2. ));
 
-  vec4 color =  mix( color1, color2, pos );
+  vec4 color =  mix( color1, color2, .5 );
   gl_FragColor = vec4( color );
 }
