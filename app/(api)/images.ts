@@ -63,9 +63,19 @@ export const places = [
   { path: "polluted_ocean.jpg" },
 ]
 
+export const fam = [
+  { path: "fam.jpg" },
+  { path: "fam1.jpg" },
+  { path: "fam2.jpg" },
+  { path: "fam3.jpg" },
+  { path: "fam4.jpg" },
+  { path: "fam5.jpg" },
+]
+
 export const noiseTextures = [
   { path: "perlin.png" }
 ]
+
 
 export const allImages = [
   ...places,

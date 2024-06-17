@@ -1,3 +1,3 @@
 
-import { HomePage } from "./Home"
-export default HomePage
+import { BrowseArt } from "./BrowseArt"
+export default BrowseArt
