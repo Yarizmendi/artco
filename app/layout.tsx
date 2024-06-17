@@ -13,16 +13,15 @@ interface IRootLayout {
 
 export default function RootLayout({ children }: IRootLayout) {
   return (
-    <html className="h-full w-full bg-gray-900 text-white text-md p-[20px]" lang="en">
-      <body className="h-fill w-fill px-[20px]">
-        <menu className="flex justify-end py-[20px]">
-          <nav className="w-[420px] tracking-wide uppercase text-sm">
+    <html className="h-full w-full bg-gray-900 text-white text-md py-[40px] px-[60px]" lang="en">
+      <body>
+        <menu className="flex justify-end p-[10px]">
+          <nav className="flex justify-between min-w-[260px] tracking-wide uppercase text-[12px]">
             { sketchTypes.map(( link, idx ) => 
               <Link 
                 key={ idx }
                 href={ link.path }
-                className="mr-4"
-                > { link.text }
+              > { link.text }
               </Link> 
             )}
           </nav>

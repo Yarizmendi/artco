@@ -1,7 +1,7 @@
 
 import { fam, noiseTextures } from "app/(api)/images"
 
-export function sketch ( p5 ) {
+export function familySketch ( p5: any, parentRef: any ) {
 
   let Shader: any
   let texturesArr: any[]
@@ -19,7 +19,7 @@ export function sketch ( p5 ) {
     noiseTex = p5.loadImage(`images/${ noiseTextures[0].path }`)
   }
 
-  p5.setup = ( parentRef ) => {
+  p5.setup = () => {
     p5.pixelDensity( 1 )
     p5.createCanvas( width, height, p5.WEBGL ).parent( parentRef )
   }
@@ -54,4 +54,5 @@ export function sketch ( p5 ) {
       p5.windowHeight / 1.2
     )
   }
+
 }

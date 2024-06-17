@@ -1,7 +1,7 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import { sketch } from "./fam-sketch"
+import { familySketch as sketch } from "./family-sketch"
 
 export default function FamilySketch() {
   let mp5 = null
