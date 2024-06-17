@@ -37,23 +37,23 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
 void main () {
   vec2 pos = vTexCoord;
 
- if ( u_basicX == true ) {
+//  if ( u_basicX == true ) {
     pos.x = pos.x + (cos(pos.x * 10. ) / 100. ) * (sin(u_time / 1000. ));
-  }
+  // }
 
-  if ( u_basicY == true ) {
+  // if ( u_basicY == true ) {
     pos.y = pos.y + (sin(pos.y * 25.) / 100. ) * (cos(u_time / 1000. ));
-  }
+  // }
 
   float numer = -10.0 + ( u_time / 1000.0 );
 
-  if ( u_advX == true ) {
+  // if ( u_advX == true ) {
     pos.x += ( sin( pos.x * numer ) / ( 22.0 + numer ));
-  }
+  // }
 
-  if ( u_advY == true ) {
+  // if ( u_advY == true ) {
     pos.y += ( cos( pos.y * numer ) / ( 25.0 + numer ));
-  }
+  // }
 
   
   vec4 col = transition( pos, u_background, u_foreground, u_timeout );

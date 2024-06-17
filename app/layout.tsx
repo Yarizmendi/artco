@@ -16,12 +16,13 @@ export default function RootLayout({ children }: IRootLayout) {
     <html className="h-full w-full bg-gray-900 text-white text-md p-[20px]" lang="en">
       <body className="h-fill w-fill px-[20px]">
         <menu className="flex justify-end py-[20px]">
-          <nav className="w-[420px] flex justify-between tracking-wide uppercase text-sm">
+          <nav className="w-[420px] tracking-wide uppercase text-sm">
             { sketchTypes.map(( link, idx ) => 
               <Link 
                 key={ idx }
-                href={ link.path }>
-                { link.text }
+                href={ link.path }
+                className="mr-4"
+                > { link.text }
               </Link> 
             )}
           </nav>

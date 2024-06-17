@@ -66,10 +66,10 @@ export const places = [
 export const fam = [
   { path: "fam.jpg" },
   { path: "fam1.jpg" },
-  { path: "fam2.jpg" },
-  { path: "fam3.jpg" },
   { path: "fam4.jpg" },
   { path: "fam5.jpg" },
+  { path: "fam3.jpeg" },
+  { path: "fam2.jpg" },
 ]
 
 export const noiseTextures = [
