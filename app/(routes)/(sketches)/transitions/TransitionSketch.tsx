@@ -11,7 +11,7 @@ function sketch ( p5, parentRef ) {
 
   let timeHeader: any
 
-  let changeEvery = 10
+  let changeEvery = 25
   let idx = 0
   let noiseTexture: any
 
@@ -42,7 +42,7 @@ function sketch ( p5, parentRef ) {
     timer = p5.round( p5.millis() / 1000 )
 
     Shader.setUniform( "u_time", p5.millis() )
-    Shader.setUniform( "u_range", 0.25 )
+    Shader.setUniform( "u_range", 0.0 )
     Shader.setUniform( "u_threshold", 1.0 )
 
     Shader.setUniform( "u_noise", noiseTexture )
@@ -53,7 +53,7 @@ function sketch ( p5, parentRef ) {
       Shader.setUniform( "u_background",  texturesArr[ idx ])
     }
     else if ( texturesArr.length-2 > idx ) {
-      changeEvery += 10
+      changeEvery += 25
       idx+=1
       Shader.setUniform( "u_timeout", p5.millis() )
     } 

@@ -6,11 +6,11 @@ export function sketch ( p5 ) {
   let Shader: any
   let texturesArr: any[]
   let timer: number
-  let changeEvery = 10
+  let changeEvery = 20
   let idx = 0
   let noiseTex: any
 
-  let [ width, height ] = [ p5.windowWidth / 2, p5.windowHeight / 1.5 ]
+  let [ width, height ] = [ p5.windowWidth / 2, p5.windowHeight / 1.2 ]
 
   p5.preload = () => {
     p5.loadFont('fonts/cabalFont.ttf')
@@ -27,7 +27,7 @@ export function sketch ( p5 ) {
   p5.draw = () => {
     timer = p5.round( p5.millis() / 1000 )
 
-    Shader.setUniform( "u_range", 0.25 )
+    Shader.setUniform( "u_range", 0.2 )
     Shader.setUniform( "u_threshold", 1.0 )
     Shader.setUniform( "u_noise", noiseTex )
     Shader.setUniform( "u_time", p5.millis() )
@@ -38,7 +38,7 @@ export function sketch ( p5 ) {
       Shader.setUniform( "u_background",  texturesArr[ idx ])
     }
     else if ( texturesArr.length-2 > idx ) {
-      changeEvery += 10
+      changeEvery += 20
       idx+=1
       Shader.setUniform( "u_timeout", p5.millis() )
     } 
@@ -51,7 +51,7 @@ export function sketch ( p5 ) {
   p5.windowResized = function()  {
     p5.resizeCanvas( 
       p5.windowWidth / 2, 
-      p5.windowHeight / 1.5
+      p5.windowHeight / 1.2
     )
   }
 }

@@ -64,7 +64,6 @@ export const places = [
 ]
 
 export const fam = [
-  { path: "fam.jpg" },
   { path: "fam1.jpg" },
   { path: "fam4.jpg" },
   { path: "fam5.jpg" },
