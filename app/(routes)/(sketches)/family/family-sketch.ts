@@ -6,7 +6,7 @@ export function familySketch ( p5: any, parentRef: any ) {
   let Shader: any
   let texturesArr: any[]
   let timer: number
-  let changeEvery = 20
+  let changeEvery = 15
   let idx = 0
   let noiseTex: any
 
@@ -38,7 +38,7 @@ export function familySketch ( p5: any, parentRef: any ) {
       Shader.setUniform( "u_background",  texturesArr[ idx ])
     }
     else if ( texturesArr.length-2 > idx ) {
-      changeEvery += 20
+      changeEvery += 15
       idx+=1
       Shader.setUniform( "u_timeout", p5.millis() )
     } 

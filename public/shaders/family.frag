@@ -19,8 +19,8 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
   vec4 noise = texture2D( u_noise, pos );
 
   float t = smoothstep(
-    ( u_threshold - u_range  ) / ( ( u_time - timeout )  /  4000.0 ),
-    ( u_threshold + u_range  ) / ( ( u_time - timeout )  / 4000.0 ),
+    ( u_threshold - u_range  ) / ( ( u_time - timeout )  /  3000.0 ),
+    ( u_threshold + u_range  ) / ( ( u_time - timeout )  / 3000.0 ),
     noise.r
   );
 
@@ -28,15 +28,11 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
   return res;
 }
 
-mat2 scale(vec2 _scale) {
-  return mat2( _scale.x, 0.0, 0.0, _scale.y );
-}
-
 void main () {
   vec2 pos = vTexCoord;
 
-  pos.x -= sin(pos.x * PI) / 9. * (cos( u_time / 2000. ));
-  pos.y += cos(pos.y * PI) / 72. * (sin( u_time / 2000. ));
+  pos.x -= sin(pos.x * PI) / 40. * (cos( u_time / 2000. ));
+  pos.y += cos(pos.y * PI) / 65. * (sin( u_time / 2000. ));
   
   vec4 col = transition( pos, u_background, u_foreground, u_timeout );
 
