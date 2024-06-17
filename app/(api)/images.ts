@@ -8,7 +8,7 @@ export const stem = [
   { path: "yellow_red_stem.jpg" },
   { path: "blue_red_stem.jpg" },
   { path: "sunset_circles_stem.jpg" },
-  { path: "in-search-of-pareto.png" },
+  { path: "in_search_of_pareto.png" },
   { path: "patents_stem.jpg" },
   { path: "person_stem.jpg" },
   { path: "pink_glimpses.png" },
@@ -74,4 +74,8 @@ export const allImages = [
   ...oceans,
   ...plants,
   ...stem
-].slice( 0, 12 )
+]
+
+export function getSomeImgs( cnt: number ) {
+  return allImages.slice( 0, cnt )
+}
