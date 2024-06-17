@@ -9,30 +9,20 @@ function sketch ( p5, parentRef ) {
   let texturesArr: any[]
   let timer: number
 
-  let timeHeader: any
-
   let changeEvery = 25
   let idx = 0
   let noiseTexture: any
 
-  let basicX: any
-  let basicY: any
-  let advX: any
-  let advY: any
-
-
   let [ width, height ] = [ p5.windowWidth / 2, p5.windowHeight / 1.5 ]
 
-  p5.preload = (  ) => {
+  p5.preload = () => {
     p5.loadFont('fonts/cabalFont.ttf')
     Shader = p5.loadShader( 'shaders/standard.vert', 'shaders/transitions.frag' )
-
     texturesArr = stem.map( img => p5.loadImage(`images/${ img.path }`))
     noiseTexture = p5.loadImage(`images/${ noiseTextures[0].path }`)
-
   }
 
-  p5.setup = ( parentRef ) => {
+  p5.setup = () => {
     p5.pixelDensity( 1 )
     p5.createCanvas( width, height, p5.WEBGL ).parent( parentRef )
   }

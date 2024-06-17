@@ -9,13 +9,6 @@ uniform sampler2D u_noise;
 uniform sampler2D u_foreground;
 uniform sampler2D u_background;
 
-uniform bool u_basicX;
-uniform bool u_basicY;
-uniform bool u_advX;
-uniform bool u_advY;
-uniform bool u_transition;
-
-
 varying vec2 vTexCoord;
 
 vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
@@ -42,17 +35,17 @@ void main () {
   // }
 
   // if ( u_basicY == true ) {
-    pos.y = pos.y + (sin(pos.y * 25.) / 100. ) * (cos(u_time / 1000. ));
+    pos.y = pos.y + (sin(pos.y * 15. ) / 100. ) * (cos(u_time / 1000. ));
   // }
 
-  float numer = -10.0 + ( u_time / 1000.0 );
+  float numer =  u_time / 1000.0;
 
   // if ( u_advX == true ) {
-    pos.x += ( sin( pos.x * numer ) / ( 22.0 + numer ));
+    // pos.x += ( sin( pos.x * numer ) / ( 22.0 + numer ));
   // }
 
   // if ( u_advY == true ) {
-    pos.y += ( cos( pos.y * numer ) / ( 25.0 + numer ));
+    // pos.y += ( cos( pos.y * numer ) / ( 25.0 + numer ));
   // }
 
   

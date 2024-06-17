@@ -37,6 +37,7 @@ void main () {
 
   pos.x -= sin(pos.x * PI) / 9. * (cos( u_time / 2000. ));
   pos.y += cos(pos.y * PI) / 72. * (sin( u_time / 2000. ));
+  
   vec4 col = transition( pos, u_background, u_foreground, u_timeout );
 
   gl_FragColor = vec4( col );
