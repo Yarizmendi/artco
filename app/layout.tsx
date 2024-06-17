@@ -1,23 +1,28 @@
 
+import "./globals.css"
 import Link from "next/link"
-import "globals.css"
+import { sketchTypes } from "./(api)/links"
 
-export default function RootLayout({
-  children,
-}: {
+export const metadata = {
+  title: "The Art Company"
+} 
+
+interface IRootLayout {
   children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: IRootLayout) {
   return (
-    <html className=" h-full w-full p-[20px] bg-gray-900 text-white text-md" lang="en">
-      <body className="h-fill w-fill ">
-        <nav className=" border-2 w-full flex justify-around items-center mb-4" >
-            <Link href={"/noise"}> Noise </Link>
-            <Link href={"/mixes"}> Mixes </Link>
-            <Link href={"/ocean"}> Ocean </Link>
-            <Link href={"/rotate"}> Rotate </Link>
-            <Link href={"/trans"}> Transitions </Link>
-        </nav>
-        { children }
+    <html className="h-full w-full bg-gray-900 text-white text-md p-[20px]" lang="en">
+      <body className="h-fill w-fill px-[20px]">
+        <menu className="flex justify-end py-[30px]">
+          <nav className="w-[500px] flex justify-between tracking-wide text-sm">
+            { sketchTypes.map(( link, key ) => 
+              <Link key={ key } href={ link.path }>{ link.text }</Link> 
+            )}
+          </nav>
+        </menu>
+        <main>{ children }</main>
       </body>
     </html>
   )

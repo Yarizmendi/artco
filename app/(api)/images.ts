@@ -1,0 +1,77 @@
+
+export const stem = [
+  { path: "yellow_org_collab.jpg" },
+  { path: "ballerina.png" },
+  { path: "Reclamation.png" },
+  { path: "yellow_org_stem.jpg" },
+  { path: "orange_actuality.png" },
+  { path: "yellow_red_stem.jpg" },
+  { path: "blue_red_stem.jpg" },
+  { path: "sunset_circles_stem.jpg" },
+  { path: "in-search-of-pareto.png" },
+  { path: "patents_stem.jpg" },
+  { path: "person_stem.jpg" },
+  { path: "pink_glimpses.png" },
+  { path: "predicting-the-present.png" },
+  { path: "quantum_ballerina.png" },
+  { path: "quantum-computer.png" },
+  { path: "reconfiguring-formality.jpg" },
+  { path: "resistance.png" },
+  { path: "abstract_toon_stem.jpg" },
+  { path: "sid.jpg" },
+  { path: "thoughts_wb.png" },
+  { path: "yellow_actuality.png" },
+  { path: "orange_actuality.png" },
+]
+
+export const oceans = [
+  { path: "dawn_glimmer.jpg" },
+  { path: "red_ocean.png" },
+  { path: "your_ocean_changed.png" },
+  { path: "watery_path.jpg" },
+  { path: "pools.jpg" },
+]
+
+export const skies = [
+  { path: "things_unsaid.png" },
+]
+
+export const plants = [
+  { path: "sunset_tree.jpg" },
+  { path: "mycellium.jpg" },
+]
+
+export const general = [
+  { path: "nostalgia.jpg" },
+  { path: "color_strings.jpg" },
+  { path: "confusion.jpg" },
+  { path: "gray_man.jpg" },
+  { path: "highway.jpg" },
+  { path: "purple_woman.jpg" },
+  { path: "desert_fog.jpg" },
+  { path: "cacti.jpg" },
+  { path: "desert_stripes.jpg" },
+  { path: "desert_sky.jpg" },
+  { path: "gemstone_cliff.jpg" },
+  { path: "lizard_eyes.jpg" },
+  { path: "candy_paint.jpg" },
+  { path: "mania.jpg" },
+]
+
+export const places = [
+  { path: "industrial_ocean.jpg" },
+  { path: "polluted_ocean.jpg" },
+]
+
+export const noiseTextures = [
+  { path: "perlin.png" }
+]
+
+export const allImages = [
+  ...places,
+  ...general,
+  ...skies,
+  ...oceans,
+  ...plants,
+  ...stem
+].slice( 0, 12 )
