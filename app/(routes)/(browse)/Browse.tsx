@@ -1,8 +1,6 @@
 
 import Image from "next/image"
-import { Suspense } from 'react'
 import { allImages } from "../../(api)/images"
-// import { ArtPrev } from "comps/ArtPreview"
 
 export function ArtPrev({ path, width, height  }) {
   const imgPrefix = "/images/"

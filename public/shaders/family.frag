@@ -19,8 +19,8 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
   vec4 noise = texture2D( u_noise, pos );
 
   float t = smoothstep(
-    ( u_threshold - u_range  ) / ( ( u_time - timeout )  /  3000.0 ),
-    ( u_threshold + u_range  ) / ( ( u_time - timeout )  / 3000.0 ),
+    ( u_threshold - u_range  ) / ( ( u_time - timeout )  /  1500.0 ),
+    ( u_threshold + u_range  ) / ( ( u_time - timeout )  / 1500.0 ),
     noise.r
   );
 

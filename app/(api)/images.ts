@@ -68,9 +68,7 @@ export const fam = [
   { path: "fam2.jpg" },
   { path: "fam1.jpg" },
   { path: "fam4.jpg" },
-  { path: "fam5.jpg" },
-  { path: "fam3.jpeg" },
-  { path: "fam2.jpg" },
+  { path: "fam5.jpg" }
 ]
 
 export const noiseTextures = [

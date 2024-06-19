@@ -3,13 +3,13 @@
 
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
-import { fam } from "app/(api)/images"
+import { fam, noiseTextures } from "app/(api)/images"
 
-export function ArtPrev({ path, width, height  }) {
+function ArtPrev({ path, width, height  }) {
   const imgPrefix = "/images/"
   const imgName = ( path: string ) => path.replace('_', ' ' ).split('.').slice(0, -1).join('.') 
   return (
-    <div className="max-w-[150px] hover:scale-110 transform duration-300 ease-in-out cursor-pointer mb-2">
+    <div className="max-w-[150px] hover:scale-110 transform duration-300 ease-in-out cursor-pointer m-2">
       <Image 
         src={ imgPrefix + path } 
         alt={ path } 
@@ -22,30 +22,63 @@ export function ArtPrev({ path, width, height  }) {
   )
 }
 
-
 function SimpleSketch() {
 
   let mp5: any = null
   let parentRef = useRef()
 
+  const [ timer, setTimer ] = useState( null )
+  const [ isMounted, setIsMounted ] = useState( false )
+  const [ isPlaying, setIsPlaying ] = useState( false )
+
   function sketch ( p5 ) {
+
+    let Shader: any
+    let texturesArr: any[]
+
+    let pTimer: number
+
+    let changeEvery = 10
+    let idx = 0
+    let noiseTexture: any
 
     const getWidth = () => document.getElementById("canvasParent").offsetWidth
     const getHeight = () => document.getElementById("canvasParent").offsetHeight
 
     p5.preload = () => {
       p5.loadFont( 'fonts/cabalFont.ttf' )
-      p5.loadShader( 'shaders/standard.vert', 'shaders/family.frag' )
+      Shader = p5.loadShader( 'shaders/standard.vert', 'shaders/family.frag' )
+      texturesArr = fam.map( img => p5.loadImage(`images/${ img.path }`))
+      noiseTexture = p5.loadImage(`images/${ noiseTextures[0].path }`)
     }
 
     p5.setup = ( parentRef) => {
       p5.createCanvas( getWidth(), getHeight(), p5.WEBGL ).parent( parentRef )
-      p5.pixelDensity( 1 )
+      p5.pixelDensity(1)
     }
 
     p5.draw = () => {
-      setTimer( p5.round( p5.millis() / 1000.0 ))
-      p5.rect( 50, 50, 50 )
+      pTimer = p5.round( p5.millis() / 1000.0 )
+      setTimer( pTimer )
+
+      Shader.setUniform( "u_time", p5.millis() )
+      Shader.setUniform( "u_range", 0.0 )
+      Shader.setUniform( "u_threshold", 1.0 )
+      Shader.setUniform( "u_noise", noiseTexture )
+  
+  
+      if ( pTimer < changeEvery ) {
+        Shader.setUniform( "u_foreground", texturesArr[ idx + 1 ]) 
+        Shader.setUniform( "u_background",  texturesArr[ idx ])
+      }
+      else if ( texturesArr.length-2 > idx ) {
+        changeEvery += 10
+        idx+=1
+        Shader.setUniform( "u_timeout", p5.millis() )
+      } 
+
+      p5.shader( Shader )
+      p5.rect( 0 )
     }
 
     p5.windowResized = () => p5.resizeCanvas( getWidth(), getHeight() )
@@ -57,12 +90,6 @@ function SimpleSketch() {
     return new p5( sketch, parentRef.current )
   }
   
-  const [ timer, setTimer ] = useState( null )
-  const [ isMounted, setIsMounted ] = useState( false )
-
-  const [ texture, setTexture ] = useState( null )
-  const [ textures, setTextures ] = useState( fam )
-
   useEffect( () => { if( !isMounted ) setIsMounted( true ) }, [])
 
   useEffect(() => { 
@@ -74,33 +101,30 @@ function SimpleSketch() {
   useEffect( () => {}, [ sketch ])
 
   return (
-    <div className="border-2 border-blue-500 text-xs flex">
+    <div className="text-xs flex p-[20px]">
 
-      <ul className="flex flex-col items-center w-[240px] h-[400px] overflow-auto">
-        { textures && textures.map(( texture, idx ) => 
-          <ArtPrev key={ idx } path={ texture.path } width={ 150 }  height={ 150 } /> )
-        } 
-      </ul>
+      <menu className="flex flex-col w-1/2">
 
-      <menu className="border-2 border-white flex flex-col w-1/3">
-       <p>sketch time: { timer }</p> 
-        <div className="border-2 border-green-500 h-1/2"
-          > <h2>Next Controls </h2>
+        <div className="flex items-center">
+          <span className="material-symbols-outlined">play_arrow</span>
+          <p>{ timer } secs</p> 
         </div>
-        <div className="border-2 border-purple-500 h-1/2"
-          > <h3>P5 Controls </h3>
-        </div>
+
+        <ul className="flex overflow-x-scroll">
+          { fam && fam.map(( texture, idx ) => 
+            <ArtPrev key={ idx } path={ texture.path } width={ 150 }  height={ 150 } /> )
+          } 
+        </ul>
+
+        <div className=""></div>
+
       </menu>
 
-      <div className="border-4 border-red-500 w-2/3 h-[400px]"
-        ref={ parentRef } 
-        id={"canvasParent"} 
-      />
+      <div className="w-1/2 h-[400px] p-4" ref={ parentRef } id={"canvasParent"} />
 
     </div> 
   )
 }
-
 
 export default SimpleSketch
 
