@@ -9,7 +9,7 @@ function ArtPrev({ path, width, height  }) {
   const imgPrefix = "/images/"
   const imgName = ( path: string ) => path.replace('_', ' ' ).split('.').slice(0, -1).join('.') 
   return (
-    <div className="max-w-[150px] hover:scale-110 transform duration-300 ease-in-out cursor-pointer m-2">
+    <div className="max-w-[150px] cursor-pointer m-2">
       <Image 
         src={ imgPrefix + path } 
         alt={ path } 
@@ -27,23 +27,37 @@ function SimpleSketch() {
   let mp5: any = null
   let parentRef = useRef()
 
-  const [ timer, setTimer ] = useState( null )
   const [ isMounted, setIsMounted ] = useState( false )
-  const [ isPlaying, setIsPlaying ] = useState( false )
+
+  const getWidth = () => document.getElementById("canvasParent").offsetWidth
+  const getHeight = () => document.getElementById("canvasParent").offsetHeight
 
   function sketch ( p5 ) {
 
     let Shader: any
     let texturesArr: any[]
-
-    let pTimer: number
-
+    let pTimer: number = 0
     let changeEvery = 10
     let idx = 0
     let noiseTexture: any
 
-    const getWidth = () => document.getElementById("canvasParent").offsetWidth
-    const getHeight = () => document.getElementById("canvasParent").offsetHeight
+    let cTimer
+
+    let playIcon
+    let playBtn
+    let p5timer
+    let playCheck
+  
+    p5timer = p5.createP("")
+    p5timer.parent( document.getElementById( "p5timer" ))
+
+    // playIcon = p5.createSpan( "play_arrow" )
+    // playIcon.class( "material-symbols-outlined" )
+
+    playBtn = p5.createCheckbox( "", false )
+    // playBtn.child( playIcon )
+    playBtn.parent( document.getElementById( "playBtn" ))
+
 
     p5.preload = () => {
       p5.loadFont( 'fonts/cabalFont.ttf' )
@@ -52,38 +66,45 @@ function SimpleSketch() {
       noiseTexture = p5.loadImage(`images/${ noiseTextures[0].path }`)
     }
 
-    p5.setup = ( parentRef) => {
-      p5.createCanvas( getWidth(), getHeight(), p5.WEBGL ).parent( parentRef )
+    p5.setup = ( parentRef ) => {
       p5.pixelDensity(1)
+      p5.createCanvas( getWidth(), getHeight(), p5.WEBGL ).parent( parentRef )
     }
 
     p5.draw = () => {
-      pTimer = p5.round( p5.millis() / 1000.0 )
-      setTimer( pTimer )
+      p5timer.html(`${ pTimer } secs`)
 
-      Shader.setUniform( "u_time", p5.millis() )
-      Shader.setUniform( "u_range", 0.0 )
-      Shader.setUniform( "u_threshold", 1.0 )
-      Shader.setUniform( "u_noise", noiseTexture )
-  
-  
-      if ( pTimer < changeEvery ) {
-        Shader.setUniform( "u_foreground", texturesArr[ idx + 1 ]) 
-        Shader.setUniform( "u_background",  texturesArr[ idx ])
+      if ( playBtn.checked() ) {
+        playSketch()
       }
-      else if ( texturesArr.length-2 > idx ) {
-        changeEvery += 10
-        idx+=1
-        Shader.setUniform( "u_timeout", p5.millis() )
-      } 
 
-      p5.shader( Shader )
-      p5.rect( 0 )
+      function playSketch() {
+        pTimer = p5.round( p5.millis() / 1000.0 )
+        Shader.setUniform( "u_time", p5.millis() )
+        Shader.setUniform( "u_range", 0.0 )
+        Shader.setUniform( "u_threshold", 1.0 )
+        Shader.setUniform( "u_noise", noiseTexture )
+
+        if ( pTimer < changeEvery ) {
+          Shader.setUniform( "u_foreground", texturesArr[ idx + 1 ]) 
+          Shader.setUniform( "u_background",  texturesArr[ idx ])
+        }
+        else if ( texturesArr.length-2 > idx ) {
+          changeEvery += 10
+          idx+=1
+          Shader.setUniform( "u_timeout", p5.millis() )
+        } 
+
+        p5.shader( Shader )
+        p5.rect( 0, 0, 0 )
+      }
+
     }
 
     p5.windowResized = () => p5.resizeCanvas( getWidth(), getHeight() )
   
   }
+
 
   async function InitP5( sketch, parentRef ) {
     const p5 = (await import( "p5" )).default
@@ -98,7 +119,8 @@ function SimpleSketch() {
     else mp5.remove()
   }, [ isMounted ])
 
-  useEffect( () => {}, [ sketch ])
+  useEffect(() => {}, [ sketch ])
+
 
   return (
     <div className="text-xs flex p-[20px]">
@@ -106,8 +128,8 @@ function SimpleSketch() {
       <menu className="flex flex-col w-1/2">
 
         <div className="flex items-center">
-          <span className="material-symbols-outlined">play_arrow</span>
-          <p>{ timer } secs</p> 
+          <div id={"playBtn"} />
+          <div id={"p5timer"} />
         </div>
 
         <ul className="flex overflow-x-scroll">
@@ -116,7 +138,7 @@ function SimpleSketch() {
           } 
         </ul>
 
-        <div className=""></div>
+        <div id="p5Controls" className=""></div>
 
       </menu>
 
