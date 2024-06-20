@@ -2,5 +2,10 @@
 import FamilySketch from "./FamilySketch"
 
 export default function Homepage() {
-  return <FamilySketch />
+  return (
+    <div>
+      <FamilySketch />
+    </div>
+  )
 }
+
