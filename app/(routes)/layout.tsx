@@ -1,7 +1,7 @@
 
-import "./globals.css"
+import "../../globals.css"
 import Link from "next/link"
-import { sketchTypes } from "./api/links"
+import { sketchTypes } from "../api/links"
 
 export const metadata = {
   title: "The Art Co."

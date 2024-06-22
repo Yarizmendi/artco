@@ -1,6 +1,6 @@
 
 import { allImages } from "../../api/images"
-import ArtPrev from "comps/Art"
+import { ArtPrev } from "comps"
 
 export default function Artwork() {
   return (
