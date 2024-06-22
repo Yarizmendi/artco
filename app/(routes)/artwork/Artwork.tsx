@@ -25,7 +25,7 @@ function ArtLink({ path, width, height  }) {
 export default function Artwork() {
   return (
     <div 
-      className="h-[350px] flex justify-center flex-wrap overflow-auto">
+      className="h-[350px] flex justify-center flex-wrap overflow-auto mx-[30px]">
       { allImages && allImages.map(( art, idx ) => 
         <ArtLink 
           width={ 130 } 
