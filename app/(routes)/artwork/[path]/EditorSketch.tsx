@@ -75,7 +75,7 @@ export default function EditorSketch({ path }) {
     <div
       ref={ parentRef } 
       id="canvasParent"
-      className="h-[475px] w-11/12 m-auto" 
+      className="h-full w-screen" 
   />
   )
 }

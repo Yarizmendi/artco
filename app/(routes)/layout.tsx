@@ -1,7 +1,7 @@
 
-import "../../globals.css"
-import Link from "next/link"
-import { sketchTypes } from "../api/links"
+import "globals.css"
+// import Link from "next/link"
+// import { sketchTypes } from "../api/links"
 
 export const metadata = {
   title: "The Art Co."
@@ -14,8 +14,8 @@ interface IRootLayout {
 export default function RootLayout({ children }: IRootLayout) {
   return (
     <html lang="en">
-      <body className="h-screen bg-gray-900 text-white text-md">
-        <menu className="flex justify-end mr-[10px] my-[20px]">
+      <body className="h-screen w-screen bg-gray-900 text-white text-md">
+        {/* <menu className="flex justify-end mr-[10px] my-[20px]">
           <nav className="flex justify-between min-w-[260px] tracking-wide uppercase text-[12px] items-center">
             <span className="material-symbols-outlined cursor-pointer">apps</span>
             { sketchTypes.map(( link, idx ) => 
@@ -26,8 +26,8 @@ export default function RootLayout({ children }: IRootLayout) {
               </Link> 
             )}
           </nav>
-        </menu>
-        <main>{ children }</main>
+        </menu> */}
+        <main className="h-full w-full">{ children }</main>
       </body>
     </html>
   )
