@@ -13,10 +13,11 @@ interface IRootLayout {
 
 export default function RootLayout({ children }: IRootLayout) {
   return (
-    <html className="h-full w-full bg-gray-900 text-white text-md py-[40px] px-[60px]" lang="en">
-      <body>
-        <menu className="flex justify-end p-[10px]">
-          <nav className="flex justify-between min-w-[260px] tracking-wide uppercase text-[12px]">
+    <html lang="en">
+      <body className="h-screen w-screen bg-gray-900 text-white text-md">
+        <menu className="flex justify-end mr-[10px] my-[20px]">
+          <nav className="flex justify-between min-w-[260px] tracking-wide uppercase text-[12px] items-center">
+            <span className="material-symbols-outlined cursor-pointer">apps</span>
             { sketchTypes.map(( link, idx ) => 
               <Link 
                 key={ idx }

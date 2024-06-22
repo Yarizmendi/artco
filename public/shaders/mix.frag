@@ -1,19 +1,20 @@
 precision mediump float;
+#define PI 3.14159265359
 
-uniform float u_time;
-uniform sampler2D u_noise;
-uniform sampler2D u_foreground;
+uniform vec2 u_resolution;
 uniform sampler2D u_background;
 
-varying vec2 vTexCoord;
-
 void main() {
-  vec2 pos = vTexCoord;
 
-  vec4 color1 = texture2D( u_background, pos );
-  vec4 color2 = texture2D( u_foreground, pos );
-  vec4 noise = texture2D( u_noise, fract(pos * 2. ));
+  vec2 st = gl_FragCoord.xy/u_resolution.xy;
+  st = st.xy / 2.0;
+  st.y = 1.0 - st.y;
 
-  vec4 color =  mix( color1, color2, .5 );
+  vec4 color = texture2D( u_background, st );
+
+
   gl_FragColor = vec4( color );
+
 }
+
+

@@ -7,6 +7,7 @@ export default function EditorSketch({ path }) {
   function sketch( p5, parentRef ) {
 
     let texture
+    let fg
     let Shader 
     
     let pColor 
@@ -17,6 +18,7 @@ export default function EditorSketch({ path }) {
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/colors.frag")
       texture = p5.loadImage( `/images/${ path }` )
+      fg = p5.loadImage( `/images/industrial_ocean.jpg` )
     }
 
     p5.setup = () =>  {
@@ -32,10 +34,9 @@ export default function EditorSketch({ path }) {
       
       // pColor.html(`color: ${ p5.get( p5.mouseX, p5.mouseY) }`)
 
-      p5.background( 0 )
-
       Shader.setUniform( "u_resolution", [ p5.width, p5.height ])
       Shader.setUniform( "u_background", texture )
+      Shader.setUniform( "u_foreground", fg )
       Shader.setUniform( "u_time", p5.millis() / 1000 )
 
       p5.shader( Shader )
@@ -83,10 +84,8 @@ export default function EditorSketch({ path }) {
     <div
       ref={ parentRef } 
       id="canvasParent"
-      className="h-[400px] w-1/2 m-4" 
-      >
-      <div id="pColor" />
-    </div>
+      className="h-[400px]" 
+  />
   )
 }
 
