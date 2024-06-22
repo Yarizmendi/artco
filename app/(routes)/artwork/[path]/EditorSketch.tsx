@@ -22,8 +22,11 @@ export default function EditorSketch({ path }) {
     }
 
     p5.draw = () => {
+      p5.imageMode(  p5.CENTER )
       p5.background( 255 )
-      p5.image( texture, 0, 0  )
+      texture.resize( document.getElementById( "canvasParent" ).offsetWidth, document.getElementById( "canvasParent" ).offsetHeight )
+      p5.image(texture, 0, 0, texture.width, texture.height, 0, 0, texture.width, texture.height, p5.COVER )
+
     }
 
     p5.windowResized = () => {
@@ -32,7 +35,6 @@ export default function EditorSketch({ path }) {
         document.getElementById( "canvasParent" ).offsetHeight
       )
     }
-      
   }
 
   
@@ -63,7 +65,7 @@ export default function EditorSketch({ path }) {
     <div
        ref={ parentRef } 
        id="canvasParent"
-      className="h-[400px] w-1/2 m-4 border-2" 
+      className="h-[400px] w-1/2 m-4" 
     /> 
   )
 }
