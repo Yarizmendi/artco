@@ -6,7 +6,6 @@ export default function EditorSketch({ path }) {
     
   function sketch( p5, parentRef ) {
 
-    let texturesArr: any[]
     let texture
 
     p5.preload = () => {
@@ -23,9 +22,8 @@ export default function EditorSketch({ path }) {
     }
 
     p5.draw = () => {
-      // p5.background( 255 )
-      p5.image( texture, 16, 16 )
-      // p5.rect( 0, 0, 0 )
+      p5.background( 255 )
+      p5.image( texture, 0, 0  )
     }
 
     p5.windowResized = () => {

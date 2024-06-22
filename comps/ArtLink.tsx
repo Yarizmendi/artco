@@ -2,7 +2,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-function ArtPrev({ path, width, height  }) {
+export default function ArtLink({ path, width, height  }) {
   const imgPrefix = "/images/"
   const imgName = ( path: string ) => path.replace('_', ' ' ).split('.').slice(0, -1).join('.') 
   return (
@@ -19,5 +19,3 @@ function ArtPrev({ path, width, height  }) {
     </Link>
   )
 }
-
-export default ArtPrev
