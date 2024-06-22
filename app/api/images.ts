@@ -78,11 +78,9 @@ export const noiseTextures = [
 
 export const allImages = [
   ...places,
-  ...general,
   ...skies,
   ...oceans,
-  ...plants,
-  ...stem
+  ...plants
 ]
 
 export function getSomeImgs( cnt: number ) {
