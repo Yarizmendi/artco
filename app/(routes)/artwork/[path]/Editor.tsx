@@ -1,7 +1,6 @@
 
 import Image from "next/image"
 import Sketch from "comps/Sketch"
-import sketch from "comps/Sketch"
 
 export default function Editor({ params }) {
 
@@ -13,14 +12,11 @@ export default function Editor({ params }) {
        alt={ params.path }
        width={ 500 }
        height={ 500 }
-       className={ "h-[400px] w-[400px] my-4" } />
+       className={ "h-[400px] w-1/2" } />
           
       <Sketch 
-        id="canvasParent"
         data = { params.path }
-        sketch={ sketch }
-        className="w-[400px] h-[400px] border-2" 
-      />
+        className="h-[400px] w-1/2 m-4 border-2" />
 
     </div>
   )

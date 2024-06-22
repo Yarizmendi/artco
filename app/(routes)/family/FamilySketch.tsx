@@ -3,7 +3,7 @@
 
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
-import { fam, noiseTextures } from "app/(api)/images"
+import { fam, noiseTextures } from "app/api/images"
 
 function ArtPrev({ path, width, height  }) {
   const imgPrefix = "/images/"
