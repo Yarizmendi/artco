@@ -7,13 +7,16 @@ export default function EditorSketch({ path }) {
   function sketch( p5, parentRef ) {
 
     let texture
+    let Shader 
+
 
     p5.preload = () => {
+      p5.loadFont( '/fonts/cabalFont.ttf' )
+      Shader = p5.loadShader("/shaders/standard.vert", "/shaders/colors.frag")
       texture = p5.loadImage( `/images/${ path }` )
     }
 
     p5.setup = () =>  {
-      p5.pixelDensity(1)
       p5.createCanvas( 
         document.getElementById( "canvasParent" ).offsetWidth,
         document.getElementById( "canvasParent" ).offsetHeight,
@@ -22,10 +25,17 @@ export default function EditorSketch({ path }) {
     }
 
     p5.draw = () => {
-      p5.imageMode(  p5.CENTER )
-      p5.background( 255 )
-      texture.resize( document.getElementById( "canvasParent" ).offsetWidth, document.getElementById( "canvasParent" ).offsetHeight )
-      p5.image(texture, 0, 0, texture.width, texture.height, 0, 0, texture.width, texture.height, p5.COVER )
+      p5.noSmooth()
+
+      Shader.setUniform( "u_background", texture )
+      
+      // p5.imageMode(  p5.CENTER )
+      // texture.resize( document.getElementById( "canvasParent" ).offsetWidth, document.getElementById( "canvasParent" ).offsetHeight )
+      // p5.image(texture, 0, 0, texture.width, texture.height, 0, 0, texture.width, texture.height, p5.COVER )
+      
+      p5.shader( Shader )
+      p5.rect( 0, 0 , 0 )
+
 
     }
 
@@ -50,7 +60,7 @@ export default function EditorSketch({ path }) {
   const [ isMounted, setIsMounted ] = useState( false )
 
     
-  useEffect(() => setIsMounted( true ), [])
+  useEffect( () => { if( !isMounted ) setIsMounted( true ) }, [])
 
 
   useEffect(() => { 

@@ -67,7 +67,7 @@ export default function TransitionSketch() {
   const parentRef = useRef()
   const [ isMounted, setIsMounted ] = useState( false )
 
-  useEffect(() => { setIsMounted( true ) }, [])
+  useEffect( () => { if( !isMounted ) setIsMounted( true ) }, [])
 
   async function initSketch() {
     const p5 = ( await import( "p5" )).default
