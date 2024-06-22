@@ -8,10 +8,13 @@ export default function EditorSketch({ path }) {
 
     let texture
     let Shader 
+    
+    let pColor 
 
-
+    // pColor = p5.createP("")
+    // pColor.parent( document.getElementById( "pColor" ))
+    
     p5.preload = () => {
-      p5.loadFont( '/fonts/cabalFont.ttf' )
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/colors.frag")
       texture = p5.loadImage( `/images/${ path }` )
     }
@@ -22,29 +25,34 @@ export default function EditorSketch({ path }) {
         document.getElementById( "canvasParent" ).offsetHeight,
         p5.WEBGL
       ).parent( parentRef )
+
     }
 
     p5.draw = () => {
-      p5.noSmooth()
+      
+      // pColor.html(`color: ${ p5.get( p5.mouseX, p5.mouseY) }`)
 
+      p5.background( 0 )
+
+      Shader.setUniform( "u_resolution", [ p5.width, p5.height ])
       Shader.setUniform( "u_background", texture )
-      
-      // p5.imageMode(  p5.CENTER )
-      // texture.resize( document.getElementById( "canvasParent" ).offsetWidth, document.getElementById( "canvasParent" ).offsetHeight )
-      // p5.image(texture, 0, 0, texture.width, texture.height, 0, 0, texture.width, texture.height, p5.COVER )
-      
+      Shader.setUniform( "u_time", p5.millis() / 1000 )
+
       p5.shader( Shader )
       p5.rect( 0, 0 , 0 )
 
+      // Shader.setUniform( "u_color", p5.get( 100, 100 ) )
 
     }
 
+   
     p5.windowResized = () => {
       p5.resizeCanvas(
         document.getElementById( "canvasParent" ).offsetWidth,
         document.getElementById( "canvasParent" ).offsetHeight
       )
     }
+
   }
 
   
@@ -73,10 +81,12 @@ export default function EditorSketch({ path }) {
 
   return (
     <div
-       ref={ parentRef } 
-       id="canvasParent"
+      ref={ parentRef } 
+      id="canvasParent"
       className="h-[400px] w-1/2 m-4" 
-    /> 
+      >
+      <div id="pColor" />
+    </div>
   )
 }
 

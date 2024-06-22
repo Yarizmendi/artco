@@ -59,3 +59,18 @@ void main () {
   gl_FragColor = vec4( col );
  
 }
+
+
+
+  // color = u_color;
+
+  // if ( color == u_color ) {
+  //   color = vec4(0.0, 0.0, 0.0, 1.0);
+  // }
+
+  // make image darker
+  // color = texture2D( u_background, pos ) / vec4(0.5, 0.5, 0.5, 1.0);
+
+
+// uniform float u_time;
+// uniform vec4 u_color;
