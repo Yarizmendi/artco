@@ -1,13 +1,22 @@
-// @ts-nocheck
+
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import dynamic from 'next/dynamic'
-import { colorsSketch as allImages } from "../../api/images"
+import { colorsSketch as allImages } from "../../../api/images"
 
 export default function EditorSketch({ path }) {
+
+  let mp5: any = null
+  let parentRef = useRef()
+
+  const [ isMounted, setIsMounted ] = useState( false )
     
-  function sketch( p5, parentRef ) {
+  useEffect( () => { if( !isMounted ) setIsMounted( true ) }, [])
+
+  const getWidth = () => document.getElementById("editorParent").offsetWidth
+  const getHeight = () => document.getElementById("editorParent").offsetHeight
+    
+  function sketch( p5 ) {
 
     let timer
     let changeEvery = 90
@@ -20,13 +29,9 @@ export default function EditorSketch({ path }) {
       textures = allImages.map( tex => p5.loadImage(`/images/${ tex.path }`))
     }
 
-    p5.setup = () =>  {
-      p5.createCanvas( 
-        document.getElementById( "canvasParent" ).offsetWidth,
-        document.getElementById( "canvasParent" ).offsetHeight,
-        p5.WEBGL
-      ).parent( parentRef )
-
+    p5.setup = ( parentRef ) => {
+      p5.pixelDensity(1)
+      p5.createCanvas( getWidth(), getHeight(), p5.WEBGL ).parent( parentRef )
     }
 
     p5.draw = () => {
@@ -51,43 +56,29 @@ export default function EditorSketch({ path }) {
 
     }
 
-    p5.windowResized = () => {
-      p5.resizeCanvas(
-        document.getElementById( "canvasParent" ).offsetWidth,
-        document.getElementById( "canvasParent" ).offsetHeight
-      )
-    }
+    p5.windowResized = () => p5.resizeCanvas( getWidth(), getHeight() )
 
   }
 
   
-  async function InitP5() {
+  async function InitP5( sketch, parentRef) {
     const p5 = (await import( "p5" )).default
     const p = new p5( sketch, parentRef.current )
     return p
   }
 
-  let mp5: any = null
-  let parentRef = useRef()
-  const [ isMounted, setIsMounted ] = useState( false )
-    
-  useEffect( () => { if( !isMounted ) setIsMounted( true ) }, [])
 
   useEffect(() => { 
     if ( !isMounted ) return
-    if ( !mp5 ) mp5 = InitP5()
+    if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
     else mp5.remove()
   }, [ isMounted ])
 
+  useEffect(() => {}, [ sketch ])
+
   return (
     <div>
-      <div
-        ref={ parentRef } 
-        id="canvasParent"
-        className="h-[480px] w-4/5 m-auto"
-        >
-        </div>
-
+      <div className="h-[480px] w-full" ref={ parentRef } id="editorParent" />
     </div>
 
   )

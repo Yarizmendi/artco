@@ -1,8 +1,11 @@
 
+
 import EditorSketch from "./EditorSketch"
 
-export default function ArtEditor({ params }) {
+export default function Homepage({ params }) {
   return (
-    <EditorSketch  suppressHydrationWarning path={ params.path } />
+    <div>
+      <EditorSketch path={ params.path } />
+    </div>
   )
 }
