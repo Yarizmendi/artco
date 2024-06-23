@@ -1,6 +1,7 @@
 
 import "globals.css"
 import Link from "next/link"
+import React from "react"
 
 export const metadata = {
   title: "The Art Co."

@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+tsconfig.json
+
 # Runtime data
 pids
 *.pid
@@ -74,5 +76,3 @@ typings/
 .idea/
 .vscode/
 *.code-workspace
-
-.next

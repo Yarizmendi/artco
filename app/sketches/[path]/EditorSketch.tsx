@@ -2,6 +2,7 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
+import dynamic from 'next/dynamic'
 import { colorsSketch as allImages } from "../../api/images"
 
 export default function EditorSketch({ path }) {
@@ -66,14 +67,11 @@ export default function EditorSketch({ path }) {
     return p
   }
 
-
   let mp5: any = null
   let parentRef = useRef()
   const [ isMounted, setIsMounted ] = useState( false )
-
     
   useEffect( () => { if( !isMounted ) setIsMounted( true ) }, [])
-
 
   useEffect(() => { 
     if ( !isMounted ) return
@@ -81,11 +79,9 @@ export default function EditorSketch({ path }) {
     else mp5.remove()
   }, [ isMounted ])
 
-  useEffect(() => {}, [ sketch ])
-
   return (
     <div>
-      <div 
+      <div
         ref={ parentRef } 
         id="canvasParent"
         className="h-[480px] w-4/5 m-auto"
