@@ -1,14 +1,13 @@
 
-import { oceans } from "../api/images"
+import { allImages } from "../api/images"
 import Image from "next/image"
 import Link from "next/link"
 
-function ArtLink({ key, path, width, height}) {
+function ArtLink({ path, width, height}) {
   const imgPrefix = "/images/"
   const imgName = ( path: string ) => path.replace('_', ' ' ).split('.').slice(0, -1).join('.') 
   return (
     <Link 
-      key = { key }
       href={`/artwork/${ path }`}
       className="hover:scale-110 transform duration-300 ease-in-out cursor-pointer m-2">
       <Image 
@@ -16,8 +15,8 @@ function ArtLink({ key, path, width, height}) {
         alt={ path } 
         width={ width }
         height={ height }
-        className="max-w-[130px] h-[140px] rounded shadow-lg"  />
-      <p className="max-w-[130px] tracking-widest text-xs">{ imgName( path )}</p>
+        className="max-w-[150px] h-[160px] rounded shadow-lg"  />
+      <p className="max-w-[150px] tracking-widest text-xs">{ imgName( path )}</p>
     </Link>
   )
 }
@@ -26,12 +25,12 @@ function ArtLink({ key, path, width, height}) {
 export default function Artwork() {
   return (
     <div 
-      className="h-[350px] flex justify-center flex-wrap overflow-auto mx-[30px]">
-      { oceans && oceans.map(( art, idx ) => 
+      className="h-[380px] flex flex-wrap overflow-auto mx-[30px]">
+      { allImages && allImages.map(( art, idx ) => 
         <ArtLink 
           key={ idx }
-          width={ 130 } 
-          height={ 140 } 
+          width={ 150 } 
+          height={ 160 } 
           path={ art.path } 
         /> )}
     </div>

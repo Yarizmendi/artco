@@ -20,8 +20,8 @@ export default function RootLayout({ children }: IRootLayout) {
   ]
   return (
     <html lang="en">
-      <body className="h-screen w-screen bg-gray-900 text-white text-md">
-        <menu className="flex justify-end mr-[10px] my-[20px]">
+      <body className="bg-gray-900 text-white text-md">
+        <menu className="flex justify-end m-[10px] my-[20px]">
           <nav className="flex justify-between min-w-[260px] tracking-wide uppercase text-[12px] items-center">
             <span className="material-symbols-outlined cursor-pointer">apps</span>
             { links.map(( link, idx ) => 
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: IRootLayout) {
             )}
           </nav>
         </menu>
-        <main className="h-full w-full">{ children }</main>
+        <main className="">{ children }</main>
       </body>
     </html>
   )
