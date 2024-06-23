@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { fam, noiseTextures } from "../../../api/images"
+import { fam, noiseTextures } from "../../api/images"
 
 function SimpleSketch() {
 

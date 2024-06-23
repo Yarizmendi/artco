@@ -1,15 +1,14 @@
 
-import { colorsSketch as allImages } from "../api/images"
-import { Nav } from "../comps/Nav"
-import { ArtLinks } from "../comps/ArtLink"
+import { colorsSketch as allImages } from "./api/images"
+import Nav from "./comps/Nav"
+import ArtLinks from "./comps/ArtLinks"
 
 function ArtPage() {
   const links = [
     { path: "/", text: "browse" },
-    { path: "/family", text: "family" },
-    { path: "/transitions", text: "transitions" },
+    { path: "/sketches", text: "sketches" },
   ]
-
+  
   return (
     <div className="w-full">
       <Nav links={ links } />

@@ -1,7 +1,7 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import { stem, noiseTextures } from "../../../api/images"
+import { stem, noiseTextures } from "../../api/images"
 
 function sketch ( p5, parentRef ) {
 
