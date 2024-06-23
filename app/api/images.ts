@@ -25,11 +25,11 @@ export const stem = [
 ]
 
 export const oceans = [
-  { path: "dawn_glimmer.jpg" },
+
   { path: "red_ocean.png" },
   { path: "your_ocean_changed.png" },
   { path: "watery_path.jpg" },
-  { path: "pools.jpg" },
+
 ]
 
 export const skies = [
@@ -81,6 +81,15 @@ export const allImages = [
   ...skies,
   ...oceans,
   ...plants
+]
+
+export const colorsSketch = [
+  { path: "industrial_ocean.jpg" },
+  { path: "red_ocean.png" },
+  { path: "polluted_ocean.jpg" },
+  { path: "things_unsaid.png" },
+  { path: "your_ocean_changed.png" },
+  { path: "pools.jpg" },
 ]
 
 export function getSomeImgs( cnt: number ) {

@@ -19,26 +19,26 @@ void main() {
 
   // st *= vec2(0.9);
 
-  // if ( st.y > 0.45 ) {
-  //   st.x = st.x + (cos(st.y * 10. ) / 20. ) * (sin(u_time / 3. ));
-  //   st.y -= ( cos( st.y * u_time ) / ( 45.0 + u_time ));
+  // if ( st.y > 0.47 ) {
+  //   st.x = st.x + (cos(st.y / 3. ) / 5. ) * (sin(u_time / 50.0 ));
+  //   // st.y -= ( cos( st.y * u_time ) / ( 7.0 + u_time ));
   // } 
 
-  // if ( st.y < 0.45 ) {
-    // st.x += ( sin( st.x * u_time ) / ( 10.0 + u_time * 3. ));
-    // st.y -= ( cos( st.y * u_time ) / ( 20.0 + u_time * 2. ));
+  // if ( st.y < 0.40 ) {
+  //   st.x += ( sin( st.x * u_time ) / ( 7.0  + u_time  ));
+  //   st.y -= ( cos( st.y * u_time ) / ( 23.0 + u_time ));
   // }
 
   color = texture2D( u_background, st );
   colorB = texture2D( u_foreground, st );
 
-  if ( st.y > 0.47 ) {
-    color = mix(color, colorB, abs( sin( u_time / 10. )));
-  }
+  // if ( st.y > 0.47  ) {
+  //   color = mix(color, colorB, abs( cos( u_time / 20. ))/2.0);
+  // }
 
 
   // if ( st.y < 0.48 ) {
-  //   color = mix(color, colorB, abs( cos( u_time / 20. )));
+  //   color = mix(color, colorB, ( cos( u_time / 25. )));
   // }
 
   gl_FragColor = vec4( color );
