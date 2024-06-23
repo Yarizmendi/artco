@@ -2,8 +2,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import ArtPrev from "comps/ArtPrev"
-import { fam, noiseTextures } from "app/api/images"
+import { fam, noiseTextures } from "../api/images"
 
 function SimpleSketch() {
 
@@ -115,11 +114,6 @@ function SimpleSketch() {
           <div id={"p5timer"} />
         </div>
 
-        <ul className="flex overflow-x-scroll">
-          { fam && fam.map(( texture, idx ) => 
-            <ArtPrev key={ idx } path={ texture.path } width={ 150 }  height={ 150 } /> )
-          } 
-        </ul>
 
         <div id="p5Controls" className=""></div>
 

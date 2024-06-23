@@ -10,14 +10,14 @@ interface IRootLayout {
   children: any
 }
 
-const links = [
-  { path: "/artwork", text: "browse" },
-  { path: "/family", text: "family" },
-  { path: "/ocean", text: "ocean" },
-  { path: "/transitions", text: "transitions" }
-]
+
 
 export default function RootLayout({ children }: IRootLayout) {
+  const links = [
+    { path: "/artwork", text: "browse" },
+    { path: "/family", text: "family" },
+    { path: "/transitions", text: "transitions" }
+  ]
   return (
     <html lang="en">
       <body className="h-screen w-screen bg-gray-900 text-white text-md">

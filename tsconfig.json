@@ -32,7 +32,6 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/sketches/test.js", "comps/Sketch/sketch.js",
   ],
   "exclude": [
     "node_modules"

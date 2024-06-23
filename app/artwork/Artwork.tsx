@@ -1,6 +1,5 @@
 
-
-import { allImages } from "../../api/images"
+import { oceans } from "../api/images"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -28,7 +27,7 @@ export default function Artwork() {
   return (
     <div 
       className="h-[350px] flex justify-center flex-wrap overflow-auto mx-[30px]">
-      { allImages && allImages.map(( art, idx ) => 
+      { oceans && oceans.map(( art, idx ) => 
         <ArtLink 
           key={ idx }
           width={ 130 } 
