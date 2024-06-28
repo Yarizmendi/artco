@@ -80,7 +80,9 @@ export const allImages = [
   ...places,
   ...skies,
   ...oceans,
-  ...plants
+  ...plants,
+  ...stem,
+  ...general
 ]
 
 export const colorsSketch = [

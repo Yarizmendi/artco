@@ -18,8 +18,8 @@ interface Props {
 const styles = {
   nav: "h-fit flex items-center justify-end tracking-wide uppercase text-[12px]",
   span: "material-symbols-outlined cursor-pointer",
-  link: "p-4",
-  ctn: ""
+  link: "p-2",
+  ctn: "p-[20px]"
 }
 
 function NavCmpt( props: Props ) {
