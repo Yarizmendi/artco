@@ -29,13 +29,13 @@ export default function StemSketch() {
       noiseTexture = p5.loadImage( `/images/${ noiseTextures[0].path }` )
     }
   
-    p5.setup = () => {
+    p5.setup = ( parentRef ) => {
       p5.pixelDensity( 1 )
       canvasParent = document.getElementById("canvasParent")
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
     }
   
-    p5.draw = ( ) => {
+    p5.draw = () => {
   
       timer = p5.round( p5.millis() / 1000 )
   
