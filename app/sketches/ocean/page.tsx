@@ -1,5 +1,5 @@
 
-import OceanMixSketch from "./OceanMixSketch"
+import { OceanMixSketch } from "./OceanMixSketch"
 
 export default function OceanMixSketchPage() {
   return <OceanMixSketch />
