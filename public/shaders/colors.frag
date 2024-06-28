@@ -3,45 +3,58 @@ precision mediump float;
 
 uniform float u_time;
 uniform vec2 u_resolution;
-uniform sampler2D u_background;
-uniform sampler2D u_foreground;
-
-varying vec2 vTexCoord;
 
 vec4 topColor;
 vec4 btmColor;
 vec4 color;
 
+uniform sampler2D u_industrial_ocean;
+vec4 industrialOceanColor;
+
+uniform sampler2D u_red_ocean;
+vec4 redOceanColor;
+
+uniform sampler2D u_polluted_ocean;
+vec4 pollutedOceanColor;
+
+uniform sampler2D u_things_unsaid;
+uniform sampler2D u_your_ocean;
+uniform sampler2D u_pools;
+
 uniform float u_topTime;
 uniform float u_btmTime;
+
+varying vec2 vTexCoord;
+
 float t;
 
-vec4 sunsetColors;
-
 void main() {
-
-  vec2 st = gl_FragCoord.xy/u_resolution.xy;
+  vec2 st = gl_FragCoord.xy/u_resolution;
   st.y = 1.0 - st.y;
 
-  topColor = texture2D( u_background, st );
-  btmColor = texture2D( u_foreground, st );
+  float yPos = st.y;
 
-  if ( st.y < .47 ) {
-    if ( topColor.r >=  0.60 ) {
-      topColor = vec4(0.03, 0.13, 0.37, 1.0);
-    }
- 
-     t = abs( sin( u_time / 10. ));
+  industrialOceanColor = texture2D( u_industrial_ocean, st );
+  pollutedOceanColor = texture2D( u_polluted_ocean, st );
+  redOceanColor = texture2D( u_red_ocean, st );
+
+  if ( yPos < .47 ) {
+    t = abs( cos( u_time / u_topTime ));
+    color = mix( industrialOceanColor, pollutedOceanColor, t );
+    color = mix( color, redOceanColor, t / 1.5 );
   } 
 
-  // if ( st.y > .47 ) {
-    // t = abs( sin( u_time / 5. ));
-    // t = .25;
-  // }
+  if ( yPos > .47 ) {
+    t = abs( sin( u_time / u_btmTime ));
+    color = mix( industrialOceanColor, redOceanColor, t );
+  }
 
-  color = mix( topColor, btmColor, t );
+  
+
   gl_FragColor = vec4( color );
 
 }
+
+
 
 

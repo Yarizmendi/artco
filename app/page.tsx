@@ -6,7 +6,9 @@ import ArtLinks from "./comps/ArtLinks"
 function ArtPage() {
   const links = [
     { path: "/", text: "browse" },
-    { path: "/sketches", text: "sketches" },
+    { path: "/sketches/stem", text: "stem" },
+    { path: "/sketches/ocean", text: "ocean" },
+    { path: "/sketches/sunset", text: "sunset" },
   ]
   
   return (

@@ -4,7 +4,7 @@
 import { useState, useRef, useEffect } from "react"
 import { colorsSketch as allImages } from "../../api/images"
 
-export default function EditorSketch({ path }) {
+export default function SunsetSketch() {
 
   let mp5: any = null
   let parentRef = useRef()
@@ -15,9 +15,6 @@ export default function EditorSketch({ path }) {
   let Shader 
   let textures
 
-  let idx = 0
-  let changeEvery = 90
-
   let seconds
 
   let [ canvas, canvasParent ] = []
@@ -25,7 +22,6 @@ export default function EditorSketch({ path }) {
   let [ topSliderParent, topTimeSlider, topTimeSliderValue ] = []
   let [ btmSliderParent, btmTimeSlider, btmTimeSliderValue ] = []
 
-  let [ topFrameBuffer, btmFrameBuffer ] = []
 
   function sketch( p5 ) {
 
@@ -42,17 +38,16 @@ export default function EditorSketch({ path }) {
 
       topSliderParent = document.getElementById("topSliderParent")
       topTimeSliderValue = p5.createP("").parent( "topSliderParent")
-      topTimeSlider = p5.createSlider( 0, 60, 1, 1 ).parent( topSliderParent )
+      topTimeSlider = p5.createSlider( 0, 60, 5, 1 ).parent( topSliderParent )
       topTimeSlider.size( 100 )
 
       btmSliderParent = document.getElementById("btmSliderParent")
       btmTimeSliderValue = p5.createP("").parent("btmSliderParent" )
-      btmTimeSlider = p5.createSlider( 0, 60, 1, 1 ).parent( btmSliderParent )
+      btmTimeSlider = p5.createSlider( 0, 60, 5, 1 ).parent( btmSliderParent )
       btmTimeSlider.size( 100 )
 
       timerParent = document.getElementById("timerParent")
       timer = p5.createP("").parent( timerParent )
-
 
     }
   
@@ -65,8 +60,14 @@ export default function EditorSketch({ path }) {
       Shader.setUniform( "u_time", seconds )
       Shader.setUniform( "u_topTime", topTimeSlider.value() )
       Shader.setUniform( "u_btmTime", btmTimeSlider.value() )
-      Shader.setUniform( "u_background", textures[ idx ] )
-      Shader.setUniform( "u_foreground", textures[ idx + 1 ])
+
+      Shader.setUniform( "u_industrial_ocean", textures[ 0 ] )
+      Shader.setUniform( "u_red_ocean", textures[ 1 ])
+      Shader.setUniform("u_polluted_ocean", textures[ 2 ])
+      Shader.setUniform("u_things_unsaid", textures[ 3 ])
+      Shader.setUniform("u_your_ocean", textures[ 4 ])
+      Shader.setUniform("u_pools", textures[ 5 ])
+
       Shader.setUniform( "u_resolution", [ canvasParent.offsetWidth, canvasParent.offsetHeight ])
 
       p5.shader( Shader )
