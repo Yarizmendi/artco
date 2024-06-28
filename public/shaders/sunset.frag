@@ -22,9 +22,9 @@ void main() {
   vec2 st = gl_FragCoord.xy/u_resolution;
   st.y = 1.0 - st.y;
 
-  // if ( st.y > .81 && st.x > .51 ) {
-  //   st.x += (cos(st.x  ) / 100. ) * (sin(u_time ));
-  // }
+  if ( st.y > .81 && st.x > .51 ) {
+    st.x += ( cos( st.x * u_time ) / ( 25.0 + u_time ));
+  }
 
   backgroundColor = texture2D( u_background, st );
   foregroundColor = texture2D( u_foreground, st );

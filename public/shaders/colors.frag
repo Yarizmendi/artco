@@ -28,6 +28,9 @@ void main() {
   st *= ( 0.92 );
   if ( st.y > .46 ) {
     st -= ( sin ( st * u_time ) / ( 40.0 + u_time ));
+  } 
+  else {
+    st.x += ( cos( st.x * u_time ) / ( 8.0 + u_time ));
   }
 
   industrialOceanColor = texture2D( u_industrial_ocean, st );

@@ -2,10 +2,10 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import InitP5 from "../../lib/InitP5"
+import InitP5 from "../../lib/InitP5.js"
 import { sketch } from "./sketch.ts"
 
-export default function HouseSketch() {
+export default function DefaultSketch() {
 
   let mp5: any = null
   let parentRef = useRef()
