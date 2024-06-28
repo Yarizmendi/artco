@@ -24,7 +24,7 @@ export default function OceanMixSketch() {
 
   return (
     <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[400px] w-full"  />
+      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-5/6 lg:w-4/6 m-auto"  />
       <div id="timerParent" className="border-b p-2 flex justify-end text-sm" />
       <div className="flex p-2">
         <div id="topSliderParent" className={ sliderCmptStyle } />

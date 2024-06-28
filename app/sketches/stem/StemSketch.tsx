@@ -21,7 +21,7 @@ export default function StemSketch() {
 
   return (
     <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[400px] w-full"  />
+      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-5/6 lg:w-4/6 m-auto"  />
     </div> 
   )
 }
