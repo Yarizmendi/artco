@@ -5,9 +5,9 @@ export const stem = [
   { path: "Reclamation.png" },
   { path: "yellow_org_stem.jpg" },
   { path: "orange_actuality.png" },
-  { path: "yellow_red_stem.jpg" },
-  { path: "blue_red_stem.jpg" },
-  { path: "sunset_circles_stem.jpg" },
+  // { path: "yellow_red_stem.jpg" },
+  // { path: "blue_red_stem.jpg" },
+  // // { path: "sunset_circles_stem.jpg" },
   { path: "in_search_of_pareto.png" },
   { path: "patents_stem.jpg" },
   { path: "person_stem.jpg" },
@@ -20,16 +20,14 @@ export const stem = [
   { path: "abstract_toon_stem.jpg" },
   { path: "sid.jpg" },
   { path: "thoughts_wb.png" },
-  { path: "yellow_actuality.png" },
-  { path: "orange_actuality.png" },
+  // { path: "yellow_actuality.png" },
+  // { path: "orange_actuality.png" },
 ]
 
 export const oceans = [
-
   { path: "red_ocean.png" },
   { path: "your_ocean_changed.png" },
   { path: "watery_path.jpg" },
-
 ]
 
 export const skies = [
@@ -75,7 +73,6 @@ export const noiseTextures = [
   { path: "perlin.png" }
 ]
 
-
 export const allImages = [
   ...places,
   ...skies,
@@ -89,11 +86,9 @@ export const colorsSketch = [
   { path: "industrial_ocean.jpg" },
   { path: "red_ocean.png" },
   { path: "polluted_ocean.jpg" },
-  { path: "things_unsaid.png" },
-  { path: "your_ocean_changed.png" },
-  { path: "pools.jpg" },
 ]
 
-export function getSomeImgs( cnt: number ) {
-  return allImages.slice( 0, cnt )
-}
+export const sunsetImgs = [
+  { path: "your_ocean_changed.png" },
+  { path: "watery_path.jpg" },
+]

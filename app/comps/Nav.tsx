@@ -26,7 +26,7 @@ function NavCmpt( props: Props ) {
   return (
     <div className={ styles.ctn }>
       <nav className={ styles.nav } >
-        <span className={ styles.span } > apps</span>
+        {/* <span className={ styles.span } > apps</span> */}
         { props.links.map(( link, idx ) => 
           <Link 
             key={ idx }

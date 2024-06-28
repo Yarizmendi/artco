@@ -7,7 +7,7 @@ function ArtPage() {
   const links = [
     { path: "/sketches/stem", text: "stem" },
     { path: "/sketches/ocean", text: "ocean" },
-    { path: "/sketches/sunset", text: "sunset" },
+    { path: "/sketches/sunset", text: "house" },
   ]
   
   return (

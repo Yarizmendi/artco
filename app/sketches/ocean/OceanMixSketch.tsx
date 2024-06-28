@@ -3,7 +3,7 @@
 "use client"
 import { useState, useRef, useEffect } from "react"
 import sketch from "./sketch"
-import InitP5 from "../InitP5"
+import InitP5 from "../../lib/InitP5"
 
 export default function OceanMixSketch() {
 

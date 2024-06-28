@@ -51,9 +51,7 @@ export default function sketch( p5, parentRef ) {
     Shader.setUniform( "u_industrial_ocean", textures[ 0 ] )
     Shader.setUniform( "u_red_ocean", textures[ 1 ])
     Shader.setUniform("u_polluted_ocean", textures[ 2 ])
-    Shader.setUniform("u_things_unsaid", textures[ 3 ])
-    Shader.setUniform("u_your_ocean", textures[ 4 ])
-    Shader.setUniform("u_pools", textures[ 5 ])
+
 
     Shader.setUniform( "u_resolution", [ canvasParent.offsetWidth, canvasParent.offsetHeight ])
 

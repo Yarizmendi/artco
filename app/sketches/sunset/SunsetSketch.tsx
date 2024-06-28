@@ -2,7 +2,7 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import InitP5 from "../InitP5"
+import InitP5 from "../../lib/InitP5"
 import sketch from "./sketch"
 
 export default function SunsetSketch() {
@@ -20,16 +20,16 @@ export default function SunsetSketch() {
     else mp5.remove()
   }, [ isMounted ])
 
-  const sliderCmptStyle = "w-[130px] flex justify-around items-center text-xs"
+  // const sliderCmptStyle = "w-[130px] flex justify-around items-center text-xs"
 
   return (
     <div>
       <div ref={ parentRef } id="canvasParent" className="h-[400px] w-full"  />
-      <div id="timerParent" className="border-b p-2 flex justify-end text-sm" />
-      <div className="flex p-2">
+      {/* <div id="timerParent" className=" p-2 flex justify-end text-sm" /> */}
+      {/* <div className="flex p-2">
         <div id="topSliderParent" className={ sliderCmptStyle } />
         <div id="btmSliderParent" className={ sliderCmptStyle } />
-      </div>
+      </div> */}
     </div>
   )
 }

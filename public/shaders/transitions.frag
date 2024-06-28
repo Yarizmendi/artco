@@ -15,7 +15,7 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
 
   vec4 color1 = texture2D( bg, pos );
   vec4 color2 = texture2D( fg, pos );
-  vec4 noise = texture2D( u_noise, ( pos ) );
+  vec4 noise = texture2D( u_noise, pos );
 
   float t = smoothstep(
     ( u_threshold - u_range  ) / ( ( u_time - timeout )  /  1300.0 ),
@@ -41,7 +41,7 @@ void main () {
   float numer =  u_time / 1000.0;
 
   // if ( u_advX == true ) {
-    // pos.x += ( sin( pos.x * numer ) / ( 22.0 + numer ));
+    pos.x += ( sin( pos.x * numer ) / ( 22.0 + numer ));
   // }
 
   // if ( u_advY == true ) {

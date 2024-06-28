@@ -7,7 +7,7 @@ export default function sketch ( p5, parentRef ) {
   let texturesArr
   let timer
 
-  let changeEvery = 25
+  let changeEvery = 10
   let idx = 0
   let noiseTexture
 
@@ -42,7 +42,7 @@ export default function sketch ( p5, parentRef ) {
       Shader.setUniform( "u_background",  texturesArr[ idx ])
     }
     else if ( texturesArr.length-2 > idx ) {
-      changeEvery += 25
+      changeEvery += 10
       idx+=1
       Shader.setUniform( "u_timeout", p5.millis() )
     } 
