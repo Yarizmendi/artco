@@ -8,7 +8,6 @@ function sketch( p5, parentRef ) {
 
   let Shader 
   let textures
-
   let seconds
 
   let [ canvas, canvasParent ] = []
@@ -17,7 +16,7 @@ function sketch( p5, parentRef ) {
   let [ btmSliderParent, btmTimeSlider, btmTimeSliderValue ] = []
 
   p5.preload = () => {
-    font = p5.loadFont("/fonts/cabalFont.ttf")
+    p5.loadFont("/fonts/cabalFont.ttf")
     Shader = p5.loadShader("/shaders/standard.vert", "/shaders/colors.frag")
     textures = allImages.map( tex => p5.loadImage(`/images/${ tex.path }`))
   }
