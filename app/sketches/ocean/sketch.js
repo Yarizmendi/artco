@@ -25,12 +25,12 @@ export default function sketch( p5, parentRef ) {
 
     topSliderParent = document.getElementById("topSliderParent")
     topTimeSliderValue = p5.createP("").parent( "topSliderParent")
-    topTimeSlider = p5.createSlider( 0, 60, 5, 1 ).parent( topSliderParent )
+    topTimeSlider = p5.createSlider( 0, 60, 10, 1 ).parent( topSliderParent )
     topTimeSlider.size( 100 )
 
     btmSliderParent = document.getElementById("btmSliderParent")
     btmTimeSliderValue = p5.createP("").parent("btmSliderParent" )
-    btmTimeSlider = p5.createSlider( 0, 60, 5, 1 ).parent( btmSliderParent )
+    btmTimeSlider = p5.createSlider( 0, 60, 15, 1 ).parent( btmSliderParent )
     btmTimeSlider.size( 100 )
 
     timerParent = document.getElementById("timerParent")
