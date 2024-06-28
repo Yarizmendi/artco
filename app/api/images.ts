@@ -5,9 +5,9 @@ export const stem = [
   { path: "Reclamation.png" },
   { path: "yellow_org_stem.jpg" },
   { path: "orange_actuality.png" },
-  // { path: "yellow_red_stem.jpg" },
-  // { path: "blue_red_stem.jpg" },
-  // // { path: "sunset_circles_stem.jpg" },
+  { path: "yellow_red_stem.jpg" },
+  { path: "blue_red_stem.jpg" },
+  { path: "sunset_circles_stem.jpg" },
   { path: "in_search_of_pareto.png" },
   { path: "patents_stem.jpg" },
   { path: "person_stem.jpg" },
@@ -20,18 +20,14 @@ export const stem = [
   { path: "abstract_toon_stem.jpg" },
   { path: "sid.jpg" },
   { path: "thoughts_wb.png" },
-  // { path: "yellow_actuality.png" },
-  // { path: "orange_actuality.png" },
+  { path: "yellow_actuality.png" },
+  { path: "orange_actuality.png" },
 ]
 
 export const oceans = [
   { path: "red_ocean.png" },
   { path: "your_ocean_changed.png" },
   { path: "watery_path.jpg" },
-]
-
-export const skies = [
-  { path: "things_unsaid.png" },
 ]
 
 export const plants = [
@@ -45,10 +41,8 @@ export const general = [
   { path: "confusion.jpg" },
   { path: "gray_man.jpg" },
   { path: "highway.jpg" },
-  { path: "purple_woman.jpg" },
   { path: "desert_fog.jpg" },
   { path: "cacti.jpg" },
-  { path: "desert_stripes.jpg" },
   { path: "desert_sky.jpg" },
   { path: "gemstone_cliff.jpg" },
   { path: "lizard_eyes.jpg" },
@@ -61,13 +55,6 @@ export const places = [
   { path: "polluted_ocean.jpg" },
 ]
 
-export const fam = [
-  { path: "fam3.jpeg" },
-  { path: "fam2.jpg" },
-  { path: "fam1.jpg" },
-  { path: "fam4.jpg" },
-  { path: "fam5.jpg" }
-]
 
 export const noiseTextures = [
   { path: "perlin.png" }
@@ -75,7 +62,6 @@ export const noiseTextures = [
 
 export const allImages = [
   ...places,
-  ...skies,
   ...oceans,
   ...plants,
   ...stem,

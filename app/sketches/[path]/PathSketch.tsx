@@ -25,10 +25,12 @@ export default function PathSKetch({ path }) {
     let texture
     let seconds
     let canvasParent 
+    let noise
 
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/basic.frag")
       texture = p5.loadImage(`/images/${ path }`)
+      noise = p5.loadImage(`/images/perlin.png`)
     }
 
     p5.setup = () => {
@@ -40,6 +42,7 @@ export default function PathSKetch({ path }) {
     p5.draw = () => {
       seconds = p5.millis() / 1000
       Shader.setUniform( "u_time", seconds )
+      Shader.setUniform( "u_noise", noise )
       Shader.setUniform( "u_background", texture )
       Shader.setUniform( "u_resolution", [ canvasParent.offsetWidth, canvasParent.offsetHeight ])
       p5.shader( Shader )
