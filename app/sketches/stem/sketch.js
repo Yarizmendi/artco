@@ -14,7 +14,6 @@ export default function sketch ( p5, parentRef ) {
   let canvasParent
 
   p5.preload = () => {
-    p5.loadFont('/fonts/cabalFont.ttf')
     Shader = p5.loadShader( '/shaders/standard.vert', '/shaders/transitions.frag' )
     texturesArr = stem.map( img => p5.loadImage( `/images/${ img.path }` ))
     noiseTexture = p5.loadImage( `/images/${ noiseTextures[0].path }` )
