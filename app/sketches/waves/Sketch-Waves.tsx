@@ -41,9 +41,9 @@ export default function Canvas({ ...props }) {
       canvasParent = document.getElementById("canvasParent")
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
 
-      wavesSlider = p5.createSlider( 0, 100, 10 )
-      timerP = p5.createP("")
-      duration = p5.createSlider( 15, 240, 30 )
+      timerP = p5.createP("").parent( parentRef )
+      wavesSlider = p5.createSlider( 0, 100, 10 ).parent( parentRef )
+      duration = p5.createSlider( 15, 240, 30 ).parent( canvasParent )
     }
 
     p5.draw = () => {
