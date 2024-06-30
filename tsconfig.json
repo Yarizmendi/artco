@@ -7,10 +7,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/comps/*": ["app/comps/*"],
-      "@/api/*": ["app/api/*"],
-      "@/css/*": ["app/css/*"],
-      "@/p5/*": ["app/comps/P5/*"],
+      "p5/*": ["comps/P5/*"],
+      "comps/*": ["comps/*"],
+      "styles/*": ["css/*"],
+      "api/*": ["app/api/*"],
     },
     "allowImportingTsExtensions": true,
     "allowJs": true,
@@ -37,7 +37,7 @@
     "**/**/*.ts",
     "**/**/*.tsx",
     ".next/types/**/*.ts"
-, "app/sketches/stem/StemSketch.jsx", "app/sketches/window/WindowSketch.jsx", "app/sketches/ocean/OceanMixSketch.jsx", "app/comps/P5/Canvas.jsx"  ],
+, "app/sketches/stem/StemSketch.jsx", "app/sketches/window/WindowSketch.tsx", "app/sketches/ocean/OceanMixSketch.jsx", "comps/P5/Canvas.jsx"  ],
   "exclude": [
     "node_modules"
   ]

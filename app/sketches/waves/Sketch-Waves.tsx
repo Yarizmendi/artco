@@ -1,15 +1,15 @@
 
 "use client"
-import p5Types from "p5";
-import InitP5 from "comps/P5/InitP5.js"
 import { useState, useRef, useEffect } from "react"
+import InitP5 from "comps/P5/InitP5.js"
+import p5Types from "p5"
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;
 
-export default function HouseSketch({ imgs }) {
+export default function Canvas({ ...props }) {
 
-  let mp5: any = null
+  let mp5 = null
   let parentRef = useRef()
 
   const [ isMounted, setIsMounted ] = useState( false )
@@ -22,29 +22,43 @@ export default function HouseSketch({ imgs }) {
     else return mp5.remove()
   }, [ isMounted ])
 
+  
   const sketch: P5jsSketch = ( p5, parentRef ) => {
     let Shader 
-    let textures
+    let texture
     let seconds
-    let canvasParent
+    let duration
+    let canvasParent 
+    let wavesSlider
+    let timerP
 
     p5.preload = () => {
-      Shader = p5.loadShader("/shaders/standard.vert", "/shaders/house.frag")
-      textures = imgs.map( tex => p5.loadImage(`/images/${ tex.path }`))
+      Shader = p5.loadShader("/shaders/standard.vert", "/shaders/oceans.frag")
+      texture = p5.loadImage(`/images/red_ocean.png`)
     }
 
     p5.setup = () => {
       canvasParent = document.getElementById("canvasParent")
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
+
+      wavesSlider = p5.createSlider( 0, 100, 10 )
+      timerP = p5.createP("")
+      duration = p5.createSlider( 15, 240, 30 )
     }
 
     p5.draw = () => {
       seconds = p5.millis() / 1000
-      Shader.setUniform( "u_time", seconds )
-      Shader.setUniform( "u_background", textures[ 0 ] )
-      Shader.setUniform( "u_foreground", textures[ 1 ])
-      p5.shader( Shader )
-      p5.rect( 0, 0, 0 )
+      timerP.html(`${ p5.round( seconds )}`)
+
+      Shader.setUniform( "u_texture", texture )
+      Shader.setUniform( "u_duration", duration.value() )
+      Shader.setUniform( "u_waves", wavesSlider.value() )
+
+      if ( seconds < duration.value() ) {
+        Shader.setUniform( "u_time", seconds )
+        p5.shader( Shader )
+        p5.rect( 0, 0, 0 )
+      }
 
     }
 

@@ -1,7 +1,10 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import InitP5 from "@/p5/InitP5.js"
+import InitP5 from "p5/InitP5.js"
+import p5Types from "p5"
+type P5jsContainerRef = HTMLDivElement;
+type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;
 
 export default function Canvas({ ...props }) {
 
@@ -18,6 +21,18 @@ export default function Canvas({ ...props }) {
     else return mp5.remove()
   }, [ isMounted ])
 
+
+  const sketch: P5jsSketch = ( p5, parentRef ) => {
+
+    p5.preload = () => {}
+
+    p5.setup = () => {}
+
+    p5.draw = () => {}
+
+    p5.windowResized = () => {}
+
+  }
 
   return (
     <div>

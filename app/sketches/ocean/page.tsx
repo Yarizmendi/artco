@@ -1,6 +1,7 @@
 
+import { colorsSketch } from "api/images"
 import OceanMixSketch  from "./OceanMixSketch"
 
 export default function OceanMixSketchPage() {
-  return <OceanMixSketch />
+  return <OceanMixSketch imgs={ colorsSketch }/>
 }

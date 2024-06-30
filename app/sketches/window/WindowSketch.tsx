@@ -1,15 +1,14 @@
 
 "use client"
-import p5Types from "p5";
-import InitP5 from "comps/P5/InitP5.js"
 import { useState, useRef, useEffect } from "react"
-
+import InitP5 from "comps/P5/InitP5.js"
+import p5Types from "p5"
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;
 
-export default function HouseSketch({ imgs }) {
+export default function WindowSketch() {
 
-  let mp5: any = null
+  let mp5 = null
   let parentRef = useRef()
 
   const [ isMounted, setIsMounted ] = useState( false )
@@ -22,15 +21,16 @@ export default function HouseSketch({ imgs }) {
     else return mp5.remove()
   }, [ isMounted ])
 
+
   const sketch: P5jsSketch = ( p5, parentRef ) => {
-    let Shader 
-    let textures
-    let seconds
+    let bgImg
     let canvasParent
+    let seconds
+    let Shader
 
     p5.preload = () => {
-      Shader = p5.loadShader("/shaders/standard.vert", "/shaders/house.frag")
-      textures = imgs.map( tex => p5.loadImage(`/images/${ tex.path }`))
+      bgImg = p5.loadImage("/images/commision.jpg")
+      Shader = p5.loadShader("/shaders/standard.vert", "/shaders/texture.frag")
     }
 
     p5.setup = () => {
@@ -41,11 +41,10 @@ export default function HouseSketch({ imgs }) {
     p5.draw = () => {
       seconds = p5.millis() / 1000
       Shader.setUniform( "u_time", seconds )
-      Shader.setUniform( "u_background", textures[ 0 ] )
-      Shader.setUniform( "u_foreground", textures[ 1 ])
+      Shader.setUniform( "u_background", bgImg )
+      Shader.setUniform( "u_resolution", [ canvasParent.offsetWidth, canvasParent.offsetHeight ])
       p5.shader( Shader )
       p5.rect( 0, 0, 0 )
-
     }
 
     p5.windowResized = () => {

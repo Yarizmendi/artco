@@ -1,7 +1,7 @@
 
-import { allImages } from "@/api/images"
-import Nav from "@/comps/Nav"
-import ArtLinks from "@/comps/ArtLinks"
+import { allImages } from "api/images"
+import Nav from "comps/Nav"
+import ArtLinks from "comps/ArtLinks"
 
 function ArtPage() {
   const links = [
