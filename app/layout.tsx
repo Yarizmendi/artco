@@ -1,5 +1,5 @@
 
-import "styles/globals.css"
+import "@/css/globals.css"
 
 export const metadata = {
   title: "The Art Co.",

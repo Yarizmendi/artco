@@ -1,5 +1,5 @@
 
-import { colorsSketch } from "api/images"
+import { colorsSketch } from "@/api/images"
 import OceanMixSketch  from "./OceanMixSketch"
 
 export default function OceanMixSketchPage() {

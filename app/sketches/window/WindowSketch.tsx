@@ -1,7 +1,7 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import InitP5 from "comps/P5/InitP5.js"
+import InitP5 from "@/p5/InitP5.js"
 import p5Types from "p5"
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;

@@ -1,5 +1,5 @@
 
-import { sunsetImgs } from "api/images"
+import { sunsetImgs } from "@/api/images"
 import HouseSketch from "./HouseSketch"
 
 export default function HouseSketchPage() {
