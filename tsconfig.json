@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/comps/*": ["app/comps/*"],
+      "@/api/*": ["app/api/*"],
+      "@/css/*": ["app/css/*"],
+      "@/p5/*": ["app/comps/P5/*"],
+    },
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/**/*.ts",
+    "**/**/*.tsx",
+    ".next/types/**/*.ts"
+, "app/sketches/stem/StemSketch.jsx", "app/sketches/window/WindowSketch.jsx", "app/sketches/ocean/OceanMixSketch.jsx", "app/comps/P5/Canvas.jsx"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

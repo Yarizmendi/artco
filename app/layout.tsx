@@ -1,8 +1,8 @@
 
-import "../globals.css"
+import "@/css/globals.css"
 
 export const metadata = {
-  title: "The Art Co."
+  title: "The Art Co.",
 } 
 
 interface IRootLayout {

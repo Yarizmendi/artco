@@ -8,6 +8,7 @@ function ArtPage() {
     { path: "/sketches/stem", text: "stem" },
     { path: "/sketches/ocean", text: "ocean" },
     { path: "/sketches/house", text: "house" },
+    { path: "/sketches/waves", text: "waves" },
     { path: "/sketches/window", text: "window" },
   ]
   

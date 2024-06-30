@@ -2,7 +2,7 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import InitP5 from "../../lib/InitP5"
+import InitP5 from "../../comps/P5/InitP5"
 
 
 export default function PathSKetch({ path }) {
