@@ -56,7 +56,7 @@ export default function HouseSketch({ imgs }) {
 
   return (
     <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-4/6 lg:w-2/3 m-auto"  />
+      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-4/6 lg:w-2/3 m-auto" />
     </div>
   )
 }

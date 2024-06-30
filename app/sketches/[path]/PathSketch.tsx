@@ -1,8 +1,10 @@
-// @ts-nocheck
-
 "use client"
+import p5Types from "p5"
 import { useState, useRef, useEffect } from "react"
 import InitP5 from "@/p5/InitP5.js"
+
+type P5jsContainerRef = HTMLDivElement;
+type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;
 
 export default function PathSKetch({ path }) {
 
@@ -15,11 +17,11 @@ export default function PathSKetch({ path }) {
   useEffect(() => { 
     if ( !isMounted ) return
     if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
-    else mp5.remove()
+    else return mp5.remove()
   }, [ isMounted ])
 
   
-  function sketch( p5, parentRef ) {
+  const sketch: P5jsSketch  = ( p5, parentRef ) => {
     let Shader 
     let texture
     let seconds
@@ -33,7 +35,6 @@ export default function PathSKetch({ path }) {
     }
 
     p5.setup = () => {
-      p5.pixelDensity(1)
       canvasParent = document.getElementById("canvasParent")
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
     }
@@ -43,9 +44,8 @@ export default function PathSKetch({ path }) {
       Shader.setUniform( "u_time", seconds )
       Shader.setUniform( "u_noise", noise )
       Shader.setUniform( "u_background", texture )
-      Shader.setUniform( "u_resolution", [ canvasParent.offsetWidth, canvasParent.offsetHeight ])
       p5.shader( Shader )
-      p5.rect( 0 )
+      p5.rect( 0, 0, 0 )
 
     }
 
@@ -57,7 +57,7 @@ export default function PathSKetch({ path }) {
 
   return (
     <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[480px] w-full md:w-5/6 lg:w-4/6 m-auto"  />
+      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-4/6 lg:w-2/3 m-auto" />
     </div>
   )
 }

@@ -1,8 +1,9 @@
 
 "use client"
+import p5Types from "p5"
 import { useState, useRef, useEffect } from "react"
 import InitP5 from "@/p5/InitP5.js"
-import p5Types from "p5"
+
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;
 
@@ -10,7 +11,6 @@ export default function WindowSketch() {
 
   let mp5 = null
   let parentRef = useRef()
-
   const [ isMounted, setIsMounted ] = useState( false )
 
   useEffect(() => { if( !isMounted ) setIsMounted( true ) }, [])
@@ -42,7 +42,6 @@ export default function WindowSketch() {
       seconds = p5.millis() / 1000
       Shader.setUniform( "u_time", seconds )
       Shader.setUniform( "u_background", bgImg )
-      Shader.setUniform( "u_resolution", [ canvasParent.offsetWidth, canvasParent.offsetHeight ])
       p5.shader( Shader )
       p5.rect( 0, 0, 0 )
     }
@@ -55,7 +54,7 @@ export default function WindowSketch() {
 
   return (
     <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-4/6 lg:w-2/3 m-auto"  />
+      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-4/6 lg:w-2/3 m-auto" />
     </div>
   )
 }

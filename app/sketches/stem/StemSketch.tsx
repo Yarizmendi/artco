@@ -1,7 +1,11 @@
 
 "use client"
+import p5Types from "p5";
 import InitP5 from "@/p5/InitP5.js"
 import { useState, useRef, useEffect } from "react"
+
+type P5jsContainerRef = HTMLDivElement;
+type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;
 
 export default function StemSketch({ imgs, noise }) {
   let mp5 = null
@@ -14,10 +18,10 @@ export default function StemSketch({ imgs, noise }) {
   useEffect(() => {
     if ( !isMounted ) return
     if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
-    else mp5.remove()
+    else return mp5.remove()
   }, [ isMounted ] )
 
-  function sketch( p5, parentRef ) {
+  const sketch: P5jsSketch = ( p5, parentRef ) => {
 
     let Shader
     let texturesArr
@@ -32,7 +36,7 @@ export default function StemSketch({ imgs, noise }) {
     p5.preload = () => {
       Shader = p5.loadShader( '/shaders/standard.vert', '/shaders/stem.frag' )
       texturesArr = imgs.map( img => p5.loadImage( `/images/${ img.path }` ))
-      noiseTexture = p5.loadImage( `/images/${ noise.path }` )
+      noiseTexture = p5.loadImage( `/images/${ noise[0].path }` )
     }
   
     p5.setup = () => {
@@ -73,7 +77,7 @@ export default function StemSketch({ imgs, noise }) {
 
   return (
     <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-5/6 lg:w-4/6 m-auto"  />
+      <div ref={ parentRef } id="canvasParent" className="h-[450px] w-full md:w-4/6 lg:w-2/3 m-auto" />
     </div> 
   )
 }

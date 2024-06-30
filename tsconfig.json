@@ -37,7 +37,7 @@
     "**/**/*.ts",
     "**/**/*.tsx",
     ".next/types/**/*.ts"
-, "app/sketches/stem/StemSketch.jsx", "app/sketches/window/WindowSketch.tsx", "app/sketches/ocean/OceanMixSketch.jsx", "comps/P5/Canvas.jsx"  ],
+  ],
   "exclude": [
     "node_modules"
   ]
