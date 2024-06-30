@@ -1,7 +1,9 @@
 
-import Canvas from "./Canvas"
+import Sketch from "./Sketch.tsx"
+import { getImages } from "@/api/images.ts"
 
-export default function Page({ path }) {
-  return <Canvas path={ path } />
+export default function SketchPage() {
+  const imgs =  getImages({})
+  return <Sketch imgs={ imgs } />
 }
 

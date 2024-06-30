@@ -1,8 +1,9 @@
 
-import { sunsetImgs } from "@/api/images"
-import HouseSketch from "./HouseSketch.tsx"
+import Sketch from "./Sketch.tsx"
+import { getImages } from "@/api/images"
 
-export default function HouseSketchPage() {
-  return <HouseSketch imgs={ sunsetImgs }/>
+export default function HouseSketch() {
+  const imgs = getImages({ sketch: "house" })
+  return <Sketch imgs={ imgs }/>
 }
 

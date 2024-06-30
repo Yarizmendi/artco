@@ -1,7 +1,9 @@
 
-import Canvas from "./Sketch-Waves.tsx"
+import Sketch from "./Sketch.tsx"
+import { getImages } from "@/api/images.ts"
 
-export default function Page({ path }) {
-  return <Canvas path={ path } />
+export default function WaveSketch() {
+  const imgs = getImages({ sketch: "waves" })
+  return <Sketch imgs={ imgs } />
 }
 

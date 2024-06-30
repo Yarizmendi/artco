@@ -2,8 +2,7 @@
 import Link from "next/link"
 // import classNames from "classnames"
 // import { Dispatch, SetStateAction } from 'react'
-
-{/* <span onClick={() => props.setValue('hello moon')}>{props.value}</span> */}
+// <span onClick={() => props.setValue('hello moon')}>{props.value}</span> 
 
 interface Props {
   links: any[]
@@ -26,7 +25,7 @@ function NavCmpt( props: Props ) {
   return (
     <div className={ styles.ctn }>
       <nav className={ styles.nav } >
-        {/* <span className={ styles.span } > apps</span> */}
+        {/* <span className={ styles.span }> apps</span> */}
         { props.links.map(( link, idx ) => 
           <Link 
             key={ idx }

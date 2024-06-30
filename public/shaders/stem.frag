@@ -38,10 +38,8 @@ void main () {
     pos.y = pos.y + (sin(pos.y * 15. ) / 100. ) * (cos(u_time / 1000. ));
   // }
 
-  float numer =  u_time / 1000.0;
-
   // if ( u_advX == true ) {
-    pos.x += ( sin( pos.x * numer ) / ( 22.0 + numer ));
+    pos.x += ( sin( pos.x * u_time / 1000. ) / ( 22.0 + u_time / 1000. ));
   // }
 
   // if ( u_advY == true ) {

@@ -1,7 +1,9 @@
 
-import WindowSketch from "./WindowSketch.tsx"
+import Sketch from "./Sketch.tsx"
+import { getImages } from "@/api/images.ts"
 
-export default function ComissionSketchPage() {
-  return <WindowSketch  />
+export default function WindowSketch() {
+  const imgs = getImages({ sketch: "window" })
+  return <Sketch imgs={ imgs } />
 }
 

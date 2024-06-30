@@ -1,7 +1,7 @@
 
-import { allImages } from "@/api/images"
-import Nav from "comps/Nav"
-import ArtLinks from "comps/ArtLinks"
+import Nav from "@/comps/Nav"
+import ArtLinks from "@/comps/ArtLinks"
+import { getImages } from "@/api/images"
 
 function ArtPage() {
   const links = [
@@ -11,14 +11,19 @@ function ArtPage() {
     { path: "/sketches/waves", text: "waves" },
     { path: "/sketches/window", text: "window" },
   ]
+
+  const allImages = getImages({ sketch: "all" })
   
   return (
     <div className="w-full">
       <Nav links={ links } />
-      <ArtLinks 
-        links = { allImages }
-        width={ 150 } 
-        height={ 160 } /> 
+      {
+        allImages && <ArtLinks 
+          links = { allImages }
+          width={ 150 } 
+          height={ 160 } /> 
+      }
+
     </div>
   )
 }

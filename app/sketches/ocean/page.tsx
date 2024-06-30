@@ -1,7 +1,8 @@
 
-import { colorsSketch } from "@/api/images"
-import OceanMixSketch  from "./OceanMixSketch.tsx"
+import Sketch  from "./Sketch.tsx"
+import { getImages } from "@/api/images"
 
-export default function OceanMixSketchPage() {
-  return <OceanMixSketch imgs={ colorsSketch }/>
+export default function OceanSketch() {
+  const imgs = getImages({ sketch: "ocean" })
+  return <Sketch imgs={ imgs }/>
 }

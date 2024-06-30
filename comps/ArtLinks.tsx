@@ -1,10 +1,10 @@
 
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
 
 function ArtLinks({ width, height, links }) {
   const imgPrefix = "/images/"
-  const imgName = ( path: string ) => path.replace('_', ' ' ).split('.').slice(0, -1).join('.') 
+  const imgName = ( path: string ) => path.replace(/_/g, ' ' ).split('.')[ 0 ]
   return (
     <div className=" my-[20px] max-w-[1200px] h-[350px] m-auto flex flex-wrap justify-center items-center overflow-auto">
       { links && links.map(( link, idx ) => 
