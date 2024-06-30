@@ -1,8 +1,6 @@
 precision mediump float;
 
 uniform float u_time;
-uniform vec2 u_resolution;
-
 
 uniform sampler2D u_background;
 vec4 backgroundColor;
@@ -10,17 +8,13 @@ vec4 backgroundColor;
 uniform sampler2D u_foreground;
 vec4 foregroundColor;
 
-// uniform float u_topTime;
-// uniform float u_btmTime;
+varying vec2 vTexCoord;
 
-// float t;
 vec4 color;
 
-// vec4 nightColor = vec4(0.6, 0.6, 0.58, 1.0);
 
 void main() {
-  vec2 st = gl_FragCoord.xy/u_resolution;
-  st.y = 1.0 - st.y;
+  vec2 st = vTexCoord;
 
   if ( st.y > .81 && st.x > .51 ) {
     st.x += ( cos( st.x * u_time ) / ( 25.0 + u_time ));

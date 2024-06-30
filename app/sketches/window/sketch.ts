@@ -11,11 +11,10 @@ export const sketch: P5jsSketch = ( p5, parentRef ) => {
 
   p5.preload = () => {
     bgImg = p5.loadImage("/images/commision.jpg")
-    Shader = p5.loadShader("/shaders/standard.vert", "/shaders/basic.frag")
+    Shader = p5.loadShader("/shaders/standard.vert", "/shaders/texture.frag")
   }
 
   p5.setup = () => {
-    p5.pixelDensity(1)
     canvasParent = document.getElementById("canvasParent")
     p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
   }

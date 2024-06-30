@@ -1,13 +1,12 @@
-// @ts-nocheck
 
 "use client"
 import { useState, useRef, useEffect } from "react"
 import InitP5 from "../../lib/InitP5.js"
 import { sketch } from "./sketch.ts"
 
-export default function DefaultSketch() {
+export default function WindowSketch() {
 
-  let mp5: any = null
+  let mp5 = null
   let parentRef = useRef()
 
   const [ isMounted, setIsMounted ] = useState( false )
@@ -18,7 +17,7 @@ export default function DefaultSketch() {
     if ( !isMounted ) return
     if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
     else return mp5.remove()
-  }, [ isMounted, sketch ])
+  }, [ isMounted ])
 
 
   return (

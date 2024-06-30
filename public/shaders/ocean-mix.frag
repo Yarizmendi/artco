@@ -1,7 +1,6 @@
 precision mediump float;
 
 uniform float u_time;
-uniform vec2 u_resolution;
 
 vec4 color;
 
@@ -17,13 +16,14 @@ vec4 pollutedOceanColor;
 uniform float u_topTime;
 uniform float u_btmTime;
 
+varying vec2 vTexCoord;
+
 float t;
 
 vec4 nightColor = vec4(0.11, 0.14, 0.31, 1.0);
 
 void main() {
-  vec2 st = gl_FragCoord.xy/u_resolution;
-  st.y = 1.0 - st.y;
+  vec2 st = vTexCoord;
 
   st *= ( 0.92 );
   if ( st.y > .46 ) {

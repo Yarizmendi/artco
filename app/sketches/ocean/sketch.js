@@ -13,12 +13,11 @@ export default function sketch( p5, parentRef ) {
   let [ btmSliderParent, btmTimeSlider, btmTimeSliderValue ] = []
 
   p5.preload = () => {
-    Shader = p5.loadShader("/shaders/standard.vert", "/shaders/colors.frag")
+    Shader = p5.loadShader("/shaders/standard.vert", "/shaders/ocean-mix.frag")
     textures = allImages.map( tex => p5.loadImage(`/images/${ tex.path }`))
   }
 
   p5.setup = () => {
-    p5.pixelDensity(1)
     canvasParent = document.getElementById("canvasParent")
     p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
 
@@ -50,9 +49,6 @@ export default function sketch( p5, parentRef ) {
     Shader.setUniform( "u_industrial_ocean", textures[ 0 ] )
     Shader.setUniform( "u_red_ocean", textures[ 1 ])
     Shader.setUniform("u_polluted_ocean", textures[ 2 ])
-
-
-    Shader.setUniform( "u_resolution", [ canvasParent.offsetWidth, canvasParent.offsetHeight ])
 
     p5.shader( Shader )
     p5.rect( 0 )

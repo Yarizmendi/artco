@@ -50,7 +50,5 @@ void main () {
 
   
   vec4 col = transition( pos, u_background, u_foreground, u_timeout );
-
-
   gl_FragColor = vec4( col );
 }

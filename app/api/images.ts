@@ -4,7 +4,6 @@ export const stem = [
   { path: "ballerina.png" },
   { path: "Reclamation.png" },
   { path: "yellow_org_stem.jpg" },
-  { path: "orange_actuality.png" },
   { path: "yellow_red_stem.jpg" },
   { path: "blue_red_stem.jpg" },
   { path: "sunset_circles_stem.jpg" },

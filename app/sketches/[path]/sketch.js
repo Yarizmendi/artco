@@ -6,12 +6,11 @@ function sketch( p5, parentRef, path ) {
   let canvasParent 
 
   p5.preload = () => {
-    Shader = p5.loadShader("/shaders/standard.vert", "/shaders/basic.frag")
+    Shader = p5.loadShader("/shaders/standard.vert", "/shaders/texture.frag")
     texture = p5.loadImage(`/images/${ path }`)
   }
 
   p5.setup = () => {
-    p5.pixelDensity(1)
     canvasParent = document.getElementById("canvasParent")
     p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
   }
@@ -20,7 +19,6 @@ function sketch( p5, parentRef, path ) {
     seconds = p5.millis() / 1000
     Shader.setUniform( "u_time", seconds )
     Shader.setUniform( "u_background", texture )
-    Shader.setUniform( "u_resolution", [ canvasParent.offsetWidth, canvasParent.offsetHeight ])
     p5.shader( Shader )
     p5.rect( 0 )
 

@@ -13,6 +13,7 @@ function ArtLinks({ width, height, links }) {
           href={`/sketches/${ link.path }`}
           className="hover:scale-110 transform duration-400 ease-in-out cursor-pointer p-4">
           <Image 
+            loading="lazy"
             src={ imgPrefix + link.path } 
             alt={ link.path } 
             width={ width }

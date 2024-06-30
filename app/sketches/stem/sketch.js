@@ -14,13 +14,12 @@ export default function sketch ( p5, parentRef ) {
   let canvasParent
 
   p5.preload = () => {
-    Shader = p5.loadShader( '/shaders/standard.vert', '/shaders/transitions.frag' )
+    Shader = p5.loadShader( '/shaders/standard.vert', '/shaders/stem.frag' )
     texturesArr = stem.map( img => p5.loadImage( `/images/${ img.path }` ))
     noiseTexture = p5.loadImage( `/images/${ noiseTextures[0].path }` )
   }
 
   p5.setup = () => {
-    p5.pixelDensity( 1 )
     canvasParent = document.getElementById("canvasParent")
     p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
   }
@@ -32,7 +31,6 @@ export default function sketch ( p5, parentRef ) {
     Shader.setUniform( "u_time", p5.millis() )
     Shader.setUniform( "u_range", 0.0 )
     Shader.setUniform( "u_threshold", 1.0 )
-
     Shader.setUniform( "u_noise", noiseTexture )
 
 

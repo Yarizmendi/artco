@@ -1,7 +1,7 @@
 
-import DefaultSketch from "./DefaultSketch"
+import Canvas from "./Canvas"
 
-export default function Page() {
-  return <DefaultSketch />
+export default function Page({ path }) {
+  return <Canvas path={ path } />
 }
 

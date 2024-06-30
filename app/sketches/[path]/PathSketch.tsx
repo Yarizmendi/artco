@@ -28,7 +28,7 @@ export default function PathSKetch({ path }) {
     let noise
 
     p5.preload = () => {
-      Shader = p5.loadShader("/shaders/standard.vert", "/shaders/basic.frag")
+      Shader = p5.loadShader("/shaders/standard.vert", "/shaders/texture.frag")
       texture = p5.loadImage(`/images/${ path }`)
       noise = p5.loadImage(`/images/perlin.png`)
     }

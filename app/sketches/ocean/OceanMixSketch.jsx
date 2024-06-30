@@ -1,4 +1,3 @@
-// @ts-nocheck
 
 "use client"
 import { useState, useRef, useEffect } from "react"
@@ -7,7 +6,7 @@ import InitP5 from "../../lib/InitP5"
 
 export default function OceanMixSketch() {
 
-  let mp5: any = null
+  let mp5 = null
   let parentRef = useRef()
 
   const [ isMounted, setIsMounted ] = useState( false )
