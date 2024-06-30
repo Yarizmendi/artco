@@ -1,7 +1,7 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import InitP5 from "../../comps/P5/InitP5"
+import InitP5 from "@/p5/InitP5.js"
 import sketch from "./sketch"
 
 export default function StemSketch() {

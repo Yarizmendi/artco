@@ -2,7 +2,7 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import InitP5 from "../../comps/P5/InitP5.js"
+import InitP5 from "@/p5/InitP5.js"
 import { sketch } from "./sketch.ts"
 
 export default function HouseSketch() {

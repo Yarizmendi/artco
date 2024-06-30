@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import InitP5 from "@/p5/InitP5.js"
 
-export default function Canvas() {
+export default function Canvas({ ...props }) {
 
   let mp5 = null
   let parentRef = useRef()
