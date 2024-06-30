@@ -1,13 +1,9 @@
 
 "use client"
 import { useState, useRef, useEffect } from "react"
-import { usePathname } from "next/navigation"
-import dynamic from "next/dynamic"
 import InitP5 from "@/p5/InitP5.js"
 
 export default function Canvas() {
-  const pathname = usePathname()
-  const sketch = dynamic(() => import( `${ pathname }/sketch` ))
 
   let mp5 = null
   let parentRef = useRef()

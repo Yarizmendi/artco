@@ -1,9 +1,7 @@
 
-// import HouseSketch from "./HouseSketch"
-// import Canvas from "../../comps/P5/sketch/Canvas"
+import HouseSketch from "./HouseSketch"
 
-export default function HouseSketch() {
-  // return <Canvas />
-  return <HouseSketch/>
+export default function HouseSketchPage() {
+  return <HouseSketch />
 }
 
