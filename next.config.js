@@ -7,7 +7,6 @@ const nextConfig = {
             loader: 'raw-loader'
         }
     });
-    // config.plugins.push( config.ProvidePlugin({ p5: 'p5' }));
     return config
   },
   experimental: {
