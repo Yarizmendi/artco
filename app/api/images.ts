@@ -1,6 +1,8 @@
 
 
 export const imgDict = {
+  window: { id: 40, path: "window.jpg" },
+  sf: { id: 40, path: "sf.jpg" },
   yellow_org_collab: { id: 0, path: "yellow_org_collab.jpg" },
   ballerina: { id: 1, path: "ballerina.png" },
   Reclamation: { id: 2, path: "Reclamation.png" },
@@ -41,7 +43,6 @@ export const imgDict = {
   sunset_tree: { id: 37, path: "sunset_tree.jpg" },
   mycellium: { id: 38, path: "mycellium.jpg" },
   watery_path: { id: 39, path: "watery_path.jpg" },
-  window: { id: 40, path: "window.jpg" },
 }
 
 export const noisesDict = {

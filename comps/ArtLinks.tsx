@@ -6,7 +6,7 @@ function ArtLinks({ width, height, links }) {
   const imgPrefix = "/images/"
   const imgName = ( path: string ) => path.replace(/_/g, ' ' ).split('.')[ 0 ]
   return (
-    <div className=" my-[20px] max-w-[1200px] h-[350px] m-auto flex flex-wrap justify-center items-center overflow-auto">
+    <div className="mb-[10px] max-w-[1200px] h-[350px] m-auto flex flex-wrap justify-center items-center overflow-auto">
       { links && links.map(( link, idx ) => 
         <Link
           key={ idx }
