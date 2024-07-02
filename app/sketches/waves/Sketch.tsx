@@ -1,25 +1,19 @@
 
 "use client"
 import p5Types from "p5"
-import InitP5 from "@/p5/InitP5.js"
+import InitP5, { P5Recorder, RecorderOverlay } from "@/p5/InitP5.js"
 import { useState, useRef, useEffect } from "react"
+import { usePathname } from "next/navigation";
 
-type P5jsContainerRef = HTMLDivElement;
+type P5jsContainerRef = HTMLDivElement
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void
 
 export default function WaveSketch({ imgs }) {
 
-  let mp5 
-  let link 
-  let video 
-  let canvas 
-  let stream
-  let frameRate
-  let mediaRecorder
-  let recordedChunks = []
-  let options = { mimeType: "video/webm; codecs=vp9" }
-
+  let mp5
   let parentRef = useRef()
+  let path = usePathname().split('/')[ 2 ]
+
   const [ isMounted, setIsMounted ] = useState( false )
 
   useEffect(() => { if ( !isMounted ) setIsMounted( true )}, [])
@@ -30,27 +24,8 @@ export default function WaveSketch({ imgs }) {
     else return mp5.remove()
   }, [ isMounted ])
 
-
-  function download() {
-    const blob = new Blob( recordedChunks, { type: "video/webm" })
-    const url = URL.createObjectURL( blob )
-    link.href = url
-    link.download = "test.webm"
-    link.click()
-    window.URL.revokeObjectURL(url)
-  }
-
-  function handleDataAvailable( 
-     event, 
-  ) {
-    if ( event.data.size > 0 ) {
-      recordedChunks.push( event.data )
-    } 
-    download()
-  }
-
-
   const sketch: P5jsSketch = ( p5, parentRef ) => {
+    let mediaRecorder
 
     let isPlaying = false
     let drawPlayTimer = 0
@@ -60,27 +35,31 @@ export default function WaveSketch({ imgs }) {
     let p5Imgs 
 
     let canvasParent 
+    let recordBtnParent
 
-    let recordBtnP
-    let playBtnP
-    
     let drawTimerP
+    let sketchNameP
 
     let recordBtn
-    let recordBtnParent
-  
-    let record_icon_class = "material-symbols-outlined cursor-pointer"
-    let record_icon_text = "radio_button_checked"
-    let recordIconSpan
-  
-    let playBtn
-    let play_icon_class = "material-symbols-outlined cursor-pointer"
-    let play_icon_text = "radio_button_checked"
-    let playIconSpan
+    let recordBtnP
 
+    let recordIconSpan
+
+    let record_icon_text = "radio_button_checked"
+
+    let playBtn
+    let playBtnP
+
+    let playIconSpan
+    let play_icon_text = "play_arrow"
+
+    let iconsClass = "material-symbols-outlined"
     const sliderCmptStyle = "w-[130px] flex justify-around items-center text-xs"
+
+
     let [ wavesSliderParent, wavesSlider, wavesSliderValue ] = [ null, null, null ]
     let [ durationSliderParent, durationSlider, durationSliderValue ] = [ null, null, null ]
+
 
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/oceans.frag")
@@ -88,7 +67,6 @@ export default function WaveSketch({ imgs }) {
     }
 
     p5.setup = () => {
-
       canvasParent = document.getElementById("canvasParent")
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
 
@@ -102,71 +80,56 @@ export default function WaveSketch({ imgs }) {
       durationSlider = p5.createSlider( 15, 120, 7, 15 ).parent( durationSliderParent )
       durationSlider.size( 100 )
 
-      recordBtnParent = p5.createDiv()
-      recordBtnParent.draggable()
-      recordBtnParent.size(150, 120)
-      recordBtnParent.position( 20, 20 )
-      recordBtnParent.parent( canvasParent )
-      recordBtnParent.class("bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg")
+      recordBtnParent = RecorderOverlay( p5, canvasParent )
 
       recordBtn = p5.createButton("")
       recordBtn.parent(recordBtnParent)
-      recordBtn.class("flex items-center text-xs m-2 text-black")
+      recordBtn.class("flex items-center text-xs m-2 cursor-pointer text-black")
 
       recordIconSpan = p5.createSpan()
-      recordIconSpan.class( record_icon_class )
+      recordIconSpan.class( iconsClass )
       recordIconSpan.html( record_icon_text )
       recordIconSpan.parent( recordBtn )
-
       recordBtnP = p5.createP("record").class("p-1").parent( recordBtn )
 
       playBtn = p5.createButton("")
       playBtn.parent(recordBtnParent)
-      playBtn.class("flex items-center text-xs m-2")
+      playBtn.class("flex items-center text-xs m-2 cursor-pointer")
 
       playIconSpan = p5.createSpan()
-      playIconSpan.class( play_icon_class )
+      playIconSpan.class( iconsClass )
       playIconSpan.html( play_icon_text )
       playIconSpan.parent( playBtn )
-
       playBtnP = p5.createP("play").class("p-1").parent( playBtn )
 
-      drawTimerP = p5.createP("").parent( recordBtnParent )
-      drawTimerP.class("text xs p-1")
+      drawTimerP = p5.createP("").class("text-xs p-1").parent( recordBtnParent)
+      sketchNameP = p5.createP(`${ path } sketch`).class("text-xs p-1").parent( recordBtnParent)
 
-      link = document.getElementById("download")
-      canvas = document.querySelector("canvas")
-      video = document.getElementById("video")
-
-      stream = canvas.captureStream( frameRate )
-      video.srcObject = stream
-      mediaRecorder = new MediaRecorder( stream, options )
-      mediaRecorder.ondataavailable = handleDataAvailable
 
       playBtn.mouseClicked(() => isPlaying = !isPlaying )
 
       recordBtn.mouseClicked(() => {
-   
         if ( mediaRecorder.state == "inactive") {
           if ( !isPlaying ) isPlaying = true
-          mediaRecorder.start()
           playBtnP.html("running")
           recordBtnP.html("recording")
           recordBtn.class("flex items-center text-xs m-2 text-red-500")
+          mediaRecorder.start()
         }
         else if ( mediaRecorder.state == "recording" ) {
           if ( isPlaying ) isPlaying = false
-          mediaRecorder.stop()
           playBtnP.html("play")
           recordBtnP.html("record")
           recordBtn.class("flex items-center text-xs m-2 text-black")
+          mediaRecorder.stop()
         }
       })
 
+      mediaRecorder = P5Recorder( path )
+
     }
 
-    p5.draw = () => {
-      frameRate = p5.frameRate()
+    p5.draw = () => {    
       wavesSliderValue.html(`${ wavesSlider.value() }`)
       durationSliderValue.html(`${ durationSlider.value() }`)
       drawTimerP.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
@@ -201,7 +164,6 @@ export default function WaveSketch({ imgs }) {
   return (
     <div>
       <div ref={ parentRef } id="canvasParent" className="h-[500px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
-      <video id="video" muted controls autoPlay={ false } className="hidden" />
       <a id="download" className="hidden">download</a>
     </div>
   )

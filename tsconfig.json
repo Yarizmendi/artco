@@ -37,7 +37,7 @@
     "**/**/*.ts",
     "**/**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "comps/P5/Recorder.jsx"  ],
   "exclude": [
     "node_modules"
   ]
