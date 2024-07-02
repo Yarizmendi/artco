@@ -1,7 +1,7 @@
 
 "use client"
 import p5Types from "p5"
-import InitP5, { P5Recorder, RecorderOverlay } from "@/p5/InitP5.js"
+import InitP5, { P5Recorder, RECORD_ICON_TEXT, ICONS_OUTLINE, PLAY_ICON_TEXT, Button, Icon, Paragraph, Controls, Slider } from "@/p5/InitP5.tsx"
 import { useState, useRef, useEffect } from "react"
 import { usePathname } from "next/navigation";
 
@@ -14,6 +14,8 @@ export default function WaveSketch({ imgs }) {
   let parentRef = useRef()
   let path = usePathname().split('/')[ 2 ]
 
+  let mediaRecorder
+
   const [ isMounted, setIsMounted ] = useState( false )
 
   useEffect(() => { if ( !isMounted ) setIsMounted( true )}, [])
@@ -25,7 +27,6 @@ export default function WaveSketch({ imgs }) {
   }, [ isMounted ])
 
   const sketch: P5jsSketch = ( p5, parentRef ) => {
-    let mediaRecorder
 
     let isPlaying = false
     let drawPlayTimer = 0
@@ -37,29 +38,19 @@ export default function WaveSketch({ imgs }) {
     let canvasParent 
     let recordBtnParent
 
-    let drawTimerP
-    let sketchNameP
+    let sketchName
+    let sketchTime
 
     let recordBtn
     let recordBtnP
-
     let recordIconSpan
-
-    let record_icon_text = "radio_button_checked"
 
     let playBtn
     let playBtnP
-
     let playIconSpan
-    let play_icon_text = "play_arrow"
-
-    let iconsClass = "material-symbols-outlined"
-    const sliderCmptStyle = "w-[130px] flex justify-around items-center text-xs"
-
-
-    let [ wavesSliderParent, wavesSlider, wavesSliderValue ] = [ null, null, null ]
-    let [ durationSliderParent, durationSlider, durationSliderValue ] = [ null, null, null ]
-
+    
+    let waveSliderValue, waveSlider 
+    let durationSliderValue, durationSlider 
 
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/oceans.frag")
@@ -70,40 +61,24 @@ export default function WaveSketch({ imgs }) {
       canvasParent = document.getElementById("canvasParent")
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
 
-      wavesSliderParent = p5.createDiv().class( sliderCmptStyle )
-      wavesSliderValue = p5.createP("").parent( wavesSliderParent )
-      wavesSlider = p5.createSlider( 10, 100, 30, 10 ).parent( wavesSliderParent )
-      wavesSlider.size( 100 )
-      
-      durationSliderParent = p5.createDiv().class( sliderCmptStyle )
-      durationSliderValue = p5.createP("").parent( durationSliderParent )
-      durationSlider = p5.createSlider( 15, 120, 7, 15 ).parent( durationSliderParent )
-      durationSlider.size( 100 )
+      waveSlider =  Slider( p5, 15, 120, 7, 15 ).parent("waveSliderParent")
+      waveSliderValue =  Paragraph( p5, waveSlider.value() ).parent("waveSliderValueParent")
+   
+      durationSlider = Slider( p5, 15, 120, 7, 15 ).parent( "durationSliderParent" )
+      durationSliderValue = Paragraph( p5, durationSlider.value() ).parent("durationSliderValueParent")
 
-      recordBtnParent = RecorderOverlay( p5, canvasParent )
+      recordBtnParent = Controls( p5, canvasParent )
 
-      recordBtn = p5.createButton("")
-      recordBtn.parent(recordBtnParent)
-      recordBtn.class("flex items-center text-xs m-2 cursor-pointer text-black")
+      recordBtn = Button( p5, recordBtnParent ).addClass( "text-black")
+      recordIconSpan = Icon( p5, ICONS_OUTLINE, RECORD_ICON_TEXT, recordBtn )
+      recordBtnP = Paragraph( p5, "record", recordBtn )
 
-      recordIconSpan = p5.createSpan()
-      recordIconSpan.class( iconsClass )
-      recordIconSpan.html( record_icon_text )
-      recordIconSpan.parent( recordBtn )
-      recordBtnP = p5.createP("record").class("p-1").parent( recordBtn )
+      playBtn = Button( p5, recordBtnParent )
+      playIconSpan = Icon( p5, ICONS_OUTLINE, PLAY_ICON_TEXT, playBtn )
+      playBtnP = Paragraph( p5, "play", playBtn )
 
-      playBtn = p5.createButton("")
-      playBtn.parent(recordBtnParent)
-      playBtn.class("flex items-center text-xs m-2 cursor-pointer")
-
-      playIconSpan = p5.createSpan()
-      playIconSpan.class( iconsClass )
-      playIconSpan.html( play_icon_text )
-      playIconSpan.parent( playBtn )
-      playBtnP = p5.createP("play").class("p-1").parent( playBtn )
-
-      drawTimerP = p5.createP("").class("text-xs p-1").parent( recordBtnParent)
-      sketchNameP = p5.createP(`${ path } sketch`).class("text-xs p-1").parent( recordBtnParent)
+      sketchTime = Paragraph( p5, "0 seconds", recordBtnParent )
+      sketchName = Paragraph( p5, `${ path } sketch`, recordBtnParent  )
 
 
       playBtn.mouseClicked(() => isPlaying = !isPlaying )
@@ -130,9 +105,9 @@ export default function WaveSketch({ imgs }) {
     }
 
     p5.draw = () => {    
-      wavesSliderValue.html(`${ wavesSlider.value() }`)
+      sketchTime.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
+      waveSliderValue.html(`${ waveSlider.value() }`)
       durationSliderValue.html(`${ durationSlider.value() }`)
-      drawTimerP.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
 
       if ( !isPlaying ) {
         const pausedAt = drawPlayTimer
@@ -147,7 +122,7 @@ export default function WaveSketch({ imgs }) {
       } 
 
       Shader.setUniform( "u_texture", p5Imgs[ 0 ] )
-      Shader.setUniform( "u_waves", wavesSlider.value() )
+      Shader.setUniform( "u_waves", waveSlider.value() )
       Shader.setUniform( "u_duration", durationSlider.value() )
 
       p5.shader( Shader )
@@ -161,11 +136,34 @@ export default function WaveSketch({ imgs }) {
 
   }
 
+  function CustomSlider({ sliderParentId, sliderValueParentId, sliderLabel }) {
+    return (
+      <div className="flex items-center mx-2">
+        <p id={ sliderValueParentId } className="px-2 py-1 mx-2 border rounded-md" />
+        <div id={ sliderParentId } className="flex flex-col p-1 justify-center">
+          <p>{ sliderLabel } </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div>
       <div ref={ parentRef } id="canvasParent" className="h-[500px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
       <a id="download" className="hidden">download</a>
+      <CustomSlider 
+        sliderLabel={ "waves" }
+        sliderParentId={ "waveSliderParent" } 
+        sliderValueParentId={ "waveSliderValueParent" }>
+      </CustomSlider>
+      <CustomSlider 
+        sliderLabel={ "duration" }
+        sliderParentId={ "durationSliderParent" } 
+        sliderValueParentId={ "durationSliderValueParent" }>
+      </CustomSlider>
     </div>
   )
 }
+
+
 
