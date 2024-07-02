@@ -14,6 +14,7 @@ export default function WaveSketch({ imgs }) {
   let video 
   let canvas 
   let stream
+  let frameRate
   let mediaRecorder
   let recordedChunks = []
   let options = { mimeType: "video/webm; codecs=vp9" }
@@ -30,25 +31,24 @@ export default function WaveSketch({ imgs }) {
   }, [ isMounted ])
 
 
-  function download( link, filename ) {
-    const blob = new Blob( recordedChunks, { type: "video/mp4" })
+  function download() {
+    const blob = new Blob( recordedChunks, { type: "video/webm" })
     const url = URL.createObjectURL( blob )
     link.href = url
-    link.download = filename + ".mp4"
+    link.download = "test.webm"
     link.click()
     window.URL.revokeObjectURL(url)
   }
 
   function handleDataAvailable( 
-     event,
-     link, 
-     filename = "test" 
+     event, 
   ) {
     if ( event.data.size > 0 ) {
       recordedChunks.push( event.data )
     } 
-    download( link, filename )
+    download()
   }
+
 
   const sketch: P5jsSketch = ( p5, parentRef ) => {
 
@@ -92,10 +92,6 @@ export default function WaveSketch({ imgs }) {
       canvasParent = document.getElementById("canvasParent")
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
 
-      video = document.getElementById("video")
-      canvas = document.querySelector("canvas")
-      link = document.getElementById("download")
-
       wavesSliderParent = p5.createDiv().class( sliderCmptStyle )
       wavesSliderValue = p5.createP("").parent( wavesSliderParent )
       wavesSlider = p5.createSlider( 10, 100, 30, 10 ).parent( wavesSliderParent )
@@ -138,10 +134,14 @@ export default function WaveSketch({ imgs }) {
       drawTimerP = p5.createP("").parent( recordBtnParent )
       drawTimerP.class("text xs p-1")
 
-      stream = canvas.captureStream( p5.frameRate() )
+      link = document.getElementById("download")
+      canvas = document.querySelector("canvas")
+      video = document.getElementById("video")
+
+      stream = canvas.captureStream( frameRate )
       video.srcObject = stream
       mediaRecorder = new MediaRecorder( stream, options )
-      mediaRecorder.ondataavailable = e => handleDataAvailable( e, link, "waves" )
+      mediaRecorder.ondataavailable = handleDataAvailable
 
       playBtn.mouseClicked(() => isPlaying = !isPlaying )
 
@@ -166,7 +166,7 @@ export default function WaveSketch({ imgs }) {
     }
 
     p5.draw = () => {
-
+      frameRate = p5.frameRate()
       wavesSliderValue.html(`${ wavesSlider.value() }`)
       durationSliderValue.html(`${ durationSlider.value() }`)
       drawTimerP.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
