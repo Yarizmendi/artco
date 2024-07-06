@@ -1,6 +1,6 @@
 
 import Nav from "@/comps/Nav"
-import { getImages } from "actions/actions"
+import { getImages } from "actions/blobs"
 import ArtLink from "@/comps/ArtLinks"
 import { Suspense } from "react"
 
