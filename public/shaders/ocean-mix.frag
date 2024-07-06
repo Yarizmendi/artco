@@ -16,6 +16,8 @@ vec4 pollutedOceanColor;
 uniform float u_topTime;
 uniform float u_btmTime;
 
+uniform float u_waves;
+
 varying vec2 vTexCoord;
 
 float t;
@@ -27,7 +29,7 @@ void main() {
 
   st *= ( 0.92 );
   if ( st.y > .46 ) {
-    st -= ( sin ( st * u_time ) / ( 40.0 + u_time ));
+    st.y += cos( st.y * u_waves + u_time ) / ( 15.0 + u_waves + u_time );
   } 
   else {
     st.x += ( cos( st.x * u_time ) / ( 8.0 + u_time ));

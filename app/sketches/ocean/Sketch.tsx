@@ -29,7 +29,7 @@ export default function OceanSketch({ imgs }) {
     let Shader 
     let p5Imgs
 
-    let waveSlider, durationSlider 
+    let uTopTime, uBtmTime, waveSlider
     let drawPlayTimer = 0, drawPauseTimer = 0
     let overlay, mediaRecorder, isPlaying = false
     let canvasParent = document.getElementById("canvasParent")
@@ -46,8 +46,9 @@ export default function OceanSketch({ imgs }) {
       mediaRecorder = P5Recorder( path )
       overlay = Controls( p5, path, parentRef )
 
-      waveSlider =  CS( p5, 15, 120, 7, 15, "waves", "ctrls")
-      durationSlider = CS( p5, 15, 120, 7, 15, "duration", "ctrls" )
+      uTopTime =  CS( p5, 0, 60, 25, 1, "city", "ctrls", "speed of sky transition" )
+      uBtmTime = CS( p5, 0, 60, 30, 1, "ocean", "ctrls", "speed of ocean transition" )
+      waveSlider =  CS( p5, 15, 120, 7, 15, "waves", "ctrls", "number of ocean waves" )
 
       overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
@@ -81,14 +82,15 @@ export default function OceanSketch({ imgs }) {
 
     p5.draw = () => {
       overlay.sketchTime.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
+      uTopTime.value.html(`${ uTopTime.input.value() }`)
+      uBtmTime.value.html(`${ uBtmTime.input.value() }`)
       waveSlider.value.html(`${ waveSlider.input.value() }`)
-      durationSlider.value.html(`${ durationSlider.input.value() }`)
 
       handleControls()
       
-      Shader.setUniform( "u_topTime", waveSlider.input.value() )
-      Shader.setUniform( "u_btmTime", durationSlider.input.value() )
-
+      Shader.setUniform( "u_topTime", uTopTime.input.value() )
+      Shader.setUniform( "u_btmTime", uBtmTime.input.value() )
+      Shader.setUniform( "u_waves", waveSlider.input.value() )
       Shader.setUniform( "u_industrial_ocean", p5Imgs[ 0 ] )
       Shader.setUniform( "u_red_ocean", p5Imgs[ 1 ])
       Shader.setUniform("u_polluted_ocean", p5Imgs[ 2 ])
@@ -119,10 +121,10 @@ export default function OceanSketch({ imgs }) {
   }
 
   return (
-    <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[400px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
+    <div className="">
+      <div ref={ parentRef } id="canvasParent" className="h-[470px] sm:h-[440px] [sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
       <a id="download" className="hidden">download</a>
-      <div id="ctrls" />
+      <div id="ctrls" className="flex h-[50px] m-4" />
     </div>
   )
 }

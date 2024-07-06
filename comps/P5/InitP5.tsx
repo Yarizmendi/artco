@@ -100,27 +100,30 @@ export function Slider( p5, start, stop, val, i, parent? ) {
   return ctn
 }
 
-export function CS( p5, start, stop, val, i, sliderLabel, parentId ) {
+export function CS( p5, start, stop, val, i, sliderLabel, parentId, sliderDescription? ) {
 
   let parent = p5.createDiv()
   parent.class("flex items-center m-2")
   parent.parent( parentId )
 
   let value = p5.createP()
-  value.class("m-2 border rounded-md text-xs px-3 py-2")
+  value.class("m-3 border rounded-md text-xs px-3 py-2")
   value.parent( parent )
 
   let sliderParent = p5.createDiv()
-  sliderParent.class("flex flex-col p-1 justify-center")
+  sliderParent.class("flex flex-col justify-center")
   sliderParent.parent( parent )
 
   let label = p5.createP( sliderLabel )
-  label.class("text-xs p-1")
+  label.class("text-[12px]")
   label.parent( sliderParent )
+
+  let description = p5.createP( sliderDescription )
+  description.class("text-[10px]")
+  description.parent( sliderParent )
 
   let input = p5.createSlider( start, stop, val, i )
   input.parent( sliderParent )
-  input.size( 100 )
   
 
   let res = {
@@ -136,9 +139,7 @@ export function CustomSlider({ sliderParentId, sliderValueParentId, sliderLabel 
   return (
     <div className="flex items-center mx-2">
       <p id={ sliderValueParentId } className="px-2 py-1 mx-2 border rounded-md" />
-      <div id={ sliderParentId } className="flex flex-col p-1 justify-center">
-        <p>{ sliderLabel } </p>
-      </div>
+      <div id={ sliderParentId } className="flex flex-col p-2 justify-center items-center" />
     </div>
   )
 }
