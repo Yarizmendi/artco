@@ -1,9 +1,10 @@
 
 import Nav from "@/comps/Nav"
-import ArtLinks from "@/comps/ArtLinks"
-import { getImages } from "@/api/images"
+import { getImages } from "actions/actions"
+import ArtLink from "@/comps/ArtLinks"
+import { Suspense } from "react"
 
-function ArtPage() {
+export default function ArtPage() {
   const links = [
     { path: "/sketches/stem", text: "stem" },
     { path: "/sketches/ocean", text: "ocean" },
@@ -12,20 +13,22 @@ function ArtPage() {
     { path: "/sketches/window", text: "window" },
   ]
 
-  const allImages = getImages({ sketch: "all" })
-  
   return (
-    <div className="w-full">
+    <>
       <Nav links={ links } />
-      {
-        allImages && <ArtLinks 
-          links = { allImages }
-          width={ 150 } 
-          height={ 160 } /> 
-      }
+      <Suspense>
+        <ArtLinks />
+      </Suspense>
+    </>
+  )
+}
 
+async function ArtLinks() {
+  const images = await getImages({ limit: 30 })
+  return (
+    <div className="mb-[10px] max-w-[1200px] h-[350px] m-auto flex flex-wrap justify-center items-center overflow-auto">
+      { images.blobs && images.blobs.map(( img, idx ) => <ArtLink key={ idx } url={ img.url } pathname={ img.pathname} /> )}
     </div>
   )
 }
 
-export default ArtPage
