@@ -21,6 +21,7 @@ export function P5Recorder( path ) {
     link.href = url
     link.download = `${ path }_sketch.webm`
     link.click()
+    recordedChunks = []
     window.URL.revokeObjectURL(url)
   }
 
@@ -34,15 +35,37 @@ export default async function InitP5( sketch, parentRef ) {
   return new p5( sketch, parentRef.current )
 }
 
-export function Controls( p5, parent? ) {
-  let className = "bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg p-2 m-2"
+export function Controls( p5, path, parent ) {
+  let className = "bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg border p-2"
   let ctn = p5.createDiv()
-  ctn.size( 150, 120 )
+  ctn.size( 150 )
   ctn.position( 20, 20 )
   ctn.class( className )
+  ctn.parent( parent )
   ctn.draggable()
-  parent && ctn.parent( parent )
-  return ctn
+
+  let recordBtn = Button( p5, ctn ).class("flex items-center text-xs text-black")
+  Icon( p5, ICONS_OUTLINE, RECORD_ICON_TEXT, recordBtn )
+  let recordBtnP = Paragraph( p5, "record", recordBtn )
+
+  let playBtn = Button( p5, ctn )
+  Icon( p5, ICONS_OUTLINE, PLAY_ICON_TEXT, playBtn )
+  let playBtnP = Paragraph( p5, "play", playBtn )
+
+  let sketchTime = Paragraph( p5, "0 seconds", ctn )
+  Paragraph( p5, `${ path } sketch`, ctn  )
+
+  
+  let res = {
+    recordBtn: recordBtn,
+    recordBtnLabel: recordBtnP,
+    playBtn: playBtn,
+    playBtnLabel: playBtnP,
+    playBtnP: playBtn,
+    sketchTime: sketchTime
+  }
+
+  return res
 }
 
 export function Icon( p5: p5Types, icon_class: string, icon_text:string, parent? ) {
@@ -77,24 +100,48 @@ export function Slider( p5, start, stop, val, i, parent? ) {
   return ctn
 }
 
-// export function CustomSlider( p5, parent? ) {
-//   let className = "w-[130px] flex justify-around items-center text-xs"
-//   let ctn = p5.createDiv()
-//   ctn.class( className )
-//   ctn.parent( parent )
-//   return ctn
-// }
+export function CS( p5, start, stop, val, i, sliderLabel, parentId ) {
 
-// export function CustomSlider({ sliderParentId, sliderValueParentId, sliderLabel }) {
-//   return (
-//     <div className="flex items-center mx-2">
-//       <p id={ sliderValueParentId } className="px-2 py-1 mx-2 border rounded-md" />
-//       <div id={ sliderParentId } className="flex flex-col p-1 justify-center">
-//         <p>{ sliderLabel } </p>
-//       </div>
-//     </div>
-//   )
-// }
+  let parent = p5.createDiv()
+  parent.class("flex items-center m-2")
+  parent.parent( parentId )
+
+  let value = p5.createP()
+  value.class("m-2 border rounded-md text-xs px-3 py-2")
+  value.parent( parent )
+
+  let sliderParent = p5.createDiv()
+  sliderParent.class("flex flex-col p-1 justify-center")
+  sliderParent.parent( parent )
+
+  let label = p5.createP( sliderLabel )
+  label.class("text-xs p-1")
+  label.parent( sliderParent )
+
+  let input = p5.createSlider( start, stop, val, i )
+  input.parent( sliderParent )
+  input.size( 100 )
+  
+
+  let res = {
+    input: input,
+    value: value
+  }
+
+  return res
+
+}
+
+export function CustomSlider({ sliderParentId, sliderValueParentId, sliderLabel }) {
+  return (
+    <div className="flex items-center mx-2">
+      <p id={ sliderValueParentId } className="px-2 py-1 mx-2 border rounded-md" />
+      <div id={ sliderParentId } className="flex flex-col p-1 justify-center">
+        <p>{ sliderLabel } </p>
+      </div>
+    </div>
+  )
+}
 
 // export function CanvasWithOverlay({ canvasParentId, canvasParentRef }) {
 //   let twClass = "h-[500px] sm:w-full md:w-4/6 lg:w-2/3 m-auto"
