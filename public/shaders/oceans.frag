@@ -26,11 +26,12 @@ vec2 increasingWaves( vec2 pos ) {
 void main () {
   vec2 pos = vTexCoord;
 
-  time = u_time;
-
-  pos *= vec2( 0.9 );
-  pos = increasingWaves( pos );
-  pos = rollingWaves( pos );
+  if ( u_time > 0.) {
+    time = u_time;
+    pos *= vec2( 0.9 );
+    pos = increasingWaves( pos );
+    pos = rollingWaves( pos );
+  }
 
   color = texture2D( u_texture, pos );
   gl_FragColor = vec4( color );

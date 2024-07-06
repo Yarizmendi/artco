@@ -75,7 +75,7 @@ export default function HouseSketch({ imgs }) {
         }
       })
 
-      p5.shader( Shader )
+
 
     }
 
@@ -85,6 +85,7 @@ export default function HouseSketch({ imgs }) {
       Shader.setUniform( "u_foreground", p5Imgs[ 1 ])
       overlay.sketchTime.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
       handleControls()
+      p5.shader( Shader )
       p5.rect( 0, 0, 0 )
 
     }
@@ -110,7 +111,7 @@ export default function HouseSketch({ imgs }) {
 
   return (
     <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[400px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
+      <div ref={ parentRef } id="canvasParent" className="h-[500px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
       <a id="download" className="hidden">download</a>
       <div id="ctrls" />
     </div>

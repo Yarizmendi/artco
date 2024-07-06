@@ -75,16 +75,16 @@ export default function WaveSketch({ imgs }) {
         }
       })
 
-      Shader.setUniform( "u_texture", p5Imgs[ 0 ] )
-      p5.shader( Shader )
 
     }
 
     p5.draw = () => {    
       overlay.sketchTime.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
+      Shader.setUniform( "u_texture", p5Imgs[ 0 ] )
       waveSlider.value.html(`${ waveSlider.input.value() }`)
       durationSlider.value.html(`${ durationSlider.input.value() }`)
       handleControls()
+      p5.shader( Shader )
       p5.rect( 0, 0, 0 )
 
     }
@@ -111,7 +111,7 @@ export default function WaveSketch({ imgs }) {
 
   return (
     <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[400px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
+      <div ref={ parentRef } id="canvasParent" className="h-[480px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
       <a id="download" className="hidden">download</a>
       <div id="ctrls" />
     </div>
