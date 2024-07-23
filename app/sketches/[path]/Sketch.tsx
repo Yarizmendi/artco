@@ -3,6 +3,7 @@
 import p5Types from "p5"
 import { useState, useRef, useEffect } from "react"
 import InitP5, { P5Recorder, Controls, CS } from "@/p5/InitP5.tsx"
+import { Ctn } from "@/p5/ctn/Ctn"
 
 type P5jsContainerRef = HTMLDivElement
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void
@@ -106,14 +107,7 @@ export default function PathSKetch({ imgs, title }) {
   } 
 
   return (
-    <div className="border-2 border-green-500">
-      <div ref={ parentRef } 
-        id="canvasParent" 
-        className="flex-col h-[480px] sm:w-full md:w-2/3 lg:w-2/3 border-2 border-red-500" 
-      />
-      <a id="download" className="hidden">download</a>
-      <div id="ctrls" className="border-2 h-[100px]" />
-    </div>
+    <Ctn parentRef={ parentRef } />
   )
 }
 
