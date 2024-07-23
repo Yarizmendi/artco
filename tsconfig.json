@@ -11,7 +11,8 @@
       "@/p5/*": ["comps/P5/*"],
       "@/comps/*": ["comps/*"],
       "@/css/*": ["css/*"],
-      "@/api/*": ["app/api/*"]
+      "@/api/*": ["app/api/*"],
+      "@/hooks/*": ["hooks"]
     },
     "allowImportingTsExtensions": true,
     "allowJs": true,

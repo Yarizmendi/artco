@@ -1,5 +1,5 @@
 
-import Nav from "@/comps/Nav"
+import Nav from "@/comps/navs/base/BaseNav"
 import ArtLink from "@/comps/ArtLinks"
 import { getBlobs } from "actions/blobs"
 
@@ -15,7 +15,7 @@ export default function ArtPage() {
   return (
     <>
       <Nav links={ links } />
-        <ArtLinks />
+      <ArtLinks />
     </>
   )
 }

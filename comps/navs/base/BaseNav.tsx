@@ -1,8 +1,8 @@
 
-import Link from "next/link"
-// import classNames from "classnames"
-// import { Dispatch, SetStateAction } from 'react'
-// <span onClick={() => props.setValue('hello moon')}>{props.value}</span> 
+"use client"
+import Link from 'next/link'
+import { useContext } from 'react'
+import { DarkModeContext } from '@/hooks/index.ts'
 
 interface Props {
   links: any[]
@@ -10,8 +10,6 @@ interface Props {
   spanStyle?: string
   linkStyle?: string
   ctnStyle?: string
-  // value?: string
-  // setValue?: Dispatch<SetStateAction<string>>
 }
 
 const styles = {
@@ -21,11 +19,14 @@ const styles = {
   ctn: "p-[20px]"
 }
 
-function NavCmpt( props: Props ) {
+function BaseNav( props: Props ) {
+  const { themeClass, setThemeClass } = useContext( DarkModeContext )
+  const isDarkMode = themeClass === "dark"
+  const onClickChange = () => setThemeClass( isDarkMode ? "light" : "dark")
   return (
     <div className={ styles.ctn }>
-      <nav className={ styles.nav } >
-        {/* <span className={ styles.span }> apps</span> */}
+      <span className="material-symbols-outlined cursor-pointer" onClick={ onClickChange }>brightness_6</span>
+      <nav className={ styles.nav }>
         { props.links.map(( link, idx ) => 
           <Link 
             key={ idx }
@@ -39,4 +40,4 @@ function NavCmpt( props: Props ) {
   )
 }
 
-export default NavCmpt
+export default BaseNav

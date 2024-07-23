@@ -45,7 +45,7 @@ export const imgDict = {
 }
 
 export const noisesDict = {
-  perlin: { id: 0,  path: "perlin.png" }
+  perlin: { id: 0,  path: "noise/perlin.png" }
 }
 
 export const stemPaths = {
@@ -70,7 +70,6 @@ export const stemPaths = {
   thoughts_wb: { id: 18, path: "thoughts_wb.png" },
   yellow_actuality: { id: 19, path: "yellow_actuality.png" },
   orange_actuality: { id: 20, path: "orange_actuality.png" },
-  perlin_noise: { id: 0,  path: "perlin.png" }
 }
 
 export const housePaths = {
