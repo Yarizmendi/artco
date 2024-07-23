@@ -1,18 +1,16 @@
 
 "use client"
 import p5Types from "p5";
-import { usePathname } from "next/navigation"
 import { useState, useRef, useEffect } from "react"
 import InitP5, { P5Recorder, Controls, CS } from "@/p5/InitP5.tsx"
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void
 
-export default function OceanSketch({ imgs }) {
+export default function OceanSketch({ imgs, title }) {
 
   let mp5 = null
   let parentRef = useRef()
-  let path = usePathname().split('/')[ 2 ]
 
   const [ isMounted, setIsMounted ] = useState( false )
 
@@ -36,15 +34,15 @@ export default function OceanSketch({ imgs }) {
 
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/ocean-mix.frag")
-      p5Imgs = imgs.map( tex => p5.loadImage(`/images/${ tex.path }`))
+      p5Imgs = imgs.map( img => p5.loadImage( img.url ))
     }
 
     p5.setup = () => {
 
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
       
-      mediaRecorder = P5Recorder( path )
-      overlay = Controls( p5, path, parentRef )
+      mediaRecorder = P5Recorder( title )
+      overlay = Controls( p5, title, parentRef )
 
       uTopTime =  CS( p5, 0, 60, 25, 1, "city", "ctrls", "speed of sky transition" )
       uBtmTime = CS( p5, 0, 60, 30, 1, "ocean", "ctrls", "speed of ocean transition" )

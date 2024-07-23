@@ -21,9 +21,9 @@ export default function ArtPage() {
 }
 
 async function ArtLinks() {
-  const blobs = await getBlobs({ limit: 15 })
+  const blobs = await getBlobs({ limit: 30 })
   return (
-    <div className="mb-[10px] max-w-[1200px] h-[350px] m-auto flex flex-wrap justify-center items-center overflow-auto">
+    <div className="mb-[10px] max-w-[1200px] h-[450px] m-auto flex flex-wrap justify-center items-center overflow-auto">
       { blobs!.map(( blob, idx ) => <ArtLink key={ idx } url={ blob.url } /> )}
     </div>
   )

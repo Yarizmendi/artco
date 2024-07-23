@@ -5,7 +5,7 @@ import { getBlobCollection } from "actions/blobs.ts"
 
 export default async function HouseSketch() {
   const collection = await getImages({ sketch: "house" })
-  const filepaths = await getBlobCollection({collection })
+  const filepaths = await getBlobCollection( {collection })
   return <Sketch imgs={ filepaths } title={ "house" } />
 }
 

@@ -1,17 +1,15 @@
 
 "use client"
 import p5Types from "p5"
-import { usePathname } from "next/navigation"
 import { useState, useRef, useEffect } from "react"
 import InitP5, { P5Recorder, Controls, CS } from "@/p5/InitP5.tsx"
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void;
 
-export default function StemSketch({ imgs, noises }) {
+export default function StemSketch({ imgs, noises, title }) {
   let mp5 = null
   let parentRef = useRef()
-  let path = usePathname().split('/')[ 2 ]
   const [ isMounted, setIsMounted ] = useState( false )
 
   useEffect(() => { if( !isMounted ) setIsMounted( true ) }, [])
@@ -39,17 +37,16 @@ export default function StemSketch({ imgs, noises }) {
     let p5Noises
 
 
-
     p5.preload = () => {
       Shader = p5.loadShader( '/shaders/standard.vert', '/shaders/stem.frag' )
-      p5Imgs = imgs.map( img => p5.loadImage( `/images/${ img.path }` ))
-      p5Noises = noises.map( noise => p5.loadImage( `/images/${ noise.path }` ))
+      p5Imgs = imgs.map( img => p5.loadImage( img.url ))
+      p5Noises = noises.map( noise => p5.loadImage( noise.url ))
     }
   
     p5.setup = () => {
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
-      mediaRecorder = P5Recorder( path )
-      overlay = Controls( p5, path, parentRef )
+      mediaRecorder = P5Recorder( title )
+      overlay = Controls( p5, title, parentRef )
 
       waveSlider =  CS( p5, 15, 120, 7, 15, "waves", "ctrls")
       durationSlider = CS( p5, 15, 120, 7, 15, "duration", "ctrls" )
