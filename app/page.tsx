@@ -1,7 +1,7 @@
 
 import Nav from "@/comps/Nav"
 import ArtLink from "@/comps/ArtLinks"
-import { getImages } from "actions/blobs"
+import { getBlobs } from "actions/blobs"
 
 export default function ArtPage() {
   const links = [
@@ -21,10 +21,10 @@ export default function ArtPage() {
 }
 
 async function ArtLinks() {
-  const images = await getImages({ limit: 30 })
+  const blobs = await getBlobs({ limit: 15 })
   return (
     <div className="mb-[10px] max-w-[1200px] h-[350px] m-auto flex flex-wrap justify-center items-center overflow-auto">
-      { images.blobs && images.blobs.map(( img, idx ) => <ArtLink key={ idx } url={ img.url } pathname={ img.pathname} /> )}
+      { blobs!.map(( blob, idx ) => <ArtLink key={ idx } url={ blob.url } /> )}
     </div>
   )
 }

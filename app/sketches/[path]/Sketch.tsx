@@ -7,11 +7,10 @@ import InitP5, { P5Recorder, Controls, CS } from "@/p5/InitP5.tsx"
 type P5jsContainerRef = HTMLDivElement
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void
 
-export default function PathSKetch({ imgs }) {
+export default function PathSKetch({ imgs, sketchName }) {
 
   let mp5
   let parentRef = useRef()
-  let img = imgs[ 0 ]
   
   const [ isMounted, setIsMounted ] = useState( false )
 
@@ -40,8 +39,8 @@ export default function PathSKetch({ imgs }) {
     p5.setup = () => {
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
 
-      mediaRecorder = P5Recorder( img.pathname )
-      overlay = Controls( p5, img.pathname, parentRef )
+      mediaRecorder = P5Recorder( sketchName )
+      overlay = Controls( p5, sketchName, parentRef )
 
       waveSlider =  CS( p5, 15, 120, 7, 15, "waves", "ctrls")
       durationSlider = CS( p5, 15, 120, 7, 15, "duration", "ctrls" )

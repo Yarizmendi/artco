@@ -1,18 +1,16 @@
 
 "use client"
 import p5Types from "p5"
-import { usePathname } from "next/navigation"
 import { useState, useRef, useEffect } from "react"
 import InitP5, { P5Recorder, Controls, CS } from "@/p5/InitP5.tsx"
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void;
 
-export default function HouseSketch({ imgs }) {
+export default function HouseSketch({ imgs, title }) {
 
   let mp5: any = null
   let parentRef = useRef()
-  let path = usePathname().split('/')[ 2 ]
 
   const [ isMounted, setIsMounted ] = useState( false )
 
@@ -42,8 +40,8 @@ export default function HouseSketch({ imgs }) {
     p5.setup = () => {
       p5.createCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight, p5.WEBGL ).parent( parentRef )
 
-      mediaRecorder = P5Recorder( path )
-      overlay = Controls( p5, path, parentRef )
+      mediaRecorder = P5Recorder( title )
+      overlay = Controls( p5, title, parentRef )
       timeSlider = CS( p5, 1, 100, 10, 10, "test", "ctrls" )
 
       

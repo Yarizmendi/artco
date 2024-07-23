@@ -89,7 +89,7 @@ export const windowPaths = {
   window: { id: 40, path: "window.jpg" },
 }
 
-export function getImages({ title, sketch }: { title?: string, sketch?: string }) {
+export async function getImages({ title, sketch }: { title?: string, sketch?: string }) {
   if ( title ) return [ imgDict[ title ] ]
   else if ( sketch == "waves" ) return [ imgDict["red_ocean"] ]
   else if ( sketch == "window" ) return [ imgDict["window"] ]

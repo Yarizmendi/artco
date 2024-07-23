@@ -2,18 +2,22 @@
 'use server'
 import { list } from "@vercel/blob"
 
-export async function getImages({ prefix, limit }: { prefix?: string, limit?: number }) {
-  return await list({ prefix, limit })
+export async function getBlob({ prefix }) {
+  const blob = await list({ prefix, limit: 1 })
+  return blob.blobs
 }
 
-export async function getBlobs({ prefix, limit }: { prefix?: string, limit?: number }) {
-  return await list({ prefix, limit })
+export async function getBlobs({ limit }) {
+  const blobObs = await list({ limit })
+  return blobObs.blobs
 }
 
-export async function getSketchImgs({ paths }: { paths?: string[] }) {
-  const customRes = []
-  paths.map( async path => {
-    customRes.push( await list({ prefix: path, limit: 1 }))
-  })
+export async function getBlobCollection({ collection }) {
+  let customRes = []
+  for ( let i = 0; i < collection.length; i++ ) {
+    const blob = await getBlob({ prefix: collection[ i ].path }) 
+    customRes.push( ...blob )
+  }
   return customRes
 }
+
