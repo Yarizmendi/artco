@@ -1,5 +1,4 @@
 
-
 export const imgDict = {
   window: { id: 40, path: "window.jpg" },
   sf: { id: 40, path: "sf.jpg" },
@@ -90,11 +89,7 @@ export const windowPaths = {
   window: { id: 40, path: "window.jpg" },
 }
 
-export function getImages({ 
-    title, 
-    sketch
-  }: { title?: string, sketch?: string })
-{
+export function getImages({ title, sketch }: { title?: string, sketch?: string }) {
   if ( title ) return [ imgDict[ title ] ]
   else if ( sketch == "waves" ) return [ imgDict["red_ocean"] ]
   else if ( sketch == "window" ) return [ imgDict["window"] ]
@@ -105,10 +100,7 @@ export function getImages({
   else return [ imgDict[ "mania" ] ]
 }
 
-export function getNoises({
-  title
-}: { title: string })
-{
+export function getNoises({ title }: { title: string }) {
   if ( title ) return Object.values( noisesDict )
 }
 

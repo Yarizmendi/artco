@@ -84,7 +84,6 @@ export default function PathSKetch({ imgs }) {
       handleControls()
       p5.shader( Shader )
       p5.rect( 0, 0, 0 )
-
     }
 
     p5.windowResized = () => {
@@ -108,10 +107,13 @@ export default function PathSKetch({ imgs }) {
   } 
 
   return (
-    <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[480px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
+    <div className="border-2 border-green-500">
+      <div ref={ parentRef } 
+        id="canvasParent" 
+        className="flex-col h-[480px] sm:w-full md:w-2/3 lg:w-2/3 border-2 border-red-500" 
+      />
       <a id="download" className="hidden">download</a>
-      <div id="ctrls" />
+      <div id="ctrls" className="border-2 h-[100px]" />
     </div>
   )
 }

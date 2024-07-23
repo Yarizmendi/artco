@@ -1,10 +1,15 @@
 
 import Sketch from "./Sketch.tsx"
-import { getImages, getNoises } from "@/api/images"
+import { getImages } from "@/api/images"
+import { getBlobs, getSketchImgs } from "actions/blobs.ts"
 
 export default function StemSketch() {
-  const imgs = getImages({ sketch: "stem" })
-  const noises = getNoises({ title: "perlin" })
-  return <Sketch imgs={ imgs } noises={ noises } />
+  const filenames: string[] = getImages({ sketch: "stem" })
+  const filepaths = getSketchImgs({ paths: filenames })
+  const noises = getBlobs({ prefix: "perlin.png", limit: 1 })
+  return <Sketch imgs={ filepaths } noises={ noises } />
 }
+
+
+
 

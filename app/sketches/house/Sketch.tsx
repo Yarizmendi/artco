@@ -36,7 +36,7 @@ export default function HouseSketch({ imgs }) {
 
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/house.frag")
-      p5Imgs = imgs.map( img => p5.loadImage(`/images/${ img.path }`))
+      p5Imgs = imgs.map( img => p5.loadImage( img.url ))
     }
 
     p5.setup = () => {

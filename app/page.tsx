@@ -1,8 +1,7 @@
 
 import Nav from "@/comps/Nav"
-import { getImages } from "actions/blobs"
 import ArtLink from "@/comps/ArtLinks"
-import { Suspense } from "react"
+import { getImages } from "actions/blobs"
 
 export default function ArtPage() {
   const links = [
@@ -16,9 +15,7 @@ export default function ArtPage() {
   return (
     <>
       <Nav links={ links } />
-      <Suspense>
         <ArtLinks />
-      </Suspense>
     </>
   )
 }

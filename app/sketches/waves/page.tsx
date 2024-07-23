@@ -1,9 +1,10 @@
 
-import Sketch from "./Sketch.tsx"
-import { getImages } from "@/api/images.ts"
+import Sketch  from "./Sketch.tsx"
+import { getImages } from "@/api/images"
+import { getSketchImgs } from "actions/blobs.ts"
 
-export default function WaveSketch() {
-  const imgs = getImages({ sketch: "waves" })
-  return <Sketch imgs={ imgs } />
+export default function WavesSketch() {
+  const filenames: string[] = getImages({ sketch: "waves" })
+  const filepaths = getSketchImgs({ paths: filenames })
+  return <Sketch imgs={ filepaths }/>
 }
-
