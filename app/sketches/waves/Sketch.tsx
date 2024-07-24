@@ -5,7 +5,7 @@ import InitP5 from "@/p5/Instance"
 import { P5Recorder } from "@/p5/Recorder"
 import { Controls } from "@/p5/Controls"
 import { Slider } from "@/p5/Slider"
-import { ResponsiveSketch } from "@/p5/ResponsiveSketch"
+import { P5Sketch } from "@/p5/P5Sketch"
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void;
@@ -112,11 +112,10 @@ export default function WavesSketch({ imgs, title }) {
   } 
 
   return (
-    <ResponsiveSketch parentRef={ parentRef }>
+    <P5Sketch parentRef={ parentRef }>
       <Slider label={"waves"} min={0} max={1000} step={1} defaultValue={10} sliderValue={waveMotion} setSliderValue={setWaveMotion} />
       <Slider label={"time"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} />
-      {/* <Slider label={"zoom"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} /> */}
-    </ResponsiveSketch>
+    </P5Sketch>
   )
 }
 

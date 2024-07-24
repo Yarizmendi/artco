@@ -1,6 +1,6 @@
 
-import Nav from "@/comps/navs/base/BaseNav"
-import ArtLink from "@/comps/ArtLinks"
+import Nav from "@/comps/Nav/BaseNav"
+import ArtLink from "@/comps/Links/ArtLinks"
 import { getBlobs } from "actions/blobs"
 
 export default function ArtPage() {

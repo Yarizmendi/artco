@@ -5,7 +5,7 @@ import InitP5 from "@/p5/Instance"
 import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { P5Recorder } from "@/p5/Recorder"
-import { ResponsiveSketch } from "@/p5/ResponsiveSketch"
+import { ResponsiveSketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
 
 type P5jsContainerRef = HTMLDivElement

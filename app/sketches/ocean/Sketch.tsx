@@ -5,7 +5,7 @@ import InitP5 from "@/p5/Instance"
 import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { P5Recorder } from "@/p5/Recorder"
-import { ResponsiveSketch } from "@/p5/ResponsiveSketch"
+import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
 
 type P5jsContainerRef = HTMLDivElement;
@@ -123,10 +123,10 @@ export default function OceanSketch({ imgs, title }) {
   }
 
   return (
-    <ResponsiveSketch parentRef={ parentRef }>
+    <P5Sketch parentRef={ parentRef }>
       <Slider label={"waves"} min={0} max={1000} step={1} defaultValue={10} sliderValue={waveMotion} setSliderValue={setWaveMotion} />
       <Slider label={"time"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} />
       <Slider label={"zoom"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} />
-    </ResponsiveSketch>
+    </P5Sketch>
   )
 }

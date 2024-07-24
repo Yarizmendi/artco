@@ -5,7 +5,7 @@ const yellowBorder = "border border-yellow-500"
 const redBorder = "border border-red-400"
 const greenBorder = "border border-green-400"
 
-function ResponsiveSketch({
+function P5Sketch({
   parentRef,
   children
 }) {
@@ -40,4 +40,4 @@ function ResponsiveSketch({
   )
 }
 
-export { ResponsiveSketch }
+export { P5Sketch }
