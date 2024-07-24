@@ -16,7 +16,7 @@ const styles = {
   nav: "h-fit flex items-center justify-end tracking-wide uppercase text-[12px]",
   span: "material-symbols-outlined cursor-pointer",
   link: "p-2",
-  ctn: "p-[20px]"
+  ctn: "p-[10px]"
 }
 
 function BaseNav( props: Props ) {
@@ -25,7 +25,7 @@ function BaseNav( props: Props ) {
   const onClickChange = () => setThemeClass( isDarkMode ? "light" : "dark")
   return (
     <div className={ styles.ctn }>
-      <span className="material-symbols-outlined cursor-pointer" onClick={ onClickChange }>brightness_6</span>
+      <span className="material-symbols-outlined cursor-pointer pl-16 pt-8" onClick={ onClickChange }>brightness_6</span>
       <nav className={ styles.nav }>
         { props.links.map(( link, idx ) => 
           <Link 
