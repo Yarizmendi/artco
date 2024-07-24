@@ -1,24 +1,31 @@
-
 "use client"
 import p5Types from "p5"
 import { useState, useRef, useEffect } from "react"
-import InitP5, { P5Recorder, Controls, CS } from "@/p5/Instance"
+import InitP5 from "@/p5/Instance"
+import { P5Recorder } from "@/p5/Recorder"
+import { Controls } from "@/p5/Controls"
+import { Slider } from "@/p5/Slider"
+import { ResponsiveSketch } from "@/p5/ResponsiveSketch"
 
-type P5jsContainerRef = HTMLDivElement
-type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void
+type P5jsContainerRef = HTMLDivElement;
+type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void;
 
-export default function WaveSketch({ imgs, title }) {
-
-  let mp5
+export default function WavesSketch({ imgs, title }) {
+  let mp5 = null
   let parentRef = useRef()
+  let canvasParent 
 
+
+  const [ waveMotion, setWaveMotion ] = useState( 10 )
+  const [ zoomMotion, setZoomMotion ] = useState( 30 )
   const [ isMounted, setIsMounted ] = useState( false )
 
   useEffect(() => { if ( !isMounted ) setIsMounted( true )}, [])
 
   useEffect(() => { 
     if ( !isMounted ) return
-    if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
+    canvasParent = document.getElementById("canvasParent")
+    if ( !mp5 ) mp5 = InitP5( sketch, parentRef, canvasParent )
     else return mp5.remove()
   }, [ isMounted ])
 
@@ -29,7 +36,7 @@ export default function WaveSketch({ imgs, title }) {
     let waveSlider, durationSlider 
     let drawPlayTimer = 0, drawPauseTimer = 0
     let overlay, mediaRecorder, isPlaying = false
-    let canvasParent = document.getElementById("canvasParent")
+
 
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/oceans.frag")
@@ -41,9 +48,6 @@ export default function WaveSketch({ imgs, title }) {
 
       mediaRecorder = P5Recorder( title )
       overlay = Controls( p5, title, parentRef )
-
-      waveSlider =  CS( p5, 15, 120, 7, 15, "waves", "ctrls")
-      durationSlider = CS( p5, 15, 120, 7, 15, "duration", "ctrls" )
 
       overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
@@ -79,8 +83,8 @@ export default function WaveSketch({ imgs, title }) {
     p5.draw = () => {    
       overlay.sketchTime.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
       Shader.setUniform( "u_texture", p5Imgs[ 0 ] )
-      waveSlider.value.html(`${ waveSlider.input.value() }`)
-      durationSlider.value.html(`${ durationSlider.input.value() }`)
+      // waveSlider.value.html(`${ waveSlider.input.value() }`)
+      // durationSlider.value.html(`${ durationSlider.input.value() }`)
       handleControls()
       p5.shader( Shader )
       p5.rect( 0, 0, 0 )
@@ -100,19 +104,19 @@ export default function WaveSketch({ imgs, title }) {
         if ( !drawPauseTimer ) drawPlayTimer = p5.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p5.millis() - drawPauseTimer
         Shader.setUniform( "u_time", drawPlayTimer / 1000 )
-        Shader.setUniform( "u_waves", waveSlider.input.value() )
-        Shader.setUniform( "u_duration", durationSlider.input.value() )
+        Shader.setUniform( "u_waves", waveMotion )
+        Shader.setUniform( "u_duration", zoomMotion )
       } 
     }
 
   } 
 
   return (
-    <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[480px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
-      <a id="download" className="hidden">download</a>
-      <div id="ctrls" />
-    </div>
+    <ResponsiveSketch parentRef={ parentRef }>
+      <Slider label={"waves"} min={0} max={1000} step={1} defaultValue={10} sliderValue={waveMotion} setSliderValue={setWaveMotion} />
+      <Slider label={"time"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} />
+      {/* <Slider label={"zoom"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} /> */}
+    </ResponsiveSketch>
   )
 }
 

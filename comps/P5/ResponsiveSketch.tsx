@@ -30,7 +30,7 @@ function ResponsiveSketch({
         id="ctrls"
         className={ classNames([ 
         // yellowBorder,
-        "p-4"
+        "w-4/6 md:w-full p-4"
       ])}>
         { children }
       </div>

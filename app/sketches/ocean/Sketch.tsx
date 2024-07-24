@@ -1,36 +1,44 @@
 
 "use client"
-import p5Types from "p5";
+import p5Types from "p5"
+import InitP5 from "@/p5/Instance"
+import { Slider } from "@/p5/Slider"
+import { Controls } from "@/p5/Controls"
+import { P5Recorder } from "@/p5/Recorder"
+import { ResponsiveSketch } from "@/p5/ResponsiveSketch"
 import { useState, useRef, useEffect } from "react"
-import InitP5, { P5Recorder, Controls, CS } from "@/p5/Instance"
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void
 
 export default function OceanSketch({ imgs, title }) {
-
-  let mp5 = null
+  let mp5 
   let parentRef = useRef()
+  let canvasParent
+
+  let Shader 
+  let p5Imgs 
+
+  let drawPlayTimer = 0, drawPauseTimer = 0
+  let overlay, mediaRecorder, isPlaying = false
 
   const [ isMounted, setIsMounted ] = useState( false )
+  const [ waveMotion, setWaveMotion ] = useState( 10 )
+  const [ zoomMotion, setZoomMotion ] = useState( 30 )
+  const [ timeMotion, setTimeMotion ] = useState( 30 )
 
   useEffect(() => { if( !isMounted ) setIsMounted( true ) }, [])
 
   useEffect(() => { 
     if ( !isMounted ) return
-    if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
+    canvasParent = document.getElementById("canvasParent")
+    if ( !mp5 ) mp5 = InitP5( sketch, parentRef, canvasParent )
     else return mp5.remove()
   }, [ isMounted ])
 
 
   const sketch: P5jsSketch = ( p5, parentRef ) => {
-    let Shader 
-    let p5Imgs
 
-    let uTopTime, uBtmTime, waveSlider
-    let drawPlayTimer = 0, drawPauseTimer = 0
-    let overlay, mediaRecorder, isPlaying = false
-    let canvasParent = document.getElementById("canvasParent")
 
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/ocean-mix.frag")
@@ -43,10 +51,6 @@ export default function OceanSketch({ imgs, title }) {
       
       mediaRecorder = P5Recorder( title )
       overlay = Controls( p5, title, parentRef )
-
-      uTopTime =  CS( p5, 0, 60, 25, 1, "city", "ctrls", "speed of sky transition" )
-      uBtmTime = CS( p5, 0, 60, 30, 1, "ocean", "ctrls", "speed of ocean transition" )
-      waveSlider =  CS( p5, 15, 120, 7, 15, "waves", "ctrls", "number of ocean waves" )
 
       overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
@@ -80,15 +84,15 @@ export default function OceanSketch({ imgs, title }) {
 
     p5.draw = () => {
       overlay.sketchTime.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
-      uTopTime.value.html(`${ uTopTime.input.value() }`)
-      uBtmTime.value.html(`${ uBtmTime.input.value() }`)
-      waveSlider.value.html(`${ waveSlider.input.value() }`)
+      // uTopTime.value.html(`${ uTopTime.input.value() }`)
+      // uBtmTime.value.html(`${ uBtmTime.input.value() }`)
+      // waveSlider.value.html(`${ waveSlider.input.value() }`)
 
       handleControls()
       
-      Shader.setUniform( "u_topTime", uTopTime.input.value() )
-      Shader.setUniform( "u_btmTime", uBtmTime.input.value() )
-      Shader.setUniform( "u_waves", waveSlider.input.value() )
+      Shader.setUniform( "u_topTime", waveMotion )
+      Shader.setUniform( "u_btmTime", timeMotion )
+      Shader.setUniform( "u_waves", zoomMotion )
       Shader.setUniform( "u_industrial_ocean", p5Imgs[ 0 ] )
       Shader.setUniform( "u_red_ocean", p5Imgs[ 1 ])
       Shader.setUniform("u_polluted_ocean", p5Imgs[ 2 ])
@@ -119,10 +123,10 @@ export default function OceanSketch({ imgs, title }) {
   }
 
   return (
-    <div className="">
-      <div ref={ parentRef } id="canvasParent" className="h-[470px] sm:h-[440px] [sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
-      <a id="download" className="hidden">download</a>
-      <div id="ctrls" className="flex h-[50px] m-4" />
-    </div>
+    <ResponsiveSketch parentRef={ parentRef }>
+      <Slider label={"waves"} min={0} max={1000} step={1} defaultValue={10} sliderValue={waveMotion} setSliderValue={setWaveMotion} />
+      <Slider label={"time"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} />
+      <Slider label={"zoom"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} />
+    </ResponsiveSketch>
   )
 }
