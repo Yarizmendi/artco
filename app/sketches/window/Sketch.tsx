@@ -2,7 +2,7 @@
 "use client"
 import p5Types from "p5"
 import { useState, useRef, useEffect } from "react"
-import InitP5, { P5Recorder, Controls, CS } from "@/p5/InitP5.tsx"
+import InitP5, { P5Recorder, Controls, CS } from "@/p5/Instance"
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void;

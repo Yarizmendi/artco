@@ -1,36 +1,43 @@
 
 "use client"
 import p5Types from "p5"
+import InitP5 from "@/p5/Instance"
+import { Slider } from "@/p5/Slider"
+import { Controls } from "@/p5/Controls"
+import { P5Recorder } from "@/p5/Recorder"
+import { ResponsiveSketch } from "@/p5/ResponsiveSketch"
 import { useState, useRef, useEffect } from "react"
-import InitP5, { P5Recorder, Controls, CS } from "@/p5/InitP5.tsx"
+
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void;
 
 export default function HouseSketch({ imgs, title }) {
 
-  let mp5: any = null
+  let mp5 
   let parentRef = useRef()
+  let canvasParent
+
+  let Shader 
+  let p5Imgs 
+
+  let drawPlayTimer = 0, drawPauseTimer = 0
+  let overlay, mediaRecorder, isPlaying = false
 
   const [ isMounted, setIsMounted ] = useState( false )
+  const [ waveMotion, setWaveMotion ] = useState( 10 )
+  const [ zoomMotion, setZoomMotion ] = useState( 30 )
 
   useEffect(() => { if( !isMounted ) setIsMounted( true ) }, [])
 
   useEffect(() => { 
     if ( !isMounted ) return
-    if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
+    canvasParent = document.getElementById("canvasParent")
+    if ( !mp5 ) mp5 = InitP5( sketch, parentRef, canvasParent )
     else return mp5.remove()
   }, [ isMounted ])
 
   const sketch: P5jsSketch = ( p5, parentRef ) => {
-
-    let Shader 
-    let p5Imgs 
-  
-    let timeSlider
-    let drawPlayTimer = 0, drawPauseTimer = 0
-    let overlay, mediaRecorder, isPlaying = false
-    let canvasParent = document.getElementById("canvasParent")
 
     p5.preload = () => {
       Shader = p5.loadShader("/shaders/standard.vert", "/shaders/house.frag")
@@ -42,8 +49,6 @@ export default function HouseSketch({ imgs, title }) {
 
       mediaRecorder = P5Recorder( title )
       overlay = Controls( p5, title, parentRef )
-      timeSlider = CS( p5, 1, 100, 10, 10, "test", "ctrls" )
-
       
       overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
@@ -73,12 +78,9 @@ export default function HouseSketch({ imgs, title }) {
         }
       })
 
-
-
     }
 
     p5.draw = () => {
-      timeSlider.value.html(`${ timeSlider.input.value() }`)
       Shader.setUniform( "u_background", p5Imgs[ 0 ] )
       Shader.setUniform( "u_foreground", p5Imgs[ 1 ])
       overlay.sketchTime.html(`${ p5.round( drawPlayTimer / 1000 )} seconds`)
@@ -101,17 +103,16 @@ export default function HouseSketch({ imgs, title }) {
         if ( !drawPauseTimer ) drawPlayTimer = p5.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p5.millis() - drawPauseTimer
         Shader.setUniform( "u_time", drawPlayTimer / 1000 )
-        Shader.setUniform("u_var", timeSlider.input.value())
+        Shader.setUniform("u_var", zoomMotion )
       } 
     }
 
   }
 
   return (
-    <div>
-      <div ref={ parentRef } id="canvasParent" className="h-[500px] sm:w-full md:w-4/6 lg:w-2/3 m-auto" />
-      <a id="download" className="hidden">download</a>
-      <div id="ctrls" />
-    </div>
+    <ResponsiveSketch parentRef={ parentRef }>
+      <Slider label={"waves"} min={0} max={1000} step={1} defaultValue={10} sliderValue={waveMotion} setSliderValue={setWaveMotion} />
+      <Slider label={"zoom"} min={0} max={3000} step={1} defaultValue={30} sliderValue={zoomMotion} setSliderValue={setZoomMotion} />
+    </ResponsiveSketch>
   )
 }
