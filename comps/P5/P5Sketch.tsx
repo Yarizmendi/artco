@@ -12,32 +12,35 @@ function P5Sketch({
   return (
     <div 
       className={ classNames([
-      // redBorder,
+      redBorder,
       "h-full w-full",
       "flex flex-col md:flex-row",
     ])}>
 
       <div 
-        id="canvasParent" 
+        id="Parent" 
         ref={ parentRef }
         className={ classNames([ 
-        // greenBorder,
+        greenBorder,
         "h-4/6 md:h-full",
-        "w-full md:w-9/12 lg:w-10/12",
+        "w-full md:w-8/12",
       ])} />
 
-      <div 
+      <form 
         id="ctrls"
         className={ classNames([ 
-        // yellowBorder,
-        "w-4/6 md:w-full p-4"
+        yellowBorder,
+        "w-full md:w-4/12",
       ])}>
         { children }
-      </div>
+      </form>
 
       <a id="download" className="hidden"/>
     </div>
   )
 }
+
+
+
 
 export { P5Sketch }

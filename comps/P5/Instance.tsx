@@ -1,18 +1,17 @@
 
-let instance
+import p5Types from "p5"
+let p: p5Types
 
-export default async function InitP5( 
-  sketch, 
-  parentRef, 
-  canvasParent,
+async function InitP5( 
+  sketch,
+  parentRef,
 ) {
   let p5 = ( await import( "p5" )).default
-  instance = new p5( sketch, parentRef.current )
-
-  instance.windowResized = () => {
-    instance.resizeCanvas( canvasParent.offsetWidth, canvasParent.offsetHeight )
+  p = new p5( sketch, parentRef.current )
+  p.windowResized = () => {
+    p.resizeCanvas( parentRef.current.offsetWidth, parentRef.current.offsetHeight )
   }
-
 }
 
+export default InitP5
 

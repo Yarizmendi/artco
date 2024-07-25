@@ -11,7 +11,7 @@ import { useState, useRef, useEffect } from "react"
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = ( p: p5Types, parentRef: P5jsContainerRef ) => void
 
-export default function OceanSketch({ imgs, title }) {
+export default function Sketch({ imgs, title, shaders }) {
   let mp5 
   let parentRef = useRef()
   let canvasParent
