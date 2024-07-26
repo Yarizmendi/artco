@@ -1,5 +1,6 @@
 
 import classNames from "classnames"
+import { Slider } from "./Slider"
 
 const yellowBorder = "border border-yellow-500"
 const redBorder = "border border-red-400"
@@ -7,7 +8,7 @@ const greenBorder = "border border-green-400"
 
 function P5Sketch({
   parentRef,
-  children
+  sliders
 }) {
   return (
     <div 
@@ -32,7 +33,7 @@ function P5Sketch({
         yellowBorder,
         "w-full md:w-4/12",
       ])}>
-        { children }
+        { sliders.map( slider => <Slider {...slider} /> )}
       </form>
 
       <a id="download" className="hidden"/>
