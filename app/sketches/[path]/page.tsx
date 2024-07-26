@@ -1,22 +1,22 @@
 
-import Sketch from "./Sketch.tsx"
-import { getBlob } from "actions/blobs.ts"
-import { stripFileExtension, stripNextPathParams } from "actions/utils.ts"
+import Sketch from "app/sketches/Sketch"
+import { getImageData } from "actions/images"
+import { getBlobCollection } from "actions/blobs.ts"
 
 export default async function Page({ params }) {
-  const prefix = stripNextPathParams( params.path )
-  const title = stripFileExtension( params.path )
-  const images = await getBlob({ prefix })
+  const title = params.path
+  const collection = ( await getImageData( title )).imagePaths
+  const imgBlobs = await getBlobCollection( collection )
 
   const setup = {
     title: title,
-    imgs: images,
+    imgs: imgBlobs,
   
     shaders: [
       { 
         vert: "/shaders/standard.vert", 
         frag: "/shaders/oceans.frag",
-       uniforms: [ "u_time", "u_waves", "u_duration", "u_texture"], 
+         uniforms: [ "u_time", "u_waves", "u_duration", "u_texture"], 
       }
     ],
 

@@ -12,7 +12,6 @@ varying vec2 vTexCoord;
 
 vec4 color;
 
-
 void main() {
   vec2 st = vTexCoord;
 
