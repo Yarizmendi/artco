@@ -84,7 +84,7 @@ export const imgDict = {
 }
 
 const imagesBySketch = {
-  mix: [
+  "ocean": [
     { title: "red_ocean", id: 0, path: "red_ocean.png", blob: "" },
     { title: "polluted_ocean", id: 1, path: "polluted_ocean.jpg", blob: "" },
     { title: "industrial_ocean", id: 2, path: "industrial_ocean.jpg", blob: "" },
@@ -101,7 +101,6 @@ export async function getImagesBySketch( title ) {
 export async function getImageData( title?) {
   let imageData = imgDict[ title ] || imgDict
   return {
-    imageData,
     imageKeys: Object.keys( imageData ),
     imagePaths: Object.values( imageData )
   }

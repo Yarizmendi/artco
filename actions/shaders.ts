@@ -4,10 +4,8 @@ const shadersBySketch = {
     "city" : [{
         id: 0,
         title: "city",
-        vertPath: "/shaders/basic.vert",
-        vertBlob: "/shaders/basic.vert",
-        fragPath: "/shaders/city.frag",
-        fragBlob: "/shaders/city.frag",
+        vert: "/shaders/basic.vert",
+        frag: "/shaders/city.frag",
         uniforms: {
             inputs: [ "u_waves" ],
             timers: [ "u_time", "u_topTime", "u_btmTime" ], 
@@ -32,12 +30,10 @@ const shadersBySketch = {
     "ocean" : [{
         id: 2,
         title: "ocean",
-        vertPath: "/shaders/basic.vert",
-        vertBlob: "/shaders/basic.vert",
-        fragPath: "/shaders/ocean.frag",
-        fragBlob: "/shaders/ocean.frag",
+        vert: "/shaders/basic.vert",
+        frag: "/shaders/ocean.frag",
         uniforms: {
-            inputs: [ "u_waves", "u_duration" ],
+            inputs: [ "u_zoom", "u_waves" ],
             timers: [ "u_time" ], 
             textures: [ "u_texture" ], 
         },

@@ -1,7 +1,7 @@
 
 import Nav from "@/comps/Nav/BaseNav"
 import ArtLink from "@/comps/Links/ArtLinks"
-import { getSketches, imgDict } from "actions/images"
+import { getImageData } from "actions/images"
 
 export default function ArtPage() {
   const links = [
@@ -19,11 +19,11 @@ export default function ArtPage() {
   )
 }
 
-function ArtLinks() {
-  const { keys, vals } = getSketches()
+async function ArtLinks() {
+  const { imageKeys, imagePaths } = await getImageData()
   return (
     <div className="mb-[10px] max-w-[1200px] h-[450px] m-auto flex flex-wrap justify-center items-center overflow-auto">
-      { keys.map(( key, idx ) => <ArtLink title={key} url={ vals[idx]["path"] } /> )}
+      { imageKeys.map(( key, idx ) => <ArtLink title={key} url={ imagePaths[idx]["path"] } /> )}
     </div>
   )
 }

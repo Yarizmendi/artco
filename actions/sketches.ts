@@ -1,46 +1,33 @@
 
-import { getImageData, getImagesBySketch } from "./images"
-import { ID, TITLE, DESCRIPTION, getInputData } from "./inputs"
-import { getShaderData, getShadersBySketch } from "./shaders"
+import { getImagesBySketch } from "./images"
+import { ID, TITLE, DESCRIPTION, getInputsBySketch } from "./inputs"
+import { getShadersBySketch } from "./shaders"
 import { getBlobCollection } from "./blobs"
-
-let sketch = {
-    shaders: [],
-    images: [],
-    inputs: [],
-    id: ID,
-    title: TITLE,
-    description: DESCRIPTION,
-}
 
 const sketches = {
     "ocean" : {
         shaders: [],
         images: [],
         inputs: [],
+        blobs: [],
         id: ID,
-        title: TITLE,
+        title: "ocean",
         description: DESCRIPTION,
     }
 }
 
 export async function getSketchData( title = "ocean" ) {
-    sketch = sketches[ title ]
+    const sketch = sketches[ title ]
 
-    sketch.shaders = await getShadersBySketch( title )
-    sketch.images = await getImagesBySketch( title )
+    const images = await getImagesBySketch( title )
+    const blobs = await getBlobCollection( images )
+    const inputs = await getInputsBySketch( title )
+    const shaders = await getShadersBySketch( title )
 
-    sketch.shaders[0].inputs.map( async inptKey => {
-        sketch.inputs.push( await getInputData( inptKey ))
-    })
-    
+    sketch.blobs = blobs
+    sketch.images = images
+    sketch.inputs = inputs
+    sketch.shaders = shaders
  
-   
-    // const imageBlobs = await getBlobCollection( imagePaths )
-    // sketches[ title ].images = imagePaths
-    // sketches[ title ].inputs = inputValues
-    // sketches[ title ].shaders = shaders
-
     return sketch
-
 }

@@ -1,5 +1,6 @@
 
 "use client"
+import p5Types from "p5"
 import InitP5 from "@/p5/Instance"
 import { Controls } from "@/p5/Controls"
 import { SketchLayout } from "@/p5/SketchLayout"
@@ -8,9 +9,9 @@ import { useState, useRef, useEffect } from "react"
 
 export default function PathSKetch({ 
   title, 
-  imgs,
+  blobs,
+  inputs,
   shaders, 
-  sliders,
 }) {
 
   let mp5 = null
@@ -25,21 +26,23 @@ export default function PathSKetch({
       else return mp5.remove() 
   }}, [ isMounted ]) 
 
-  function sketch(p) {
+  function sketch( p: p5Types ) {
 
     let ActiveShader
     let Overlay, MediaRecorder
     let Parent = parentRef.current 
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
+    let pShaders, pImages
+
     p.preload = () => {
-      shaders = shaders.map( shader => p.loadShader( shader.vert, shader.frag ))
-      imgs = imgs.map( img => p.loadImage( img.url ))
+      pShaders = shaders.map( shader => p.loadShader( shader.vert, shader.frag ))
+      pImages = blobs.map( blob => p.loadImage( blob.url ))
     }
   
     p.setup = () => {
       createElements(Parent)
-      ActiveShader = shaders[0]
+      ActiveShader = pShaders[0]
     }
   
     p.draw = () => {
@@ -51,10 +54,12 @@ export default function PathSKetch({
 
     function createElements(parent) {
       p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent(parent)
-      sliders.map( slider => { 
-        slider["input"] = p.createSlider( 0, 100, 10, 10 ).parent( slider.label ), 
-        slider["paragraph"] = p.createP("pval").parent( slider.label+"value" )
+      inputs.map( slider => { 
+        const { min, max, value, step } = slider.settings
+        slider["input"] = p.createSlider( min, max, value, step ).parent( slider.label ), 
+        slider["paragraph"] = p.createP( value ).parent( slider.label+"value" )
       })
+
       MediaRecorder = P5Recorder(title)
       Overlay = Controls(p,title,Parent)
       Overlay.playBtn.mouseClicked(() => {
@@ -87,7 +92,8 @@ export default function PathSKetch({
     }
 
     function handleControls() {
-      ActiveShader.setUniform("u_texture", imgs[0])
+      
+      ActiveShader.setUniform("u_texture", pImages[0])
 
       if ( !isPlaying ) {
         drawPauseTimer = p.millis() - drawPlayTimer
@@ -97,19 +103,20 @@ export default function PathSKetch({
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
 
-        sliders.map( slider => {
+        inputs.map( slider => {
           ActiveShader.setUniform( "u_"+slider.label, slider.input.value() )
         })
+        
         ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
       } 
     }
 
     function updateElements() {
-      sliders.map( slider => slider.paragraph.html(slider.input.value()))
+      inputs.map( slider => slider.paragraph.html(slider.input.value()))
     }
   }
   
-  return <SketchLayout parentRef={parentRef} sliders={sliders}/>
+  return <SketchLayout parentRef={parentRef} sliders={inputs}/>
 }
 
 

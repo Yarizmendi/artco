@@ -2,7 +2,7 @@ precision mediump float;
 
 uniform float u_time;
 uniform float u_waves;
-uniform float u_duration;
+uniform float u_zoom;
 uniform sampler2D u_texture;
 
 varying vec2 vTexCoord;
@@ -15,7 +15,7 @@ mat2 scale(vec2 _scale) {
 }
 
 vec2 rollingWaves( vec2 pos ) {
-  return scale( abs( vec2 ( cos( time / u_duration )))) * pos;
+  return scale( abs( vec2 ( cos( time / u_zoom )))) * pos;
 }
 
 vec2 increasingWaves( vec2 pos ) {
