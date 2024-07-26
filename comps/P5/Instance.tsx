@@ -12,5 +12,7 @@ async function InitP5(
   p.windowResized = () => {
     p.resizeCanvas( parentRef.current.offsetWidth, parentRef.current.offsetHeight )
   }
+
+  return p
 }
 export default InitP5

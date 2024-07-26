@@ -4,7 +4,7 @@ import p5Types from "p5"
 import InitP5 from "@/p5/Instance"
 import { Controls } from "@/p5/Controls"
 import { SketchLayout } from "@/p5/SketchLayout"
-import { P5Recorder } from "@/p5/Recorder"
+import { Recorder } from "@/p5/Recorder"
 import { useState, useRef, useEffect } from "react"
 
 export default function PathSKetch({ 
@@ -46,8 +46,15 @@ export default function PathSKetch({
     }
   
     p.draw = () => {
-      updateElements()
       handleControls()
+      Overlay.sketchTime.html( drawPlayTimer / 1000 + " seconds" )
+      ActiveShader.setUniform("u_texture", pImages[0])
+      ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
+      inputs.map( slider => {
+        ActiveShader.setUniform( slider.uniform, slider.input.value() )
+        slider.paragraph.html(slider.input.value())
+      })
+
       p.shader(ActiveShader)
       p.rect(0,0,0)
     }
@@ -60,7 +67,7 @@ export default function PathSKetch({
         slider["paragraph"] = p.createP( value ).parent( slider.label+"value" )
       })
 
-      MediaRecorder = P5Recorder(title)
+      MediaRecorder = Recorder(title)
       Overlay = Controls(p,title,Parent)
       Overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
@@ -92,28 +99,13 @@ export default function PathSKetch({
     }
 
     function handleControls() {
-      
-      ActiveShader.setUniform("u_texture", pImages[0])
-
-      if ( !isPlaying ) {
-        drawPauseTimer = p.millis() - drawPlayTimer
-      }
-    
+      if ( !isPlaying ) drawPauseTimer = p.millis() - drawPlayTimer
       if ( isPlaying ) {
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
-        else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
-
-        inputs.map( slider => {
-          ActiveShader.setUniform( "u_"+slider.label, slider.input.value() )
-        })
-        
-        ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
+        else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer   
       } 
     }
 
-    function updateElements() {
-      inputs.map( slider => slider.paragraph.html(slider.input.value()))
-    }
   }
   
   return <SketchLayout parentRef={parentRef} sliders={inputs}/>

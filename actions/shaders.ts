@@ -20,10 +20,8 @@ const shadersBySketch = {
     "house" : [{
         id: 1,
         title: "house",
-        vertPath: "/shaders/basic.vert",
-        vertBlob: "/shaders/basic.vert",
-        fragPath: "/shaders/house.frag",
-        fragBlob: "/shaders/house.frag",
+        vert: "/shaders/basic.vert",
+        frag: "/shaders/house.frag",
         uniforms: {
             inputs: [ ],
             timers: [ "u_time" ], 
@@ -68,7 +66,7 @@ const shadersBySketch = {
             {
                 id: 3,
                 label: "texture",
-                type: "p5.Image",
+                type: "texture",
                 uniform: "u_texture",
             }
         ],
@@ -76,7 +74,7 @@ const shadersBySketch = {
             {
                 id: 2,
                 label: "time",
-                type: "p5.millis",
+                type: "timer",
                 uniform: "u_time",
             },
         ],
