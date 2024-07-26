@@ -1,4 +1,8 @@
 
+export const ID = 0
+export const TITLE = "TEST"
+export const DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
 const shadersBySketch = {
 
     "city" : [{
@@ -32,11 +36,50 @@ const shadersBySketch = {
         title: "ocean",
         vert: "/shaders/basic.vert",
         frag: "/shaders/ocean.frag",
-        uniforms: {
-            inputs: [ "u_zoom", "u_waves" ],
-            timers: [ "u_time" ], 
-            textures: [ "u_texture" ], 
-        },
+        inputs: [
+            {
+                id: 0,
+                label: "zoom",
+                type: "slider",
+                uniform: "u_zoom",
+                description: DESCRIPTION,
+                settings: {
+                    min: 0,
+                    max: 120,
+                    value: 30,
+                    step: 1,
+                }
+            },
+            {
+                id: 1,
+                label: "waves",
+                type: "slider",
+                uniform: "u_waves",
+                description: DESCRIPTION,
+                settings: {
+                  min: 0,
+                  max: 120,
+                  value: 10,
+                  step: 1,
+                }
+            },
+        ],
+        textures: [
+            {
+                id: 3,
+                label: "texture",
+                type: "p5.Image",
+                uniform: "u_texture",
+            }
+        ],
+        timers: [
+            {
+                id: 2,
+                label: "time",
+                type: "p5.millis",
+                uniform: "u_time",
+            },
+        ],
     }],
 
     "stem" : [{

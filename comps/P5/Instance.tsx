@@ -8,9 +8,9 @@ async function InitP5(
 ) {
   let p5 = ( await import( "p5" )).default
   p = new p5( sketch, parentRef.current )
+
   p.windowResized = () => {
     p.resizeCanvas( parentRef.current.offsetWidth, parentRef.current.offsetHeight )
   }
 }
-
 export default InitP5

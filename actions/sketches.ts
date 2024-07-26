@@ -6,10 +6,15 @@ import { getBlobCollection } from "./blobs"
 
 const sketches = {
     "ocean" : {
-        shaders: [],
         images: [],
-        inputs: [],
+        shaders: [],
+
         blobs: [],
+
+        inputs: [],
+        textures: [],
+        timers: [],
+
         id: ID,
         title: "ocean",
         description: DESCRIPTION,
@@ -21,13 +26,15 @@ export async function getSketchData( title = "ocean" ) {
 
     const images = await getImagesBySketch( title )
     const blobs = await getBlobCollection( images )
-    const inputs = await getInputsBySketch( title )
     const shaders = await getShadersBySketch( title )
-
+   
     sketch.blobs = blobs
     sketch.images = images
-    sketch.inputs = inputs
     sketch.shaders = shaders
- 
+
+    sketch.inputs = shaders[0].inputs
+    sketch.timers = shaders[0].timers
+    sketch.textures = shaders[0].textures
+
     return sketch
 }

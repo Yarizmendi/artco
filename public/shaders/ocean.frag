@@ -15,23 +15,19 @@ mat2 scale(vec2 _scale) {
 }
 
 vec2 rollingWaves( vec2 pos ) {
-  return scale( abs( vec2 ( cos( time / u_zoom )))) * pos;
+  return scale( abs( vec2 ( cos( u_time / u_zoom )))) * pos;
 }
 
 vec2 increasingWaves( vec2 pos ) {
-  pos.y += cos( pos.y * u_waves + time ) / ( 15.0 + u_waves + time );
+  pos.y += cos( pos.y * u_waves + u_time ) / ( 15.0 + u_waves + u_time );
   return pos;
 }
 
 void main () {
   vec2 pos = vTexCoord;
 
-  if ( u_time > 0.) {
-    time = u_time;
-    pos *= vec2( 0.9 );
-    pos = increasingWaves( pos );
-    pos = rollingWaves( pos );
-  }
+  pos *= vec2( 0.9 );
+  pos = increasingWaves( pos );
 
   color = texture2D( u_texture, pos );
   gl_FragColor = vec4( color );

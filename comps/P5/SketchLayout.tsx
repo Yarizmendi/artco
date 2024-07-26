@@ -1,6 +1,6 @@
 
 import classNames from "classnames"
-import { Slider } from "./Slider"
+import  {Slider}  from "./Slider"
 
 const yellowBorder = "border border-yellow-500"
 const redBorder = "border border-red-400"
@@ -8,7 +8,7 @@ const greenBorder = "border border-green-400"
 
 export function SketchLayout({
   parentRef,
-  sliders
+  sliders,
 }) {
   return (
     <div 
@@ -36,7 +36,6 @@ export function SketchLayout({
       ])}>
         { sliders.map( slider => <Slider {...slider} /> )}
       </form>
-
       <a id="download" className="hidden"/>
     </div>
   )

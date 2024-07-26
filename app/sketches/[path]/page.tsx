@@ -4,7 +4,7 @@ import { getSketchData } from "actions/sketches"
 
 export default async function Page({ params }) {
   const title = params.path
-  const settings = await getSketchData(title)
-  return <Sketch {...settings} />
+  const sketchData = await getSketchData(title)
+  return <Sketch {...sketchData} />
   
 }
