@@ -1,30 +1,25 @@
 
 import Nav from "@/comps/Nav/BaseNav"
+import { getImages } from "actions/images"
 import ArtLink from "@/comps/Links/ArtLinks"
-import { getImageData } from "actions/images"
 
-export default function ArtPage() {
+export default async function ArtPage() {
+  const images = await getImages()
   const links = [
-    { path: "/sketches/stem", text: "stem" },
-    { path: "/sketches/ocean", text: "ocean" },
-    { path: "/sketches/house", text: "house" },
-    { path: "/sketches/waves", text: "waves" },
+    { path: "/sketches/stem", title: "stem" },
+    { path: "/sketches/city", title: "city" },
+    { path: "/sketches/oceans", title: "oceans" },
   ]
-
   return (
-    <>
-      <Nav links={ links } />
-      <ArtLinks />
-    </>
-  )
-}
-
-async function ArtLinks() {
-  const { imageKeys, imagePaths } = await getImageData()
-  return (
-    <div className="mb-[10px] max-w-[1200px] h-[450px] m-auto flex flex-wrap justify-center items-center overflow-auto">
-      { imageKeys.map(( key, idx ) => <ArtLink title={key} url={ imagePaths[idx]["path"] } /> )}
+    <div>
+      <Nav links={links} />
+      <div className="max-w-[1200px] h-[450px] flex flex-wrap justify-center items-center overflow-auto">
+        {images.map((img, idx) => <ArtLink key={idx} {...img} />)}
+       </div>
     </div>
   )
 }
+
+
+
 

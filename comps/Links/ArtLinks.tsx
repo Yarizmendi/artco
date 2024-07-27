@@ -1,18 +1,16 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { getBlob }  from "actions/blobs"
 
-export default async function ArtLink({ title, url  }) {
-  let blob = await getBlob( url )
-  let blobUrl = blob[ 0 ].url
+export default function ArtLink({ title, blob, path  }) {
+  title = title.replace(/_/g, ' ')
   return (
   <Link
-    href={ `sketches/${ title }` }
+    href={ `sketches/${ path }` }
     className="hover:scale-110 transform duration-400 ease-in-out cursor-pointer p-4">
     <Image 
       priority
-      src={ blobUrl } 
+      src={ blob } 
       alt={ title } 
       width={ 500 }
       height={ 500 }

@@ -4,39 +4,31 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import { DarkModeContext } from '@/hooks/index.ts'
 
-interface Props {
-  links: any[]
-  navStyle?: string
-  spanStyle?: string
-  linkStyle?: string
-  ctnStyle?: string
-}
 
 const styles = {
-  nav: "h-fit flex items-center justify-end tracking-wide uppercase text-[12px] pb-4",
-  span: "material-symbols-outlined cursor-pointer",
-  link: "p-2",
-  ctn: "p-[10px]"
+  span: "material-symbols-outlined cursor-pointer mr-4",
+  nav: "flex items-center justify-end tracking-wide uppercase text-[12px] border-b p-4 mb-4",
+  link: "p-3",
 }
 
-function BaseNav( props: Props ) {
+function BaseNav({ links }) {
+
   const { themeClass, setThemeClass } = useContext( DarkModeContext )
   const isDarkMode = themeClass === "dark"
   const onClickChange = () => setThemeClass( isDarkMode ? "light" : "dark")
+
   return (
-    <div className={ styles.ctn }>
-      <span className="material-symbols-outlined cursor-pointer pl-8 pt-4" onClick={ onClickChange }>brightness_6</span>
-      <nav className={ styles.nav }>
-        { props.links.map(( link, idx ) => 
+    <nav className={ styles.nav }>
+      <span className={styles.span} onClick={ onClickChange }>brightness_6</span>
+        { links.map(( link, idx ) => 
           <Link 
             key={ idx }
             className={ styles.link }
             href={ link.path }
-          > { link.text }
+          > { link.title }
           </Link> 
         )}
-      </nav>
-    </div>
+    </nav>
   )
 }
 

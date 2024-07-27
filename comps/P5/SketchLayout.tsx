@@ -1,6 +1,6 @@
 
 import classNames from "classnames"
-import  {Slider}  from "./Slider"
+import  { Slider }  from "./Slider"
 
 const yellowBorder = "border border-yellow-500"
 const redBorder = "border border-red-400"
@@ -8,7 +8,7 @@ const greenBorder = "border border-green-400"
 
 export function SketchLayout({
   parentRef,
-  sliders,
+  inputs,
 }) {
   return (
     <div 
@@ -27,15 +27,15 @@ export function SketchLayout({
         "w-full md:w-8/12",
       ])} />
 
-      <form 
+      <div 
         id="ctrls"
         className={ classNames([ 
         // yellowBorder,
         "h-2/6 md:h-full",
         "w-full md:w-4/12",
       ])}>
-        { sliders.map( slider => <Slider {...slider} /> )}
-      </form>
+        { inputs.map((slider, idx ) => <Slider key={ idx } {...slider} /> )}
+      </div>
       <a id="download" className="hidden"/>
     </div>
   )

@@ -7,12 +7,25 @@ import { SketchLayout } from "@/p5/SketchLayout"
 import { Recorder } from "@/p5/Recorder"
 import { useState, useRef, useEffect } from "react"
 
+const vert = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert"
+
 export default function PathSKetch({ 
+  id,
   title, 
-  blobs,
-  inputs,
+  images,
   shaders, 
+  description,
 }) {
+
+  let timers = []
+  let inputs = []
+  let textures = []
+
+  shaders.map( shader => {
+    inputs.push( ...shader.inputs )
+    timers.push( ...shader.timers )
+    textures.push(...shader.textures )
+  })
 
   let mp5 = null
   let parentRef = useRef()
@@ -33,44 +46,65 @@ export default function PathSKetch({
     let Parent = parentRef.current 
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
-    let pShaders, pImages
+    let idx = 0
 
     p.preload = () => {
-      pShaders = shaders.map( shader => p.loadShader( "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert", shader.frag ))
-      pImages = blobs.map( blob => p.loadImage( blob.url ))
+
+      shaders.map( shader => {
+        shader["Shader"] = p.loadShader( vert, shader.frag ) 
+      })
+
+      images.map( img => {
+        img["Image"] = p.loadImage( img.blob )
+      })
+
+
     }
+  
   
     p.setup = () => {
       p.pixelDensity(1)
+  
+      ActiveShader = shaders[idx]["Shader"]
       createElements(Parent)
-      ActiveShader = pShaders[0]
 
     }
   
     p.draw = () => {
-      handleControls()
-      Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )}`)
-      ActiveShader.setUniform("u_texture", pImages[0])
-      ActiveShader.setUniform( "u_time", drawPlayTimer )
-      inputs.map( slider => {
-        ActiveShader.setUniform( slider.uniform, slider.input.value() )
-        slider.paragraph.html(slider.input.value())
+      Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
+
+      textures.map(( texture ) => {
+        ActiveShader.setUniform( texture.uniform, images[ idx ]["Image"])
       })
 
+      timers.map((timer ) => {
+        ActiveShader.setUniform( timer.uniform, drawPlayTimer )
+      })
+
+      inputs.map(( input ) => {
+        input["Paragraph"].html( input["Slider"].value() )
+        ActiveShader.setUniform( input.uniform, input["Slider"].value() )
+      })
+
+      handleControls()
       p.shader(ActiveShader)
       p.rect(0,0,0)
     }
 
     function createElements(parent) {
       p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent(parent)
-      inputs.map( slider => { 
-        const { min, max, value, step } = slider.settings
-        slider["input"] = p.createSlider( min, max, value, step ).parent( slider.label ), 
-        slider["paragraph"] = p.createP( value ).parent( slider.label+"value" )
+
+      inputs.map( input => {
+        if ( input.type == "slider" ) {
+          const { min, max, value, step } = input.settings
+          input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
+          input["Paragraph"] = p.createP( value ).parent(input.uniform+"Value")
+        }
       })
 
       MediaRecorder = Recorder(title)
       Overlay = Controls(p,title,Parent)
+
       Overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
           isPlaying = true
@@ -101,16 +135,15 @@ export default function PathSKetch({
     }
 
     function handleControls() {
-      if ( !isPlaying ) drawPauseTimer = p.millis() - drawPlayTimer
       if ( isPlaying ) {
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer   
-      } 
+      } else  drawPauseTimer = p.millis() - drawPlayTimer
     }
 
   }
   
-  return <SketchLayout parentRef={parentRef} sliders={inputs}/>
+  return <SketchLayout parentRef={parentRef} inputs={inputs}/>
 }
 
 
