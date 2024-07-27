@@ -1,6 +1,6 @@
 
 
-export function Recorder( path ) {
+export function Recorder( path? ) {
     let recordedChunks = []
     let link = document.querySelector("a")
     let canvas = document.querySelector("canvas")

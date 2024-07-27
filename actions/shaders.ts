@@ -3,12 +3,15 @@ export const ID = 0
 export const TITLE = "TEST"
 export const DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
+
+
+
 const shadersBySketch = {
 
     "city" : [{
         id: 0,
         title: "city",
-        vert: "/shaders/basic.vert",
+        vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
         frag: "/shaders/city.frag",
         uniforms: {
             inputs: [ "u_waves" ],

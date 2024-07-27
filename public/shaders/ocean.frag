@@ -19,7 +19,8 @@ vec2 rollingWaves( vec2 pos ) {
 }
 
 vec2 increasingWaves( vec2 pos ) {
-  pos.y += cos( pos.y * u_waves + u_time ) / ( 15.0 + u_waves + u_time );
+  float numer = 25.0 + ( u_time / 1000.0 );
+  pos.y += ( sin( pos.y * numer ) / ( 30.0 + numer ));
   return pos;
 }
 

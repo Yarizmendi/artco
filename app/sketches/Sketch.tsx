@@ -36,20 +36,22 @@ export default function PathSKetch({
     let pShaders, pImages
 
     p.preload = () => {
-      pShaders = shaders.map( shader => p.loadShader( shader.vert, shader.frag ))
+      pShaders = shaders.map( shader => p.loadShader( "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert", shader.frag ))
       pImages = blobs.map( blob => p.loadImage( blob.url ))
     }
   
     p.setup = () => {
+      p.pixelDensity(1)
       createElements(Parent)
       ActiveShader = pShaders[0]
+
     }
   
     p.draw = () => {
       handleControls()
-      Overlay.sketchTime.html( drawPlayTimer / 1000 + " seconds" )
+      Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )}`)
       ActiveShader.setUniform("u_texture", pImages[0])
-      ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
+      ActiveShader.setUniform( "u_time", drawPlayTimer )
       inputs.map( slider => {
         ActiveShader.setUniform( slider.uniform, slider.input.value() )
         slider.paragraph.html(slider.input.value())
