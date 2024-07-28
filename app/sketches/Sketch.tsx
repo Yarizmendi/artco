@@ -3,8 +3,8 @@
 import p5Types from "p5"
 import InitP5 from "@/p5/Instance"
 import { Controls } from "@/p5/Controls"
-import { SketchLayout } from "@/p5/SketchLayout"
 import { Recorder } from "@/p5/Recorder"
+import { SketchLayout } from "@/p5/SketchLayout"
 import { useState, useRef, useEffect } from "react"
 
 const vert = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert"
@@ -13,6 +13,7 @@ export default function PathSKetch({
   id,
   title, 
   images,
+  noises,
   shaders, 
   description,
 }) {
@@ -41,44 +42,47 @@ export default function PathSKetch({
 
   function sketch( p: p5Types ) {
 
-    let ActiveShader
+    let idx = 0
+    let ActiveShader, Noise
     let Overlay, MediaRecorder
     let Parent = parentRef.current 
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
-    let idx = 0
-
     p.preload = () => {
-
-      shaders.map( shader => {
-        shader["Shader"] = p.loadShader( vert, shader.frag ) 
-      })
 
       images.map( img => {
         img["Image"] = p.loadImage( img.blob )
       })
 
+      noises.map( noise => {
+        noise["Noise"] = p.loadImage( noise.blob )
+      })
+
+      shaders.map( shader => {
+        shader["Shader"] = p.loadShader( vert, shader.frag ) 
+      })
 
     }
   
   
     p.setup = () => {
       p.pixelDensity(1)
-  
       ActiveShader = shaders[idx]["Shader"]
+      Noise = noises[idx]["Noise"]
       createElements(Parent)
-
     }
   
     p.draw = () => {
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
+      
+      ActiveShader.setUniform( "u_noise", Noise )
 
       textures.map(( texture ) => {
         ActiveShader.setUniform( texture.uniform, images[ idx ]["Image"])
       })
 
       timers.map((timer ) => {
-        ActiveShader.setUniform( timer.uniform, drawPlayTimer )
+        ActiveShader.setUniform( timer.uniform, drawPlayTimer / 1000 )
       })
 
       inputs.map(( input ) => {
@@ -92,7 +96,7 @@ export default function PathSKetch({
     }
 
     function createElements(parent) {
-      p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent(parent)
+      p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent( parent )
 
       inputs.map( input => {
         if ( input.type == "slider" ) {
@@ -103,7 +107,7 @@ export default function PathSKetch({
       })
 
       MediaRecorder = Recorder(title)
-      Overlay = Controls(p,title,Parent)
+      Overlay = Controls( p,title,parent )
 
       Overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {

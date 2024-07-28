@@ -1,7 +1,5 @@
 
-// export const noisesDict = {
-//   perlin: { id: 0,  path: "noise/perlin.png" }
-// }
+
 
 const images = [
   { title: "red_ocean", id: 0, path: "red_ocean.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
@@ -28,6 +26,10 @@ const images = [
   { title: "industrial_ocean", id: 36, path: "industrial_ocean.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/industrial_ocean.jpg" },
   { title: "red_ocean", id: 33, path: "red_ocean.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
   { title: "polluted_ocean", id: 35, path: "polluted_ocean.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/polluted_ocean.jpg" },
+]
+
+const noises = [
+  { id: 0, title: "perlin", path: "perlin.png", blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png" }
 ]
 
 const imagesBySketch = {
@@ -60,11 +62,24 @@ const imagesBySketch = {
     { title: "resistance", id: 15, path: "resistance.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/resistance.png" },
     { title: "abstract_toon_stem", id: 16, path: "abstract_toon_stem.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/abstract_toon_stem.jpg" },
     { title: "sid", id: 17, path: "sid.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sid.jpg" },
-  ]
+  ],
 }
 
-export async function getImagesBySketch( sketchTitle ) {
-  return imagesBySketch[ sketchTitle ]
+const noisesBySketch = {
+  stem: [{ id: 0, title: "perlin", uniform: "u_noise", path: "perlin.png", blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png" }]
+}
+
+
+export async function getImagesBySketch( title ) {
+  const imgs = [
+    { title: title, id: 0, path: title, blob: `https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/${ title }` },
+  ]
+  return imagesBySketch[ title ] || imgs
+}
+
+
+export async function getNoisesBySketch( title ) {
+  return noisesBySketch[ title ]
 }
 
 export async function getDefinedSketches() {
