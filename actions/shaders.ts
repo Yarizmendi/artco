@@ -8,9 +8,6 @@ const shadersBySketch = {
         id: 0,
         title: "city",
         frag: `https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/city.frag`,
-        timers: [
-          { id: 0, type: "timer", uniform: "u_time" },
-        ],
         textures: [
           { id: 0, type: "texture", uniform: "u_red_ocean" },
           { id: 0, type: "texture", uniform: "u_polluted_ocean" },
@@ -23,7 +20,7 @@ const shadersBySketch = {
               label: "waves",
               uniform: "u_waves",
               description: DESCRIPTION,
-              settings: { min: 0, max: 100, value: 10, step: 1 },
+              settings: { min: 0, max: 100, value: 50, step: 1 },
             },
             {  
                 id: 1,
@@ -39,7 +36,7 @@ const shadersBySketch = {
               label: "btmTime",
               uniform: "u_btmTime",
               description: DESCRIPTION,
-              settings: { min: 0, max: 100, value: 10, step: 1 },
+              settings: { min: 0, max: 100, value: 15, step: 1 },
           },
         ],
     }],
@@ -61,7 +58,7 @@ const shadersBySketch = {
               label: "waves",
               uniform: "u_waves",
               description: DESCRIPTION,
-              settings: { min: 0, max: 100, value: 10, step: 1 },
+              settings: { min: 0, max: 100, value: 50, step: 1 },
               
             },
             {  
@@ -70,7 +67,7 @@ const shadersBySketch = {
                 label: "duration",
                 uniform: "u_duration",
                 description: DESCRIPTION,
-                settings: { min: 0, max: 100, value: 10, step: 1 },
+                settings: { min: 0, max: 100, value: 30, step: 1 },
               },
         ],
     }],
@@ -86,23 +83,23 @@ const shadersBySketch = {
           { id: 0, type: "texture", uniform: "u_background" }
         ],
         inputs: [
-            {  
-              id: 0,
-              type: "slider",
-              label: "waves",
-              uniform: "u_waves",
-              description: DESCRIPTION,
-              settings: { min: 0, max: 100, value: 10, step: 1 },
+            // {  
+            //   id: 0,
+            //   type: "slider",
+            //   label: "waves",
+            //   uniform: "u_waves",
+            //   description: DESCRIPTION,
+            //   settings: { min: 0, max: 100, value: 10, step: 1 },
               
-            },
-            {  
-                id: 1,
-                type: "slider",
-                label: "duration",
-                uniform: "u_duration",
-                description: DESCRIPTION,
-                settings: { min: 0, max: 100, value: 10, step: 1 },
-              },
+            // },
+            // {  
+            //     id: 1,
+            //     type: "slider",
+            //     label: "duration",
+            //     uniform: "u_duration",
+            //     description: DESCRIPTION,
+            //     settings: { min: 0, max: 100, value: 10, step: 1 },
+            //   },
         ],
     }],
 
@@ -111,7 +108,6 @@ const shadersBySketch = {
         transitions: true,
         title: "stem",
         frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/stem.frag",
-        timers: [],
         textures: [
           { id: 0, type: "texture", uniform: "u_background" },
           { id: 0, type: "texture", uniform: "u_foreground" },
@@ -120,26 +116,26 @@ const shadersBySketch = {
             {  
               id: 0,
               type: "slider",
+              label: "threshold",
+              uniform: "u_threshold",
+              description: DESCRIPTION,
+              settings: { min: 0, max: 1, value: 1, step: .1 },
+            },
+            {  
+              id: 1,
+              type: "slider",
               label: "range",
               uniform: "u_range",
               description: DESCRIPTION,
-              settings: { min: 0, max: 1, value: 0, step: .1 },
-            },
-            {  
-                id: 1,
-                type: "slider",
-                label: "threshold",
-                uniform: "u_threshold",
-                description: DESCRIPTION,
-                settings: { min: 0, max: 1, value: 1, step: .1 },
+              settings: { min: 0, max: 1, value: 0.25, step: .01 },
             },
             {  
               id: 2,
               type: "slider",
-              label: "change timer",
-              uniform: "u_change_time",
+              label: "transitions",
+              uniform: "u_change_every",
               description: DESCRIPTION,
-              settings: { min: 0, max: 60, value: 15, step: 1 },
+              settings: { min: 0, max: 60, value: 5, step: 1 },
           },
         ],
     }],

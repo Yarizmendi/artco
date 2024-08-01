@@ -38,7 +38,7 @@ export function Controls( p5, path, parent ) {
     ctn.parent( parent )
     ctn.draggable()
   
-    let recordBtn = Button( p5, ctn ).class("flex items-center text-xs text-black")
+    let recordBtn = Button( p5, ctn )
     Icon( p5, ICONS_OUTLINE, RECORD_ICON_TEXT, recordBtn )
     let recordBtnP = Paragraph( p5, "record", recordBtn )
   
@@ -47,8 +47,7 @@ export function Controls( p5, path, parent ) {
     let playBtnP = Paragraph( p5, "play", playBtn )
   
     let sketchTime = Paragraph( p5, "0 seconds", ctn )
-    Paragraph( p5, `${ path } sketch`, ctn  )
-  
+
     
     let res = {
       recordBtn: recordBtn,

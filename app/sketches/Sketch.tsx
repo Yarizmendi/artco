@@ -44,10 +44,10 @@ export default function PathSKetch({
 
     let idx = 0
     let seconds
-    let changeEvery = 3
     let ActiveShader
     let Overlay, MediaRecorder
-    let Parent = parentRef.current 
+    let Parent = parentRef.current && parentRef.current
+    let changeEvery = transitions && inputs[2]["settings"].value
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
     p.preload = () => {
@@ -62,33 +62,39 @@ export default function PathSKetch({
 
       shaders.map( shader => {
         shader["Shader"] = p.loadShader( vert, shader.frag ) 
+        // shader["Shader"] = p.loadShader( vert, `/${title}.frag` ) 
       })
 
     }
   
-  
     p.setup = () => {
       p.pixelDensity(1)
       ActiveShader = shaders[idx]["Shader"]
-      transitions && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
       createElements(Parent)
     }
   
     p.draw = () => {
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
+      handleControls()
 
       inputs.map(( input ) => {
         input["Paragraph"].html( input["Slider"].value() )
         ActiveShader.setUniform( input.uniform, input["Slider"].value() )
       })
   
-      transitions ?? textures.map(( texture ) => {
-        ActiveShader.setUniform( texture.uniform, images[ idx ]["Image"])
+      textures.map(( texture, i ) => {
+        ActiveShader.setUniform( texture.uniform, images[ i + idx ]["Image"])
       })
+
+      noises && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
       
-      handleControls()
       p.shader(ActiveShader)
       p.rect(0,0,0)
+    }
+    
+    p.windowResized = () => {
+      // @ts-ignore
+      p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight )
     }
 
     function handleControls() {
@@ -96,8 +102,14 @@ export default function PathSKetch({
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
         seconds = drawPlayTimer / 1000 
-        ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
-        transitions && handleTransitions()
+
+        if ( transitions ) {
+          ActiveShader.setUniform( "u_time", drawPlayTimer )
+          handleTransitions()
+        } else {
+          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
+        }
+
       } 
 
       if (!isPlaying) {
@@ -107,19 +119,17 @@ export default function PathSKetch({
     }
 
     function handleTransitions() {
-      if ( seconds < changeEvery ) {
-        ActiveShader.setUniform( "u_background",  images[ idx ]["Image"])
-        ActiveShader.setUniform( "u_foreground", images[ idx + 1 ]["Image"]) 
-      }
-      else if ( images.length-2 > idx ) {
+      if ( seconds > changeEvery && images.length-1 > idx ) {
         idx+=1
-        changeEvery += 3
+        changeEvery += inputs[2]["Slider"].value()
         ActiveShader.setUniform( "u_timeout", drawPlayTimer )
       } 
     }
 
     function createElements(parent) {
-      p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent( parent )
+      let canvas = p.createCanvas( parent.offsetWidth-60, parent.offsetHeight-60, p.WEBGL )
+      canvas.class("border-[30px] rounded-md border-black")
+      canvas.parent( parent )
 
       inputs.map( input => {
         if ( input.type == "slider" ) {
@@ -163,7 +173,7 @@ export default function PathSKetch({
 
   }
   
-  return <SketchLayout parentRef={parentRef} inputs={inputs}/>
+  return <SketchLayout parentRef={parentRef} inputs={inputs} title={ title }/>
 }
 
 
