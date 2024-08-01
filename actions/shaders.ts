@@ -24,7 +24,6 @@ const shadersBySketch = {
               uniform: "u_waves",
               description: DESCRIPTION,
               settings: { min: 0, max: 100, value: 10, step: 1 },
-              
             },
             {  
                 id: 1,
@@ -109,16 +108,13 @@ const shadersBySketch = {
 
     "stem" : [{
         id: 3,
+        transitions: true,
         title: "stem",
         frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/stem.frag",
-        timers: [
-          { id: 0, type: "timer", uniform: "u_time" },
-          { id: 0, type: "timer", uniform: "u_timeout" },
-        ],
+        timers: [],
         textures: [
           { id: 0, type: "texture", uniform: "u_background" },
           { id: 0, type: "texture", uniform: "u_foreground" },
-          { id: 0, type: "texture", uniform: "u_noise" }
         ],
         inputs: [
             {  
@@ -127,8 +123,7 @@ const shadersBySketch = {
               label: "range",
               uniform: "u_range",
               description: DESCRIPTION,
-              settings: { min: 0, max: 100, value: 10, step: 1 },
-              
+              settings: { min: 0, max: 1, value: 0, step: .1 },
             },
             {  
                 id: 1,
@@ -136,8 +131,16 @@ const shadersBySketch = {
                 label: "threshold",
                 uniform: "u_threshold",
                 description: DESCRIPTION,
-                settings: { min: 0, max: 100, value: 10, step: 1 },
+                settings: { min: 0, max: 1, value: 1, step: .1 },
             },
+            {  
+              id: 2,
+              type: "slider",
+              label: "change timer",
+              uniform: "u_change_time",
+              description: DESCRIPTION,
+              settings: { min: 0, max: 60, value: 15, step: 1 },
+          },
         ],
     }],
 }

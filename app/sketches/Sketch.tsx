@@ -18,14 +18,14 @@ export default function PathSKetch({
   description,
 }) {
 
-  let timers = []
   let inputs = []
   let textures = []
+  let transitions
 
   shaders.map( shader => {
     inputs.push( ...shader.inputs )
-    timers.push( ...shader.timers )
     textures.push(...shader.textures )
+    transitions = shader.transitions
   })
 
   let mp5 = null
@@ -43,19 +43,21 @@ export default function PathSKetch({
   function sketch( p: p5Types ) {
 
     let idx = 0
-    let ActiveShader, Noise
+    let seconds
+    let changeEvery = 3
+    let ActiveShader
     let Overlay, MediaRecorder
     let Parent = parentRef.current 
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
     p.preload = () => {
 
+      noises && noises.map( noise => {
+        noise["Noise"] = p.loadImage( noise.blob )
+      })  
+      
       images.map( img => {
         img["Image"] = p.loadImage( img.blob )
-      })
-
-      noises.map( noise => {
-        noise["Noise"] = p.loadImage( noise.blob )
       })
 
       shaders.map( shader => {
@@ -68,31 +70,52 @@ export default function PathSKetch({
     p.setup = () => {
       p.pixelDensity(1)
       ActiveShader = shaders[idx]["Shader"]
-      Noise = noises[idx]["Noise"]
+      transitions && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
       createElements(Parent)
     }
   
     p.draw = () => {
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
-      
-      ActiveShader.setUniform( "u_noise", Noise )
-
-      textures.map(( texture ) => {
-        ActiveShader.setUniform( texture.uniform, images[ idx ]["Image"])
-      })
-
-      timers.map((timer ) => {
-        ActiveShader.setUniform( timer.uniform, drawPlayTimer / 1000 )
-      })
 
       inputs.map(( input ) => {
         input["Paragraph"].html( input["Slider"].value() )
         ActiveShader.setUniform( input.uniform, input["Slider"].value() )
       })
-
+  
+      transitions ?? textures.map(( texture ) => {
+        ActiveShader.setUniform( texture.uniform, images[ idx ]["Image"])
+      })
+      
       handleControls()
       p.shader(ActiveShader)
       p.rect(0,0,0)
+    }
+
+    function handleControls() {
+      if (isPlaying) {
+        if ( !drawPauseTimer ) drawPlayTimer = p.millis()
+        else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
+        seconds = drawPlayTimer / 1000 
+        ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
+        transitions && handleTransitions()
+      } 
+
+      if (!isPlaying) {
+        drawPauseTimer = p.millis() - drawPlayTimer
+        seconds = drawPauseTimer / 1000
+      }
+    }
+
+    function handleTransitions() {
+      if ( seconds < changeEvery ) {
+        ActiveShader.setUniform( "u_background",  images[ idx ]["Image"])
+        ActiveShader.setUniform( "u_foreground", images[ idx + 1 ]["Image"]) 
+      }
+      else if ( images.length-2 > idx ) {
+        idx+=1
+        changeEvery += 3
+        ActiveShader.setUniform( "u_timeout", drawPlayTimer )
+      } 
     }
 
     function createElements(parent) {
@@ -136,13 +159,6 @@ export default function PathSKetch({
           MediaRecorder.stop()
         }
       })
-    }
-
-    function handleControls() {
-      if ( isPlaying ) {
-        if ( !drawPauseTimer ) drawPlayTimer = p.millis()
-        else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer   
-      } else  drawPauseTimer = p.millis() - drawPlayTimer
     }
 
   }
