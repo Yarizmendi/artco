@@ -2,7 +2,7 @@
 import Link from "next/link"
 import Image from "next/image"
 
-export default function ArtLink({ title, blob, path  }) {
+export default function Painting({ title, blob, path  }) {
   title = title.replace(/_/g, ' ')
   return (
   <Link

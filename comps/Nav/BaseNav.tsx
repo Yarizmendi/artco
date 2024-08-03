@@ -7,7 +7,7 @@ import { DarkModeContext } from '@/hooks/index.ts'
 
 const styles = {
   span: "material-symbols-outlined cursor-pointer mr-4",
-  nav: "flex items-center justify-end tracking-wide uppercase text-[12px] border-b p-4 mb-4",
+  nav: "flex items-center justify-end tracking-wide uppercase text-[12px] p-4 mb-4 dark:bg-gray-950",
   link: "p-3",
 }
 

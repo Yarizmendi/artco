@@ -1,5 +1,5 @@
 
-import Sketch from "app/sketches/Sketch"
+import Sketch from "app/collections/sketches/Sketch"
 import { getSketchData } from "actions/sketches"
 
 export default async function Page({ params }) {

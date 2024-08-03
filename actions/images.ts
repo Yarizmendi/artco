@@ -1,4 +1,75 @@
+import { DESCRIPTION, TITLE } from "./shaders"
 
+export const showcaseSketches = {
+  futurism: {
+    id: 2,
+    title: "Uotopic Dreams",
+    path: "sketches/futurism",
+    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
+    description: DESCRIPTION,
+    tags: {
+      object: ["science", "chemistry", "physics", "engineering"],
+      meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
+    }
+  },
+  mania: {
+    id: 2,
+    title: "Uotopic Dreams",
+    path: "sketches/mania",
+    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
+    description: DESCRIPTION,
+    tags: {
+      object: ["science", "chemistry", "physics", "engineering"],
+      meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
+    }
+  },
+  trips: {
+    id: 2,
+    title: "Uotopic Dreams",
+    path: "sketches/trips",
+    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
+    description: DESCRIPTION,
+    tags: {
+      object: ["science", "chemistry", "physics", "engineering"],
+      meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
+    }
+  },
+  oceans: {
+    id: 0,
+    title: "In Search Of Context",
+    path: "sketches/ocean",
+    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png",
+    description: DESCRIPTION,
+    tags: {
+      object: ["ocean", "sea", "waves", "nature"],
+      meta: ["searching", "wandering", "percieving"]
+    }
+  },
+  city: {
+    id: 1,
+    title: "Industrial Oakland",
+    path: "sketches/city",
+    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/industrial_ocean.jpg",
+    description: DESCRIPTION,
+    tags: {
+      object: ["skyline", "oakland", "shoreline", "city views"],
+      meta: []
+    }
+  },
+  stem: {
+    id: 2,
+    title: "Aesthetic Calcukus",
+    path: "sketches/stem",
+    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
+    description: DESCRIPTION,
+    tags: {
+      object: ["science", "chemistry", "physics", "engineering"],
+      meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
+    }
+  },
+}
+
+  
 
 
 const images = [
@@ -45,12 +116,7 @@ const imagesBySketch = {
     { title: "industrial_ocean", id: 36, path: "industrial_ocean.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/industrial_ocean.jpg" },
   ],
   stem: [
-    // { title: "yellow_org_collab", id: 0, path: "yellow_org_collab.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/yellow_org_collab.jpg" },
     { title: "ballerina", id: 1, path: "ballerina.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png" },
-    // { title: "Reclamation", id: 2, path: "Reclamation.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Reclamation.png" },
-    // { title: "yellow_org_stem", id: 3, path: "yellow_org_stem.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/yellow_org_stem.jpg" },
-    // { title: "blue_red_stem", id: 5, path: "blue_red_stem.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/blue_red_stem.jpg" },
-    // { title: "sunset_circles_stem", id: 6, path: "sunset_circles_stem.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sunset_circles_stem.jpg" },
     { title: "in_search_of_pareto", id: 7, path: "in_search_of_pareto.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/in_search_of_pareto.png" },
     { title: "patents_stem", id: 8, path: "patents_stem.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/patents_stem.jpg" },
     { title: "person_stem", id: 9, path: "person_stem.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/person_stem.jpg" },
@@ -59,9 +125,7 @@ const imagesBySketch = {
     { title: "quantum_ballerina", id: 12, path: "quantum_ballerina.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/quantum_ballerina.png" },
     { title: "quantum_computer", id: 13, path: "quantum_computer.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/quantum_computer.png" },
     { title: "reconfiguring_formality", id: 14, path: "reconfiguring_formality.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/reconfiguring_formality.jpg" },
-    // { title: "resistance", id: 15, path: "resistance.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/resistance.png" },
     { title: "sid", id: 17, path: "sid.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sid.jpg" },
-    // { title: "abstract_toon_stem", id: 16, path: "abstract_toon_stem.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/abstract_toon_stem.jpg" },
   ],
 }
 
