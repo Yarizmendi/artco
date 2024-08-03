@@ -12,39 +12,35 @@ interface ISketchLink {
   description?: string
 }
 
-export const bggd = " bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text"
-
 function SketchLink({ title, blob, path, tags, description  }: ISketchLink ) {
   title = rmUnderScores(title)
-
+  const ctnClass="m-4 min-w-[300px] max-w-[440px] bg-gray-200 dark:bg-slate-950"
   return (
-  <Link
-    href={ path }
-    className="
-    cursor-pointer p-4
-    flex flex-col justify-around w-[450px] tracking-widest">
-
-    <div className="dark:bg-gray-950 bg-gray-200 font-normal px-3 py-1 w-fit rounded">
-      <p className={"tracking-widest text-xs"}>{title.toUpperCase()}</p>
-    </div>
-
-    <Image 
-    priority
-    src={ blob } 
-    alt={ title } 
-    width={ 500 }
-    height={ 350 }
-    className="w-full h-[350px] rounded-lg" />
-
-   <div className="w-full h-[160px] overflow-hidden dark:bg-gray-950 bg-gray-200 p-4 flex flex-col justify-around">
-    {<p className="text-[12px] h-[50px] overflow-hidden font-normal">{description}</p>}
-    <span className="flex overflow-hidden">
-      { tags.object && tags.object.map((tag,key) => <Tag key={key} title={tag} style={"outlined"} /> )}
-      { tags.meta && tags.meta.map((tag,key) => <Tag key={key} title={tag} style={"outlined"} /> )}
-    </span>
-  </div>
-
+  <Link href={path} className={ctnClass}>
+    <Image className="h-[340px] rounded-t" priority src={blob} alt={title} width={500} height={400} />
+    <Title title={title} />
+    <Description description={description}/>
+    <Tags tags={tags}/>
   </Link>   
+  )
+}
+
+function Title({ title }) {
+  const titleClass = "text-sm p-2 rounded bg-slate-100 dark:bg-gray-900"
+  return <p className={titleClass}>{title.toUpperCase()}</p>
+}
+
+function Description({ description }) {
+  const style="p-4 text-[12px] h-[90px] overflow-hidden"
+  return <p className={style}>{description}</p>
+}
+
+function Tags({ tags }) {
+  tags = tags.meta.concat(tags.object)
+  return (
+    <div className="flex overflow-hidden m-4">
+      {tags.map((tag,key) => <Tag key={key} title={tag} style={"outlined"} /> )}
+    </div>
   )
 }
 
