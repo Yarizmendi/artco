@@ -16,7 +16,7 @@ function ThemeButton() {
       <span 
         onClick={handleThemeChange}
         className={classNames(
-        "material-symbols-sharp",
+        "material-symbols-outlined",
         "ml-10 cursor-pointer",
         "inline-block text-transparent bg-clip-text",
         "bg-gradient-to-r",
