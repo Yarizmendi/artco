@@ -13,9 +13,9 @@ interface IRootLayout {
 }
 
 const baseNavLinks = [
-  { title: "home", path: "/"},
+  // { title: "home", path: "/"},
   // { title: "about", path: "/about"},
-  { title: "artists", path: "/artists"},
+  { title: "artists", path: "/artists/arizmendi"},
   // { title: "collections", path: "/collections"},
   { title: "showcase", path: "/showcase"}
 ]
@@ -27,7 +27,7 @@ function RootLayout({ children }: IRootLayout ): JSX.Element {
   return (
     <html lang="en">
       <DarkModeProvider>
-        <div className={'h-screen w-screen font-thin ' + darkClasses + ligtClasses}>
+        <div className={'border border-yellow-500 h-screen w-fill font-thin ' + darkClasses + ligtClasses}>
           <Nav links={baseNavLinks} />
           { children }
         </div>

@@ -12,7 +12,7 @@ const iconStyles = {
 }
 
 const styles = {
-  ctn: "flex items-center justify-between tracking-wide text-[12px] p-4 mb-4 dark:bg-slate-950 rounded-lg",
+  ctn: "flex items-center justify-between tracking-wide text-[12px] p-4 dark:bg-slate-950 rounded-lg px-[40px] h-[80px]",
   icon: iconStyles.common + iconStyles.dark + iconStyles.light,
   links: "p-3 font-normal",
 }
@@ -40,7 +40,7 @@ function BaseNav({ links }) {
           </Link> 
         )}
       </div>
-      <div className='ml-4 flex items-center'>
+      <div className='flex items-center'>
 
         <Link href={"/"} className={"text-2xl dark:text-gray-200 tracking-widest" }>The<span className={bggd +" tracking-widest font-normal"}>ART</span><span className='dark:text-gray-400 text-lg'>Company.</span>
         </ Link>
