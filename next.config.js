@@ -17,7 +17,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'qfyy9q32bnwxmali.public.blob.vercel-storage.com',
+      },
+      {
+        protocol: 'https',
+        hostname: `https://static.wixstatic.com`
       }
+
     ],
   },
 }

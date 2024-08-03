@@ -15,14 +15,19 @@ interface IRootLayout {
 const baseNavLinks = [
   { title: "home", path: "/"},
   // { title: "about", path: "/about"},
-  { title: "collections", path: "/collections"}
+  { title: "artists", path: "/artists"},
+  // { title: "collections", path: "/collections"},
+  { title: "showcase", path: "/showcase"}
 ]
+
+const darkClasses = "dark:bg-gray-900 dark:text-gray-300 "
+const ligtClasses = "bg-gray-100 text-black-950 font-semibold "
 
 function RootLayout({ children }: IRootLayout ): JSX.Element {
   return (
     <html lang="en">
       <DarkModeProvider>
-        <div className='dark:bg-gray-900 dark:text-white h-screen w-screen'>
+        <div className={'h-screen w-screen font-thin ' + darkClasses + ligtClasses}>
           <Nav links={baseNavLinks} />
           { children }
         </div>

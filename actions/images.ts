@@ -4,7 +4,7 @@ export const showcaseSketches = {
   futurism: {
     id: 2,
     title: "Uotopic Dreams",
-    path: "sketches/futurism",
+    path: "/artists/arizmendi/collections/sketches/futurism",
     blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
     description: DESCRIPTION,
     tags: {
@@ -15,7 +15,7 @@ export const showcaseSketches = {
   mania: {
     id: 2,
     title: "Uotopic Dreams",
-    path: "sketches/mania",
+    path: "/artists/arizmendi/collections/sketches/mania",
     blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
     description: DESCRIPTION,
     tags: {
@@ -26,7 +26,7 @@ export const showcaseSketches = {
   trips: {
     id: 2,
     title: "Uotopic Dreams",
-    path: "sketches/trips",
+    path: "/artists/arizmendi/collections/sketches/trips",
     blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
     description: DESCRIPTION,
     tags: {
@@ -37,7 +37,7 @@ export const showcaseSketches = {
   oceans: {
     id: 0,
     title: "In Search Of Context",
-    path: "sketches/ocean",
+    path: "/artists/arizmendi/collections/sketches/oceans",
     blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png",
     description: DESCRIPTION,
     tags: {
@@ -48,7 +48,7 @@ export const showcaseSketches = {
   city: {
     id: 1,
     title: "Industrial Oakland",
-    path: "sketches/city",
+    path: "/artists/arizmendi/collections/sketches/city",
     blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/industrial_ocean.jpg",
     description: DESCRIPTION,
     tags: {
@@ -59,7 +59,7 @@ export const showcaseSketches = {
   stem: {
     id: 2,
     title: "Aesthetic Calcukus",
-    path: "sketches/stem",
+    path: "/artists/arizmendi/collections/sketches/stem",
     blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
     description: DESCRIPTION,
     tags: {
