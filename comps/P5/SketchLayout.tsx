@@ -27,7 +27,6 @@ export function SketchLayout({
     <div 
       className={ classNames([
       // redBorder,
-      "h-full w-full font-light",
       "flex flex-col md:flex-row",
     ])}>
 

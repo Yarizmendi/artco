@@ -5,16 +5,15 @@ import { ThemeButton } from './ThemeButton'
 import { getRoutes } from 'actions/routes'
 import { LogoName } from './LogoName'
 
-const routes = await getRoutes("home")
-
-function NavBar() {
+async function NavBar() {
+  const routes = await getRoutes()
   return (
-    <nav className={classNames(
+    <header className={classNames(
       "h-[80px]",
-      "flex justify-between items-center rounded-lg",
-      "dark:bg-slate-950"
+      "flex justify-between items-center",
+      "bg-white dark:bg-slate-950"
     )}>
-      <div className=''>
+      <nav>
         <ThemeButton/>
         {routes.map((link,i)=> 
           <Link 
@@ -23,9 +22,9 @@ function NavBar() {
             className={classNames("uppercase px-4 text-xs")}>
               {link.title}
           </Link>)}
-      </div>
+      </nav>
       <LogoName/>
-    </nav>
+    </header>
   )
 }
 

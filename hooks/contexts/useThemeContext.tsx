@@ -3,8 +3,8 @@
 import { createContext, useState } from 'react'
 
 export const DarkModeContext = createContext({
-    themeClass: 'dark',
-    setThemeClass: null
+  themeClass: 'dark',
+  setThemeClass: null
 })
 
 export function DarkModeProvider({children}) {

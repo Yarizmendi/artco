@@ -1,0 +1,32 @@
+
+/* Icons */
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+
+     * {
+      @apply box-border font-light tracking-widest
+     };
+
+     a {
+      @apply: cursor-pointer text-md
+     };
+
+     p {
+       @apply text-sm
+     };
+
+    .light {
+      @apply bg-gray-100 text-black
+    };
+
+    .dark {
+      @apply bg-slate-900 text-gray-300
+    };
+
+  }

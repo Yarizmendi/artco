@@ -58,7 +58,7 @@ export const showcaseSketches = {
   },
   stem: {
     id: 2,
-    title: "Aesthetic Calcukus",
+    title: "Aesthetic Calculus",
     path: "/artists/arizmendi/collections/sketches/stem",
     blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
     description: DESCRIPTION,
@@ -152,6 +152,10 @@ export async function getDefinedSketches() {
 
 export async function getImages() {
   return images
+}
+
+export async function getShowcaseSketches() {
+  return Object.values(showcaseSketches).reverse()
 }
 
 
