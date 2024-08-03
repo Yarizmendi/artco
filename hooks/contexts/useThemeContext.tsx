@@ -1,6 +1,5 @@
 
 "use client"
-import classNames from 'classnames'
 import { createContext, useState } from 'react'
 
 export const DarkModeContext = createContext({
@@ -8,14 +7,11 @@ export const DarkModeContext = createContext({
     setThemeClass: null
 })
 
-export function DarkModeProvider({ children }) {
-    const [ themeClass, setThemeClass ] = useState( 'dark' )
+export function DarkModeProvider({children}) {
+    const [ themeClass, setThemeClass ] = useState("dark")
     return (
-      <DarkModeContext.Provider value={{ themeClass, setThemeClass }}>
-      <body 
-        className={ classNames( themeClass )}> 
-        { children }
-      </body>
+      <DarkModeContext.Provider value={{themeClass, setThemeClass}}>
+        <body className={themeClass}>{children}</body>
       </DarkModeContext.Provider>
     )
 }
