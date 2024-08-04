@@ -32,10 +32,9 @@ export function Icon( p5: p5Types, icon_class: string, icon_text:string, parent?
 export function Controls( p5, path, parent ) {
     let className = "bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg border p-2"
     let ctn = p5.createDiv()
-    ctn.size( 150 )
-    ctn.position( 20, 20 )
+    ctn.position( 20, 100 )
     ctn.class( className )
-    ctn.parent( parent )
+    ctn.parent( "Parent" )
     ctn.draggable()
   
     let recordBtn = Button( p5, ctn )
