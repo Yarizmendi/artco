@@ -1,75 +1,51 @@
 
-import classNames from "classnames"
-import  { Slider }  from "./Slider"
-import { DESCRIPTION } from "actions/shaders"
+import classnames from "classnames"
+import  { Sliders }  from "./Slider"
+import { ShaderIcons, shaderIcons, ShaderIconsWithLabels } from "./Shader"
 
-const yellowBorder = "border border-yellow-500"
-const redBorder = "border border-red-400"
-const greenBorder = "border border-green-400"
+export const sketchStyles = classnames(
+  "m-2 font-normal",
+  "text-[10px] bg-slate-200 dark:bg-slate-800",
+  "min-w-[40px] min-h-[30px]",
+  "max-w-[60px] max-h-[50px]",
+  "rounded cursor-pointer",
+  "flex justify-between"
+)
 
-export function SketchLayout({
-  parentRef,
+export const sketchTitleClasses = classnames(
+  "px-2 mt-4",
+  "text-[20px]"
+)
+
+export const SketchLayout = ({ props, children }:{ props?:any, children?:any })  => <div className={classnames("")} {...props}>{children}</div>
+
+export const CanvasCtn = ({ parentRef }) => <div className="min-h-full min-w-[350px]" id="Parent" ref={parentRef} />
+
+export const SketchControls = ({ props, children }:{ props?:any, children?:any }) => <div {...props } id={"ctrls"} className={classnames("max-w-[500px]")} >{children}</div>
+
+export const SketchTitle = ({ title }) => <p className={sketchTitleClasses}>{title} sketch</p>
+
+export const DownloadLink = ({}) => <a id="download" className="hidden"/>
+
+export function P5Sketch({
+  title,
   inputs,
-  title
+  parentRef,
 }) {
-  let icons = [
-    <span className="material-symbols-outlined">airwave</span>,
-    <span className="material-symbols-outlined">heat</span>,
-    <span className="material-symbols-outlined">zoom_in_map</span>,
-    <span className="material-symbols-outlined">zoom_out_map</span>,
-    <span className="material-symbols-outlined">360</span>,
-    <span className="material-symbols-outlined">arrow_upward</span>,
-    <span className="material-symbols-outlined">arrow_downward</span>,
-    <span className="material-symbols-outlined">arrow_back</span>,
-    <span className="material-symbols-outlined">arrow_forward</span>,
-  ]
   return (
-    <div 
-      className={ classNames([
-      // redBorder,
-      "flex flex-col md:flex-row",
-    ])}>
-
-      <div 
-        id="Parent" 
-        ref={ parentRef }
-        className={ classNames([ 
-        // greenBorder,
-        "h-3/4 md:h-full",
-        "w-full md:w-8/12",
-        "flex justify-center text-[40px]"
-      ])} />
-
-
-      <div 
-        id="ctrls"
-        className={ classNames([ 
-        // yellowBorder,
-        "h-1/4 md:h-full",
-        "w-full md:w-4/12",
-      ])}>
-
-        <div className="flex mx-4 py-3 border-b">
-          {/* <span className="material-symbols-outlined">share</span> */}
-          <p className="tracking-widest text-sm">{ title } sketch</p>
-        </div>
-
-        { inputs.map((slider, idx ) => <Slider key={ idx } {...slider} /> )}
-
-        <div className="hidden md:flex justify-around items-center mx-6">
-          <p className="text-xs w-1/2 h-[200px] overflow-hidden pt-3">{DESCRIPTION}</p>
-          <div className="flex flex-wrap justify-center w-1/2">
-            { icons.map( icon => 
-                <p className="border rounded-lg cursor-pointer text-[10px] h-[50px] w-[50px] flex justify-center items-center mx-2 mb-2">{ icon }</p>)
-              }
-          </div>
-        </div>
-
-      </div>
-
-      <a id="download" className="hidden"/>
-    </div>
+    <SketchLayout>
+      <CanvasCtn parentRef={parentRef} />
+      <SketchControls>
+        <SketchTitle title={title} />
+        <Sliders sliders={inputs} />
+        {/* <ShaderIcons shaders={shaderIcons} /> */}
+        <ShaderIconsWithLabels shaderIcons={shaderIcons} />
+        <DownloadLink />
+      </SketchControls>
+    </SketchLayout>
   )
 }
+
+
 
 

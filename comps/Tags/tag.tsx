@@ -9,7 +9,7 @@ interface ITagUi {
 }
 
 
-  const colors: string[] = [
+  export const colors: string[] = [
     "green", "blue", "red", "purple", "yellow", "orange", "stone"
   ]
 
