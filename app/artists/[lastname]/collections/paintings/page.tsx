@@ -11,8 +11,3 @@ export default async function Page() {
   )
 }
 
-export { Homepage }
-
-
-
-
