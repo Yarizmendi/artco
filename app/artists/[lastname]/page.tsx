@@ -42,7 +42,7 @@ const artistStyles = {
 }
 
 
-export function ArtistPage({ params }) {
+export default function ArtistPage({ params }) {
 
   const { fullName, lastname, aboutPreview, blob } = artists[0]
 
@@ -71,10 +71,6 @@ export function ArtistPage({ params }) {
           </div>
         </Link> )}
       </div>
-
-
     </div>
   )
 }
-
-export default ArtistPage
