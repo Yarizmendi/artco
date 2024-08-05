@@ -8,8 +8,6 @@ import classnames from "classnames"
 export function RandomBorder (size="m") {
   const randColor = getRandomElement(colors)
   const color = classnames(
-    "h-screen",
-    "flex flex-col",
     `border-${randColor}-500`, {
     "border": size == "s",
     "border-2": size == "m",
@@ -27,6 +25,6 @@ export const boxClass = classnames(
   )
   
 
- export const sliderCmptclass = classnames("flex justify-center items-center")
+ export const flexCenter = classnames("flex justify-center items-center")
 
    
