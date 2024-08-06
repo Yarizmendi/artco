@@ -47,17 +47,17 @@ export function ArtistPage({ params }) {
   const { fullName, lastname, aboutPreview, blob } = artists[0]
 
   return (
-    <div className="flex h-fill">
+    <div className="">
 
-      <div className={ artistStyles.ctn }>
+      {/* <div className={ artistStyles.ctn }>
         <Image className={ artistStyles.image } width={500} height={500} src={blob} alt="artist" />
         <p className={ artistStyles.about }>{ aboutPreview }</p>
         <h3 className={ artistStyles.fullName }>{ fullName }</h3> 
-      </div>
+      </div> */}
 
-      <div className="flex flex-wrap overflow-auto h-fill">
+      <div className="flex">
         { collections.map(({ title, path, blob },key)=>
-        <Link href={ params.lastname + path } className={"h-fit mr-4"} key={key}>
+        <Link href={ params.lastname + path } className={"h-fit m-4"} key={key}>
         <Image 
           priority 
           src={blob} 

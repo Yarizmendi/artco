@@ -4,15 +4,19 @@ import classNames from 'classnames'
 
 export function LogoName() {
     return (
-      <Link href={"/"} className={classNames("text-3xl font-light mr-10")}>The
+      <Link href={"/"} className={classNames("text-3xl font-light mr-10 tracking-widde")}>
+         the
         <span 
          className={classNames(
          "font-normal text-3xl",
          "inline-block text-transparent bg-clip-text",
          "bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400",
-         )}> ART
+         )}> 
+          art
         </span>
-        <span className={classNames("dark:text-gray-400 text-2xl")}>Company</span>
+        <span className={classNames("dark:text-gray-400 text-2xl tracking-wide")}>
+          Co.
+        </span>
       </Link>
     )
   }

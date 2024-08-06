@@ -30,9 +30,9 @@ export function Icon( p5: p5Types, icon_class: string, icon_text:string, parent?
   }
 
 export function Controls( p5, path, parent ) {
-    let className = "bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg border p-2"
+    let className = "bg-stone bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg p-2"
     let ctn = p5.createDiv()
-    ctn.position( 20, 100 )
+    ctn.position( 0, 80 )
     ctn.class( className )
     ctn.parent( "Parent" )
     ctn.draggable()

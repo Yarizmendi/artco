@@ -4,7 +4,7 @@ import p5Types from "p5"
 import InitP5 from "@/p5/Instance"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
-import { SketchLayout } from "@/p5/SketchLayout"
+import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
 
 const vert = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert"
@@ -171,7 +171,7 @@ export default function PathSKetch({
 
   }
   
-  return <SketchLayout parentRef={parentRef} inputs={inputs} title={ title }/>
+  return <P5Sketch parentRef={parentRef} inputs={inputs} title={ title }/>
 }
 
 
