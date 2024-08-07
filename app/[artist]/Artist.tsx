@@ -3,9 +3,9 @@ import Image from "next/image"
 import { DESCRIPTION } from "actions/shaders"
 
 const collections = [
-  { title: "sketches", id: 0, path: "/collections/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png" },
-  { title: "prints", id: 1, path: "/collections/prints", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
-  { title: "paintings", id: 2, path: "/collections/paintings", blob: "/alice_falls.webp" },
+  { title: "sketches", id: 0, path: "/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png" },
+  { title: "prints", id: 1, path: "/prints", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
+  { title: "paintings", id: 2, path: "/paintings", blob: "/alice_falls.webp" },
 ]
 
 const abt = `a visual artist residing in Oakland, California. Influenced by abstract expressionism, photography and digital media, Arizmendi uses color and composition in various forms to explore human consciousness and subjectivity.  The purpose of art, for Arizmendi, is to freely explore and express the internal world of the mind in its various emotional, intellectual, and spiritual modalities.`
@@ -54,7 +54,7 @@ export function ArtistPage({ params }) {
       </div> */}
       {/* <div className="flex w-4/5 h-[500px]"> */}
       { collections.map(({ title, path, blob },key)=>
-      <Link href={ params.lastname + path } className={"p-2 m-2"} key={key}>
+      <Link href={ params.artist + path } className={"p-2 m-2"} key={key}>
       <Image 
         priority 
         src={blob} 

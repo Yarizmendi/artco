@@ -1,6 +1,5 @@
 
 const baseNavLinks = [
-    { title: "home", path: "/"},
     { title: "arizmendi", path: `/${"arizmendi"}`},
     { title: "showcase", path: `/${"arizmendi"}/sketches`},
   ]

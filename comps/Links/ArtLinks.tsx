@@ -9,12 +9,12 @@ export default function Painting({ title, blob, path  }) {
     href={ `${"arizmendi"}/sketches/${ path }` }
     className="hover:scale-110 transform duration-400 ease-in-out cursor-pointer p-4">
     <Image 
-      priority
       src={ blob } 
       alt={ title } 
-      width={ 500 }
-      height={ 500 }
-      className="max-w-[150px] h-[160px] rounded"  />
+      width={ 300 }
+      height={ 300 }
+      quality={ 100 }
+      className="w-[300px] h-[300px] md:w-[200px] md:h-[220px] rounded"  />
       <p className=" p-1 max-w-[150px] tracking-widest text-xs">{ title }</p>
   </Link>   
   )

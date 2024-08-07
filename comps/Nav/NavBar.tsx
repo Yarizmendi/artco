@@ -9,21 +9,21 @@ async function NavBar() {
   const routes = await getRoutes()
   return (
     <header className={classNames(
-      "p-[20px]",
-      "flex justify-between items-center",
+      "h-[80px] px-[40px] py-2 tracking-widest",
+      "flex flex-col justify-between items-center md:flex-row",
       "bg-slate-200 dark:bg-slate-950 rounded"
     )}>
-      <nav>
+      <div className='flex items-center'>
         <ThemeButton/>
-        {routes.map((link,i)=> 
-          <Link 
-            key={i}
-            href={link.path} 
-            className={classNames("uppercase px-4 text-xs")}>
-              {link.title}
-          </Link>)}
+        <LogoName/>
+      </div>
+      <nav className='flex justify-center items-center'>
+        { routes.map((link,i)=> 
+          <Link key={i} href={link.path} className={classNames("uppercase text-xs m-2")}>
+            {link.title}
+          </Link>
+        )}
       </nav>
-      <LogoName/>
     </header>
   )
 }

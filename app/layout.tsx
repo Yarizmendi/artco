@@ -17,7 +17,7 @@ function RootLayout({ children }: IRootLayout ): JSX.Element {
       <DarkModeProvider>
         <NavBar/>
         {children}
-        <footer className="bg-slate-200 dark:bg-slate-950 rounded p-[30px]" />
+        <footer className="bg-slate-200 dark:bg-slate-950 h-[80px]" />
       </DarkModeProvider>
     </html>
   )

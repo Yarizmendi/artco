@@ -10,7 +10,7 @@
 @layer base {
 
      * {
-      @apply box-border font-normal tracking-widest
+      @apply box-border font-normal 
      };
 
      a {
