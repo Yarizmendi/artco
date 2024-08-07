@@ -1,12 +1,17 @@
 
-import { getShowcaseSketches } from "actions/images"
-import { SketchLink } from "@/comps/Links/SketchLink"
+import { getImages } from "actions/images"
+import ArtLink from "@/comps/Links/ArtLinks"
 
-export default async function Home() {
-  const showcases = await getShowcaseSketches()
+export default async function Homepage() {
+  const images = await getImages()
   return (
-    <div className="w-full max-h-[560px] flex flex-wrap overflow-auto">
-      {showcases.map((img, idx) => <SketchLink key={idx} {...img} />)}
+    <div className="max-w-[1200px] h-[450px] flex flex-wrap justify-center items-center overflow-auto">
+      {images.map((img, idx) => <ArtLink key={idx} {...img} />)}
     </div>
   )
 }
+
+
+
+
+

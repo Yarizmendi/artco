@@ -163,7 +163,7 @@ export default function PathSKetch({
           if ( isPlaying ) isPlaying = false
           Overlay.playBtnLabel.html("play")
           Overlay.recordBtnLabel.html("record")
-          Overlay.recordBtn.addClass("")
+          Overlay.recordBtn.removeClass("text-red-500")
           MediaRecorder.stop()
         }
       })
