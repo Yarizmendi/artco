@@ -23,23 +23,23 @@ export const shaderIconWithLabelStyle = classNames(
     "flex flex-col items-center justify-center"
 )
 
-export const shaderIcons: ReactElement[] = [
-    <span className="material-symbols-outlined">airwave</span>,
-    <span className="material-symbols-outlined">heat</span>,
-    <span className="material-symbols-outlined">zoom_in_map</span>,
-    <span className="material-symbols-outlined">zoom_out_map</span>,
-    <span className="material-symbols-outlined">360</span>,
+// export const shaderIcons: any[] = [
+  // { title: "heat", label: "waves"}
+    // <span className="material-symbols-outlined">airwave</span>,
+    // <span className="material-symbols-outlined">zoom_in_map</span>,
+    // <span className="material-symbols-outlined">zoom_out_map</span>,
+    // <span className="material-symbols-outlined">360</span>,
     // <span className="material-symbols-outlined">arrow_upward</span>,
-    <span className="material-symbols-outlined">arrow_downward</span>,
-    <span className="material-symbols-outlined">arrow_back</span>,
-    <span className="material-symbols-outlined">arrow_forward</span>,
-    <span className="material-symbols-outlined">arrow_forward</span>,
-]
+    // <span className="material-symbols-outlined">arrow_downward</span>,
+    // <span className="material-symbols-outlined">arrow_back</span>,
+    // <span className="material-symbols-outlined">arrow_forward</span>,
+    // <span className="material-symbols-outlined">arrow_forward</span>,
+// ]
 
-export const ShaderIconWithLabel = ({icon}) =>
+export const ShaderIconWithLabel = ({ icon, label }) =>
  <div className={shaderIconWithLabelStyle}>
-  {icon}
-  <p>{ "label" }</p>
+  <span className="material-symbols-outlined">{ icon }</span>
+  <p>{label}</p>
 </div>
 
 export const ShaderIcon = 
@@ -55,7 +55,7 @@ export const ShaderIcons =
 </div>
 
 const shadersIconStyle = "h-full flex flex-col flex-wrap font-bold bg-slate-300 dark:bg-slate-950"
-export const ShaderIconsWithLabels = ({ shaderIcons }) => 
+export const ShaderIconsWithLabels = ({ shaders }) => 
 <div className={shadersIconStyle}>
-  { shaderIcons.map((icon,i) => <ShaderIconWithLabel key={i} icon={icon} /> )}
+  { shaders.map((shader,i) => <ShaderIconWithLabel key={i} {...shader } /> )}
 </div>

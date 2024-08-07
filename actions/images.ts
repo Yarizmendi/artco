@@ -127,6 +127,7 @@ const imagesBySketch = {
     { title: "reconfiguring_formality", id: 14, path: "reconfiguring_formality.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/reconfiguring_formality.jpg" },
     { title: "sid", id: 17, path: "sid.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sid.jpg" },
   ],
+  new: []
 }
 
 const noisesBySketch = {

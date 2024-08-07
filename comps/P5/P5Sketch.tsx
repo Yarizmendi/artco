@@ -1,7 +1,7 @@
 
 import classnames from "classnames"
 import  { Sliders }  from "./Slider"
-import { shaderIcons, ShaderIconsWithLabels } from "./Shader"
+import { ShaderIconsWithLabels } from "./Shader"
 import { DESCRIPTION } from "actions/shaders"
 
 
@@ -21,10 +21,11 @@ export const CanvasCtn = ({ parentRef }) => <div className={canvas} id="Parent" 
 const controls = classnames("flex md:w-1/2")
 export const SketchControls = ({ props, children }:{ props?:any, children?:any }) => <div {...props } id={"ctrls"} className={controls}>{children}</div>
 
-const titleClass = classnames("text-[20px] uppercase mx-4 ml-4 md:mt-4")
+const titleClass = classnames("text-[20px] uppercase mx-4 md:mt-4")
 export const SketchTitle = ({ title }) => <p className={titleClass}>{title} sketch</p>
 
 export const DownloadLink = ({}) => <a id="download" className="hidden"/>
+const fileInputClass = classnames("flex text-md w-fit mx-6 md:mt-4")
 
 export function P5Sketch({
   title,
@@ -35,11 +36,12 @@ export function P5Sketch({
     <SketchLayout>
       <CanvasCtn parentRef={parentRef} />
       <SketchControls>
-        <ShaderIconsWithLabels shaderIcons={shaderIcons} />
+        <ShaderIconsWithLabels shaders={inputs} />
         <div>
           <SketchTitle title={title} />
           <p className="p-4 text-sm">{DESCRIPTION}</p>
           <Sliders sliders={inputs} />
+          <span id="files" className={fileInputClass} />
         </div>
       </SketchControls>
       <DownloadLink />
