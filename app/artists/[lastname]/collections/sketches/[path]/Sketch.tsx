@@ -88,7 +88,7 @@ export default function PathSKetch({
 
       noises && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
       
-      p.shader(ActiveShader)
+    p.shader(ActiveShader)
       p.rect(0,0,0)
     }
     
@@ -163,7 +163,7 @@ export default function PathSKetch({
           if ( isPlaying ) isPlaying = false
           Overlay.playBtnLabel.html("play")
           Overlay.recordBtnLabel.html("record")
-          Overlay.recordBtn.addClass("text-black")
+          Overlay.recordBtn.addClass("")
           MediaRecorder.stop()
         }
       })

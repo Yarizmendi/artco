@@ -54,7 +54,7 @@ export const ShaderIcons =
   { shaders.map((shader,i)=><ShaderIcon key={i} iconClassname={shader}/> )}
 </div>
 
-const shadersIconStyle = ""
+const shadersIconStyle = "h-full flex flex-col flex-wrap font-bold bg-slate-300 dark:bg-slate-950"
 export const ShaderIconsWithLabels = ({ shaderIcons }) => 
 <div className={shadersIconStyle}>
   { shaderIcons.map((icon,i) => <ShaderIconWithLabel key={i} icon={icon} /> )}

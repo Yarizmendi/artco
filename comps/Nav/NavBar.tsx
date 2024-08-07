@@ -11,7 +11,7 @@ async function NavBar() {
     <header className={classNames(
       "h-[80px]",
       "flex justify-between items-center",
-      "bg-white dark:bg-slate-950"
+      "bg-slate-200 dark:bg-slate-950 rounded"
     )}>
       <nav>
         <ThemeButton/>
