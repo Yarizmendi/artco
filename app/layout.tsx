@@ -13,12 +13,11 @@ interface IRootLayout {
 
 function RootLayout({ children }: IRootLayout ): JSX.Element {
   return (
-    <html lang="en" className="h-screen w-screen">
+    <html lang="en">
       <DarkModeProvider>
         <NavBar/>
-        <main>
-          {children}
-        </main>
+        {children}
+        <footer className="bg-slate-200 dark:bg-slate-950 rounded p-[30px]" />
       </DarkModeProvider>
     </html>
   )

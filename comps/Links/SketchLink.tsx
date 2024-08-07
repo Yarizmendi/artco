@@ -14,10 +14,10 @@ interface ISketchLink {
 
 function SketchLink({ title, blob, path, tags, description  }: ISketchLink ) {
   title = rmUnderScores(title)
-  const ctnClass="m-4 min-w-[300px] max-w-[400px] bg-gray-200 dark:bg-slate-950"
+  const ctnClass="w-[300px] m-4 bg-gray-200 dark:bg-slate-950"
   return (
   <Link href={path} className={ctnClass}>
-    <Image className="h-[340px] rounded-t" priority src={blob} alt={title} width={500} height={400} />
+    <Image className="h-[280px] rounded-t" priority src={blob} alt={title} width={500} height={400} />
     <Title title={title} />
     <Description description={description}/>
     <Tags tags={tags}/>
@@ -26,7 +26,7 @@ function SketchLink({ title, blob, path, tags, description  }: ISketchLink ) {
 }
 
 function Title({ title }) {
-  const titleClass = "text-sm p-2 rounded"
+  const titleClass = "text-sm p-4"
   return <p className={titleClass}>{title.toUpperCase()}</p>
 }
 

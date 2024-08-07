@@ -5,8 +5,10 @@ import ArtLink from "@/comps/Links/ArtLinks"
 export default async function Homepage() {
   const images = await getImages()
   return (
-    <div className="max-w-[1200px] h-[450px] flex flex-wrap justify-center items-center overflow-auto">
-      {images.map((img, idx) => <ArtLink key={idx} {...img} />)}
+    <div className="flex items-center grow">
+      <div className="h-[420px] flex flex-wrap justify-center overflow-auto">
+        {images.map((img, idx) => <ArtLink key={idx} {...img} />)}
+      </div>
     </div>
   )
 }
