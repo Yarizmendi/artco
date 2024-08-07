@@ -15,13 +15,13 @@ const sketchLayout = classnames(
 )
 export const SketchLayout = ({ props, children }:{ props?:any, children?:any })  => <div className={sketchLayout} {...props}>{children}</div>
 
-const canvas = classnames("min-h-[500px] w-full md:w-1/2 md:h-full ")
+const canvas = classnames("min-h-[550px] w-full md:w-1/2 md:h-full flex justify-center text-[30px]")
 export const CanvasCtn = ({ parentRef }) => <div className={canvas} id="Parent" ref={parentRef} />
 
 const controls = classnames("flex md:w-1/2")
 export const SketchControls = ({ props, children }:{ props?:any, children?:any }) => <div {...props } id={"ctrls"} className={controls}>{children}</div>
 
-const titleClass = classnames("text-[20px] uppercase mx-4 ml-4 mt-4")
+const titleClass = classnames("text-[20px] uppercase mx-4 ml-4 md:mt-4")
 export const SketchTitle = ({ title }) => <p className={titleClass}>{title} sketch</p>
 
 export const DownloadLink = ({}) => <a id="download" className="hidden"/>

@@ -31,14 +31,14 @@ function Title({ title }) {
 }
 
 function Description({ description }) {
-  const style="mx-4 text-[12px] h-[90px] overflow-hidden"
+  const style="px-4 text-[12px] h-[90px] overflow-hidden"
   return <p className={style}>{description}</p>
 }
 
 function Tags({ tags }) {
   tags = tags.meta.concat(tags.object)
   return (
-    <div className="flex overflow-hidden m-4">
+    <div className="flex overflow-hidden my-2 p-1">
       {tags.map((tag,key) => <Tag key={key} title={tag} style={"outlined"} /> )}
     </div>
   )

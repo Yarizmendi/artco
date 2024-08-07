@@ -30,7 +30,7 @@ export function Icon( p5: p5Types, icon_class: string, icon_text:string, parent?
   }
 
 export function Controls( p5, path, parent ) {
-    let className = "bg-stone-200 bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg p-4 text-white"  
+    let className = "bg-stone-200 bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg px-4 py-2 text-white"  
     let ctn = p5.createDiv()
     ctn.position( 10, 90 )
     ctn.class( className )
