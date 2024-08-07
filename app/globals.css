@@ -10,7 +10,7 @@
 @layer base {
 
      * {
-      @apply box-border font-light tracking-widest
+      @apply box-border font-semibold tracking-widest
      };
 
      a {
@@ -20,10 +20,6 @@
      p {
        @apply text-sm
      };
-
-    .light {
-      @apply bg-gray-100 text-black
-    };
 
     .dark {
       @apply bg-slate-900 text-gray-300

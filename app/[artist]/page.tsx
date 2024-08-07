@@ -35,10 +35,9 @@ const artists = [
 ]
 
 const artistStyles = {
-  ctn: "flex flex-col w-[300px] bg-slate-950" ,
+  ctn: "flex flex-col w-[300px]" ,
   image: " h-[250px] w-[300px] rounded-t ",
-  about: " text-sm dark:bg-slate-950 bg-gray-200 p-4 max-h-5/6 overflow-hidden ",
-  fullName: " tracking-widest text-sm font-medium h-[35px] flex items-end justify-end p-2 ",
+  about: "border-2 border-blue-500 h-full overflow-hidden text-sm",
 }
 
 
@@ -47,31 +46,39 @@ export default async function ArtistPage({ params }) {
   const { fullName, lastname, aboutPreview, blob } = artists[0]
 
   return (
-    <div className="">
+    <div className="border">
 
-      {/* <div className={ artistStyles.ctn }>
-        <Image className={ artistStyles.image } width={500} height={500} src={blob} alt="artist" />
-        <p className={ artistStyles.about }>{ aboutPreview }</p>
-        <h3 className={ artistStyles.fullName }>{ fullName }</h3> 
-      </div> */}
+        <p className="w-1/3 h-5/6 flex overflow-hidden">{ artists[0].aboutPreview }</p>
+    
 
-      <div className="flex">
-        { collections.map(({ title, path, blob },key)=>
-        <Link href={ params.artist + path } className={"h-fit m-4"} key={key}>
-        <Image 
-          priority 
-          src={blob} 
-          alt={title} 
-          width={600} 
-          height={500}
-          className={"max-w-[350px] h-[350px]"}
-          />
-          <div className="w-full dark:bg-slate-950 bg-gray-300 p-2">
-            <p className="text-3xl">{title.toUpperCase()}</p>
-          </div>
-        </Link> )}
-      </div>
     </div>
   )
 }
 
+/*
+
+      <div className={ artistStyles.ctn }>
+        <Image className={ artistStyles.image } width={500} height={500} src={blob} alt="artist" />
+        <p className={ artistStyles.about }>{ aboutPreview }</p>
+        {/* <h3 className={ artistStyles.fullName }>{ fullName }</h3>  
+        </div> 
+
+        <div className="flex">
+          { collections.map(({ title, path, blob },key)=>
+          <Link href={ params.artist + path } className={"h-fit m-4"} key={key}>
+          <Image 
+            priority 
+            src={blob} 
+            alt={title} 
+            width={600} 
+            height={500}
+            className={"max-w-[350px] h-[350px]"}
+            />
+            <div className="w-full dark:bg-slate-950 bg-gray-300 p-2">
+              <p className="text-3xl">{title.toUpperCase()}</p>
+            </div>
+          </Link> )}
+        </div>
+
+
+*/
