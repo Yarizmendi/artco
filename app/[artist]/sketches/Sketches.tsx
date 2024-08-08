@@ -4,7 +4,7 @@ import { SketchLink } from "@/comps/Links/SketchLink"
 import { ICONS_FILL, ICONS_OUTLINE } from "@/p5/Controls"
 import Link from "next/link"
 
-const showcases = await Object.values(showcaseSketches).reverse()
+const showcases = await Object.values(showcaseSketches)
 
 export default function Sketches() {
   return (

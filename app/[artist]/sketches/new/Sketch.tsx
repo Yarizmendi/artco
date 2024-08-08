@@ -37,8 +37,9 @@ export default function PathSKetch({
   useEffect(() => { 
     if ( isMounted ) {
       if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
-      else return mp5.remove() 
+      else mp5.remove() 
   }}, [ isMounted ]) 
+
 
   function sketch( p: p5Types ) {
 
@@ -57,13 +58,13 @@ export default function PathSKetch({
         noise["Noise"] = p.loadImage( noise.blob )
       })  
       
-      images.map( img => {
+      images && images.map( img => {
         if(!img["Image"]) img["Image"] = p.loadImage( img.blob )
       })
 
-      shaders.map( shader => {
-        // shader["Shader"] = p.loadShader( vert, shader.frag ) 
-        shader["Shader"] = p.loadShader( vert, `/new.frag` ) 
+      shaders && shaders.map( shader => {
+        p.loadShader( vert, `/new.frag` ) 
+        // else p.loadShader( vert, shader.frag ) 
       })
 
     }
@@ -173,6 +174,20 @@ export default function PathSKetch({
           MediaRecorder.stop()
         }
       })
+
+      Overlay.resetBtn.mouseClicked(() => {
+        isPlaying = false
+        drawPlayTimer = 0
+        drawPauseTimer = 0
+        Overlay.playBtnLabel.html("play")
+        Overlay.recordBtnLabel.html("record")
+        // setTimeout( replay, 500 )
+      })
+
+    }
+
+    function replay() {
+      document.getElementById("playbtn").click()
     }
 
     // Create an image if the file is an image.
@@ -181,7 +196,7 @@ export default function PathSKetch({
         inptImg = p.createImg(file.data, 'new');
         inptImg.hide()
         let imgObj = { title: "red_ocean", id: 0, "Image": inptImg }
-        images.push(imgObj)
+        images = [imgObj]
 
       }
     }

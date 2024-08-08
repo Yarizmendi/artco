@@ -144,7 +144,6 @@ const shadersBySketch = {
       id: 4,
       title: "new",
       frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/new.frag",
-      // transitions: true,
       timers: [
         { id: 0, type: "timer", uniform: "u_time" }
       ],
@@ -159,7 +158,7 @@ const shadersBySketch = {
           label: "waves",
           uniform: "u_waves",
           description: DESCRIPTION,
-          settings: { min: 0, max: 100, value: 1, step: 1 },
+          settings: { min: 0, max: 100, value: 15, step: 1 },
           
         },
         {  
@@ -169,9 +168,45 @@ const shadersBySketch = {
             label: "zoom",
             uniform: "u_zoom_in",
             description: DESCRIPTION,
-            settings: { min: 0, max: 100, value: 0, step: 1 },
+            settings: { min: 0, max: 1000, value: 1000, step: 1 },
           },
     ],
+  }],
+
+  "aqua" : [{
+    id: 4,
+    title: "aqua",
+    frag: "/new.frag",
+    shaders: [
+      {}
+    ],
+    timers: [
+      { id: 0, type: "timer", uniform: "u_time" }
+    ],
+    textures: [
+      { id: 0, type: "texture", uniform: "u_texture" }
+    ],
+    inputs: [
+      {  
+        id: 0,
+        icon: "heat",
+        type: "slider",
+        label: "waves",
+        uniform: "u_waves",
+        description: DESCRIPTION,
+        settings: { min: 0, max: 100, value: 16, step: 1 },
+        
+      },
+      {  
+          id: 1,
+          icon: "zoom_in_map",
+          type: "slider",
+          label: "zoom",
+          uniform: "u_zoom_in",
+          description: DESCRIPTION,
+          settings: { min: 0, max: 100, value: 100, step: 1 },
+        },
+  ],
   }],
 
 }

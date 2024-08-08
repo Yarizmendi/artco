@@ -32,7 +32,7 @@ export function Icon( p5: p5Types, icon_class: string, icon_text:string, parent?
 export function Controls( p5, path, parent ) {
     let className = "bg-stone-200 bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg px-4 py-2 text-white"  
     let ctn = p5.createDiv()
-    ctn.position( 40, 90 )
+    ctn.position( 20, 90 )
     ctn.class( className )
     ctn.parent( "Parent" )
     ctn.draggable()
@@ -41,9 +41,13 @@ export function Controls( p5, path, parent ) {
     Icon( p5, ICONS_OUTLINE, RECORD_ICON_TEXT, recordBtn )
     let recordBtnP = Paragraph( p5, "record", recordBtn )
   
-    let playBtn = Button( p5, ctn )
+    let playBtn = Button( p5, ctn ).id("playbtn")
     Icon( p5, ICONS_OUTLINE, PLAY_ICON_TEXT, playBtn )
     let playBtnP = Paragraph( p5, "play", playBtn )
+
+    let resetBtn = Button( p5, ctn )
+    Icon( p5, ICONS_OUTLINE, "reset_settings", resetBtn )
+    let resetBtnP = Paragraph( p5, "reset", resetBtn )
   
     let sketchTime = Paragraph( p5, "0 seconds", ctn )
 
@@ -54,7 +58,9 @@ export function Controls( p5, path, parent ) {
       playBtn: playBtn,
       playBtnLabel: playBtnP,
       playBtnP: playBtn,
-      sketchTime: sketchTime
+      sketchTime: sketchTime,
+      resetBtn: resetBtn,
+      resetBtnLabel: resetBtnP
     }
   
     return res

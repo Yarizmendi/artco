@@ -1,39 +1,28 @@
 import { DESCRIPTION, TITLE } from "./shaders"
 
 export const showcaseSketches = {
-  futurism: {
+  aqua: {
     id: 2,
-    title: "Uotopic Dreams",
-    path: "sketches/futurism",
-    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
+    title: "aqua",
+    path: "sketches/aqua",
+    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/gemstone_cliff.jpg",
     description: DESCRIPTION,
     tags: {
       object: ["science", "chemistry", "physics", "engineering"],
       meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
     }
   },
-  mania: {
-    id: 2,
-    title: "Uotopic Dreams",
-    path: "sketches/mania",
-    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
-    description: DESCRIPTION,
-    tags: {
-      object: ["science", "chemistry", "physics", "engineering"],
-      meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
-    }
-  },
-  trips: {
-    id: 2,
-    title: "Uotopic Dreams",
-    path: "sketches/trips",
-    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
-    description: DESCRIPTION,
-    tags: {
-      object: ["science", "chemistry", "physics", "engineering"],
-      meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
-    }
-  },
+  // new: {
+  //   id: 2,
+  //   title: "new",
+  //   path: "sketches/new",
+  //   blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/window.jpg",
+  //   description: DESCRIPTION,
+  //   tags: {
+  //     object: ["science", "chemistry", "physics", "engineering"],
+  //     meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
+  //   }
+  // },
   oceans: {
     id: 0,
     title: "In Search Of Context",
@@ -68,9 +57,6 @@ export const showcaseSketches = {
     }
   },
 }
-
-  
-
 
 const images = [
   { title: "red_ocean", id: 0, path: "red_ocean.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
@@ -127,11 +113,17 @@ const imagesBySketch = {
     { title: "reconfiguring_formality", id: 14, path: "reconfiguring_formality.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/reconfiguring_formality.jpg" },
     { title: "sid", id: 17, path: "sid.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sid.jpg" },
   ],
-  new: []
+  new: [
+    { title: "example", id: 17, path: "/alice_falls.webp", blob: "/alice_falls.webp"},
+  ],
+  aqua: [
+    { title: "aqua", id: 17,  path: "gemstone_cliff.jpg",  blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/gemstone_cliff.jpg"},
+  ]
 }
 
 const noisesBySketch = {
   stem: [{ id: 0, title: "perlin", uniform: "u_noise", path: "perlin.png", blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png" }]
+  
 }
 
 

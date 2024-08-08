@@ -17,7 +17,7 @@ function SketchLink({ title, blob, path, tags, description  }: ISketchLink ) {
   const ctnClass="w-[300px] m-4 bg-gray-200 dark:bg-slate-950"
   return (
   <Link href={path} className={ctnClass}>
-    <Image className="h-[280px] rounded-t" src={blob} alt={title} width={300} height={300} />
+    <Image className="h-[280px] rounded-t" src={blob} alt={title} width={500} height={500} />
     <Title title={title} />
     <Description description={description}/>
     <Tags tags={tags}/>

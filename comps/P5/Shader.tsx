@@ -1,7 +1,4 @@
-import classnames from "classnames"
 import classNames from "classnames"
-import { ReactElement } from "react"
-import { RandomBorder } from "./utils"
 
 export const shaderIconStyle = classNames(
     "m-2",
@@ -55,7 +52,9 @@ export const ShaderIcons =
 </div>
 
 const shadersIconStyle = "h-full flex flex-col flex-wrap font-bold bg-slate-300 dark:bg-slate-950"
-export const ShaderIconsWithLabels = ({ shaders }) => 
+export const ShaderIconsWithLabels = ({ 
+  shaders
+}) => 
 <div className={shadersIconStyle}>
   { shaders.map((shader,i) => <ShaderIconWithLabel key={i} {...shader } /> )}
 </div>

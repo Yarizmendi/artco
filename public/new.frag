@@ -11,7 +11,7 @@ float time;
 vec4 color;
 
 mat2 scale(vec2 _scale) {
-  return mat2( _scale.x, 0.0, 0.0, _scale.y );
+  return mat2( _scale.x, 0.0, _scale.y, 1.0 );
 }
 
 vec2 rollingWaves( vec2 pos ) {
@@ -27,7 +27,9 @@ void main () {
   vec2 pos = vTexCoord;
 
   pos = increasingWaves( pos );
-  // pos = rollingWaves( pos );
+  pos = rollingWaves( pos );
+  pos = fract(pos);/
+
 
   color = texture2D( u_texture, pos );
   gl_FragColor = vec4( color );
