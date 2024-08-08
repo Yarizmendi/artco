@@ -28,7 +28,7 @@ void main () {
 
   pos = increasingWaves( pos );
   pos = rollingWaves( pos );
-  pos = fract(pos);/
+  pos = fract(pos);
 
 
   color = texture2D( u_texture, pos );

@@ -1,5 +1,5 @@
 
-import { showcaseSketches } from "actions/images"
+import { showcaseSketches } from "@/api/images/images"
 import { SketchLink } from "@/comps/Links/SketchLink"
 import { ICONS_FILL, ICONS_OUTLINE } from "@/p5/Controls"
 import Link from "next/link"

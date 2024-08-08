@@ -1,5 +1,5 @@
 
-import Sketch from "./Sketch"
+import Sketch from "../../../../comps/pages/NewSketch"
 import { getSketchData } from "actions/sketches"
 
 export default async function Page({ params }) {

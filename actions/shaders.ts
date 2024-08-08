@@ -143,7 +143,7 @@ const shadersBySketch = {
     "new" : [{
       id: 4,
       title: "new",
-      frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/new.frag",
+      frag: "/new.frag",
       timers: [
         { id: 0, type: "timer", uniform: "u_time" }
       ],
@@ -178,7 +178,7 @@ const shadersBySketch = {
     title: "aqua",
     frag: "/new.frag",
     shaders: [
-      {}
+    
     ],
     timers: [
       { id: 0, type: "timer", uniform: "u_time" }

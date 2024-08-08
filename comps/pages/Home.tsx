@@ -1,4 +1,4 @@
-import { getImages } from "actions/images"
+import { getImages } from "@/api/images/images"
 import ArtLink from "@/comps/Links/ArtLinks"
 
 const images = await getImages()

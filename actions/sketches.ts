@@ -1,5 +1,5 @@
 
-import { getImagesBySketch, getNoisesBySketch } from "./images"
+import { getImagesBySketch, getNoisesBySketch } from "../app/api/images/images"
 import { DESCRIPTION, getShadersBySketch, ID } from "./shaders"
 
 export async function getSketchData( title ) {
@@ -9,16 +9,12 @@ export async function getSketchData( title ) {
 
     const sketch = {
         id: ID,
-        images: [],
-        noises: [],
-        shaders: [],
+        images: images,
+        noises: noises,
+        shaders: shaders,
         title: title,
         description: DESCRIPTION,
     }
-
-    sketch["images"] = images
-    sketch["noises"] = noises
-    sketch["shaders"] = shaders
     
     return sketch
 }

@@ -63,8 +63,7 @@ export default function PathSKetch({
       })
 
       shaders && shaders.map( shader => {
-        p.loadShader( vert, `/new.frag` ) 
-        // else p.loadShader( vert, shader.frag ) 
+        if(!shader["Shader"]) shader["Shader"] = p.loadShader( vert, shader.frag )
       })
 
     }
