@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
-import { shadersBySketch } from "./shaders"
+import { getShaderInputsBySketch } from "./shader_inputs"
 
 export async function GET({ id }) {
-    const shaders = shadersBySketch[ id ] || shadersBySketch.image
+    const shaders = getShaderInputsBySketch(id)
     return NextResponse.json( shaders );
 }
 

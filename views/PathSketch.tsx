@@ -193,7 +193,7 @@ export default function PathSKetch({
     }
   }
 
-  return <P5Sketch parentRef={parentRef} shaders={shaders} title={ title }/>
+  return <P5Sketch parentRef={parentRef} shaders={shaders} title={ displayName }/>
 }
 
 

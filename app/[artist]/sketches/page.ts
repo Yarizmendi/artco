@@ -1,3 +1,3 @@
 
-import Sketches from "../../../comps/pages/Sketches"
+import Sketches from "../../../views/Sketches"
 export default Sketches

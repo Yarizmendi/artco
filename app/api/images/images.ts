@@ -86,9 +86,6 @@ const images = [
   { title: "polluted_ocean", id: 35, path: "polluted_ocean.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/polluted_ocean.jpg" },
 ]
 
-const noises = [
-  { id: 0, title: "perlin", path: "perlin.png", blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png" }
-]
 
 const imagesBySketch = {
   oceans : [
@@ -122,11 +119,6 @@ const imagesBySketch = {
   ]
 }
 
-const noisesBySketch = {
-  stem: [{ id: 0, title: "perlin", uniform: "u_noise", path: "perlin.png", blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png" }]
-  
-}
-
 
 export async function getImagesBySketch( title ) {
   const imgs = [
@@ -135,14 +127,6 @@ export async function getImagesBySketch( title ) {
   return imagesBySketch[ title ] || imgs
 }
 
-
-export async function getNoisesBySketch( title ) {
-  return noisesBySketch[ title ]
-}
-
-export async function getDefinedSketches() {
-  return Object.keys( imagesBySketch )
-}
 
 export async function getImages() {
   return images

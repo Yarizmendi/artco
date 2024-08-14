@@ -1,3 +1,3 @@
 
-import Home from "../../../comps/pages/Home"
+import Home from "../../../views/Home"
 export default Home

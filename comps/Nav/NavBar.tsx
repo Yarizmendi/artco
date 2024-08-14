@@ -19,10 +19,11 @@ async function NavBar() {
         <LogoName/>
       </div>
       <nav className='flex justify-center items-center'>
-      <Link href={`/${'arizmendi'}`} className={classNames("flex mx-2")}>
-        <span className={ICONS_OUTLINE}>home</span>
-      </Link>
-  
+
+        {/* <Link href={`/`} className={classNames("flex ")}>
+          <span className={ICONS_OUTLINE}>home</span>
+        </Link> */}
+    
         { routes.map((link,i)=> 
           <Link key={i} href={link.path} className={classNames("uppercase text-xs m-2")}>
             {link.title}

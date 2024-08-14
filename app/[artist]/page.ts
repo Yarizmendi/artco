@@ -1,3 +1,3 @@
 
-import ArtistPage from "../../comps/pages/Artist"
+import ArtistPage from "../../views/Artist"
 export default ArtistPage

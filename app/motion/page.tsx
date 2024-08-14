@@ -1,4 +1,4 @@
 
 
-import Motion from "@/comps/pages/Motion"
+import Motion from "views/Motion"
 export default Motion

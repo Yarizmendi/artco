@@ -1,8 +1,8 @@
 
 
-import { getShadersBySketch } from "../shaders/shaders"
+import { getShaderInputsBySketch } from "../shaders/inputs/shader_inputs"
 
 export async function getSketchData( title ) {
-    const sketchData = await getShadersBySketch( title )
+    const sketchData = await getShaderInputsBySketch( title )
     return sketchData
 }
