@@ -1,9 +1,8 @@
 
-import Sketch from "../../../../comps/pages/PathSketch"
-import { getSketchData } from "actions/sketches"
+import Sketch from "@/comps/pages/PathSketch"
+import { getShadersBySketch } from "@/api/shaders/shaders"
 
 export default async function Page({ params }) {
-  const sketchData = await getSketchData( params.path )
-  console.log(sketchData)
+  const sketchData = await getShadersBySketch( params.path )
   return <Sketch {...sketchData} />
 }

@@ -1,4 +1,5 @@
 
+import { DESCRIPTION } from "actions/utils"
 import classnames from "classnames"
 
 export const box = classnames(
@@ -15,9 +16,9 @@ export const Slider = ({
   description,
 }) => {
   return (
-    <div className="flex items-center justify-around font-bold p-2 mx-4">
+    <div className="flex items-center font-bold p-2 mx-4">
       <InputValueWithLabel uniform={uniform} label={label}/>
-      <InputSliderWithDescription uniform={uniform} description={description}/>
+      <InputSliderWithDescription uniform={uniform} description={description || DESCRIPTION}/>
     </div>
   )
 }
@@ -27,7 +28,7 @@ export const InputValueWithLabel = ({
     uniform
   }) => {
     return (
-      <div className="flex flex-col justify-center mr-4">
+      <div className="flex flex-col justify-center text-center mr-4">
         <p id={uniform+"Value"} className={box} />
         <label className="text-[9px] w-[35px] overflow-hidden" htmlFor={label}>{label}</label>
       </div>
@@ -39,7 +40,7 @@ export const InputSliderWithDescription = ({
   description
 }) => {
   return (
-    <div id={uniform+"Input"} className="flex flex-col justify-center max-h-[50px]">
+    <div id={uniform+"Input"} className="flex flex-col  max-h-[50px]">
       <p className="overflow-hidden text-[10px] pb-2">{description}</p>
     </div>
   )

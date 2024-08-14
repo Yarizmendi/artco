@@ -1,4 +1,5 @@
-import { DESCRIPTION, TITLE } from "../../../actions/shaders"
+import { DESCRIPTION } from "actions/utils"
+
 
 export const showcaseSketches = {
   aqua: {

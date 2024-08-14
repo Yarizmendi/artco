@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getSketchData } from "actions/sketches";
+import { getSketchData } from "@/api/sketches/sketches";
 
 export async function GET(title) {
     const sketches = await getSketchData(title)

@@ -1,32 +1,28 @@
 
 "use client"
-import p5Types from "p5"
+import p5Types, { Shader } from "p5"
 import InitP5 from "@/p5/Instance"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
 
-const vert = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert"
-
 export default function PathSKetch({ 
-  id,
   title, 
+  transitions,
+  displayName,
+
+  vert, 
+  frag,
+
   images,
+  textures,
   noises,
-  shaders, 
-  description,
+  shaders
+
 }) {
 
-  let inputs = []
-  let textures = []
-  let transitions
 
-  shaders.map( shader => {
-    inputs.push( ...shader.inputs )
-    textures.push(...shader.textures )
-    transitions = shader.transitions
-  })
 
   let mp5 = null
   let parentRef = useRef()
@@ -42,29 +38,29 @@ export default function PathSKetch({
 
   function sketch( p: p5Types ) {
 
+    let inptImg
     let idx = 0
     let seconds
     let ActiveShader
     let Overlay, MediaRecorder
     let Parent = parentRef.current && parentRef.current
-    let changeEvery = transitions && inputs[2]["settings"].value
+    let changeEvery = transitions ? shaders[2]["settings"].value : 60
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
     p.preload = () => {
+
 
       noises && noises.map( noise => {
         noise["Noise"] = p.loadImage( noise.blob )
       })  
       
-      images.map( img => {
+      images && images.map( img => {
         img["Image"] = p.loadImage( img.blob )
       })
 
-      shaders.map( shader => {
-        shader["Shader"] = p.loadShader( vert, shader.frag ) 
-        // shader["Shader"] = p.loadShader( vert, `/${title}.frag` ) 
+      shaders && shaders.map( shader => {
+        shader["Shader"] = p.loadShader( vert, frag )
       })
-
     }
   
     p.setup = () => {
@@ -77,18 +73,18 @@ export default function PathSKetch({
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
       handleControls()
 
-      inputs.map(( input ) => {
+      shaders && shaders.map(( input ) => {
         input["Paragraph"].html( input["Slider"].value() )
         ActiveShader.setUniform( input.uniform, input["Slider"].value() )
       })
   
-      textures.map(( texture, i ) => {
-        ActiveShader.setUniform( texture.uniform, images[ i + idx ]["Image"])
+      images && textures.map(( texture, i ) => {
+        ActiveShader.setUniform( texture.uniform, images[ i ]["Image"])
       })
 
       noises && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
-      
-    p.shader(ActiveShader)
+
+      p.shader(ActiveShader)
       p.rect(0,0,0)
     }
     
@@ -121,7 +117,7 @@ export default function PathSKetch({
     function handleTransitions() {
       if ( seconds > changeEvery && images.length-1 > idx ) {
         idx+=1
-        changeEvery += inputs[2]["Slider"].value()
+        changeEvery += shaders[2]["Input"].value()
         ActiveShader.setUniform( "u_timeout", drawPlayTimer )
       } 
     }
@@ -129,7 +125,10 @@ export default function PathSKetch({
     function createElements(parent) {
       p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent( parent )
 
-      inputs.map( input => {
+      inptImg = p.createFileInput(handleImage, true)
+      inptImg.parent("files")
+
+      shaders && shaders.map( input => {
         if ( input.type == "slider" ) {
           const { min, max, value, step } = input.settings
           input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
@@ -167,11 +166,34 @@ export default function PathSKetch({
           MediaRecorder.stop()
         }
       })
-    }
 
-  }
+      Overlay.resetBtn.mouseClicked(() => {
+        isPlaying = false
+        drawPlayTimer = 0
+        drawPauseTimer = 0
+        Overlay.playBtnLabel.html("play")
+        Overlay.recordBtnLabel.html("record")
+        setTimeout( replay, 500 )
+      })
+
+      function replay() {
+        document.getElementById("playbtn").click()
+      }
   
-  return <P5Sketch parentRef={parentRef} inputs={inputs} title={ title }/>
+      // Create an image if the file is an image.
+      function handleImage(file) {
+        if (file.type === 'image') {
+          inptImg = p.createImg(file.data, 'new');
+          inptImg.hide()
+          let imgObj = { title: "red_ocean", id: 0, "Image": inptImg }
+          images = [imgObj]
+        }
+      }
+
+    }
+  }
+
+  return <P5Sketch parentRef={parentRef} shaders={shaders} title={ title }/>
 }
 
 

@@ -5,6 +5,8 @@ uniform sampler2D u_texture;
 
 varying vec2 vTexCoord;
 
+vec4 ogColor;
+vec4 newColor;
 vec4 color;
 
 void main () {
@@ -14,6 +16,6 @@ void main () {
   pos.x += u_time;
   pos = fract(pos);
 
-  color = texture2D( u_texture, pos );
+  
   gl_FragColor = vec4( color );
 }

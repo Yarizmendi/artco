@@ -2,8 +2,7 @@
 import classnames from "classnames"
 import  { Sliders }  from "./Slider"
 import { ShaderIconsWithLabels } from "./Shader"
-import { DESCRIPTION } from "actions/shaders"
-
+import { DESCRIPTION } from "actions/utils"
 
 export const sketchTitleClasses = classnames(
   "px-2 mt-4",
@@ -29,18 +28,19 @@ const fileInputClass = classnames("flex text-md w-fit mx-6 md:mt-4")
 
 export function P5Sketch({
   title,
-  inputs,
+  shaders,
   parentRef,
+  displayName,
 }) {
   return (
     <SketchLayout>
       <CanvasCtn parentRef={parentRef} />
       <SketchControls>
-        <ShaderIconsWithLabels shaders={inputs} />
+        <ShaderIconsWithLabels shaders={shaders} />
         <div>
-          <SketchTitle title={title} />
+          <SketchTitle title={displayName} />
           <p className="p-4 text-sm">{DESCRIPTION}</p>
-          <Sliders sliders={inputs} />
+          <Sliders sliders={shaders} />
           <span id="files" className={fileInputClass} />
         </div>
       </SketchControls>

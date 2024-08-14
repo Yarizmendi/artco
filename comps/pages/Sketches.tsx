@@ -1,7 +1,6 @@
 
-import { showcaseSketches } from "@/api/images/images"
+import { showcaseSketches } from "app/api/images/images"
 import { SketchLink } from "@/comps/Links/SketchLink"
-import { ICONS_FILL, ICONS_OUTLINE } from "@/p5/Controls"
 import Link from "next/link"
 
 const showcases = await Object.values(showcaseSketches)

@@ -1,32 +1,44 @@
+import { DESCRIPTION } from "actions/utils"
+import { getImagesBySketch } from "../images/images"
 
-const shaderModules = {
-  waves: {  
+export const shaderModules = {
+  waves: [{  
     icon: "heat",
     type: "slider",
     label: "waves",
     uniform: "u_waves",
     description: "amplitude of trig function",
     settings: { min: 0, max: 1, value: 0.1, step: .1 },
-  },
-  simpleScale: {
-    icon: "arrow",
+  }],
+  simpleScale: [{
+    icon: "chevron_right",
     type: "slider",
     label: "pan",
     uniform: "u_pan",
     description: "goes in the input direction",
     settings: { min: 0, max: 1, value: 0.1, step: .1 },
-  },
-  matrixScale: {  
+  }],
+  matrixScale: [
+    {  
     icon: "zoom_in_map",
     type: "slider",
-    label: "zoom",
-    uniform: "u_zoom",
+    label: "scale x",
+    uniform: "u_scale_y",
     description: "input of matrix scaling function",
     settings: { min: 0, max: 1, value: 0.1, step: .1 },
-  },
-  noisyMix: {
+    },
+    {  
+      icon: "zoom_out_map",
+      type: "slider",
+      label: "scale",
+      uniform: "u_scale_x",
+      description: "input of matrix scaling function",
+      settings: { min: 0, max: 1, value: 0.1, step: .1 },
+    },
+  ],
+  noisyMix: [{
     icon: "instant_mix",
-    uRange:{  
+    uRange: {  
       type: "slider",
       label: "threshold",
       uniform: "u_threshold",
@@ -47,23 +59,28 @@ const shaderModules = {
       description: "the amount to represent the noiser",
       settings: { min: 0, max: 1, value: 0.25, step: .01 },
     },
-  }
+  }]
 }
 
 const common = {
+  transitions: false,
+  description: DESCRIPTION,
+
   vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
-  timers: [
-    { type: "timer", uniform: "u_time" }
-  ],
+
+  tags: {
+    object: ["science", "chemistry", "physics", "engineering"],
+    meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
+  },
+
   textures: [
     { type: "texture", uniform: "u_texture" },
   ],
+
   noises: [
-    { type: "texture", uniform: "u_noise" }
+    { title: "perlin", uniform: "u_noise", path: "perlin.png", blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png" }
   ],
-  inputs: [
-    shaderModules.waves
-  ]
+
 }
 
 export const shadersBySketch = {
@@ -71,10 +88,9 @@ export const shadersBySketch = {
         title: "city",
         vert: common.vert,
         frag: `https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/city.frag`,
-        timers: common.timers,
-        rexrures: common.textures,
+        textures: common.textures,
         inputs: {
-          ...common.inputs,
+          ...shaderModules["waves"],
             topTimer: {  
                 type: "slider",
                 label: "topTime",
@@ -90,28 +106,14 @@ export const shadersBySketch = {
               settings: { min: 0, max: 100, value: 15, step: 1 },
             },
         },
-        noises:common.noises
         
     },
     
     "stem" : {
+       ...common,
         transitions: true,
-        title: "stem",
-        vert: common.vert,
         frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/stem.frag",
-        textures: {
-          ...common.textures,
-        },
-        inputs: {
-          ...common.inputs,
-          ...shaderModules.noisyMix
-        },
-        timers: {
-          ...common.timers,
-        },
-        noises: {
-          ...common.noises
-        }
+        shaders: shaderModules.matrixScale
     },
 
     "image" : {
@@ -121,23 +123,66 @@ export const shadersBySketch = {
       displayName: "Image to Shader",
     },
 
-    "aqua": {
-      ...common,
+    aqua: {
+      transitions: false,
       title: "aqua",
-      frag: "/aqua.frag",
+
+      path: "sketches/aqua",
       displayName: "Aquarium Strolls",
+   
+      vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
+      frag: "/scale.frag",
+
+      tags: {
+        object: ["science", "chemistry", "physics", "engineering"],
+        meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
+      },
+
+      images: getImagesBySketch("aqua"),
+
+      noises: [
+        { title: "perlin", uniform: "u_noise", path: "perlin.png", blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png" }
+      ],
+
+      textures: [
+        { type: "texture", uniform: "u_texture" },
+      ],
+
+      shaders: shaderModules.simpleScale
+
     },
 
     "oceans" : {
       ...common,
         title: "oceans",
+        images: getImagesBySketch("oceans"),
         frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/oceans.frag",
         displayName: "Ocean Listening",
+        shaders: shaderModules.waves,
+
     },
+
+    "new" : {
+       ...common,
+        title: "oceans",
+        frag: "/new.frag",
+        displayName: "Ocean Listening",
+  },
 
 }
 
 export async function getShadersBySketch( title ) {
-    return shadersBySketch[ title ] || shadersBySketch.image
+
+    let res = {
+      ...common,
+      displayName: "Ocean Listening",
+      title: title,
+      frag: "/scale.frag",
+      path: `sketches/${title}`,
+      images: await getImagesBySketch(title),
+      shaders: shaderModules.simpleScale,
+    }
+
+    return res;
   }
 
