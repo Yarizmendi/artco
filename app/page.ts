@@ -1,3 +1,3 @@
 
-import Home from "../comps/pages/Home"
+import Home from "../comps/pages/Artist"
 export default Home

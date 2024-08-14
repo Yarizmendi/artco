@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import { DESCRIPTION } from "actions/shaders"
 
 const collections = [
   { title: "sketches", id: 0, path: "/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png" },
@@ -54,7 +53,7 @@ export function ArtistPage({ params }) {
       </div> */}
       {/* <div className="flex w-4/5 h-[500px]"> */}
       { collections.map(({ title, path, blob },key)=>
-      <Link href={ params.artist + path } className={"p-2 m-2"} key={key}>
+      <Link href={ params.artist || "arizmendi" + path } className={"p-2 m-2"} key={key}>
       <Image 
         priority 
         src={blob} 
