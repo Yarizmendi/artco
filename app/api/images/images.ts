@@ -59,7 +59,7 @@ export const showcaseSketches = {
   },
 }
 
-const images = [
+export const images = [
   { title: "red_ocean", id: 0, path: "red_ocean.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
   { title: "polluted_ocean", id: 1, path: "polluted_ocean.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/polluted_ocean.jpg" },
   { title: "industrial_ocean", id: 2, path: "industrial_ocean.jpg", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/industrial_ocean.jpg" },

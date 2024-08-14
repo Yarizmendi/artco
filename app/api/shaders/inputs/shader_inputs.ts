@@ -66,7 +66,7 @@ export const shaderInputsBySketch = {
 
   ],
 
-  simpleMix:[
+  simpleMix: [
     {  
       icon: "instant_mix",
       type: "slider",

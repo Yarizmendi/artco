@@ -1,6 +1,6 @@
 
 "use client"
-import p5Types, { Shader } from "p5"
+import p5Types from "p5"
 import InitP5 from "@/p5/Instance"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
@@ -21,8 +21,6 @@ export default function PathSKetch({
   shaders
 
 }) {
-
-
 
   let mp5 = null
   let parentRef = useRef()

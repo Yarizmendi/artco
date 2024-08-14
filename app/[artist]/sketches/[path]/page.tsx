@@ -1,16 +1,15 @@
 
 import Sketch from "views/PathSketch"
-import { getImagesBySketch } from "@/api/images/images"
 import { DESCRIPTION } from "actions/utils"
-import { getShaderInputsBySketch } from "@/api/shaders/inputs/shader_inputs"
-import { getShaderFilesBySketch } from "@/api/shaders/files/shader_files"
-import { getShaderTexturesBySketch } from "@/api/shaders/textures/shader_textures"
+import { getSketchImages } from "@/api/images/route"
+import { getShaderFiles } from "@/api/shaders/files/route"
+import { getShaderInputs } from "@/api/shaders/inputs/route"
+import { getShaderTextures } from "@/api/shaders/textures/route"
+
 
 const common = {
   transitions: false,
   description: DESCRIPTION,
-
-  vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
 
   tags: {
     object: ["science", "chemistry", "physics", "engineering"],
@@ -27,15 +26,21 @@ export default async function Page({ params }) {
 
   const title = params.path
 
+  const { images } = await getSketchImages(title)
+  const { inputs } = await getShaderInputs(title)
+  const { vert, frag } = await getShaderFiles(title)
+  const { textures } = await getShaderTextures(title)
+
   let sketchData = {
     ...common,
     displayName: "Ocean Listening",
     title: title,
     path: `sketches/${title}`,
-    images: await getImagesBySketch(title),
-    frag: await getShaderFilesBySketch(title),
-    shaders: await getShaderInputsBySketch(title),
-    textures: await getShaderTexturesBySketch(title),
+    vert, 
+    frag,
+    images,
+    textures,
+    shaders: inputs,
   }
 
   return <Sketch {...sketchData} />
