@@ -77,6 +77,34 @@ export const shaderInputsBySketch = {
     },
   ],
 
+  stem: [
+    {  
+      icon: "instant_mix",
+      type: "slider",
+      label: "range",
+      uniform: "u_range",
+      description: "amplitude of trig function",
+      settings: { min: 0, max: 1, value: .25, step: .25 },
+    },
+    {  
+      icon: "airwave",
+      type: "slider",
+      label: "threshold",
+      uniform: "u_threshold",
+      description: "amplitude of trig function",
+      settings: { min: 0, max: 1, value: 1, step: .25 },
+    },
+    {  
+      icon: "timer",
+      type: "slider",
+      label: "timeout",
+      uniform: "u_timeout",
+      description: "amplitude of trig function",
+      settings: { min: 0, max: 120, value: 10, step: 10 },
+    },
+  ],
+    
+
   image: [
     {
 

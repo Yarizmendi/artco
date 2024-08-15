@@ -7,21 +7,20 @@ import { Recorder } from "@/p5/Recorder"
 import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
 
+
 export default function PathSKetch({ 
-  title, 
-  transitions,
-  displayName,
-
-  vert, 
+  vert,
   frag,
-
+  title, 
   images,
-  textures,
   noises,
-  shaders
-
+  shaders, 
+  textures,
+  displayName,
+  transitions,
 }) {
 
+  let inputs = shaders
   let mp5 = null
   let parentRef = useRef()
   const [ isMounted, setIsMounted ] = useState(false)
@@ -42,28 +41,24 @@ export default function PathSKetch({
     let ActiveShader
     let Overlay, MediaRecorder
     let Parent = parentRef.current && parentRef.current
-    let changeEvery = transitions ? shaders[2]["settings"].value : 60
+    let changeEvery = transitions && inputs[2]["settings"].value
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
     p.preload = () => {
-
 
       noises && noises.map( noise => {
         noise["Noise"] = p.loadImage( noise.blob )
       })  
       
-      images && images.map( img => {
+      images.map( img => {
         img["Image"] = p.loadImage( img.blob )
       })
 
-      shaders && shaders.map( shader => {
-        shader["Shader"] = p.loadShader( vert, frag )
-      })
+      ActiveShader = p.loadShader( vert, frag ) 
     }
   
     p.setup = () => {
       p.pixelDensity(1)
-      ActiveShader = shaders[idx]["Shader"]
       createElements(Parent)
     }
   
@@ -71,18 +66,18 @@ export default function PathSKetch({
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
       handleControls()
 
-      shaders && shaders.map(( input ) => {
+      inputs.map(( input ) => {
         input["Paragraph"].html( input["Slider"].value() )
         ActiveShader.setUniform( input.uniform, input["Slider"].value() )
       })
   
-      images && textures.map(( texture, i ) => {
-        ActiveShader.setUniform( texture.uniform, images[ i ]["Image"])
+      textures.map(( texture, i ) => {
+        ActiveShader.setUniform( texture.uniform, images[ i + idx ]["Image"])
       })
 
       noises && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
-
-      p.shader(ActiveShader)
+      
+    p.shader(ActiveShader)
       p.rect(0,0,0)
     }
     
@@ -115,7 +110,7 @@ export default function PathSKetch({
     function handleTransitions() {
       if ( seconds > changeEvery && images.length-1 > idx ) {
         idx+=1
-        changeEvery += shaders[2]["Input"].value()
+        changeEvery += inputs[2]["Slider"].value()
         ActiveShader.setUniform( "u_timeout", drawPlayTimer )
       } 
     }
@@ -126,7 +121,7 @@ export default function PathSKetch({
       inptImg = p.createFileInput(handleImage, true)
       inptImg.parent("files")
 
-      shaders && shaders.map( input => {
+      inputs.map( input => {
         if ( input.type == "slider" ) {
           const { min, max, value, step } = input.settings
           input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
@@ -193,5 +188,3 @@ export default function PathSKetch({
 
   return <P5Sketch parentRef={parentRef} shaders={shaders} title={ displayName }/>
 }
-
-
