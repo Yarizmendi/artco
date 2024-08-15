@@ -1,8 +1,8 @@
 
-import mongoose from 'mongoose'
-const { Schema, model } = mongoose
 
-const blogSchema = new Schema({
+const mongoose = require('mongoose')
+
+const blogSchema = new mongoose.Schema({
   title: String,
   slug: String,
   published: Boolean,
@@ -18,5 +18,4 @@ const blogSchema = new Schema({
   }]
 });
 
-const Blog = model('Blog', blogSchema);
-export default Blog;
+module.exports = mongoose.model('Blog', blogSchema);
