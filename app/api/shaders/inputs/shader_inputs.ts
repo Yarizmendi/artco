@@ -1,3 +1,4 @@
+import { Mongo } from "@/mongo/index"
 
 export const shaderInputsBySketch = {
 
@@ -123,4 +124,10 @@ const shadersBySketch = {
 
 export async function getShaderInputsBySketch(title) {
   return shadersBySketch[title]
+}
+
+export async function getSketch(title) {
+  const col =  await Mongo.db("test").collection("sketches")
+  .findOne({ name: title })
+  return col
 }

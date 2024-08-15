@@ -2,13 +2,7 @@
 import { Mongo } from '@/mongo/index'
 import { NextResponse } from 'next/server'
 
-export async function getShaderTextures(title) {
-  const col =  await Mongo.db("Shaders").collection("textures")
-  .findOne({ name: title })
-  return col
-}
-
 export async function GET( request: Request ) {
-  const textures = await getShaderTextures( "city")
+  const textures = []
   return NextResponse.json( textures)
 }
