@@ -1,6 +1,6 @@
 
 import { NextResponse } from 'next/server'
-import { Mongo } from '@/api/mongo'
+import { Mongo } from '@/mongo/index'
 
 export async function getSketchImages(title) {
   const col =  await Mongo.db("Images").collection("textures")

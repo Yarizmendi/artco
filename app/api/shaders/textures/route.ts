@@ -1,5 +1,5 @@
 
-import { Mongo } from '@/api/mongo'
+import { Mongo } from '@/mongo/index'
 import { NextResponse } from 'next/server'
 
 export async function getShaderTextures(title) {
