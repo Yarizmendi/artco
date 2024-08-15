@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://admin:artadmin@cluster0.couko.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 

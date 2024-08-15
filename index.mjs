@@ -8,9 +8,9 @@ async function getSketchByTitle() {
   console.log(sketch.creator);
 }
 
-async function updateSketch(title="stem") {
-  const sketch = await SketchModel.findOne({title})
-  console.log(sketch.frag);
+async function updateSketch(title="aqua") {
+  const sketch = await SketchModel.findOne({title:"aqua"}).projection({ title })
+  console.log(sketch);
 }
 
 

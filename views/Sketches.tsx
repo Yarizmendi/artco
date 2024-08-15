@@ -1,9 +1,9 @@
 
-import { showcaseSketches } from "app/api/images/images"
+import { Mongo } from "@/mongo/index"
 import { SketchLink } from "@/comps/Links/SketchLink"
 import Link from "next/link"
 
-const showcases = await Object.values(showcaseSketches)
+const showcases =  await Mongo.db("test").collection("sketches").find().toArray()
 
 export default function Sketches() {
   return (
@@ -16,7 +16,7 @@ export default function Sketches() {
       </div>
 
       <div className="h-[500px] flex flex-wrap items-center justify-center overflow-auto">
-        {showcases.map((img, idx) => <SketchLink key={idx} {...img} />)}
+        {showcases.map((img, idx) => <SketchLink title={img.title} blob={img.blob} key={idx} {...img} />)}
       </div>
     </div>
   )
