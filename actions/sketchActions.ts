@@ -9,6 +9,10 @@ const addUser = async user => {
     return newUser.save()
 }
 
+export const getUsers = async () => UserModel.find().exec()
+export const getUser = async ({user}) => UserModel.findOne({user}).exec()
+
+
 const addSketch = async sketch => {
     const title = sketch.get('title')
     const description = sketch.get('description')
@@ -25,12 +29,12 @@ const getSKetch = async ( title ) => {
     return SketchModel.findOne({ title }).populate("creator").exec()
 }
 
-const getSketchesByCreatorId = async ({ creatorId }) => {
-    return SketchModel.find({ creatorId }).exec()
+const getSketchesByCreatorId = async ({ creator }) => {
+    return SketchModel.find({ creator }).exec()
 }
 
-const getImagesByCreatorId = async ({ creatorId }) => {
-    return ImageModel.find({ creatorId }).exec()
+const getImagesByCreatorId = async ({ uploaderId }) => {
+    return ImageModel.find({ uploaderId }).exec()
 }
 
 

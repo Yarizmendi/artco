@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import { getUser } from "actions/sketchActions"
 
 const collections = [
   { title: "sketches", id: 0, path: "/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png" },
@@ -14,25 +15,13 @@ Arizmendi has created art inspired by and in collaboration with leading scientis
 Arizmendi's art has been shown throughout Northern and Southern California, as well as East Hampton, NY and Vienna, Austria.  He has been represented by Hugo Rivera Gallery in Laguna Beach, California and Joyce Gordon Gallery in Oakland, California.  Arizmendi received his BA in philosophy with honors from UCLA.  Before becoming a full time artist he was a lawyer and a financial advisor.  He holds a JD from the George Washington University Law School.
 `
 
-const artists = [
-  {
+const artist = {
       fullName: "Benjamin Arizmendi",
       firstname: "benjamin",
       lastname: "arizmendi",
       aboutPreview: fabt,
       blob: "/benji.png"
-  },
-  // {
-  //     fullName: "Benjamin Arizmendi",
-  //     aboutPreview: abt,
-  //     blob: "/benji.png"
-  // },
-  // {
-  //     fullName: "Benjamin Arizmendi",
-  //     aboutPreview: abt,
-  //     blob: "/benji.png"
-  // }
-]
+}
 
 const artistStyles = {
   ctn: "w-1/4 border" ,
@@ -42,34 +31,27 @@ const artistStyles = {
 }
 
 
-export function ArtistPage({ params }) {
-
-  const { fullName, lastname, aboutPreview, blob } = artists[0]
-
+export default async function ArtistPage({ params }) {
+  const { username, _id } = await getUser({ ...params.path })
   return (
-    <div className="flex flex-wrap items-center justify-center overflow-auto grow">
-      {/* <div className="flex w-1/5">
-        <p>{DESCRIPTION}</p>
-      </div> */}
-      {/* <div className="flex w-4/5 h-[500px]"> */}
-      { collections.map(({ title, path, blob },key)=>
-      <Link href={ params.artist || "arizmendi" + path } className={"p-2 m-2"} key={key}>
-      <Image 
-        priority 
-        src={blob} 
-        alt={title} 
-        width={600} 
-        height={500}
-        className={"max-w-[350px] h-[350px]"}
-        />
-        <div className="w-full dark:bg-slate-950 bg-gray-300 p-2">
-          <p className="text-3xl">{title.toUpperCase()}</p>
+    <div className="flex flex-col justify-center grow">
+      {/* <div className="border">
+        <div className="flex justify-center border w-[220px]">
+          <Image className={"w-[80px] h-[80px] rounded-full"} src={artist.blob} alt={"avi"} width={200} height={200} />
+          <div className="flex-col border self-center p-4">
+            <p className="text-sm self-center">{username}</p>
+            <p className="text-sm self-center">{artist.firstname}</p>
+            <p className="text-sm self-center">{artist.lastname}</p>
+          </div>
         </div>
-      </Link> )}
-      {/* </div> */}
-
+      </div> */}
+      <div className={"flex flex-wrap items-center justify-center overflow-auto"}>
+      { collections.map(({ title, path, blob },key)=>
+        <Link href={ params.user + path } className={"p-2 m-2"} key={key}>
+        <Image src={blob} alt={title} width={600} height={500} className={"max-w-[350px] h-[350px]"} />
+        <p className="w-full dark:bg-slate-950 bg-gray-300 p-2 text-3xl">{title.toUpperCase()}</p>
+        </Link> )} 
+      </div>
     </div>
   )
 }
-
-export default ArtistPage

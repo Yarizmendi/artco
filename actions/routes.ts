@@ -1,8 +1,8 @@
 
 const baseNavLinks = [
-    { title: "sketches", path: `/${"arizmendi"}/sketches`},
-    { title: "prints", path: `/${"arizmendi"}/prints`},
-    { title: "paintings", path: `/${"arizmendi"}/paintings`}
+    { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
+    { title: "prints", path: `/${"66bd62276d3999b70d5fd91b"}/prints`},
+    { title: "paintings", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`}
   ]
 
   async function getRoutes() {
