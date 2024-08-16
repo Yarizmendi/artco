@@ -41,7 +41,7 @@
     "**/**/*.ts",
     "**/**/*.tsx",
     ".next/types/**/*.ts"
-, "mongo/models/sketch.js", "mongo/models/user.js", "mongo/models/blog.js"  ],
+, "mongo/models/sketchmodel.js", "mongo/models/usermodel.js", "mongo/models/blogmodel.js", "mongo/index.js"  ],
   "exclude": [
     "node_modules"
   ]

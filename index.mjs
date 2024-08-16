@@ -1,7 +1,11 @@
 
 
-import UserModel from "./mongo/models/user.js"
-import SketchModel from "./mongo/models/sketch.js"
+import ImageModel from "./mongo/models/image.model.js"
+import SketchModel from "./mongo/models/sketchmodel.js"
+import { list } from "@vercel/blob";
+import connect from './mongo/index.js'
+
+await connect()
 
 async function getSketchByTitle() {
   const sketch = await SketchModel.findOne().populate("creator").exec()
@@ -13,33 +17,29 @@ async function updateSketch(title="aqua") {
   console.log(sketch);
 }
 
+async function createImages() {
+  let vercelBlobs = await list({token:"vercel_blob_rw_qfyy9q32bNwxmAlI_bRLzsLIQ017p7pZdpHvbu1pyaHDjMs"})
+  vercelBlobs = vercelBlobs.blobs
+  vercelBlobs.map( async blob => {
+    const { url, downloadUrl, pathname, size, uploadedAt } = blob
+    const image = {}
+    const imgNoExt = pathname.split('.')[0]
+    const imgNoPunct = imgNoExt.replace(/_/g, ' ')
+    image["title"] = imgNoExt
+    image["displayname"] = imgNoPunct
+    image["uploaderId"] = "66bd62276d3999b70d5fd91b"
+    image["blob"] = url
+    image["size"] = size
+    image["pathname"] = pathname
+    image["uploadedAt"] = uploadedAt
+    image["downloadUrl"] = downloadUrl
+    const sketch = await ImageModel.create({...image})
+    console.log(sketch)
+  })
 
-const stemInputs = [
-  {  
-    icon: "airwave",
-    type: "slider",
-    label: "threshold",
-    uniform: "u_threshold",
-    description: "percentage of mixture",
-    settings: { min: 0, max: 1, value: 1, step: .1 },
-  },
-  {  
-    icon: "instant_mix",
-    type: "slider",
-    label: "range",
-    uniform: "u_range",
-    description: "size of noise",
-    settings: { min: 0, max: 1, value: 0.25, step: .01 },
-  },
-  {  
-    icon: "timer",
-    type: "slider",
-    label: "transitions",
-    uniform: "u_change_every",
-    description: "transition timer",
-    settings: { min: 0, max: 60, value: 5, step: 1 },
-},
-]
+}
 
-// console.log(sketch.shaders);
-// updateSketch()
+// createImages()
+
+
+

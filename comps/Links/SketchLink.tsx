@@ -1,47 +1,20 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { rmUnderScores } from "actions/utils"
-import { Tag } from "../Tags/tag"
+import Tag from "@/comps/Tags/tag"
 
-interface ISketchLink {
-  title: string
-  blob: string
-  path?: string
-  tags?: any, 
-  description?: string
-}
-
-function SketchLink({ title, blob, path, tags, description  }: ISketchLink ) {
-  title = rmUnderScores(title)
-  const ctnClass="w-[300px] m-4 bg-gray-200 dark:bg-slate-950"
+export default function SketchLink({sketch}) {
   return (
-  <Link href={path} className={ctnClass}>
-    <Image className="h-[280px] rounded-t" src={blob} alt={title} width={500} height={500} />
-    <Title title={title} />
-    <Description description={description}/>
-    <Tags tags={tags}/>
-  </Link>   
-  )
-}
-
-function Title({ title }) {
-  const titleClass = "text-sm p-4"
-  return <p className={titleClass}>{title.toUpperCase()}</p>
-}
-
-function Description({ description }) {
-  const style="px-4 text-[12px] h-[90px] overflow-hidden"
-  return <p className={style}>{description}</p>
-}
-
-function Tags({ tags }) {
-  tags = tags.meta.concat(tags.object)
-  return (
+    <Link  href={sketch.path} className={"w-[300px] m-6 bg-gray-200 dark:bg-slate-950"}>
+    <Image className={"h-[280px] rounded-t"} src={sketch.blob} alt={sketch.title} width={500} height={500} />
+    <p className={"text-sm p-4"}>{ sketch.title }</p>
+    <p className={"px-4 text-[12px] h-[90px] overflow-hidden"}>{sketch.description}</p>
     <div className="flex overflow-hidden my-2 p-1">
-      {tags.map((tag,key) => <Tag key={key} title={tag} style={"outlined"} /> )}
-    </div>
+     {sketch.tags.object.map((tag,key) => <Tag key={key} title={tag} style={"outlined"} /> )}
+   </div>
+  </Link>
   )
+
 }
 
-export { SketchLink }
+

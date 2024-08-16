@@ -1,9 +1,9 @@
-import { getImages } from "app/api/images/images"
+
 import ArtLink from "@/comps/Links/ArtLinks"
+import { getImages } from "actions/sketchActions"
 
-const images = await getImages()
-
-export default function Home() {
+export default async function Paintings() {
+  const images = await getImages().then(s=>s.reverse())
   return (
     <div className="flex items-center grow">
       <div className="h-[480px] flex flex-wrap justify-center overflow-auto">

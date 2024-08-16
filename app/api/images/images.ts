@@ -1,63 +1,3 @@
-import { DESCRIPTION } from "actions/utils"
-
-
-export const showcaseSketches = {
-  aqua: {
-    id: 2,
-    title: "aqua",
-    path: "sketches/aqua",
-    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/gemstone_cliff.jpg",
-    description: DESCRIPTION,
-    tags: {
-      object: ["science", "chemistry", "physics", "engineering"],
-      meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
-    }
-  },
-  // new: {
-  //   id: 2,
-  //   title: "new",
-  //   path: "sketches/new",
-  //   blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/window.jpg",
-  //   description: DESCRIPTION,
-  //   tags: {
-  //     object: ["science", "chemistry", "physics", "engineering"],
-  //     meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
-  //   }
-  // },
-  oceans: {
-    id: 0,
-    title: "In Search Of Context",
-    path: "sketches/oceans",
-    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png",
-    description: DESCRIPTION,
-    tags: {
-      object: ["ocean", "sea", "waves", "nature"],
-      meta: ["searching", "wandering", "percieving"]
-    }
-  },
-  city: {
-    id: 1,
-    title: "Industrial Oakland",
-    path: "sketches/city",
-    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/industrial_ocean.jpg",
-    description: DESCRIPTION,
-    tags: {
-      object: ["skyline", "oakland", "shoreline", "city views"],
-      meta: []
-    }
-  },
-  stem: {
-    id: 2,
-    title: "Aesthetic Calculus",
-    path: "sketches/stem",
-    blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png",
-    description: DESCRIPTION,
-    tags: {
-      object: ["science", "chemistry", "physics", "engineering"],
-      meta: ["conceiving", "theorizing", "systemizing", "stylizing"]
-    }
-  },
-}
 
 export const images = [
   { title: "red_ocean", id: 0, path: "red_ocean.png", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
@@ -132,9 +72,6 @@ export async function getImages() {
   return images
 }
 
-export async function getShowcaseSketches() {
-  return Object.values(showcaseSketches).reverse()
-}
 
 
 // const newSketch = await sketch.create({
@@ -205,3 +142,31 @@ export async function getShowcaseSketches() {
 // })
 
 // console.log(newSketch)
+
+
+const stemInputs = [
+  {  
+    icon: "airwave",
+    type: "slider",
+    label: "threshold",
+    uniform: "u_threshold",
+    description: "percentage of mixture",
+    settings: { min: 0, max: 1, value: 1, step: .1 },
+  },
+  {  
+    icon: "instant_mix",
+    type: "slider",
+    label: "range",
+    uniform: "u_range",
+    description: "size of noise",
+    settings: { min: 0, max: 1, value: 0.25, step: .01 },
+  },
+  {  
+    icon: "timer",
+    type: "slider",
+    label: "transitions",
+    uniform: "u_change_every",
+    description: "transition timer",
+    settings: { min: 0, max: 60, value: 5, step: 1 },
+},
+]

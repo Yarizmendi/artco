@@ -1,6 +1,5 @@
 
-const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://admin:artadmin@cluster0.couko.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+import mongoose from 'mongoose'
 
 const sketchSchema = new mongoose.Schema({
     vert: String,
@@ -36,4 +35,4 @@ const sketchSchema = new mongoose.Schema({
     textures: [Object],
 })
   
-module.exports = mongoose.model('Sketch', sketchSchema);
+export default mongoose.models.Sketch || mongoose.model('Sketch', sketchSchema)

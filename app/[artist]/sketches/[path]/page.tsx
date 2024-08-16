@@ -1,6 +1,6 @@
 
-import { Mongo } from "@/mongo/index"
 import Sketch from "views/PathSketch"
+import { getSKetch } from "actions/sketchActions"
 
 export default async function Page({ params }) {
   const {
@@ -13,7 +13,7 @@ export default async function Page({ params }) {
     textures,
     displayName,
     transitions,
-  } =  await Mongo.db("test").collection("sketches").findOne({ title: params.path })
+  } =  await getSKetch( params.path )
 
   return <Sketch 
     vert={vert}
