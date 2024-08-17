@@ -2,7 +2,7 @@
 import classnames from "classnames"
 import  { Sliders }  from "./Slider"
 import { ShaderIconsWithLabels } from "./Shader"
-import { DESCRIPTION } from "actions/utils"
+import { DESCRIPTION } from "@/mongo/actions/utils"
 
 export const sketchTitleClasses = classnames(
   "px-2 mt-4",

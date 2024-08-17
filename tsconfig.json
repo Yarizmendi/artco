@@ -10,7 +10,7 @@
     "paths": {
       "@/p5/*": ["comps/P5/*"],
       "@/comps/*": ["comps/*"],
-      "@/views/*": ["views/*"],
+      "@/views/*": ["app/views/*"],
       "@/css/*": ["css/*"],
       "@/api/*": ["app/api/*"],
       "@/hooks/*": ["hooks"],

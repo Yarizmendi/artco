@@ -1,4 +1,4 @@
-import { getRandomElement } from "actions/utils";
+import { getRandomElement } from "@/mongo/actions/utils";
 
 interface ITagProps {
   color?: string;

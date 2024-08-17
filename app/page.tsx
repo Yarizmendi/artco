@@ -1,6 +1,6 @@
 
 import Link from "next/link"
-import { getUsers } from "actions/sketchActions"
+import { getUsers } from "@/mongo/actions/sketchActions"
 
 export default async function Homepage() {
   const users = await getUsers()

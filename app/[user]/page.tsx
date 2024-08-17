@@ -1,10 +1,10 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getUser } from "actions/sketchActions"
+import { getUser } from "@/mongo/actions/sketchActions"
 
 const collections = [
   { title: "sketches", id: 0, path: "/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png" },
-  { title: "prints", id: 1, path: "/prints", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
+  { title: "prints", id: 1, path: "/paintings", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/red_ocean.png" },
   { title: "paintings", id: 2, path: "/paintings", blob: "/alice_falls.webp" },
 ]
 

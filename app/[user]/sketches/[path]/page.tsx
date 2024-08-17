@@ -1,6 +1,6 @@
 
-import Sketch from "views/PathSketch"
-import { getShaders, getSKetch } from "actions/sketchActions"
+import Sketch from "./PathSketch"
+import { getSKetch } from "@/mongo/actions/sketchActions"
 
 export default async function Page({ params }) {
   const {

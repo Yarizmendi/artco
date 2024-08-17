@@ -1,7 +1,7 @@
 
 
 import { Painting } from "@/comps/Links/PaintingLink"
-import { getImagesByCreatorId } from "actions/sketchActions"
+import { getImagesByCreatorId } from "@/mongo/actions/sketchActions"
 
 export default async function Paintings({params}) {
   const uploaderId = params.user || "66bd62276d3999b70d5fd91b"

@@ -27,7 +27,7 @@ async function updateSketch(_id="66bdb2564ca6cabf9f8793d1") {
 }
 
 async function createImages() {
-  let vercelBlobs = await list({token:"vercel_blob_rw_qfyy9q32bNwxmAlI_bRLzsLIQ017p7pZdpHvbu1pyaHDjMs"})
+  let vercelBlobs = await list({token: process.env.BLOB_READ_WRITE_TOKEN})
   vercelBlobs = vercelBlobs.blobs
   vercelBlobs.map( async blob => {
     const { url, downloadUrl, pathname, size, uploadedAt } = blob

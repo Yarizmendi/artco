@@ -1,6 +1,6 @@
 
 import { NavBar } from "@/comps/Nav/NavBar"
-import "./globals.css"
+import "globals.css"
 import { DarkModeProvider } from "hooks"
 
 export const metadata = {

@@ -1,6 +1,6 @@
 
 import SketchLink from "@/comps/Links/SketchLink"
-import { getSketchesByCreatorId } from "actions/sketchActions"
+import { getSketchesByCreatorId } from "@/mongo/actions/sketchActions"
 
 export default async function Sketches({params}) {
   const creatorId = params.user || "66bd62276d3999b70d5fd91b"
