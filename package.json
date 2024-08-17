@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "next dev",
-    "api": "nodemon index.mjs",
+    "api": "nodemon mongo/nodemon.js",
     "build": "next build",
     "start": "next start"
   },

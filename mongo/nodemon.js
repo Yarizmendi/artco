@@ -1,10 +1,13 @@
 
-import UserModel from "./mongo/models/user.model.js"
-import ImageModel from "./mongo/models/image.model.js"
-import InputModel from "./mongo/models/input.model.js"
-import TextureModel from "./mongo/models/texture.model.js"
-import ShaderModel from "./mongo/models/shader.model.js"
-import SketchModel from "./mongo/models/sketch.model.js"
+import connect from "./index.js"
+import UserModel from "./models/user.model.js"
+import ImageModel from "./models/image.model.js"
+import InputModel from "./models/input.model.js"
+import TextureModel from "./models/texture.model.js"
+import ShaderModel from "./models/shader.model.js"
+import SketchModel from "./models/sketch.model.js"
+
+await connect()
 
 async function getUsers() {
   const sketch = await UserModel.find()
@@ -127,7 +130,8 @@ async function RenameSchemaField() {
   console.log(sketch)
 }
 
-await getUsers()
+const sketch = await SketchModel.find()
+console.log( sketch )
 
 
 

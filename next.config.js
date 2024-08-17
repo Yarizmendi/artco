@@ -11,7 +11,6 @@ const nextConfig = {
   },
   experimental: {
     mdxRs: true,
-    instrumentationHook: true,
   },
   images: {
     remotePatterns: [

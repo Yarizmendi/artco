@@ -76,4 +76,3 @@ typings/
 *.code-workspace
 .vercel
 
-mongo/nodemon.js

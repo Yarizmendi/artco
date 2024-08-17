@@ -1,11 +1,13 @@
 
-import connect from '@/mongo/index.js'
+import connect from 'mongo/index.js'
 import ShaderModel from '@/mongo/models/shader.model.js'
 import UserModel from '@/mongo/models/user.model.js'
 import ImageModel from '@/mongo/models/image.model.js'
 import SketchModel from '@/mongo/models/sketch.model.js'
 import TextureModel from '@/mongo/models/texture.model.js'
 import InputModel from '@/mongo/models/input.model.js'
+
+await connect()
 
 export const getTexturesById = async (id) => TextureModel.find().exec()
 export const getInputs = async () => InputModel.find().exec()
