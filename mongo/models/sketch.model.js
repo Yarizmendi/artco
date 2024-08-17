@@ -12,7 +12,7 @@ const sketchSchema = new mongoose.Schema({
     description: String,
     transitions: Boolean,
   
-    creator: {
+    creatorId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
       required: true,
@@ -31,8 +31,10 @@ const sketchSchema = new mongoose.Schema({
   
     images: [Object],
     noises: [Object],
-    shaders: [Object],
+    inputs: [Object],
     textures: [Object],
+
+  
 })
   
 export default mongoose.models.Sketch || mongoose.model('Sketch', sketchSchema)

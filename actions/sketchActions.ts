@@ -1,56 +1,27 @@
 
-import UserModel from '@/mongo/models/usermodel'
-import ImageModel from '@/mongo/models/image.model'
-import SketchModel from '@/mongo/models/sketchmodel'
+import ShaderModel from '@/mongo/models/shader.model.js'
+import UserModel from '@/mongo/models/user.model.js'
+import ImageModel from '@/mongo/models/image.model.js'
+import SketchModel from '@/mongo/models/sketch.model.js'
+import TextureModel from '@/mongo/models/texture.model.js'
+import InputModel from '@/mongo/models/input.model.js'
 
-const addUser = async user => {
-    const title = user.get('name')
-    const newUser = new UserModel({ title })
-    return newUser.save()
-}
+export const getTexturesById = async (id) => TextureModel.find().exec()
+export const getInputs = async () => InputModel.find().exec()
 
+export const createUser = async user => UserModel.create({ user })
 export const getUsers = async () => UserModel.find().exec()
 export const getUser = async ({user}) => UserModel.findOne({user}).exec()
 
+export const getShaders = async ({_id}) => ShaderModel.findOne({_id}).exec()
 
-const addSketch = async sketch => {
-    const title = sketch.get('title')
-    const description = sketch.get('description')
-    const newPost = new SketchModel({ title, description })
-    return newPost.save()
-}
+export const createSketch = async sketch => SketchModel.create({ sketch })
+export const updateSketch = async (_id, sketch) => SketchModel.updateOne({_id}, sketch)
+export const getSKetches = async () => SketchModel.find().exec()
+export const getSKetch = async ( title ) => SketchModel.findOne({ title }).exec()
+export const getSketchesByCreatorId = async ({ creatorId }) => SketchModel.find({ creatorId }).exec()
 
-async function updateSketch(title="aqua") {
-  const sketch = SketchModel.findOne({title}).projection({ title })
-  console.log(sketch);
-}
-  
-const getSKetch = async ( title ) => {
-    return SketchModel.findOne({ title }).populate("creator").exec()
-}
-
-const getSketchesByCreatorId = async ({ creator }) => {
-    return SketchModel.find({ creator }).exec()
-}
-
-const getImagesByCreatorId = async ({ uploaderId }) => {
-    return ImageModel.find({ uploaderId }).exec()
-}
-
-
-const getSKetches = async () => {
-    return SketchModel.find().exec()
-}
-
-const getImages = async () => {
-    return ImageModel.find().exec()
-}
-
-
-export { 
-    getSKetch,
-    getSKetches,
-    getSketchesByCreatorId,
-    getImagesByCreatorId,
-    getImages,
- }
+export const createImage = async img => ImageModel.create({ img })
+export const getImages = async () => ImageModel.find().exec()
+export const getImageById = async ({id}) => ImageModel.findOne({id}).exec()
+export const getImagesByCreatorId = async ({ uploaderId }) => ImageModel.find({ uploaderId }).exec()

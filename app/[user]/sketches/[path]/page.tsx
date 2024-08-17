@@ -1,6 +1,6 @@
 
 import Sketch from "views/PathSketch"
-import { getSKetch } from "actions/sketchActions"
+import { getShaders, getSKetch } from "actions/sketchActions"
 
 export default async function Page({ params }) {
   const {
@@ -9,21 +9,24 @@ export default async function Page({ params }) {
     title, 
     images,
     noises,
-    shaders, 
+    inputs, 
     textures,
     displayName,
     transitions,
   } =  await getSKetch( params.path )
 
-  return <Sketch 
-    vert={vert}
-    frag={frag}
-    title={title}
-    images={images}
-    noises={noises}
-    shaders={shaders}
-    textures={textures}
-    displayName={displayName}
-    transitions={transitions}
-  />
+
+  const sk = {
+    vert,
+    frag,
+    title, 
+    images,
+    noises,
+    inputs,
+    textures,
+    displayName,
+    transitions,
+  }
+
+  return  <Sketch {...sk} />
 }

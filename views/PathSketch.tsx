@@ -14,13 +14,13 @@ export default function PathSKetch({
   title, 
   images,
   noises,
-  shaders, 
+  inputs, 
   textures,
   displayName,
   transitions,
 }) {
 
-  let inputs = shaders
+  let shaders = inputs
   let mp5 = null
   let parentRef = useRef()
   const [ isMounted, setIsMounted ] = useState(false)
@@ -186,5 +186,5 @@ export default function PathSKetch({
     }
   }
 
-  return <P5Sketch parentRef={parentRef} shaders={shaders} title={ displayName }/>
+  return <P5Sketch parentRef={parentRef} shaders={inputs} title={ displayName }/>
 }

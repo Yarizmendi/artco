@@ -25,9 +25,9 @@ export const getImgName = ( path: string ) => {
     return { imgName, imgFile }
   }
 
-export const stripFileExtension = path => path.split('.')[ 0 ].replace(/_/g, ' ' )
+// export const stripFileExtension = path => path.split('.')[ 0 ].replace(/_/g, ' ' )
   
-export const rmUnderScores = ( text: string, replacement=' ' ) => text.replace(/_/g, replacement )
+// export const rmUnderScores = ( text: string, replacement=' ' ) => text.replace(/_/g, replacement )
 
 
 

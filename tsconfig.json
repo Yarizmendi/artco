@@ -28,11 +28,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "plugins": [{"name": "next" }]
   },
   "include": [
     "next-env.d.ts",
@@ -40,8 +36,8 @@
     "**/*.tsx",
     "**/**/*.ts",
     "**/**/*.tsx",
-    ".next/types/**/*.ts"
-, "mongo/models/sketchmodel.js", "mongo/models/usermodel.js", "mongo/models/blogmodel.js", "mongo/index.js"  ],
+    ".next/types/**/*.ts",
+  ],
   "exclude": [
     "node_modules"
   ]

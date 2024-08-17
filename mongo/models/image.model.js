@@ -10,6 +10,7 @@ const imageSchema = new mongoose.Schema({
     description: String,
     uploadedAt: Date,
     downloadUrl: String,
+    type: String,
     
     uploaderId: {
       type: mongoose.SchemaTypes.ObjectId,
