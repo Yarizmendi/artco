@@ -2,9 +2,8 @@
 import Link from 'next/link'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
-import { getRoutes } from '@/mongo/actions/routes'
+import { getRoutes } from 'actions/routes'
 import { LogoName } from './Logo'
-import { ICONS_OUTLINE } from '@/p5/Controls'
 
 async function NavBar() {
   const routes = await getRoutes()

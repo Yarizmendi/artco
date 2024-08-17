@@ -1,4 +1,4 @@
-import { getRandomElement } from "@/mongo/actions/utils"
+import { getRandomElement } from "actions/utils"
 import classnames from "classnames"
 
 interface ITagUi {

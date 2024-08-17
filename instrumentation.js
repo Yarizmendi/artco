@@ -1,4 +1,4 @@
-import connect from '@/mongo/db.js'
+import connect from '@/mongo/index.js'
 
 export async function register() {
     await connect()

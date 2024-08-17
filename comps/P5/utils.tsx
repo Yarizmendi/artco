@@ -1,8 +1,6 @@
 
-
-
 import { colors } from "@/comps/Tags/tag"
-import { getRandomElement } from "@/mongo/actions/utils"
+import { getRandomElement } from "actions/utils"
 import classnames from "classnames"
 
 export function RandomBorder (size="m") {

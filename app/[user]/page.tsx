@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getUser } from "@/mongo/actions/sketchActions"
 
 const collections = [
   { title: "sketches", id: 0, path: "/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png" },
@@ -32,7 +31,6 @@ const artistStyles = {
 
 
 export default async function ArtistPage({ params }) {
-  const { username, _id } = await getUser({ ...params.path })
   return (
     <div className="flex flex-col justify-center grow">
       {/* <div className="border">

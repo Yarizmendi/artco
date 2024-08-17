@@ -1,5 +1,5 @@
 
-import { DESCRIPTION } from "@/mongo/actions/utils"
+import { DESCRIPTION } from "actions/utils"
 import classnames from "classnames"
 
 export const box = classnames(

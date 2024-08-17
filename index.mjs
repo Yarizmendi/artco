@@ -1,24 +1,24 @@
 
-import UserModel from "./models/user.model.js"
-import ImageModel from "./models/image.model.js"
-import InputModel from "./models/input.model.js"
-import TextureModel from "./models/texture.model.js"
-import ShaderModel from "./models/shader.model.js"
-import SketchModel from "./models/sketch.model.js"
+import UserModel from "./mongo/models/user.model.js"
+import ImageModel from "./mongo/models/image.model.js"
+import InputModel from "./mongo/models/input.model.js"
+import TextureModel from "./mongo/models/texture.model.js"
+import ShaderModel from "./mongo/models/shader.model.js"
+import SketchModel from "./mongo/models/sketch.model.js"
 
-import { list } from "@vercel/blob";
-import connect from './db.js'
-
-await connect()
-
-async function getUserById() {
-  const sketch = await UserModel.find().exec()
+async function getUsers() {
+  const sketch = await UserModel.find()
   console.log(sketch)
 }
 
 async function getSketchByTitle() {
   const sketch = await SketchModel.findOne().populate("creator").exec()
   console.log(sketch.creator);
+}
+
+async function getSketches() {
+  const sketch = await SketchModel.find().exec()
+  console.log(sketch);
 }
 
 async function updateSketch(_id="66bdb2564ca6cabf9f8793d1") {
@@ -127,11 +127,9 @@ async function RenameSchemaField() {
   console.log(sketch)
 }
 
+await getUsers()
 
 
-
-
-// addSchemaField()
 
 
 

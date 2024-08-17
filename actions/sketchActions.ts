@@ -1,4 +1,5 @@
 
+import connect from '@/mongo/index.js'
 import ShaderModel from '@/mongo/models/shader.model.js'
 import UserModel from '@/mongo/models/user.model.js'
 import ImageModel from '@/mongo/models/image.model.js'
@@ -11,7 +12,7 @@ export const getInputs = async () => InputModel.find().exec()
 
 export const createUser = async user => UserModel.create({ user })
 export const getUsers = async () => UserModel.find().exec()
-export const getUser = async ({user}) => UserModel.findOne({user}).exec()
+export const getUser = async (usernme) => UserModel.findOne({username:"Benji"}).exec()
 
 export const getShaders = async ({_id}) => ShaderModel.findOne({_id}).exec()
 

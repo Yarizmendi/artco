@@ -75,3 +75,5 @@ typings/
 .vscode/
 *.code-workspace
 .vercel
+
+mongo/nodemon.js
