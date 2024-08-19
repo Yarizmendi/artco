@@ -11,6 +11,11 @@ const nextConfig = {
   },
   experimental: {
     mdxRs: true,
+    serverActions: {
+      allowedOrigins: ["zany-garbanzo-7vw7p9jvx6w3xgvv.github.dev", "localhost:3000"],
+      // allowedForwardedHosts: ["localhost:3000"],
+      // ^ You might have to use this property depending on your exact version.
+    }
   },
   images: {
     remotePatterns: [

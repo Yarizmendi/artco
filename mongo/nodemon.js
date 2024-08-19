@@ -130,8 +130,21 @@ async function RenameSchemaField() {
   console.log(sketch)
 }
 
-const sketch = await SketchModel.find()
-console.log( sketch )
+async function createSketch() {
+
+  const shaderInput =  
+
+  {  
+    title: "Waves Shader",
+    icon: "heat",
+    description: "Ocean Motion",
+    inputIds: ["66c0231a26fb9c0fdb5b1f71"],
+    textureIds: ["66c023dd5b84addbc1675f72"],
+  }
+
+  const shader = await ShaderModel.create(shaderInput)
+  console.log(shader)
+}
 
 
 

@@ -20,7 +20,6 @@ export default function PathSKetch({
   transitions,
 }) {
 
-  let shaders = inputs
   let mp5 = null
   let parentRef = useRef()
   const [ isMounted, setIsMounted ] = useState(false)
