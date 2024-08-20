@@ -1,6 +1,6 @@
 
 import Sketch from "./PathSketch"
-import { getSKetch } from "actions/sketchActions"
+import { getSketchByTitle } from "actions/sketches/getSketches"
 
 export default async function Page({ params }) {
   const {
@@ -13,8 +13,7 @@ export default async function Page({ params }) {
     textures,
     displayName,
     transitions,
-  } =  await getSKetch( params.path )
-
+  } =  await getSketchByTitle( params.path )
 
   const sk = {
     vert,
