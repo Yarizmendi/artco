@@ -1,7 +1,8 @@
 
 const baseNavLinks = [
     { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
-    { title: "prints", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
+    { title: "motions", path: `/motions`},
+    { title: "articles", path: `/blog`},
     { title: "paintings", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`}
   ]
 

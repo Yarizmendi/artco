@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
-import { getRoutes } from 'actions/sketches/routes'
+import { getRoutes } from 'actions/routes'
 import { LogoName } from './Logo'
 
 async function NavBar() {
@@ -18,10 +18,6 @@ async function NavBar() {
         <LogoName/>
       </div>
       <nav className='flex justify-center items-center'>
-
-        {/* <Link href={`/`} className={classNames("flex ")}>
-          <span className={ICONS_OUTLINE}>home</span>
-        </Link> */}
     
         { routes.map((link,i)=> 
           <Link key={i} href={link.path} className={classNames("uppercase text-xs m-2")}>

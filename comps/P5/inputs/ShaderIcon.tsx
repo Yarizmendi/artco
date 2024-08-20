@@ -1,5 +1,6 @@
 
 import classNames from "classnames"
+import { ICONLINED } from "data/css"
 
 export const shaderIconWithLabelStyle = classNames(
     "rounded cursor-pointer",
@@ -11,7 +12,7 @@ export const shaderIconWithLabelStyle = classNames(
 export const ShaderIcon = ({ icon, label }: { icon: string, label?: string }) => {
      return (
        <div className={shaderIconWithLabelStyle}>
-         <span className="material-symbols-outlined">{ icon }</span>
+         <span className={ICONLINED}>{ icon }</span>
          <p className="text-sm text-white">{label}</p>
        </div>
      )

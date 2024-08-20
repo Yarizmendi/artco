@@ -1,15 +1,15 @@
 
 
-export function Input({ type, title, value, placeholder }: { type?: string, title: string, value?: any, placeholder?: string }) {
+export function Input({ type, title, value, placeholder, style }: { type?: string, title: string, value?: any, placeholder?: string, style?: any }) {
     const InputCmpt = () => {
         if ( type == "textarea" ) return <textarea name={ title } />
         else if ( type == "textures" ) {}
-        else return <input className="bg-slate-200 dark:bg-slate-950 text-md" name={title} type={type} defaultValue={value} placeholder={placeholder} />
+        else return <input className={"dark:bg-slate-950 py-1 px-2 rounded"} name={title} type={type} defaultValue={value} placeholder={placeholder} />
     }
     return (
-        <div className='flex flex-col my-2'>
+        <div className='flex flex-col my-2 font-light text-sm'>
             <InputCmpt />
-            <label className="text-xs self-end">{title}</label>
+            <label className={"text-xs self-end px-2 py-1"}>{title}</label>
         </div>
     )
 }
