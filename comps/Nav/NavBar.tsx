@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
-import { getRoutes } from 'actions/routes'
+import { getRoutes } from 'actions/sketches/routes'
 import { LogoName } from './Logo'
 
 async function NavBar() {

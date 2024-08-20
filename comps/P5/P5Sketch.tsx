@@ -1,8 +1,8 @@
 
 import classnames from "classnames"
 import  { Sliders }  from "./Slider"
-import { ShaderIconsWithLabels } from "./Shader"
 import { DESCRIPTION } from "actions/utils"
+import { ShaderIcon } from "./inputs/ShaderIcon"
 
 export const sketchTitleClasses = classnames(
   "px-2 mt-4",
@@ -33,7 +33,9 @@ export function P5Sketch({
     <SketchLayout>
       <CanvasCtn parentRef={parentRef} />
       <SketchControls>
-        <ShaderIconsWithLabels shaders={shaders} />
+        <div className="dark:bg-slate-950">
+          {shaders.map(inpt=><ShaderIcon key={inpt._id} icon={inpt.icon} label={inpt.label} />)}
+        </div>
         <div>
           <SketchTitle title={title} />
           <p className="p-4 text-sm">{DESCRIPTION}</p>
