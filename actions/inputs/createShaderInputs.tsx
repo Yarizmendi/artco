@@ -2,6 +2,7 @@
 "use server"
 import connect from 'mongo/index.js'
 import InputModel from '@/mongo/models/input.model.js'
+import { redirect } from 'next/navigation'
 
 export async function createShaderAction ( formData: FormData ) {
     const shaderInputBody = {
@@ -18,6 +19,6 @@ export async function createShaderAction ( formData: FormData ) {
         }
     }
     await connect()
-    const res = await InputModel.create(shaderInputBody)
-    // console.log(res)
+    await InputModel.create(shaderInputBody)
+    redirect("/motions")
 }

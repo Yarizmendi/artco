@@ -9,11 +9,8 @@ import SketchModel from '@/mongo/models/sketch.model.js'
 import TextureModel from '@/mongo/models/texture.model.js'
 import InputModel from '@/mongo/models/input.model.js'
 
-// await connect()
-
 export const getTexturesById = async (id) => TextureModel.find().exec()
 // export const getInputs = async () => await InputModel.find().exec()
-
 
 export async function getInputs () {
     await connect()
@@ -21,9 +18,6 @@ export async function getInputs () {
     // console.log(inpts)
     return inpts
 }
-
-
-
 
 export const createUser = async user => UserModel.create({ user })
 export const getUsers = async () => UserModel.find().exec()
