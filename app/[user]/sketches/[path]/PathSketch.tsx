@@ -18,6 +18,7 @@ export default function PathSKetch({
   textures,
   displayName,
   transitions,
+  description
 }) {
 
   let mp5 = null
@@ -185,5 +186,5 @@ export default function PathSKetch({
     }
   }
 
-  return <P5Sketch parentRef={parentRef} shaders={inputs} title={ displayName }/>
+  return <P5Sketch description={description} parentRef={parentRef} shaders={inputs} title={ displayName }/>
 }

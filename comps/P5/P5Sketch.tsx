@@ -22,12 +22,13 @@ const titleClass = classnames("text-[20px] uppercase mx-4 md:mt-4")
 export const SketchTitle = ({ title }) => <p className={titleClass}>{title} sketch</p>
 
 export const DownloadLink = () => <a id="download" className="hidden"/>
-const fileInputClass = classnames("flex text-md w-fit mx-6 md:mt-4")
+const fileInputClass = classnames("flex text-sm w-fit mx-6 md:mt-4")
 
 export function P5Sketch({
   title,
   shaders,
   parentRef,
+  description
 }) {
   return (
     <SketchLayout>
@@ -38,7 +39,7 @@ export function P5Sketch({
         </div>
         <div>
           <SketchTitle title={title} />
-          <p className="p-4 text-sm">{DESCRIPTION}</p>
+          <p className="p-4 text-sm">{description}</p>
           <Sliders sliders={shaders} />
           <span id="files" className={fileInputClass} />
         </div>

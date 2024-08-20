@@ -13,6 +13,7 @@ export default async function Page({ params }) {
     textures,
     displayName,
     transitions,
+    description
   } =  await getSketchByTitle( params.path )
 
   const sk = {
@@ -25,6 +26,7 @@ export default async function Page({ params }) {
     textures,
     displayName,
     transitions,
+    description
   }
 
   return  <Sketch {...sk} />
