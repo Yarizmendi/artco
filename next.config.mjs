@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+import createMDX from '@next/mdx'
+
 const nextConfig = {
   webpack: ( config ) => {
     config.module.rules.push({
@@ -9,14 +12,15 @@ const nextConfig = {
     });
     return config
   },
+
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+
   experimental: {
-    mdxRs: true,
     serverActions: {
       allowedOrigins: ["zany-garbanzo-7vw7p9jvx6w3xgvv.github.dev", "localhost:3000"],
-      // allowedForwardedHosts: ["localhost:3000"],
-      // ^ You might have to use this property depending on your exact version.
     }
   },
+
   images: {
     remotePatterns: [
       {
@@ -27,15 +31,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: `https://static.wixstatic.com`
       }
-
     ],
+
   },
+
 }
 
-const withMDX = require('@next/mdx')({
-  options: {
-    providerImportSource: '@mdx-js/react',
-  }
+const withMDX = createMDX({
+// providerImportSource: '@mdx-js/react',
 })
 
-module.exports = withMDX(nextConfig)
+export default withMDX(nextConfig)
