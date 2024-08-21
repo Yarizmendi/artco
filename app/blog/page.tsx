@@ -1,12 +1,10 @@
 
 import TestMdxPage from "../mdx/test.mdx"
+import "@/styles/a11y-dark.css"
+import "@/styles/github-dark.css"
 
 export default function Articles() {
-  // const servertoClientPropErr = ""
-  // const plainObjectPropErr = ""
   return (
-    <div className="">
-        <TestMdxPage />
-    </div>
+    <TestMdxPage />
   )
 }

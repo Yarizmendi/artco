@@ -14,7 +14,8 @@
       "@/css/*": ["css/*"],
       "@/api/*": ["app/api/*"],
       "@/hooks/*": ["hooks"],
-      "@/mongo/*": ["mongo/*"]
+      "@/mongo/*": ["mongo/*"],
+      "@/styles/*": ["styles/*"]
     },
     "allowImportingTsExtensions": true,
     "allowJs": true,

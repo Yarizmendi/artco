@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 import createMDX from '@next/mdx'
+import rehypeHighlight from 'rehype-highlight'
 
 const nextConfig = {
   webpack: ( config ) => {
@@ -38,7 +39,10 @@ const nextConfig = {
 }
 
 const withMDX = createMDX({
-// providerImportSource: '@mdx-js/react',
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [rehypeHighlight],
+  },
 })
 
 export default withMDX(nextConfig)

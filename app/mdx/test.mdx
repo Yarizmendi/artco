@@ -1,8 +1,24 @@
 
-## This is a heading
- 
-This is a list in markdown:
- 
-- One
-- Two
-- Three
+export const metadata = {
+	title: "My first blog post",
+	description: "An awesome blog post about important stuff",
+	date: new Date('2023-12-24'),
+	author: 'donis.dev'
+};
+
+#### Learning Articles
+
+##### Can only render plain object error 
+- caused by server responses containing data types that are not React Serializable
+
+##### Can not pass functions as props [in Client Components]
+- caused by not appening "Action" to server actions 
+- Necessary to enable passing server actions to the client as event handlers
+
+##### Other unclassified
+- Formdata and Mongo Objectss are examples of server data that may have to be
+converted using methods like `formData.get()` and `Array.from()`
+
+```js
+const advancing: boolean = true
+```
