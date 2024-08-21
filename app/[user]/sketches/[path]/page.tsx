@@ -1,5 +1,5 @@
 
-import Sketch from "./PathSketch"
+import Sketch from "./AffineSketch"
 import { getSketchByTitle } from "actions/sketches/getSketches"
 
 export default async function Page({ params }) {
