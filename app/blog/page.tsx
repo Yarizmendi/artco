@@ -1,11 +1,11 @@
 
-import TestMdxPage from "../mdx/tes.mdx"
+import TestMdxPage from "../mdx/test.mdx"
 
 export default function Articles() {
   // const servertoClientPropErr = ""
   // const plainObjectPropErr = ""
   return (
-    <div className="grow">
+    <div className="">
         <TestMdxPage />
     </div>
   )
