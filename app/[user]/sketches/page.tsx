@@ -1,12 +1,13 @@
 
 import { IconLink } from "@/comps/Links/IconLink"
 import SketchLink from "@/comps/Links/SketchLink"
-import { getSketchesByCreatorId } from "actions/sketchActions"
+import { getSKetchesByCreatorId } from "actions/sketches/getSketches"
+
 import { USERID } from "data/id"
 
 export default async function Sketches({params}) {
   const creatorId = params.user || USERID
-  const showcases = await getSketchesByCreatorId({ creatorId }).then(s=>s.reverse())
+  const showcases = await getSKetchesByCreatorId({ creatorId }).then(s=>s.reverse())
   return (
     <div className="grow">
       <h1 className="text-xl m-8">Generative Art</h1>

@@ -1,6 +1,6 @@
 
 import Sketch from "./PathSketch"
-import { getSketchByTitle } from "actions/users/sketches/getSketches"
+import { getSketchByTitle } from "actions/sketches/getSketches"
 
 export default async function Page({ params }) {
   const {
