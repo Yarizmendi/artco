@@ -4,6 +4,7 @@ import { getSketchByTitle } from "actions/sketches/getSketches"
 
 export default async function Page({ params }) {
   const {
+    _id,
     vert,
     frag,
     title, 
@@ -17,6 +18,7 @@ export default async function Page({ params }) {
   } =  await getSketchByTitle( params.path )
 
   const sk = {
+    id: _id.toString(),
     vert,
     frag,
     title, 

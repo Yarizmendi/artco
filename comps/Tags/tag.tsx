@@ -28,42 +28,41 @@ interface ITagUi {
     })} />
   
 
-export const Tag = ({ color, title, size = "small", style="outlined" }: ITagUi ) => {
+export const Tag = ({ color, title, size = "small" }: ITagUi ) => {
 
   color = color || getRandomElement( colors )
   
   const sizeClasses = {
-    small: "pl-2 pr-[5px] border-b",
+    small: "border-b",
     medium: "pl-2 pr-3 py-1 border-b",
     large: "pl-3 pr-4 py-2 border-b-2",
   }
 
   const colorClasses = {
-    green: "text-black bg-green-200 border-green-400 dark:border-b dark:border-green-400 dark:bg-gray-900 dark:text-green-400",
-    blue: "text-black bg-blue-200 border-blue-400 dark:border-b dark:border-blue-400 dark:bg-gray-900 dark:text-blue-400",
-    red: "text-black bg-red-200 border-red-400 dark:border-b dark:border-red-400 dark:bg-gray-900 dark:text-red-400",
-    purple: "text-black bg-purple-200 border-purple-400 dark:border-b dark:border-purple-100 dark:bg-gray-900 dark:text-purple-400",
-    yellow: "text-black bg-yellow-200 border-yellow-400 dark:border-b dark:border-yellow-100 dark:bg-gray-900 dark:text-yellow-400",
-    orange: "text-black bg-orange-200 border-orange-400 dark:border-b dark:border-orange-100 dark:bg-gray-900 dark:text-orange-400",
-    stone: "text-black bg-stone-200 border-stone-400 dark:border-b dark:border-stone-100 dark:bg-gray-900 dark:text-stone-400",
+    green: "text-black bg-green-200 border-green-400 dark:border-b dark:border-green-600 dark:bg-gray-900 dark:text-green-400",
+    blue: "text-black bg-blue-200 border-blue-400 dark:border-b dark:border-blue-600 dark:bg-gray-900 dark:text-blue-400",
+    red: "text-black bg-red-200 border-red-400 dark:border-b dark:border-red-600 dark:bg-gray-900 dark:text-red-400",
+    purple: "text-black bg-purple-200 border-purple-400 dark:border-b dark:border-purple-600 dark:bg-gray-900 dark:text-purple-400",
+    yellow: "text-black bg-yellow-200 border-yellow-600 dark:border-b dark:border-yellow-600 dark:bg-gray-900 dark:text-yellow-400",
+    orange: "text-black bg-orange-200 border-orange-400 dark:border-b dark:border-orange-600 dark:bg-gray-900 dark:text-orange-400",
+    stone: "text-black bg-stone-200 border-stone-400 dark:border-b dark:border-stone-600 dark:bg-gray-900 dark:text-stone-400",
   };
   
 
   return (
     <div
       className={classnames(
-        "w-fit mx-1 ",
+        "rounded",
         "flex items-center",
-        "rounded-full",
-        "shadow-sm",
+        "flex-wrap overflow-hidden",
         colorClasses[color],
         sizeClasses[size],
       )}>
       <Dot color={color} />
       <p 
         className={classnames(
-          "text-xs font-semibold", 
-          "max-h-[15px]"
+          "text-[8px] font-semibold pr-2", 
+          "max-h-[15px] max-w-[100px]"
         )}>
         {title}
       </p>
