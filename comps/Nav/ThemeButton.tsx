@@ -17,10 +17,10 @@ function ThemeButton() {
         onClick={handleThemeChange}
         className={classNames(
         "material-symbols-outlined",
-        "cursor-pointer text-[30px]",
+        "cursor-pointer text-[40px]",
         "inline-block text-transparent bg-clip-text",
         "bg-gradient-to-r",
-        "from-blue-600 via-orange-500 to-indigo-400",
+        "from-blue-600 via-green-400 to-indigo-400",
         "dark:from-blue-600 dark:via-yellow-500 dark:to-indigo-400",
       )}> 
       {themeClass=="dark" ? "dark_mode" : "light_mode"}

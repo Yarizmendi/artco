@@ -1,6 +1,6 @@
 
 
-export function Input({ type, title, value, placeholder }: { type?: string, title: string, value?: any, placeholder?: string, style?: any }) {
+export function Input({ type, title, value, placeholder, labelName }: { type?: string, title: string, value?: any, placeholder?: string, style?: any, labelName?: string }) {
     const InputCmpt = () => {
         if ( type == "textarea" ) return <textarea name={ title } />
         else if ( type == "textures" ) {}
@@ -9,7 +9,7 @@ export function Input({ type, title, value, placeholder }: { type?: string, titl
     return (
         <div className='flex flex-col my-1 font-light text-sm'>
             <InputCmpt />
-            <label className={"text-xs self-end px-2 py-1"}>{title}</label>
+            <label className={"text-xs self-end px-2 py-1"}>{labelName || title }</label>
         </div>
     )
 }

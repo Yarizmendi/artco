@@ -21,10 +21,11 @@ export const ActionButton = ({
 
   const actionBtnStyle = classNames(
     "my-2 px-4 py-2",
-    "rounded text-xs text-slate-200 font-semibold",
+    "rounded text-xs text-slate-100 font-semibold",
     color == "red" && "bg-red-900",
     color == "blue" && "bg-blue-900",
     color == "green" && "bg-green-900",
+    color == "orange" && "dark:bg-orange-800 bg-orange-700",
   )
 
   return (
