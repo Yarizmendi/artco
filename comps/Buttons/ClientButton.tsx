@@ -17,7 +17,7 @@ export const ClientButton = ({
   }) => {
 
   const actionBtnStyle = classNames(
-    "my-2 px-4 py-2",
+    "my-2 px-4 py-2 text-slate-200",
     "rounded text-xs font-semibold",
     color == "red" && "bg-red-900",
     color == "blue" && "bg-blue-900",

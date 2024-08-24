@@ -3,6 +3,7 @@
 import connect from 'mongo/index.js'
 import { redirect } from 'next/navigation'
 import SketchModel from '@/mongo/models/sketch.model'
+import { revalidatePath } from 'next/cache'
 
 export async function createSketchAction ( formData: FormData ) {
     const id = formData.get("creatorId")
@@ -40,5 +41,6 @@ export async function createSketchAction ( formData: FormData ) {
 
     await connect()
     await SketchModel.create(sketchInputBody)
+    revalidatePath(`/${id}/sketches/`)
     redirect(`/${id}/sketches/`)
 }

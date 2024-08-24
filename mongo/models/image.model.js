@@ -11,6 +11,7 @@ const imageSchema = new mongoose.Schema({
     uploadedAt: Date,
     downloadUrl: String,
     type: String,
+    contentType: String,
     
     uploaderId: {
       type: mongoose.SchemaTypes.ObjectId,
