@@ -16,9 +16,10 @@ export default function CreateSketchPage({ params }) {
       <div className="grow p-4">
       
         <form action={createSketchAction}>
-          <div className="flex items-center">
-              <h1 className="text-2xl mx-8">Create Sketch</h1>
-              <ActionButton idleTxt="create" />
+
+          <div className="flex items-center px-4 gap-4">
+            <ActionButton idleTxt="create" />
+            <h1 className="text-xl">sketch</h1>
           </div>
 
           <div className="m-4 flex justify-between" >

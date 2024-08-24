@@ -15,7 +15,7 @@ export function IconLink({
   }) {
   return (
     <Link href={href}>
-      <span className={googleCssClass}>{googleIconName}</span>
+      <span className={googleCssClass + " text-3xl"}>{googleIconName}</span>
       <p>{txt}</p>
     </Link>
   )

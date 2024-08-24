@@ -61,7 +61,7 @@ export const Tag = ({ color, title, size = "small" }: ITagUi ) => {
       <Dot color={color} />
       <p 
         className={classnames(
-          "text-[8px] font-semibold pr-2", 
+          "text-[8px] font-semibold pr-2 flex items-center", 
           "max-h-[15px] max-w-[100px]"
         )}>
         {title}
