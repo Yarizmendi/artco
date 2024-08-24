@@ -1,12 +1,32 @@
 
 
-export function Datalist({ list, dataArr }: { list?: string, dataArr: any[] }) {
+export function Datalist({ title, list, dataArr }: { title: string, list?: string, dataArr: any[] }) {
     return (
-        <div className={"mb-4"}>
-            <input className="dark:bg-slate-950 w-full py-1 px-2 rounded" list={list} />
-            <datalist id={list}>
-              {dataArr.map( st => <option key={ st._id.toString() } value={ st._id.toString() }>{ st.uniform || st.title } </option> )}
-            </datalist>
+        <div className={"mb-4 font-light text-sm"}>
+            <label htmlFor={title}>{title}:</label>
+            <select 
+              // multiple
+              name={title} 
+              id={list} 
+              className="dark:bg-slate-950 w-full py-1 px-2 rounded" >
+              {/* <option value="">options</option> */}
+              {dataArr.map( st => <option className="text-sm font-light" key={ st._id.toString() } value={ st._id.toString() }>{ st.uniform || st.title } </option> )}
+            </select>
         </div>
     )
 }
+
+export function BoolSelect({ title, list, dataArr }: { title: string, list?: string, dataArr: any[] }) {
+    return (
+        <div className={"mb-4 font-light text-sm"}>
+            <label htmlFor={title}>{title}:</label>
+            <select 
+              name={title} 
+              id={list} 
+              className="dark:bg-slate-950 w-full py-1 px-2 rounded" >
+              {dataArr.map((st, idx) => <option key={idx} className="text-sm font-light" value={ st }>{ st } </option> )}
+            </select>
+        </div>
+    )
+}
+

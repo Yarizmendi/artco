@@ -16,6 +16,6 @@ export async function getSKetchesByCreatorId ({ creatorId }) {
 
 export async function getSketchByTitle (sketchTitle) {
     await connect()
-    const sketches = SketchModel.findOne({ title: sketchTitle }).exec()
+    const sketches = SketchModel.findOne({ title: sketchTitle }).populate("")
     return sketches
 }

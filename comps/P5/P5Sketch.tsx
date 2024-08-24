@@ -1,8 +1,9 @@
 
 import classnames from "classnames"
 import  { Sliders }  from "./Slider"
-import { DESCRIPTION } from "actions/utils"
 import { ShaderIcon } from "./inputs/ShaderIcon"
+import { deleteSketchAction } from "actions/sketches/deleteSketchAction"
+import { ClientButton } from "../Buttons/ClientButton"
 
 export const sketchTitleClasses = classnames(
   "px-2 mt-4",
@@ -18,13 +19,14 @@ export const CanvasCtn = ({ parentRef }) => <div className={canvas} id="Parent" 
 const controls = classnames("flex md:w-1/2")
 export const SketchControls = ({ props, children }:{ props?:any, children?:any }) => <div {...props } id={"ctrls"} className={controls}>{children}</div>
 
-const titleClass = classnames("text-[20px] uppercase mx-4 md:mt-4")
+const titleClass = classnames("text-[20px] uppercase mx-4")
 export const SketchTitle = ({ title }) => <p className={titleClass}>{title} sketch</p>
 
 export const DownloadLink = () => <a id="download" className="hidden"/>
 const fileInputClass = classnames("flex text-sm w-fit mx-6 md:mt-4")
 
 export function P5Sketch({
+  id,
   title,
   shaders,
   parentRef,
@@ -35,10 +37,13 @@ export function P5Sketch({
       <CanvasCtn parentRef={parentRef} />
       <SketchControls>
         <div className="dark:bg-slate-950">
-          {shaders.map(inpt=><ShaderIcon key={inpt._id} icon={inpt.icon} label={inpt.label} />)}
+          {shaders.length > 1 && shaders.map(inpt=><ShaderIcon key={inpt._id} icon={inpt.icon} label={inpt.label} />)}
         </div>
         <div>
-          <SketchTitle title={title} />
+          <div className="flex items-center md:mt-4">
+            <SketchTitle title={title} />
+            <ClientButton idleTxt={"delete"} color={"red"} actionFunct={deleteSketchAction} dataId={id} />
+          </div>
           <p className="p-4 text-sm">{description}</p>
           <Sliders sliders={shaders} />
           <span id="files" className={fileInputClass} />

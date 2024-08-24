@@ -9,6 +9,7 @@ import { useState, useRef, useEffect } from "react"
 
 
 export default function PathSKetch({ 
+  id, 
   vert,
   frag,
   title, 
@@ -87,6 +88,7 @@ export default function PathSKetch({
     p.draw = () => {
 
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
+
       handleControls()
 
       inputs.map(( input ) => {
@@ -157,7 +159,7 @@ export default function PathSKetch({
       inptImg = p.createFileInput(handleImage, true)
       inptImg.parent("files")
 
-      inputs.map( input => {
+      inputs && inputs.map( input => {
         if ( input.type == "slider" ) {
           const { min, max, value, step } = input.settings
           input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
@@ -273,5 +275,5 @@ export default function PathSKetch({
     }
   }
 
-  return <P5Sketch description={description} parentRef={parentRef} shaders={inputs} title={ displayName }/>
+  return <P5Sketch id={id} description={description} parentRef={parentRef} shaders={inputs} title={ displayName }/>
 }

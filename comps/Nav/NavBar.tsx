@@ -9,7 +9,7 @@ async function NavBar() {
   const routes = await getRoutes()
   return (
     <header className={classNames(
-      "h-[80px] px-[40px] py-2 tracking-widest",
+      "min-h-[80px] px-[40px] py-2 tracking-widest",
       "flex flex-col justify-between items-center md:flex-row",
       "bg-slate-200 dark:bg-slate-950 rounded"
     )}>
