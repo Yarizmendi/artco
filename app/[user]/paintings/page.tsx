@@ -1,22 +1,24 @@
 
 import { Painting } from "@/comps/Links/PaintingLink"
-import { UploadImgForm } from "@/comps/Forms/UploadImgForm"
+import { ImageUpload } from "@/comps/Forms/ImageUpload"
 import { getMongoImagesByUploaderId } from "actions/images/getImages"
 import { Suspense } from "react"
+import { SectionSkeleton } from "@/comps/Loading/SectionSkeleton"
 
 export default function Paintings({ params }) {
   const uploaderId = params.user || "66bd62276d3999b70d5fd91b"
   return (
     <div className="flex flex-col items-center justify-center md:flex-row md:items-start grow mt-8 px-8 ">
       <div className="min-w-[400px] mt-4 mb-[20px] px-4 md:mt-1 md:mb-1 md:w-1/3">
-        <UploadImgForm uploaderId={uploaderId} />
+        <ImageUpload uploaderId={uploaderId} />
       </div>
-      <Suspense fallback={ <p>loading...</p> }>
+      <Suspense fallback={ <SectionSkeleton /> }>
         <ArtworkSuspense uploaderId={uploaderId} />
       </Suspense>
     </div>
   )
 }
+
 
 async function ArtworkSuspense({ uploaderId }) {
   const images = await getMongoImagesByUploaderId({ uploaderId })

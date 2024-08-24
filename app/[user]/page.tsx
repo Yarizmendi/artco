@@ -30,19 +30,9 @@ const artistStyles = {
 }
 
 
-export default async function ArtistPage({ params }) {
+export default function ArtistPage({ params }) {
   return (
     <div className="flex flex-col justify-center grow">
-      {/* <div className="border">
-        <div className="flex justify-center border w-[220px]">
-          <Image className={"w-[80px] h-[80px] rounded-full"} src={artist.blob} alt={"avi"} width={200} height={200} />
-          <div className="flex-col border self-center p-4">
-            <p className="text-sm self-center">{username}</p>
-            <p className="text-sm self-center">{artist.firstname}</p>
-            <p className="text-sm self-center">{artist.lastname}</p>
-          </div>
-        </div>
-      </div> */}
       <div className={"flex flex-wrap items-center justify-center overflow-auto"}>
       { collections.map(({ title, path, blob },key)=>
         <Link href={ params.user + path } className={"p-2 m-2"} key={key}>

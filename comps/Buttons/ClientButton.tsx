@@ -3,10 +3,11 @@
 import classNames from 'classnames'
 
 export const ClientButton = ({
-   color = "red",
-   actionFunct,
    dataId,
-   type = "button"
+   actionFunct,
+   color = "red",
+   type = "button",
+   idleTxt = "delete"
   }: {
     loadingTxt?: string,
     idleTxt?: string,
@@ -22,6 +23,7 @@ export const ClientButton = ({
     color == "red" && "bg-red-900",
     color == "blue" && "bg-blue-900",
     color == "green" && "bg-green-900",
+    color == "orange" && "bg-orange-700",
   )
 
   return (
@@ -31,7 +33,7 @@ export const ClientButton = ({
         actionFunct(dataId)
       }}
       className={actionBtnStyle} type={type}>
-        { "delete" }
+        { idleTxt }
       </button>
     </div>
   )

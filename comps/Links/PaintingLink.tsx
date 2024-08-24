@@ -1,7 +1,8 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { IconButton } from "../Buttons/IconButton"
+import { ImgActionsBtn } from "../Buttons/ImgActionsBtn"
+import { deleteImageAction } from "actions/images/deleteImage"
 
 export function Painting({ title, displayName, blob, path, id, uploaderId }) {
   return (
@@ -20,7 +21,7 @@ export function Painting({ title, displayName, blob, path, id, uploaderId }) {
 
     <div className="flex">
       <p className="p-1 max-w-[150px] tracking-widest text-xs">{ displayName || title }</p>
-      <IconButton color="red" loadingTxt="deleting" iconName="delete" imageId={id} vercelBlobUrl={blob} uploaderId={uploaderId} />
+      <ImgActionsBtn svrAction={deleteImageAction} color="red" loadingTxt="deleting" iconName="delete" imageId={id} vercelBlobUrl={blob} uploaderId={uploaderId} />
     </div>
 
   </div>

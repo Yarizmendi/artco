@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   updatedAt: Date,
+  createdAt: {
+    type: Date,
+    default: () => Date.now(),
+    immutable: true,
+  },
 })
 
 export default mongoose.models.User || mongoose.model('User', userSchema)

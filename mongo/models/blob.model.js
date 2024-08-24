@@ -8,7 +8,11 @@ const blogSchema = new mongoose.Schema({
   author: String,
   content: String,
   tags: [String],
-  createdAt: Date,
+  createdAt: {
+    type: Date,
+    default: () => Date.now(),
+    immutable: true,
+  },
   updatedAt: Date,
   comments: [{
     user: String,

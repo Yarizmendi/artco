@@ -3,7 +3,7 @@ import { ActionButton } from "@/comps/Buttons/ActionButton"
 import { createShaderAction } from "actions/inputs/createShaderInputs"
 import { Input } from "@/comps/Forms/FormInput"
 
-export default async function CreateMotionPage() {
+export default function CreateMotionPage() {
     return (
       <div className="grow p-4">
         <h1 className="text-2xl text-center">Create Motion Page</h1>

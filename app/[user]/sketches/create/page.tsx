@@ -5,12 +5,12 @@ import { createSketchAction } from "actions/sketches/createSketchAction"
 import { getShaderInputs } from "actions/inputs/getShaderInputs"
 import { getShaderTextures } from "actions/textures/getShaderTextures"
 import { BoolSelect, Datalist } from "@/comps/Forms/DataList"
-import { getImages } from "actions/sketchActions"
 
-export default async function CreateSketchPage({ params }) {
-    const shaderInputs = await getShaderInputs()
-    const shaderTextures = await getShaderTextures()
-    const sketchImages = await getImages()
+import { SectionSkeleton } from "@/comps/Loading/SectionSkeleton"
+import { Suspense } from "react"
+import { getMongoImages } from "actions/images/getImages"
+
+export default function CreateSketchPage({ params }) {
     const transitionsOptions = ["false", "true"]
     return (
       <div className="grow p-4">
@@ -23,10 +23,12 @@ export default async function CreateSketchPage({ params }) {
 
           <div className="m-4 flex justify-between" >
             <div className={"flex flex-col w-1/2 p-2"}>
-              <Input title={"title"} value={"test"} />  ``
-              <Datalist title={"motions"} list="motions" dataArr={shaderInputs} />
-              <Datalist title={"textures"} list="textures" dataArr={shaderTextures} />
-              <Datalist title={"images"} list="images" dataArr={sketchImages} />
+              <Input title={"title"} value={"test"} /> 
+
+              <Suspense fallback={<SectionSkeleton/>}>
+                <DataInputSuspense />
+              </Suspense>
+
               <BoolSelect title={"transitions"} list={"transitions"} dataArr={transitionsOptions} />
               <Input title={"creatorId"} value={params.user} />
               <Input title={"frag"} value={"/matrixScale.frag"} />
@@ -37,5 +39,18 @@ export default async function CreateSketchPage({ params }) {
           </div>
         </form>
       </div>
+    )
+  }
+
+  async function DataInputSuspense() {
+    const sketchImages = await getMongoImages()
+    const shaderInputs = await getShaderInputs()
+    const shaderTextures = await getShaderTextures()
+    return (
+      <>
+        <Datalist title={"motions"} list="motions" dataArr={shaderInputs} />
+        <Datalist title={"textures"} list="textures" dataArr={shaderTextures} />
+        <Datalist title={"images"} list="images" dataArr={sketchImages} />
+      </>
     )
   }

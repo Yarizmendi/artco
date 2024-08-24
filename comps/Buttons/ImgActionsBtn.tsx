@@ -1,19 +1,18 @@
 
 'use client'
-import { deleteImageAction } from 'actions/images/deleteImage'
 import classNames from 'classnames'
 import { ICONLINED } from 'data/css'
 import { useFormStatus } from 'react-dom'
 
-export const IconButton = ({
+export const ImgActionsBtn = ({
    loadingTxt = "loading", 
-   idleTxt = "submit",
    color = "green",
    btnType = "submit", 
    iconName = "delete",
    imageId,
    vercelBlobUrl,
-   uploaderId
+   uploaderId, 
+   svrAction
   }: {
     loadingTxt?: string,
     idleTxt?: string,
@@ -22,7 +21,8 @@ export const IconButton = ({
     iconName?: string
     imageId: string
     vercelBlobUrl: string,
-    uploaderId: string
+    uploaderId: string, 
+    svrAction: any
   }) => {
 
   const { pending } = useFormStatus()
@@ -35,7 +35,7 @@ export const IconButton = ({
   )
 
   return (
-    <form className='absolute top-0 right-2 rounded-full text-slate-100 dark:text-slate-200' action={deleteImageAction}>
+    <form className='absolute top-0 right-2 rounded-full text-slate-100 dark:text-slate-200' action={svrAction}>
       <input hidden name={"imageId"} value={imageId} />
       <input hidden name={"vercelBlobUrl"} value={vercelBlobUrl} />
       <input hidden name={"uploaderId"} value={uploaderId}  />

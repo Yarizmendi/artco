@@ -8,10 +8,15 @@ const imageSchema = new mongoose.Schema({
     displayName: String,
     pathname: String,
     description: String,
-    uploadedAt: Date,
     downloadUrl: String,
     type: String,
     contentType: String,
+
+    createdAt: {
+      type: Date,
+      default: () => Date.now(),
+      immutable: true,
+    },
     
     uploaderId: {
       type: mongoose.SchemaTypes.ObjectId,
