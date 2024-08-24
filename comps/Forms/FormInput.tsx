@@ -7,7 +7,7 @@ export function Input({ type, title, value, placeholder, style }: { type?: strin
         else return <input className={"dark:bg-slate-950 py-1 px-2 rounded"} name={title} type={type} defaultValue={value} placeholder={placeholder} />
     }
     return (
-        <div className='flex flex-col my-2 font-light text-sm'>
+        <div className='flex flex-col my-1 font-light text-sm'>
             <InputCmpt />
             <label className={"text-xs self-end px-2 py-1"}>{title}</label>
         </div>

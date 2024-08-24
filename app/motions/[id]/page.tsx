@@ -3,7 +3,7 @@ import { ActionButton } from "@/comps/Buttons/ActionButton"
 import { ClientButton } from "@/comps/Buttons/ClientButton"
 import { deleteShaderAction } from "actions/inputs/deleteShaderInput"
 import { getShaderInputById } from "actions/inputs/getShaderInputs"
-import { Input } from "app/[user]/sketches/newSketch/FormInput"
+import { Input } from "@/comps/Forms/FormInput"
 
 export default async function Motion({ params }) {
   const id = params.id

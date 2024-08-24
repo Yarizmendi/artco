@@ -1,5 +1,5 @@
 
-import Sketch from "./PathSketch"
+import Sketch from "./AffineSketch"
 import { getSketchByTitle } from "actions/sketches/getSketches"
 
 export default async function Page({ params }) {
@@ -15,8 +15,6 @@ export default async function Page({ params }) {
     transitions,
     description
   } =  await getSketchByTitle( params.path )
-
-  
 
   const sk = {
     vert,
