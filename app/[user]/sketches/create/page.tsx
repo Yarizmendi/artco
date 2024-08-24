@@ -23,7 +23,7 @@ export default async function CreateSketchPage({ params }) {
 
           <div className="m-4 flex justify-between" >
             <div className={"flex flex-col w-1/2 p-2"}>
-              <Input title={"title"} value={"test"} />  
+              <Input title={"title"} value={"test"} />  ``
               <Datalist title={"motions"} list="motions" dataArr={shaderInputs} />
               <Datalist title={"textures"} list="textures" dataArr={shaderTextures} />
               <Datalist title={"images"} list="images" dataArr={sketchImages} />

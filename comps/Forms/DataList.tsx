@@ -9,8 +9,7 @@ export function Datalist({ title, list, dataArr }: { title: string, list?: strin
               name={title} 
               id={list} 
               className="dark:bg-slate-950 w-full py-1 px-2 rounded" >
-              {/* <option value="">options</option> */}
-              {dataArr.map( st => <option className="text-sm font-light" key={ st._id.toString() } value={ st._id.toString() }>{ st.uniform || st.title } </option> )}
+              {dataArr.map( st => <option className="text-sm font-light" key={ st._id.toString() } defaultValue={ st._id.toString() }>{ st.uniform || st.title } </option> )}
             </select>
         </div>
     )
@@ -24,7 +23,7 @@ export function BoolSelect({ title, list, dataArr }: { title: string, list?: str
               name={title} 
               id={list} 
               className="dark:bg-slate-950 w-full py-1 px-2 rounded" >
-              {dataArr.map((st, idx) => <option key={idx} className="text-sm font-light" value={ st }>{ st } </option> )}
+              {dataArr.map((st, idx) => <option key={idx} className="text-sm font-light" defaultValue={ st }>{ st } </option> )}
             </select>
         </div>
     )

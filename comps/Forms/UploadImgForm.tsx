@@ -13,7 +13,7 @@ export function UploadImgForm({ uploaderId }) {
         <input className='text-xs' type="file" name="image" />   
         <ActionButton idleTxt="upload" color="orange" />
       </div>
-      <input type="hidden" name="uploaderId" value={uploaderId} />
+      <input type="hidden" name="uploaderId" defaultValue={uploaderId} />
     </form>
   );
 }
