@@ -3,15 +3,19 @@
 import connect from 'mongo/index.js'
 import ImageModel from '@/mongo/models/image.model'
 
-
 export async function getMongoImagesByUploaderId ({ uploaderId }) {
     await connect()
-    return ImageModel.find({ uploaderId }).exec()
+    return ImageModel.find({ uploaderId }).select("-uploaderId -__v").sort({ createdAt: "desc"})
 }
 
 export async function getMongoImageById (imageId) {
     await connect()
     return ImageModel.findOne({ _id: imageId }).exec()
+}
+
+export async function getMongoImageByTitle (title) {
+    await connect()
+    return ImageModel.findOne({ title: title }).exec()
 }
 
 export async function getMongoImages () {

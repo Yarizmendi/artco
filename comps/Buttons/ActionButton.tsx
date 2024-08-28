@@ -8,7 +8,6 @@ export const ActionButton = ({
    idleTxt = "submit",
    color = "green",
    btnType = "submit", 
-   action,
   }: {
     loadingTxt?: string,
     idleTxt?: string,
@@ -25,12 +24,12 @@ export const ActionButton = ({
     color == "red" && "bg-red-900",
     color == "blue" && "bg-blue-900",
     color == "green" && "bg-green-900",
-    color == "orange" && "dark:bg-orange-800 bg-orange-700",
+    color == "orange" && "dark:bg-orange-700",
   )
 
   return (
     <div>
-      <button 
+      <button
         disabled={pending}
          type={btnType}
           className={actionBtnStyle}>

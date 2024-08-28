@@ -118,7 +118,6 @@ export default function PathSKetch({
     
      p.mouseWheel = (event) => {
       // Determine the scale factor based on zoom sensitivity
-      console.log(event);
       let scaleFactor = null;
       //@ts-ignore
       if (event.delta < 0) {

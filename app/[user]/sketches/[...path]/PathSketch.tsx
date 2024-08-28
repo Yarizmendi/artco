@@ -7,7 +7,6 @@ import { Recorder } from "@/p5/Recorder"
 import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
 
-
 export default function PathSKetch({ 
   id, 
   vert,
@@ -251,7 +250,6 @@ export default function PathSKetch({
       
        p.mouseWheel = (event) => {
         // Determine the scale factor based on zoom sensitivity
-        console.log(event);
         let scaleFactor = null;
         //@ts-ignore
         if (event.delta < 0) {

@@ -7,6 +7,11 @@ export async function getShaderInputs () {
     return InputModel.find().exec()
 }
 
+export async function getShaderInputsById (sketchId) {
+    await connect()
+    return InputModel.findOne({ sketchId: sketchId }).exec()
+}
+
 export async function getShaderInputById (motionId) {
     await connect()
     return InputModel.findOne({ _id: motionId }).exec()

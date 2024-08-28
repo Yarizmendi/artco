@@ -37,8 +37,6 @@ export async function createSketchAction ( formData: FormData ) {
         }
     }
 
-    console.log(sketchInputBody.transitions)
-
     await connect()
     await SketchModel.create(sketchInputBody)
     revalidatePath(`/${id}/sketches/`)

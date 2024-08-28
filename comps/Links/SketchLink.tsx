@@ -5,7 +5,7 @@ import Tag from "@/comps/Tags/tag"
 
 export default function SketchLink({sketch}) {
   return (
-    <Link prefetch={false} href={sketch.path} className={"w-[360px] h-[380px] lg:w-[300px] m-4 bg-gray-200 dark:bg-slate-950 text-sm"}>
+    <Link prefetch={true} href={sketch.path} className={"w-[360px] h-[380px] lg:w-[300px] m-4 bg-gray-200 dark:bg-slate-950 text-sm"}>
       <Image className={"h-[280px] w-[360px] lg:w-[300px] rounded-t"} src={sketch.blob} alt={sketch.title} width={250} height={250} />
       <p className="px-2">{ sketch.title }</p>
       <p className={"px-2 py-2 h-[30px] overflow-hidden"}>{sketch.description}</p>
