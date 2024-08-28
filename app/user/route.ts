@@ -1,8 +1,8 @@
 
 
-import { getUsers } from "actions/users/getUserAction"
+import { getUsersAction } from "actions/users/getUserAction"
 
 export async function GET() {
-    const data = await getUsers()
+    const data = await getUsersAction()
     return Response.json(data)
 }
