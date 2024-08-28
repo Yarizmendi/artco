@@ -1,6 +1,6 @@
 
 import Sketch from "./AffineSketch"
-import { getSketchByTitle } from "actions/sketches/getSketches"
+import { getSketchByTitle } from "actions/sketches/getSketchActions"
 
 export default async function Page({ params }) {
   const {

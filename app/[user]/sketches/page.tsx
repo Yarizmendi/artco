@@ -2,7 +2,7 @@
 import { IconLink } from "@/comps/Links/IconLink"
 import SketchLink from "@/comps/Links/SketchLink"
 import { SectionSkeleton } from "@/comps/Loading/SectionSkeleton"
-import { getSKetchesByCreatorId } from "actions/sketches/getSketches"
+import { getSKetchesByCreatorId } from "actions/sketches/getSketchActions"
 import { USERID } from "data/id"
 import { Suspense } from "react"
 

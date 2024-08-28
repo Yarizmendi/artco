@@ -5,7 +5,7 @@ import ImageModel from '@/mongo/models/image.model'
 
 export async function getMongoImagesByUploaderId ({ uploaderId }) {
     await connect()
-    return ImageModel.find({ uploaderId }).select("-uploaderId -__v").sort({ createdAt: "desc"})
+    return ImageModel.find({ uploaderId }).select("-uploaderId -__v").sort({ createdAt: "desc"}).exec()
 }
 
 export async function getMongoImageById (imageId) {

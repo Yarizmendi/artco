@@ -15,7 +15,7 @@ export function Painting({ id, blob, title, uploaderId, description, displayName
 
   return (
   <div className="transform duration-400 ease-in-out p-4">
-    <Link href={`sketches/${title}`}>
+    <Link href={`sketches/${title}`} prefetch={false}>
       <Image 
         src= {blob} 
         alt={title} 

@@ -1,6 +1,6 @@
 
 import Sketch from "./PathSketch"
-import { getSketchByTitle } from "actions/sketches/getSketches"
+import { getSketchByTitle } from "actions/sketches/getSketchActions"
 
 export default async function Page({ params }) {
   const { id, vert, frag, title, images, noises, inputs, displayName, transitions, description, textures } =  await getSketchByTitle( params.path[0] )

@@ -4,8 +4,10 @@ import { Painting } from "@/comps/Links/PaintingLink"
 import { getMongoImagesByUploaderId } from "actions/images/getImages"
 import { SectionSkeleton } from "@/comps/Loading/SectionSkeleton"
 import { ImageCreateForm } from "@/comps/Forms/ImageCreateForm"
+import useSWR from "swr"
 
 export default function Paintings({ params }) {
+  const { data, error, isLoading } = useSWR(`/api/user/${params.user}`)
   const uploaderId = params.user || "66bd62276d3999b70d5fd91b"
   return (
     <div className="flex flex-col items-center justify-center md:flex-row md:items-start grow mt-8 px-8 ">
@@ -14,7 +16,7 @@ export default function Paintings({ params }) {
         <ImageCreateForm uploaderId={uploaderId} btnColor={"green"} /> 
       </div>
       <Suspense fallback={ <SectionSkeleton /> }>
-        <ArtSuspense uploaderId={uploaderId} />
+        {/* <ArtSuspense uploaderId={uploaderId} /> */}
       </Suspense>
     </div>
   )
