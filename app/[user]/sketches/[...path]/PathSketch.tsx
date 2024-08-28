@@ -44,28 +44,6 @@ export default function PathSKetch({
     let changeEvery = transitions && inputs[2]["settings"].value
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
-    // Sensitivity when taking mouse wheel action into account
-    const zoomSensitivity = 0.1;
-
-    // Scale while drawing objects
-    // Start with a scale of 1
-    let currentScale = 1;
-
-    // Transformation while drawing objects
-    // Start with no transformation
-    let transformX = 0;
-    let transformY = 0;
-
-    // List of circles on the screem
-    let circles = [];
-
-    // To detect when mouse is dragged
-    // Used to not create a circle on the screen when panned
-    let isMouseDragged = false;
-    let mousePressedX = null;
-    let mousePressedY = null;
-    const mouseDragDetectionThreshold = 10;
-
     p.preload = () => {
 
       noises && noises.map( noise => {
@@ -101,20 +79,8 @@ export default function PathSKetch({
 
       noises && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
 
-      p.background(0, 0, 0);
-      p.stroke(180, 180, 180);
-      p.fill(255, 255, 255);
-
-      p.translate(transformX, transformY);
-      p.scale(currentScale);
-
-      p.shader(ActiveShader)
-
-      p.rect(
-        (p.mouseX - transformX) / currentScale,
-        (p.mouseY - transformY) / currentScale,
-       p.random(5, 100),
-      )
+      p.shader( ActiveShader )
+      p.rect( 0, 0, 0 )
 
     }
     
@@ -219,56 +185,6 @@ export default function PathSKetch({
           images = [imgObj]
         }
       }
-
-      p.mousePressed = () => {
-        mousePressedX = p.mouseX;
-        mousePressedY = p.mouseY;
-      }
-      
-      p.mouseDragged = () => {
-        if (p.dist(mousePressedX, mousePressedY, p.mouseX, p.mouseY) > mouseDragDetectionThreshold) {
-          isMouseDragged = true;
-          transformX += (p.mouseX - p.pmouseX);
-          transformY += (p.mouseY - p.pmouseY);
-        }
-      }
-      
-      p.mouseReleased = () => {
-        if (!isMouseDragged) {
-          // Push a circle that will be drawn on the screen
-          // Reverse the transformation and scale while storing the coordinates
-          circles.push({
-            x: (p.mouseX - transformX) / currentScale,
-            y: (p.mouseY - transformY) / currentScale,
-            r: p.random(5, 100),
-          }); 
-        }
-        mousePressedX = null;
-        mousePressedY = null;
-        isMouseDragged = false;
-      }
-      
-       p.mouseWheel = (event) => {
-        // Determine the scale factor based on zoom sensitivity
-        let scaleFactor = null;
-        //@ts-ignore
-        if (event.delta < 0) {
-          // Zoom in
-          scaleFactor = 1 + zoomSensitivity;
-        } else {
-          // Zoom out
-          scaleFactor = 1 - zoomSensitivity;
-        }
-      
-        // Apply transformation and scale incrementally
-        currentScale = currentScale * scaleFactor;
-        transformX = p.mouseX - (p.mouseX * scaleFactor) + (transformX * scaleFactor);
-        transformY = p.mouseY - (p.mouseY * scaleFactor) + (transformY * scaleFactor);
-        
-        // Disable page scroll
-        return false;
-      }
-
 
     }
   }
