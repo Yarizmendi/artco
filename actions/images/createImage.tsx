@@ -3,12 +3,9 @@
 import connect from 'mongo/index.js'
 import ImageModel from '@/mongo/models/image.model'
 import { put } from '@vercel/blob'
-import { revalidatePath } from 'next/cache'
 
 export async function uploadImageAction(formData: FormData) {
-    'use server'
     const imageMongo = {}
-
     const uploaderId = formData.get("uploaderId")
     const imageFile = formData.get('image') as File
     const description = formData.get('description')
@@ -30,5 +27,4 @@ export async function uploadImageAction(formData: FormData) {
     })
     await connect()
     await ImageModel.create(imageMongo)
-    revalidatePath(`/${ uploaderId }/paintings`)
 }

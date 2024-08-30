@@ -5,12 +5,17 @@ import ImageModel from '@/mongo/models/image.model.js'
 import { del } from '@vercel/blob'
 import { revalidatePath } from 'next/cache'
 
-export async function deleteImageAction(formData: FormData) {
-    const uploaderId = formData.get("uploaderId") as string
-    const vercelBlobUrl = formData.get("vercelBlobUrl") as string
+export async function deleteImageAction( id, blob, uploaderId ) {
     await connect()
-    await del( vercelBlobUrl )
-    await ImageModel.findOneAndDelete({ blob: vercelBlobUrl })
+    await ImageModel.findByIdAndDelete(id)
+
+    try {
+      await del( blob )
+    }
+    catch {
+        console.log("already deleted")
+    }
+    
     revalidatePath(`/${ uploaderId }/paintings`)
 }
 

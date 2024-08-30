@@ -2,9 +2,9 @@
 "use server"
 import connect from 'mongo/index.js'
 import ImageModel from '@/mongo/models/image.model.js'
-import { redirect } from 'next/navigation'
-import { USERID } from 'data/id'
-import { revalidatePath } from 'next/cache'
+// import { redirect } from 'next/navigation'
+// import { USERID } from 'data/id'
+// import { revalidatePath } from 'next/cache'
 
 export async function updateImageAction( formData: FormData ) {
     const _id = formData.get("id")
@@ -17,6 +17,6 @@ export async function updateImageAction( formData: FormData ) {
         displayName,
         description
     }).exec()
-    revalidatePath(`/${USERID}/paintings/`)
-    redirect(`/${USERID}/paintings/`)
+    // revalidatePath(`/${USERID}/paintings/`)
+    // redirect(`/${USERID}/paintings/`)
 }

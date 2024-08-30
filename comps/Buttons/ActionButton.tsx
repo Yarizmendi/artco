@@ -8,12 +8,14 @@ export const ActionButton = ({
    idleTxt = "submit",
    color = "green",
    btnType = "submit", 
+   mutate
   }: {
     loadingTxt?: string,
     idleTxt?: string,
     color?: string,
     btnType?: any,
-    action?: any
+    action?: any,
+    mutate?
   }) => {
 
   const { pending } = useFormStatus()
@@ -28,13 +30,11 @@ export const ActionButton = ({
   )
 
   return (
-    <div>
-      <button
-        disabled={pending}
-         type={btnType}
-          className={actionBtnStyle}>
-        { pending ? loadingTxt : idleTxt }
-      </button>
-    </div>
+    <button
+      disabled={pending}
+        type={btnType}
+        className={actionBtnStyle}>
+      { pending ? loadingTxt : idleTxt }
+    </button>
   )
 }
