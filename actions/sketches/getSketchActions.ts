@@ -5,7 +5,7 @@ import { getMongoImageByTitle } from 'actions/images/getImages'
 
 export async function getSKetches () {
     await connect()
-    return SketchModel.find().select("-__v -creatorId -uploaderId").exec()
+    return SketchModel.find().select("-__v -creatorId -uploaderId").sort({ createdAt: "desc"}).exec()
 }
 
 export async function getSKetchesByCreatorId ({ creatorId }) {

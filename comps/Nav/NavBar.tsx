@@ -36,11 +36,8 @@ async function SuspenseRoutes() {
         </Link>
       )}
       <div className='flex mx-4 gap-4'>
-        <Link href={"/account"}>
+        <Link href={"/accounts"}>
           <ActionButton color={"blue"} idleTxt='login' />
-        </Link>
-        <Link href={"/account"}>
-          <ActionButton color={"green"} idleTxt='signup' />
         </Link>
       </div>
   </nav>

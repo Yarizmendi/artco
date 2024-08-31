@@ -3,8 +3,8 @@ import { getUserByUsernameAction } from "actions/users/getUserAction"
 
 export function LoginForm() {
     return (
-      <div className="w-1/2 flex items-center justify-center bg-gray-100 dark:bg-slate-900">
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <div className="w-1/2 flex items-center justify-center dark:bg-slate-900">
+        <div className="bg-slate-100 p-8 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-semibold mb-6 text-center text-gray-700">Login</h2>
           <form action={getUserByUsernameAction}>
             <div className="mb-4">
@@ -20,10 +20,10 @@ export function LoginForm() {
                 <input type="checkbox" id="remember" name="remember" className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
                 <label htmlFor="remember" className="ml-2 block text-sm text-gray-900">Remember me</label>
               </div>
-              <a href="#" className="text-sm text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+              <a href="#" className="text-sm text-blue-700 hover:text-blue-500">Forgot password?</a>
             </div>
             <div>
-              <button type="submit" className="w-full bg-indigo-600 text-white rounded-md py-2 px-4 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">{"Sign in"}</button>
+              <button type="submit" className="w-full bg-blue-700 text-white rounded-md py-2 px-4 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">{"Sign in"}</button>
             </div>
           </form>
         </div>
