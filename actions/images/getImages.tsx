@@ -15,7 +15,7 @@ export async function getMongoImageById (imageId) {
 
 export async function getMongoImageByTitle (title) {
     await connect()
-    return ImageModel.findOne({ title: title }).exec()
+    return ImageModel.findOne({ title }).exec()
 }
 
 export async function getMongoImageByBlob (blob) {

@@ -5,8 +5,8 @@ import { ThemeButton } from './ThemeButton'
 import { getRoutes } from 'actions/routes'
 import { LogoName } from './Logo'
 import { Suspense } from 'react'
-import { SectionSkeleton } from '../Loading/SectionSkeleton'
 import { ActionButton } from '../Buttons/ActionButton'
+import { Loading } from '../Loading'
 
 function NavBar() {
   return (
@@ -19,7 +19,7 @@ function NavBar() {
         <ThemeButton/>
         <LogoName/>
       </div>
-      <Suspense fallback={<SectionSkeleton/>}>
+      <Suspense fallback={<Loading/>}>
         <SuspenseRoutes/>
       </Suspense>
     </header>

@@ -9,7 +9,6 @@ import { ICONLINED } from "data/css"
 import { ActionButton } from "../Buttons/ActionButton"
 import { Input } from "../Forms/FormInput"
 import { SketchDeleteIcon } from "../sketches/buttons/SketchDeleteIcon"
-import { Datalist } from "../Forms/DataList"
 
 export default function SketchLink({ 
   id, vert, frag, 

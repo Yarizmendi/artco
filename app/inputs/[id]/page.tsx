@@ -4,18 +4,16 @@ import { ClientButton } from "@/comps/Buttons/ClientButton"
 import { deleteShaderAction } from "actions/shaders/inputs/deleteShaderInput"
 import { getShaderInputById } from "actions/shaders/inputs/getInputs"
 import { Input } from "@/comps/Forms/FormInput"
-import { Suspense } from "react"
-import { SectionSkeleton } from "@/comps/Loading/SectionSkeleton"
+
+import { updateShaderAction } from "actions/shaders/inputs/updateShaderInput"
 
 export default function Motion({ params }) {
   const id = params.id
     return (
       <div className="grow p-4">
         <h1 className="text-2xl text-center">Shader Input: <span className="text-lg">{id}</span> </h1>
-        <form action={""}>
-          <Suspense fallback={ <SectionSkeleton />}>
-            <MotionSuspense id={id} />
-          </Suspense>
+        <form action={updateShaderAction}>
+          <MotionSuspense id={id} />
           <div className="flex gap-8 mx-4">
             <ActionButton idleTxt={"update"} color={"blue"} btnType={"submit"} />
             <ClientButton idleTxt={"delete"} color={"red"} actionFunct={deleteShaderAction} dataId={id} />

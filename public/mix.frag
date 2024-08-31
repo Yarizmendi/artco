@@ -17,7 +17,8 @@ void main () {
 
   newColor = texture2D( u_foreground, pos );
   ogColor = texture2D( u_texture, pos );
-  t = sin( u_time );
+  
+  t = abs(sin( u_time ));
 
   color = mix( ogColor, newColor, t);
   gl_FragColor = vec4( color );

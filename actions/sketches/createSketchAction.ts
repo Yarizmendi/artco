@@ -2,8 +2,6 @@
 "use server"
 import connect from 'mongo/index.js'
 import SketchModel from '@/mongo/models/sketch.model'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 
 
 export async function createSketchAction ( formData: FormData ) {
@@ -11,7 +9,7 @@ export async function createSketchAction ( formData: FormData ) {
     const title = formData.get("title")
 
     let images = formData.get("images")
-    let inputs = formData.get("motions")
+    let inputs = formData.get("inputs")
     let textures = formData.get("textures")
     let transitions = formData.get("transitions")
 
@@ -25,21 +23,14 @@ export async function createSketchAction ( formData: FormData ) {
         description: formData.get("description"),
         transitions: transitions == "false" ? false : true,
   
-        path: `sketches/${title}`,
         noises: [],
 
         images: [images],
         inputs: [inputs],
         textures: [textures],
         
-        tags: {
-            meta: [],
-            object: [],
-        }
     }
 
     await connect()
     await SketchModel.create(sketchInputBody)
-    revalidatePath(`/${id}/sketches/`)
-    redirect(`/${id}/sketches/`)
 }

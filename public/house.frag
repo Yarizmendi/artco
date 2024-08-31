@@ -17,6 +17,7 @@ void main() {
 
   if ( st.y > .81 && st.x > .51 ) {
     st.x += ( cos( st.x * u_time ) / ( 25.0 + u_time ));
+    st.x = fract(st.x);
   }
 
   backgroundColor = texture2D( u_background, st );

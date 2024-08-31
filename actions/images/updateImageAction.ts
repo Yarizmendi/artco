@@ -14,6 +14,4 @@ export async function updateImageAction( formData: FormData ) {
         displayName,
         description
     }).exec()
-    // revalidatePath(`/${USERID}/paintings/`)
-    // redirect(`/${USERID}/paintings/`)
 }
