@@ -29,7 +29,7 @@ export function Painting({ id, uploaderId, blob, title, description, displayName
     <form action={ async formData => {
       await updateImageAction( formData )
       mutate()
-    }} className="w-full flex flex-col">
+    }} className="w-full flex flex-col dark:bg-slate-950">
       <input hidden name={"id"} defaultValue={id} />
 
       <div className="flex items-center dark:bg-slate-950">
@@ -41,7 +41,7 @@ export function Painting({ id, uploaderId, blob, title, description, displayName
         <div>
           <Input title="description" value={description} placeholder='description' required={false} />
           <Input title="displayName" value={displayName} placeholder='display name'/>
-          <div className="flex items-center justify-between dark:bg-slate-950">
+          <div className="flex items-end justify-between p-2">
             <ImageDeleteIcon id={id} uploaderId={uploaderId} blob={blob} mutate={mutate} />
             <ActionButton mutate={mutate} idleTxt={"update"} loadingTxt={"...updating"} color={"orange"} btnType={"submit"} />
           </div> 

@@ -21,7 +21,7 @@ function PaintList({ uploaderId }) {
   if ( isLoading || isValidating ) return <Loading />
   if ( data ) return (
     <div className=" mx-8 w-11/12 md:w-2/3 h-[500px] flex flex-wrap justify-center overflow-auto">
-    { data.map( art => <Painting key={art.id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
+    { data.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
    </div>
   )
 }

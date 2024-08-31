@@ -2,23 +2,14 @@
 "use client"
 import p5Types from "p5"
 import InitP5 from "@/p5/Instance"
-import { Controls } from "@/p5/Controls"
-import { Recorder } from "@/p5/Recorder"
 import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
 
 
 export default function PathSKetch({ 
   id,
-  vert,
-  frag,
-  title, 
-  images,
-  noises,
   inputs, 
-  textures,
   displayName,
-  transitions,
   description
 }) {
 
@@ -63,11 +54,11 @@ export default function PathSKetch({
       p.createCanvas(parent.offsetWidth, parent.offsetHeight).parent(parent)
     }
 
-    p.preload = () => {
-      images.map( img => {
-        img["Image"] = p.loadImage( img.blob )
-      })
-    }
+    // p.preload = () => {
+    //   images.map( img => {
+    //     img["Image"] = p.loadImage( img.blob )
+    //   })
+    // }
 
     p.setup = () => {
       //@ts-ignore
@@ -77,7 +68,6 @@ export default function PathSKetch({
 
     p.draw = () => {
       p.background(0, 0, 0);
-      p.image(images[0]["Image"], 0, 0)
       p.stroke(180, 180, 180);
       p.fill(255, 255, 255);
 

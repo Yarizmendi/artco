@@ -21,7 +21,7 @@ export const ActionButton = ({
   const { pending } = useFormStatus()
 
   const actionBtnStyle = classNames(
-    "my-2 px-4 py-2",
+    "px-4 py-2 w-fit",
     "rounded text-xs text-slate-100 font-semibold",
     color == "red" && "bg-red-900",
     color == "blue" && "bg-blue-900",
@@ -30,10 +30,8 @@ export const ActionButton = ({
   )
 
   return (
-    <button
-      disabled={pending}
-        type={btnType}
-        className={actionBtnStyle}>
+    <button className={actionBtnStyle}
+      disabled={pending} type={btnType}>
       { pending ? loadingTxt : idleTxt }
     </button>
   )

@@ -2,56 +2,26 @@
 import { Input } from "@/comps/Forms/FormInput"
 import { ActionButton } from "@/comps/Buttons/ActionButton"
 import { createSketchAction } from "actions/sketches/createSketchAction"
-import { getShaderInputs } from "actions/inputs/getShaderInputs"
-import { getShaderTextures } from "actions/textures/getShaderTextures"
-import { BoolSelect, Datalist } from "@/comps/Forms/DataList"
-
-import { SectionSkeleton } from "@/comps/Loading/SectionSkeleton"
-import { Suspense } from "react"
-import { getMongoImages } from "actions/images/getImages"
+import { BoolSelect } from "@/comps/Forms/DataList"
+import { ImageSelect, InputSelect, TextureSelect } from "./forms/ImageSelect"
 
 export default function CreateSketchPage({ params }) {
     const transitionsOptions = ["false", "true"]
     return (
-      <div className="grow p-4">
-      
-        <form action={createSketchAction}>
-
-          <div className="flex items-center px-4 gap-4">
-            <ActionButton idleTxt="create" />
-            <h1 className="text-xl">sketch</h1>
-          </div>
-
-          <div className="m-4 flex justify-between" >
-            <div className={"flex flex-col w-1/2 p-2"}>
-              <Input title={"title"} value={"test"} /> 
-
-              <Suspense fallback={<SectionSkeleton/>}>
-                <DataInputSuspense />
-              </Suspense>
-
-              <BoolSelect title={"transitions"} list={"transitions"} dataArr={transitionsOptions} />
-              <Input title={"creatorId"} value={params.user} />
-              <Input title={"frag"} value={"/matrixScale.frag"} />
-              <Input title={"displayName"} value={"new test sketch"} />
-              <Input title={"description"} value={"test description"} />
-              <Input title={"blob"} value={"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sid.jpg"} />
-            </div>
-          </div>
+      <form className="w-3/5 h-[500px] flex flex-col gap-2 mb-4 overflow-auto flex-wrap" action={createSketchAction}>   
+        <input name="creatorId" value={params.user} type={"hidden"} />
+        <input name="vert" type={"hidden"} value={"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert"} />
+        <Input title={"title"} value={"test"} /> 
+        <Input title={"frag"} value={"/matrixScale.frag"} />
+        <Input title={"displayName"} value={"new test"} />
+        <Input title={"description"} value={"test description"} />
+        <Input title={"blob"} value={"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sid.jpg"} />
+        <BoolSelect title={"transitions"} list={"transitions"} dataArr={transitionsOptions} />
+        <ImageSelect />
+        <InputSelect />
+        <TextureSelect />
+        <ActionButton idleTxt="create sketch" />
         </form>
-      </div>
     )
   }
 
-  async function DataInputSuspense() {
-    const sketchImages = await getMongoImages()
-    const shaderInputs = await getShaderInputs()
-    const shaderTextures = await getShaderTextures()
-    return (
-      <>
-        <Datalist title={"motions"} list="motions" dataArr={shaderInputs} />
-        <Datalist title={"textures"} list="textures" dataArr={shaderTextures} />
-        <Datalist title={"images"} list="images" dataArr={sketchImages} />
-      </>
-    )
-  }

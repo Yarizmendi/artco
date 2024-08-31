@@ -2,14 +2,14 @@
 
 export function Datalist({ title, list, dataArr }: { title: string, list?: string, dataArr: any[] }) {
     return (
-        <div className={"mb-4 font-light text-sm"}>
+        <div className={"font-light text-sm"}>
             <label htmlFor={title}>{title}:</label>
             <select 
-              // multiple
+              multiple
               name={title} 
               id={list} 
               className="dark:bg-slate-950 w-full py-1 px-2 rounded" >
-              {dataArr.map( st => <option className="text-sm font-light" key={ st._id.toString() } defaultValue={ st._id.toString() }>{ st.uniform || st.title } </option> )}
+              {dataArr.map((st, idx) => <option className="text-sm font-light" key={idx}>{st.label || st.title || st.uniform } </option> )}
             </select>
         </div>
     )
@@ -17,7 +17,7 @@ export function Datalist({ title, list, dataArr }: { title: string, list?: strin
 
 export function BoolSelect({ title, list, dataArr }: { title: string, list?: string, dataArr: any[] }) {
     return (
-        <div className={"mb-4 font-light text-sm"}>
+        <div className={"font-light text-sm"}>
             <label htmlFor={title}>{title}:</label>
             <select 
               name={title} 

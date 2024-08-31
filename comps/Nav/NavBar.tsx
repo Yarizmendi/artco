@@ -6,6 +6,7 @@ import { getRoutes } from 'actions/routes'
 import { LogoName } from './Logo'
 import { Suspense } from 'react'
 import { SectionSkeleton } from '../Loading/SectionSkeleton'
+import { ActionButton } from '../Buttons/ActionButton'
 
 function NavBar() {
   return (
@@ -29,11 +30,19 @@ async function SuspenseRoutes() {
   const routes = await getRoutes()
   return (
     <nav className='flex justify-center items-center'>
-    { routes.map((link,i)=> 
-      <Link key={i} href={link.path} className={classNames("uppercase text-xs m-2")}>
-        {link.title}
-      </Link>
-    )}
+      { routes.map((link,i)=> 
+        <Link key={i} href={link.path} className={classNames("uppercase text-xs m-2")}>
+          {link.title}
+        </Link>
+      )}
+      <div className='flex mx-4 gap-4'>
+        <Link href={"/account"}>
+          <ActionButton color={"blue"} idleTxt='login' />
+        </Link>
+        <Link href={"/account"}>
+          <ActionButton color={"green"} idleTxt='signup' />
+        </Link>
+      </div>
   </nav>
   )
 }

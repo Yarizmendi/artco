@@ -38,19 +38,17 @@ export function P5Sketch({
       <CanvasCtn parentRef={parentRef} />
       <SketchControls>
         <div className="dark:bg-slate-950">
-          {shaders.length > 0 && shaders.map(inpt=><ShaderIcon key={inpt._id} icon={inpt.icon} label={inpt.label} />)}
+          {shaders.length > 0 && shaders.map((inpt, idx)=><ShaderIcon key={idx} icon={inpt.icon} label={inpt.label} />)}
         </div>
         <div>
           <div className="flex items-center md:mt-4 gap-4">
             <SketchTitle title={title} />
-            {/* <ClientButton idleTxt={"share"} color={"blue"} actionFunct={()=>{}} dataId={id} /> */}
-            {/* <ClientButton idleTxt={"fork"} color={"green"} actionFunct={()=>{}} dataId={id} /> */}
             {/* <ClientButton idleTxt={"delete"} color={"red"} actionFunct={deleteSketchAction} dataId={id} />
             <ClientButton idleTxt={"edit"} color={"orange"} actionFunct={updateSketchAction} dataId={id} /> */}
           </div>
           <p className="p-4 text-sm">{description}</p>
           <Sliders sliders={shaders} />
-          <span id="files" className={fileInputClass} />
+          {/* <span id="files" className={fileInputClass} /> */}
         </div>
       </SketchControls>
       <DownloadLink />

@@ -35,7 +35,7 @@ export default function PathSKetch({
 
   function sketch( p: p5Types ) {
 
-    let inptImg
+    // let inptImg
     let idx = 0
     let seconds
     let ActiveShader

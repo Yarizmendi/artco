@@ -25,7 +25,7 @@ export default function Motions() {
     return (
       <div className={"flex p-4 w-full h-[400px] overflow-auto"}>
       { shaderInputs.map(inpt =>
-         <Link className="m-2" key={inpt._id} href={`motions/${inpt._id}`}>
+         <Link className="m-2" key={inpt._id} href={`inputs/${inpt._id}`}>
           <ShaderIcon icon={inpt.icon} label={inpt.label} />
         </Link>
       )}

@@ -7,29 +7,6 @@ const collections = [
   { title: "paintings", id: 2, path: "/paintings", blob: "/alice_falls.webp" },
 ]
 
-const abt = `a visual artist residing in Oakland, California. Influenced by abstract expressionism, photography and digital media, Arizmendi uses color and composition in various forms to explore human consciousness and subjectivity.  The purpose of art, for Arizmendi, is to freely explore and express the internal world of the mind in its various emotional, intellectual, and spiritual modalities.`
-
-const fabt = `Benjamin Arizmendi is a visual artist residing in Oakland, California. Influenced by abstract expressionism, photography and digital media, Arizmendi uses color and composition in various forms to explore human consciousness and subjectivity.  The purpose of art, for Arizmendi, is to freely explore and express the internal world of the mind in its various emotional, intellectual, and spiritual modalities.  More boldly, Arizmendi believes these subjective explorations and expressions can help human beings understand external, objective reality.  Arizmendi believes that art can be a profound tool for understanding the world that science unveils, a tool that unifies internal, subjective truths with external objective truths.  While science quantifies the empirical world, abstract art can be used to "quantify" the world of mind and consciousness.  Arizmendi's thesis is that mind and consciousness are central to our understanding of reality, and that artistic abstraction can bring mind and consciousness to bear upon rational, scientific inquiry.
-Arizmendi has created art inspired by and in collaboration with leading scientists and philosophers from the University of Vienna, UC Berkeley, UC San Diego, The Lawrence Berkeley National Laboratory, NYU, Oxford, and the University of Washington.  Notably, he was commissioned by the UC Berkeley Physics department to create art pieces for the new Center for Quantum Coherent Sciences, as well as the Quantum Nanoelectronics Laboratory at that institution.  He is currently creating pieces for a new, Quantum Computing facility at the Lawrence Berkeley National Laboratory.
-Arizmendi's art has been shown throughout Northern and Southern California, as well as East Hampton, NY and Vienna, Austria.  He has been represented by Hugo Rivera Gallery in Laguna Beach, California and Joyce Gordon Gallery in Oakland, California.  Arizmendi received his BA in philosophy with honors from UCLA.  Before becoming a full time artist he was a lawyer and a financial advisor.  He holds a JD from the George Washington University Law School.
-`
-
-const artist = {
-      fullName: "Benjamin Arizmendi",
-      firstname: "benjamin",
-      lastname: "arizmendi",
-      aboutPreview: fabt,
-      blob: "/benji.png"
-}
-
-const artistStyles = {
-  ctn: "w-1/4 border" ,
-  image: " h-[250px] rounded-t ",
-  about: " border border-green-500",
-  fullName: " tracking-widest text-sm font-medium h-[35px] flex items-end justify-end p-2 ",
-}
-
-
 export default function ArtistPage({ params }) {
   return (
     <div className="flex flex-col justify-center grow">
