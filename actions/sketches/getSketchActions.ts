@@ -10,12 +10,13 @@ export async function getSKetches () {
 
 export async function getSKetchesByCreatorId ({ creatorId }) {
     await connect()
-    return await SketchModel.find({ creatorId }).select("-__v -creatorId").sort({ createdAt: "desc"}).exec()
+    return await SketchModel.find({ creatorId }).populate(["inputs", "textures"]).select("-__v -creatorId").sort({ createdAt: "desc"}).exec()
 }
 
 export async function getSketchByTitle (sketchTitle) {
     await connect()
-    const sk = await SketchModel.findOne({ title: sketchTitle }).select("-__v -creatorId -uploaderId").exec()
+    const sk = await SketchModel.findOne({ title: sketchTitle }).populate(["inputs", "textures", "images", "noises"]).exec()
+
     const newSketch = {
         id: 0,
         vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
@@ -50,6 +51,13 @@ export async function getSketchByTitle (sketchTitle) {
 
 export async function getSketchById (id) {
     await connect()
-    const sketches = await SketchModel.findOne({ _id: id }).select("-__v -creatorId -uploaderId").exec()
+    const sketches = await SketchModel.findOne({ _id: id }).populate(["inputs", "textures"]).select("-__v -creatorId -uploaderId").exec()
     return sketches
+}
+
+export async function replaceSketchTextures( title, textures ) {
+    await connect()
+    return await SketchModel
+      .findOneAndUpdate({ title }, { textures })
+      .exec()
 }

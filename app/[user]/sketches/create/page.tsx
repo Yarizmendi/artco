@@ -1,14 +1,20 @@
 
+"use client"
 import { Input } from "@/comps/Forms/FormInput"
 import { ActionButton } from "@/comps/Buttons/ActionButton"
 import { createSketchAction } from "actions/sketches/createSketchAction"
 import { BoolSelect } from "@/comps/Forms/DataList"
 import { ImageSelect, InputSelect, TextureSelect } from "./forms/ImageSelect"
+import { UseSketches } from "../(home)/api/UseSketches"
 
 export default function CreateSketchPage({ params }) {
     const transitionsOptions = ["false", "true"]
+    const { mutate } = UseSketches({ creatorId: params.user })
     return (
-      <form className="w-3/5 h-[500px] flex flex-col gap-2 mb-4 overflow-auto flex-wrap" action={createSketchAction}>   
+      <form className="min-w-1/3 h-[500px] flex flex-col gap-2 flex-wrap overflow-auto" action={ async formData =>{
+        await createSketchAction(formData)
+        mutate()
+      }}>   
         <input name="creatorId" value={params.user} type={"hidden"} />
         <input name="vert" type={"hidden"} value={"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert"} />
         <Input title={"title"} value={"test"} /> 
@@ -20,7 +26,7 @@ export default function CreateSketchPage({ params }) {
         <ImageSelect />
         <InputSelect />
         <TextureSelect />
-        <ActionButton idleTxt="create sketch" />
+        <ActionButton idleTxt="create sketch" btnType={"submit"}/>
         </form>
     )
   }

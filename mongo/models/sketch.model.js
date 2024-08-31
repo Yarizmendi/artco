@@ -29,10 +29,29 @@ const sketchSchema = new mongoose.Schema({
       meta: [String]
     },
   
-    images: [Object],
-    noises: [Object],
-    inputs: [Object],
-    textures: [Object],
+    textures: [{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Texture',
+        required: true,
+    }],
+
+    images: [{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Image',
+        required: true,
+    }],
+
+    inputs: [{
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Input',
+      required: true,
+    }],
+
+    noises: [{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Image',
+        required: true,
+    }],
 
   
 })

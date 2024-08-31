@@ -18,6 +18,11 @@ export async function getMongoImageByTitle (title) {
     return ImageModel.findOne({ title: title }).exec()
 }
 
+export async function getMongoImageByBlob (blob) {
+    await connect()
+    return ImageModel.findOne({ blob: blob }).exec()
+}
+
 export async function getMongoImages () {
     await connect()
     return ImageModel.find().exec()

@@ -1,8 +1,8 @@
 
 import { ActionButton } from "@/comps/Buttons/ActionButton"
 import { ClientButton } from "@/comps/Buttons/ClientButton"
-import { deleteShaderAction } from "actions/inputs/deleteShaderInput"
-import { getShaderInputById } from "actions/inputs/getShaderInputs"
+import { deleteShaderAction } from "actions/shaders/inputs/deleteShaderInput"
+import { getShaderInputById } from "actions/shaders/inputs/getInputs"
 import { Input } from "@/comps/Forms/FormInput"
 import { Suspense } from "react"
 import { SectionSkeleton } from "@/comps/Loading/SectionSkeleton"

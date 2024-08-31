@@ -6,20 +6,35 @@ import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
+import { UseSketch } from "../(home)/api/UseSketches"
 
 export default function PathSKetch({ 
-  id, 
-  vert,
-  frag,
-  title, 
-  images,
-  noises,
-  inputs, 
-  textures,
-  displayName,
-  transitions,
-  description
+  // id, 
+  // vert,
+  // frag,
+  // title, 
+  // images,
+  // noises,
+  // inputs, 
+  // textures,
+  // displayName,
+  // transitions,
+  // description
 }) {
+
+  const { 
+    _id, 
+    vert,
+    frag,
+    title, 
+    images,
+    noises,
+    inputs, 
+    textures,
+    displayName,
+    transitions,
+    description
+  } = UseSketch()
 
   let mp5 = null
   let parentRef = useRef()
@@ -189,5 +204,5 @@ export default function PathSKetch({
     }
   }
 
-  return <P5Sketch id={id} description={description} parentRef={parentRef} shaders={inputs} title={ displayName }/>
+  return <P5Sketch id={_id} description={description} parentRef={parentRef} shaders={inputs} title={ displayName }/>
 }

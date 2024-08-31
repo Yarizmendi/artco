@@ -1,6 +1,6 @@
 
 import { ActionButton } from "@/comps/Buttons/ActionButton"
-import { createShaderAction } from "actions/inputs/createShaderInputs"
+import { createShaderAction } from "actions/shaders/inputs/createShaderInputs"
 import { Input } from "@/comps/Forms/FormInput"
 
 export default function CreateMotionPage() {

@@ -9,10 +9,10 @@ export function SketchesList({ creatorId }) {
   const { data, error, isLoading, isValidating, mutate } = UseSketches({ creatorId })
   
   if ( error ) return <NotFound />
-  if ( isLoading ) return <Loading />
+  if ( isLoading || isValidating ) return <Loading />
 
   if ( data ) return (
-    <div className="flex flex-wrap overflow-auto h-[500px]">
+    <div className="mx-8 w-11/12 md:w-2/3 h-[500px] flex flex-wrap justify-center overflow-auto">
       { data.map( art => { 
         return <SketchLink 
           id={art._id} 

@@ -24,3 +24,8 @@ export async function createShaderAction ( formData: FormData ) {
     revalidatePath(`/motions`)
     redirect("/motions")
 }
+
+export async function createInput(inputBody) {
+    await connect()
+    await InputModel.create(inputBody)
+}

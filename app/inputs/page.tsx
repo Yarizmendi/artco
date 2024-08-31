@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { IconLink } from "@/comps/Links/IconLink"
 import { ShaderIcon } from "@/p5/inputs/ShaderIcon"
-import { getShaderInputs } from "actions/inputs/getShaderInputs"
+import { getShaderInputs } from "actions/shaders/inputs/getInputs"
 import { Suspense } from "react"
 
 export default function Motions() {
