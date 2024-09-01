@@ -27,7 +27,7 @@ export default function PathSKetch({
 
   useEffect(() => { if ( !isMounted ) setIsMounted( true )}, [])
 
-  useEffect(() => { 
+  useEffect( () => { 
     if ( isMounted ) {
       if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
       else return mp5.remove() 

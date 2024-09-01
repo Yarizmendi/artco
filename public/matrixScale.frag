@@ -13,26 +13,36 @@ float time;
 vec4 color;
 
 mat2 scale(vec2 _scale) {
-  return mat2( _scale.x, u_scale_x, _scale.y, u_scale_y );
+  return mat2( _scale.x, 0.0, 0.1, _scale.y );
 }
 
 vec2 rollingWaves( vec2 pos ) {
-  return scale(( vec2 (( u_time / (u_time + u_zoom ))))) * pos;
+  return scale( abs( vec2 ( cos( u_time / u_zoom )))) * pos;
 }
 
 vec2 increasingWaves( vec2 pos ) {
-  pos.y += cos( pos.y * u_waves + u_time ) / ( 55.0 - u_waves + u_time );
+  pos.y += cos( pos.y * (u_waves/2.) + u_time ) / ( 30.0 - (u_waves/2.) + u_time );
   return pos;
 }
 
 void main () {
   vec2 pos = vTexCoord;
-
-  pos = increasingWaves( pos );
-  pos = rollingWaves( pos );
-  pos = fract(pos);
+  pos *= ( 0.90 );
 
   color = texture2D( u_texture, pos );
+
+
+  if ( color.r > .33 || color.b > .33 ) {
+    pos = increasingWaves( pos );
+    pos = rollingWaves( pos );
+  } 
+  else {
+    pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
+  }
+
+
+  color = texture2D( u_texture, pos );
+
   gl_FragColor = vec4( color );
 
 }

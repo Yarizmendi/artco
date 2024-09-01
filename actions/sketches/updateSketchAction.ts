@@ -8,8 +8,9 @@ export async function updateSketchAction( formData: FormData ) {
     const title = formData.get("title")
     const displayName = formData.get("displayName")
     const description = formData.get("description")
+    const frag = formData.get("frag")
     await connect()
-    await SketchModel.findByIdAndUpdate({ _id }, { title, displayName, description }).exec()
+    await SketchModel.findByIdAndUpdate({ _id }, { title, displayName, description, frag }).exec()
 }
 
 export async function updateSketchImages(title, images) {

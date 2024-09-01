@@ -1,7 +1,8 @@
 
-// import sketchModel from "@/mongo/models/sketch.model"
 import { getSKetches } from "actions/sketches/getSketchActions"
 import { USERID } from "data/id"
+
+// import sketchModel from "@/mongo/models/sketch.model"
 
 const sketchInputBody = {
     transitions: true,
@@ -52,15 +53,6 @@ const sketchInputBody = {
             "createdAt": "2024-09-01T01:18:37.040Z"
         },
         {
-            "_id": "66d3c0ec39447bc27f9a8eca",
-            "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_1920bb2a-3849-4864-9438-27aceab66b15.jpeg",
-            "title": "Messenger_creation_1920bb2a-3849-4864-9438-27aceab66b15.jpeg",
-            "pathname": "Messenger_creation_1920bb2a-3849-4864-9438-27aceab66b15.jpeg",
-            "description": "",
-            "downloadUrl": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_1920bb2a-3849-4864-9438-27aceab66b15.jpeg?download=1",
-            "createdAt": "2024-09-01T01:18:36.539Z"
-        },
-        {
             "_id": "66d3c0ec39447bc27f9a8ec8",
             "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_2c5e9010-5b0c-444a-adf7-77d39557c80d.jpeg",
             "title": "Messenger_creation_2c5e9010-5b0c-444a-adf7-77d39557c80d.jpeg",
@@ -88,6 +80,7 @@ const sketchInputBody = {
             "createdAt": "2024-09-01T01:18:10.190Z"
         },
     ],
+
     inputs: [
         {
             "_id": "66d318d13df76d776c2d951f",
@@ -128,22 +121,17 @@ const sketchInputBody = {
             "label": "threshold",
             "uniform": "u_timeout",
             "settings": {
-                "min": 0,
-                "max": 1,
-                "value": 100,
+                "min": 5,
+                "max": 30,
+                "value": 3,
                 "step": 1
             },
-            "description": "percentage of mixture",
+            "description": "time of mixture of mixture",
             "createdAt": "2024-09-01T02:17:05.687Z",
             "__v": 0
         }
     ],
     textures: [
-        {
-            "_id": "66c023dd5b84addbc1675f72",
-            "uniform": "u_texture",
-            "__v": 0
-        },
         {
             "_id": "66d31d673df76d776c2d953b",
             "uniform": "u_background",
@@ -157,7 +145,6 @@ const sketchInputBody = {
     ],
     
 }
-
 // await sketchModel.create(sketchInputBody)
 
 export async function GET( req: Request ) {

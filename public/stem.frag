@@ -18,7 +18,7 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
   vec4 noise = texture2D( u_noise, pos );
 
   float t = smoothstep(
-    ( u_threshold - u_range  ) / ( ( u_time - timeout ) / 500. ),
+    ( u_threshold - u_range  ) / ( ( u_time + timeout ) / 500. ),
     ( u_threshold + u_range  ) / ( ( u_time - timeout ) / 500. ),
     noise.r
   );
@@ -29,10 +29,8 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
 
 void main () {
   vec2 pos = vTexCoord;
-
-
   pos.x += (cos(pos.x * 10. ) / 30. ) * (sin( u_time ));
-
-  vec4 col = transition( pos, u_background, u_foreground, u_time );
+  pos = fract(pos);
+  vec4 col = transition( pos, u_foreground, u_background, u_timeout );
   gl_FragColor = vec4( col );
 }
