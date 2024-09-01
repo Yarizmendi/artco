@@ -1,11 +1,11 @@
 
-import CreateSketchPage from "../../../comps/Forms/CreateSketchForm"
+import { CreateSketchForm } from "@/comps/Forms/CreateSketchForm"
 import { SketchesList } from "./SketchesList"
 
 export default function Sketches({ params }) {
   return (
-    <div className="flex flex-col items-center justify-center grow md:flex-row md:items-start mt-8 px-4">
-      <CreateSketchPage params={params} />
+    <div className="flex flex-col grow md:flex-row justify-center items-center gap-12 m-4">
+      <CreateSketchForm params={params} />
       <SketchesList creatorId={params.user} />
     </div>
   )

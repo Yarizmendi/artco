@@ -58,9 +58,9 @@ export default function PathSKetch({
     }
   
     p.setup = () => {
-      p.pixelDensity(1)
       createElements(Parent)
     }
+
   
     p.draw = () => {
 
@@ -121,9 +121,6 @@ export default function PathSKetch({
     function createElements(parent) {
       p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent( parent )
 
-      // inptImg = p.createFileInput(handleImage, true)
-      // inptImg.parent("files")
-
       inputs && inputs.map( input => {
         if ( input.type == "slider" ) {
           const { min, max, value, step } = input.settings
@@ -175,17 +172,6 @@ export default function PathSKetch({
       function replay() {
         document.getElementById("playbtn").click()
       }
-  
-      // Create an image if the file is an image.
-      // function handleImage(file) {
-      //   if (file.type === 'image') {
-      //     inptImg = p.createImg(file.data, 'new');
-      //     inptImg.hide()
-      //     let imgObj = { title: "red_ocean", id: 0, "Image": inptImg }
-      //     images = [imgObj]
-      //   }
-      // }
-
     }
   }
 
