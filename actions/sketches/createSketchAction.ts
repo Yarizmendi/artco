@@ -31,17 +31,17 @@ export async function createSketchAction ( formData: FormData ) {
         description: formData.get("description"),
         transitions: transitions == "false" ? false : true,
 
-        noises: [{
-            "_id": "66d23819ef9ec71d14e5d9b1",
-            "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png",
-            "title": "perlin",
-            "pathname": "perlin.png",
-            "description": "perlin noise",
-            "downloadUrl": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png?download=1",
-            "uploaderId": "66bd62276d3999b70d5fd91b",
-            "createdAt": "2024-08-30T21:22:33.697Z",
-            "__v": 0
-        }],
+        // noises: [{
+        //     "_id": "66d23819ef9ec71d14e5d9b1",
+        //     "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png",
+        //     "title": "perlin",
+        //     "pathname": "perlin.png",
+        //     "description": "perlin noise",
+        //     "downloadUrl": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png?download=1",
+        //     "uploaderId": "66bd62276d3999b70d5fd91b",
+        //     "createdAt": "2024-08-30T21:22:33.697Z",
+        //     "__v": 0
+        // }],
 
         images: [image],
         inputs: [
@@ -54,7 +54,7 @@ export async function createSketchAction ( formData: FormData ) {
                 "settings": {
                     "min": 0,
                     "max": 100,
-                    "value": 30,
+                    "value": 4,
                     "step": 1
                 },
                 "description": "controls the strength of the wave affect",

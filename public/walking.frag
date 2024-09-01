@@ -22,13 +22,11 @@ void main () {
 
   color = texture2D( u_texture, pos);
 
-
+  pos.x += (u_pan * u_time);
+  pos = fract(pos);
   
-  if ( color.g < .2 ) {
-      pos.x += (u_pan * u_time);
-     pos = fract(pos);
+  if ( color.g < .5 ) {
     pos = rollingWaves( pos );
-      pos *= (cos(pos.x * 10. ) / 30. ) * (sin( u_time ));
   }
 
   color = texture2D( u_texture, pos);

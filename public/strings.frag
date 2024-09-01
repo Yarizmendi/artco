@@ -22,7 +22,7 @@ vec2 increasingWaves( vec2 pos ) {
   return pos;
 }
 
-float time = u_waves + u_time; 
+float time = u_time; 
 vec3 yellow = vec3(1.0, 0.0, 1.0);
  
 
@@ -35,11 +35,11 @@ void main () {
 
   if ( color.r > .33 && color.b > .33 ) {
     pos = rollingWaves( pos );
-     pos += cos( pos.y * u_waves - time ) / ( u_waves - time );
+    pos.x += cos( pos.x * u_waves + time ) / ( u_waves + time );
   }
 
   else {
-    pos += cos( pos.x * u_waves - time ) / ( u_waves - time );
+    pos.y += cos( pos.x * u_waves + time ) / ( u_waves + time );
   }
 
   color = texture2D( u_texture, pos );

@@ -18,10 +18,9 @@ export async function getSketchByTitle ({ title }) {
     const sk = await SketchModel.findOne({ title }).exec()
 
     const newSketch = {
-        id: 0,
         vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
-        frag: "/ip.frag",
-        title: 'image',
+        frag: "/strings.frag",
+        title: title,
         displayName: "Image",
         description: "User image sketch",
         transitons: false, 
@@ -33,8 +32,8 @@ export async function getSketchByTitle ({ title }) {
                 "uniform": "u_waves",
                 "settings": {
                     "min": 0,
-                    "max": 100,
-                    "value": 30,
+                    "max": 240,
+                    "value": 5,
                     "step": 1
                 },
                 "description": "controls the strength of the wave affect",
@@ -46,10 +45,10 @@ export async function getSketchByTitle ({ title }) {
                 "label": "zoom",
                 "uniform": "u_zoom",
                 "settings": {
-                    "min": "0",
-                    "max": "60",
-                    "step": "1",
-                    "value": 60
+                    "min": 0,
+                    "max": 120,
+                    "step": 1,
+                    "value": 5
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },
@@ -58,7 +57,7 @@ export async function getSketchByTitle ({ title }) {
             {
                 "uniform": "u_texture",
             },
-        ]
+        ],
     }
 
     if ( !sk ) {
