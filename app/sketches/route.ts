@@ -1,5 +1,5 @@
 
-import sketchModel from "@/mongo/models/sketch.model"
+// import sketchModel from "@/mongo/models/sketch.model"
 import { getSKetches } from "actions/sketches/getSketchActions"
 import { USERID } from "data/id"
 
@@ -153,7 +153,7 @@ const sketchInputBody = {
     
 }
 
-await sketchModel.create(sketchInputBody)
+// await sketchModel.create(sketchInputBody)
 
 export async function GET( req: Request ) {
     const sketches = await getSKetches()
