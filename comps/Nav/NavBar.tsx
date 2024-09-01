@@ -11,9 +11,9 @@ import { Loading } from '../Loading'
 function NavBar() {
   return (
     <header className={classNames(
-      "min-h-[80px] px-[40px] py-2 tracking-widest",
+      "px-[20px] py-2 md:tracking-widest md:px-[40px]",
       "flex flex-col justify-between items-center md:flex-row",
-      "bg-slate-200 dark:bg-slate-950 rounded"
+      "bg-slate-200 dark:bg-slate-950 rounded",
     )}>
       <div className='flex items-center'>
         <ThemeButton/>
@@ -29,7 +29,7 @@ function NavBar() {
 async function SuspenseRoutes() {
   const routes = await getRoutes()
   return (
-    <nav className='flex justify-center items-center'>
+    <nav className='flex justify-center items-center p-2'>
       { routes.map((link,i)=> 
         <Link key={i} href={link.path} className={classNames("uppercase text-xs m-2")}>
           {link.title}

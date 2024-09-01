@@ -30,10 +30,10 @@ export default function SketchLink({
           width={300}
           height={300}
           quality={100}
-          className="min-w-[340px] h-[300px] sm:min-w-[200px] sm:h-[200px] md:min-w-[240px] md:h-[230px] rounded" />
+          className="min-w-[300px] h-[300px] sm:min-w-[200px] sm:h-[200px] md:w-[250px] md:h-[230px] rounded" />
       </Link>
   
-      <form className="w-full flex flex-col dark:bg-slate-950 p-1" 
+      <form className="w-full flex flex-col dark:bg-slate-950" 
         action={ async formData => {
           await updateSketchAction( formData )
           mutate()
@@ -56,7 +56,7 @@ export default function SketchLink({
             {/* <Datalist title={"inputs"} dataArr={inputs} /> */}
             {/* <Datalist title={"textures"} dataArr={textures} /> */}
 
-            <div className="flex items-end justify-between p-1">
+            <div className="flex items-end justify-between p-2">
               <SketchDeleteIcon id={id} mutate={mutate} />
               <ActionButton mutate={mutate} idleTxt={"update"} loadingTxt={"...updating"} color={"orange"} btnType={"submit"} />
             </div> 

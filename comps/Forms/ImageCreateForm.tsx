@@ -33,9 +33,9 @@ export function ImageCreateForm({ uploaderId, btnColor="green", mutate } : ICrea
         }} />   
         <ActionButton idleTxt={"create"} loadingTxt='...creating' color={btnColor} btnType={"submit"}/>
       </div>
-      <div className='h-[280px] w-full my-2 flex flex-wrap gap-8 overflow-auto'>
-        { files && files.map( (url, idx) => <Image className={"w-[100px] h-[100px]"} key={idx} src={url} width={100} height={100} alt={"img"} /> )}
-      </div>
+      { files &&  <div className='h-[280px] w-full my-2 flex flex-wrap gap-8 overflow-auto'>
+        { files.map( (url, idx) => <Image className={"w-[100px] h-[100px]"} key={idx} src={url} width={100} height={100} alt={"img"} /> )}
+      </div>}
     </form>
   )
 }

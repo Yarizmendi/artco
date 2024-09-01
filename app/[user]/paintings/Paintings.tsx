@@ -28,7 +28,7 @@ function PaintList({ uploaderId }) {
 
 function PaintForm({ uploaderId }) {
   const { mutate } = UsePaintings()
-  return <div className="min-w-1/3 md:w-1/3">
+  return <div className="w-10/12 mb-8 md:w-1/3">
     <ImageCreateForm uploaderId={uploaderId} mutate={mutate} />
   </div>
 }

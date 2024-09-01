@@ -1,4 +1,5 @@
 
+// import textureModel from "@/mongo/models/texture.model"
 import { getTextures } from "actions/textures/getTextures"
 
 export async function GET( req: Request ) {
@@ -6,3 +7,7 @@ export async function GET( req: Request ) {
     return Response.json(textures)
 }
 
+
+// await textureModel.create({
+//   "uniform": "u_noise",
+// })
