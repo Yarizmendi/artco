@@ -140,6 +140,11 @@ const sketchInputBody = {
     ],
     textures: [
         {
+            "_id": "66c023dd5b84addbc1675f72",
+            "uniform": "u_texture",
+            "__v": 0
+        },
+        {
             "_id": "66d31d673df76d776c2d953b",
             "uniform": "u_background",
             "__v": 0
