@@ -8,7 +8,6 @@ import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
 
 export default function PathSKetch({ 
-  id, 
   vert,
   frag,
   title, 
@@ -182,5 +181,5 @@ export default function PathSKetch({
     }
   }
 
-  return <P5Sketch id={id} description={description} parentRef={parentRef} shaders={inputs} title={ displayName }/>
+  return <P5Sketch description={description} parentRef={parentRef} shaders={inputs} title={ displayName }/>
 }

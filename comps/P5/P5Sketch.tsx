@@ -27,7 +27,6 @@ export const DownloadLink = () => <a id="download" className="hidden"/>
 const fileInputClass = classnames("flex text-sm w-fit mx-6 md:mt-4")
 
 export function P5Sketch({
-  id,
   title,
   shaders,
   parentRef,

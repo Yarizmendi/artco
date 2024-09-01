@@ -1,17 +1,12 @@
 precision mediump float;
 
 uniform float u_time;
+uniform float u_waves;
+uniform float u_zoom;
+uniform float u_scale_x;
+uniform float u_scale_y;
 uniform sampler2D u_texture;
 
 varying vec2 vTexCoord;
 
-float time;
-vec4 color;
 
-void main () {
-  vec2 pos = vTexCoord;
-  pos.y *= .99;
-  color = texture2D( u_texture, pos);
-  gl_FragColor = vec4( color );
-
-}
