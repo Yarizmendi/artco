@@ -10,22 +10,22 @@ export async function getMongoImagesByUploaderId ({ uploaderId }) {
 
 export async function getMongoImageById (imageId) {
     await connect()
-    return ImageModel.findOne({ _id: imageId }).exec()
+    return ImageModel.findOne({ _id: imageId }).select("-uploaderId -__v").exec()
 }
 
 export async function getMongoImageByTitle (title) {
     await connect()
-    return ImageModel.findOne({ title }).exec()
+    return ImageModel.findOne({ title }).select("-uploaderId -__v").exec()
 }
 
 export async function getMongoImageByBlob (blob) {
     await connect()
-    return ImageModel.findOne({ blob: blob }).exec()
+    return ImageModel.findOne({ blob: blob }).select("-uploaderId -__v").exec()
 }
 
 export async function getMongoImages () {
     await connect()
-    return ImageModel.find().exec()
+    return ImageModel.find().select("-uploaderId -__v").exec()
 }
 
  

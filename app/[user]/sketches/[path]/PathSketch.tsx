@@ -44,6 +44,13 @@ export default function PathSKetch({
     let changeEvery = transitions && inputs[2]["settings"].value
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
+    // Set the noise level and scale.
+    let noiseLevel = 1;
+    let noiseScale = 0.005;
+
+        // Scale the input coordinate.
+    let nt = noiseScale * p.frameCount;
+
     p.preload = () => {
 
       noises && noises.map( noise => {
@@ -70,7 +77,7 @@ export default function PathSKetch({
 
       inputs.map(( input ) => {
         input["Paragraph"].html( input["Slider"].value() )
-        ActiveShader.setUniform( input.uniform, input["Slider"].value() )
+        ActiveShader.setUniform( input.uniform, input["Slider"].value() + noiseLevel * p.noise(nt))
       })
   
       textures.map(( texture, i ) => {

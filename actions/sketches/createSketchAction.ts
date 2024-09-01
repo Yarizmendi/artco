@@ -2,7 +2,7 @@
 "use server"
 import connect from 'mongo/index.js'
 import SketchModel from '@/mongo/models/sketch.model'
-import { getMongoImageById, getMongoImageByTitle } from 'actions/images/getImages'
+import { getMongoImageById } from 'actions/images/getImages'
 import { getShaderInputById } from 'actions/shaders/inputs/getInputs'
 import { getShaderTextureById } from 'actions/textures/getTextures'
 
