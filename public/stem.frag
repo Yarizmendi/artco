@@ -1,36 +1,36 @@
 precision mediump float;
 
 uniform float u_time;
-uniform float u_pan;
-uniform sampler2D u_texture;
+uniform float u_range;
+uniform float u_timeout;
+uniform float u_threshold;
+
+uniform sampler2D u_noise;
+uniform sampler2D u_foreground;
+uniform sampler2D u_background;
 
 varying vec2 vTexCoord;
 
-vec4 color;
+vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
 
-mat2 scale(vec2 _scale) {
-  return mat2( _scale.x, 0.0, 0.1, _scale.y );
+  vec4 color1 = texture2D( bg, pos );
+  vec4 color2 = texture2D( fg, pos );
+  vec4 noise = texture2D( u_noise, pos );
+
+  float t = smoothstep(
+    ( u_threshold - u_range  ) / ( ( u_time + timeout ) / 500. ),
+    ( u_threshold + u_range  ) / ( ( u_time - timeout ) / 500. ),
+    noise.r
+  );
+
+  vec4 res = mix( color1, color2, t  );
+  return res;
 }
-
-vec2 rollingWaves( vec2 pos ) {
-  return scale( abs( vec2 ( cos( u_time )))) * pos;
-}
-
 
 void main () {
   vec2 pos = vTexCoord;
-
-  color = texture2D( u_texture, pos);
-
-
-  
-  if ( color.g < .2 ) {
-      pos.x += (u_pan * u_time);
-     pos = fract(pos);
-    pos = rollingWaves( pos );
-      pos *= (cos(pos.x * 10. ) / 30. ) * (sin( u_time ));
-  }
-
-  color = texture2D( u_texture, pos);
-  gl_FragColor = vec4( color );
+  pos.x += (cos(pos.x * 10. ) / 30. ) * (sin( u_time ));
+  pos = fract(pos);
+  vec4 col = transition( pos, u_foreground, u_background, u_timeout );
+  gl_FragColor = vec4( col );
 }
