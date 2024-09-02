@@ -51,8 +51,8 @@ export default function PathSKetch({
     let nt = noiseScale * p.frameCount;
 
     p.preload = () => {
-
-      noises && noises.map( noise => {
+        
+      noises.length && noises.map( noise => {
         noise["Noise"] = p.loadImage( noise.blob )
       })  
       
@@ -83,7 +83,7 @@ export default function PathSKetch({
         ActiveShader.setUniform( texture.uniform, images[ i + idx ]["Image"])
       })
 
-      noises && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
+      noises.lenghth && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
 
       p.shader( ActiveShader )
       p.rect( 0, 0, 0 )
