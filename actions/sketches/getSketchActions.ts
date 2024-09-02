@@ -19,7 +19,7 @@ export async function getSketchByTitle ({ title }) {
 
     const newSketch = {
         vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
-        frag: "/qc.frag",
+        frag: "/matrixScale.frag",
         title: title,
         displayName: "Image",
         description: "User image sketch",
