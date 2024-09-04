@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 export function LogoName() {
     return (
-      <Link href={`/`} className={classNames("text-3xl font-light mx-[10px]")}>
+      <Link href={`/`} className={classNames("text-2xl md:text-3xl font-light mx-[10px]")}>
          the
         <span 
          className={classNames(

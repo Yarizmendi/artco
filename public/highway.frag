@@ -9,7 +9,7 @@ uniform sampler2D u_texture;
 
 varying vec2 vTexCoord;
 
-float time = u_waves + u_time;
+// float time = u_waves + u_time;
 vec4 color;
 
 mat2 scale(vec2 _scale) {
@@ -17,11 +17,11 @@ mat2 scale(vec2 _scale) {
 }
 
 vec2 rollingWaves( vec2 pos ) {
-  return scale( ( vec2 ( cos( time / u_zoom )))) * pos;
+  return scale( abs( vec2 ( cos( u_time / u_zoom )))) * pos;
 }
 
 vec2 increasingWaves( vec2 pos ) {
-  pos.y -= sin( pos.y * u_waves + time ) / ( u_waves + time );
+  pos.y += sin( pos.y * u_waves + u_time ) / ( u_waves + u_time );
   return pos;
 }
 
@@ -30,10 +30,15 @@ void main () {
 
   color = texture2D( u_texture, pos );
 
-  if ( color.b > .5 ) {
-    pos = increasingWaves( pos );
-    pos = rollingWaves( pos );
-  } 
+  if ( color.r > .33) {
+    pos.y += sin( pos.y * u_waves + u_time ) / ( u_waves + u_time );
+  }
+  else {
+    pos.y += sin( pos.y * u_waves + u_time ) / ( u_waves + u_time );
+  }
+
+  pos = rollingWaves( pos );
+  // pos = increasingWaves( pos );
 
   color = texture2D( u_texture, pos );
   gl_FragColor = vec4( color );

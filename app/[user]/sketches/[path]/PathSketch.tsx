@@ -4,8 +4,10 @@ import p5Types from "p5"
 import InitP5 from "@/p5/Instance"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
-import { P5Sketch } from "@/p5/P5Sketch"
 import { useState, useRef, useEffect } from "react"
+import { ShaderIcon } from "@/p5/inputs/ShaderIcon"
+import { Slider } from "@/p5/Slider"
+import classnames from "classnames"
 
 export default function PathSKetch({ 
   vert,
@@ -33,8 +35,6 @@ export default function PathSKetch({
   }}, [ isMounted ]) 
 
   function sketch( p: p5Types ) {
-
-    // let inptImg
     let idx = 0
     let seconds
     let ActiveShader
@@ -46,13 +46,12 @@ export default function PathSKetch({
     // Set the noise level and scale.
     let noiseLevel = 1;
     let noiseScale = 0.005;
-
-        // Scale the input coordinate.
+    // Scale the input coordinate.
     let nt = noiseScale * p.frameCount;
+    let pNoise = () => p.round(noiseLevel * p.noise(nt))
 
     p.preload = () => {
-        
-      noises.length && noises.map( noise => {
+      noises && noises.length && noises.map( noise => {
         noise["Noise"] = p.loadImage( noise.blob )
       })  
       
@@ -67,23 +66,21 @@ export default function PathSKetch({
       createElements(Parent)
     }
 
-  
     p.draw = () => {
-
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
 
       handleControls()
 
       inputs.map(( input ) => {
-        input["Paragraph"].html( input["Slider"].value() )
-        ActiveShader.setUniform( input.uniform, input["Slider"].value() + noiseLevel * p.noise(nt))
+        input["Paragraph"].html( input["Slider"].value() + pNoise() )
+        ActiveShader.setUniform( input.uniform, input["Slider"].value() + pNoise() )
       })
   
       textures.map(( texture, i ) => {
         ActiveShader.setUniform( texture.uniform, images[ i + idx ]["Image"])
       })
 
-      noises.lenghth && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
+      noises && noises.length && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
 
       p.shader( ActiveShader )
       p.rect( 0, 0, 0 )
@@ -96,9 +93,11 @@ export default function PathSKetch({
     }
 
     function handleControls() {
+
       if (isPlaying) {
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
+
         seconds = drawPlayTimer / 1000 
 
         if ( transitions ) {
@@ -119,7 +118,7 @@ export default function PathSKetch({
     function handleTransitions() {
       if ( seconds > changeEvery && images.length-1 > idx ) {
         idx+=1
-        changeEvery += inputs[2]["Slider"].value()
+        inputs[2] ? changeEvery += inputs[2]["Slider"].value(): changeEvery += 5
         ActiveShader.setUniform( "u_timeout", drawPlayTimer )
       } 
     }
@@ -127,7 +126,7 @@ export default function PathSKetch({
     function createElements(parent) {
       p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent( parent )
 
-      inputs && inputs.map( input => {
+      inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
           const { min, max, value, step } = input.settings
           input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
@@ -136,12 +135,12 @@ export default function PathSKetch({
       })
 
       MediaRecorder = Recorder(title)
-      Overlay = Controls( p,title,parent )
+      Overlay = Controls( p )
 
       Overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
           isPlaying = true
-          Overlay.playBtnLabel.html("running")
+          Overlay.playBtnLabel.html("pause")
         }
         else if ( isPlaying ) {
           isPlaying = false
@@ -152,7 +151,7 @@ export default function PathSKetch({
       Overlay.recordBtn.mouseClicked(() => {
         if ( MediaRecorder.state == "inactive") {
           if ( !isPlaying ) isPlaying = true
-          Overlay.playBtnLabel.html("running")
+          Overlay.playBtnLabel.html("pause")
           Overlay.recordBtnLabel.html("recording")
           Overlay.recordBtn.addClass("text-red-500")
           MediaRecorder.start()
@@ -172,14 +171,28 @@ export default function PathSKetch({
         drawPauseTimer = 0
         Overlay.playBtnLabel.html("play")
         Overlay.recordBtnLabel.html("record")
-        setTimeout( replay, 500 )
+        setTimeout(() => document.getElementById("playbtn").click(), 1000)
       })
 
-      function replay() {
-        document.getElementById("playbtn").click()
-      }
     }
   }
 
-  return <P5Sketch description={description} parentRef={parentRef} shaders={inputs} title={ displayName }/>
+  return (
+    <div className={classnames("flex grow flex-col md:flex-row dark:bg-slate-950")}>
+      <div className={classnames("h-full w-[80px]")} />
+      <div className={classnames("min-h-[550px] w-full md:w-1/2 md:h-full flex justify-center text-[30px]")}
+       ref={parentRef} 
+       id={"Parent"} />
+      <div className={classnames("flex h-full w-[80px] md:flex-col")}>
+        { inputs && inputs.map( inpt => <ShaderIcon {...inpt} />)}
+      </div>
+      <div className={classnames("flex flex-col md:w-1/2 dark:bg-slate-900 p-4 gap-2")}>
+        { displayName && <p className={classnames("text-lg uppercase")}>{displayName} sketch</p> }
+        { description && <p className="text-sm">{description}</p> }
+        { inputs && inputs.map( inpt => <Slider key={inpt.id} {...inpt} /> )}
+      </div>
+      <div className={classnames("h-full w-[80px]")} />
+      <a id="download" className="hidden"/>
+  </div>
+  )
 }

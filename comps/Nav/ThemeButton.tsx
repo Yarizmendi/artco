@@ -17,7 +17,7 @@ function ThemeButton() {
         onClick={handleThemeChange}
         className={classNames(
         "material-symbols-outlined",
-        "cursor-pointer text-[40px]",
+        "cursor-pointer text-[30px] md:text-[40px]",
         "inline-block text-transparent bg-clip-text",
         "bg-gradient-to-r",
         "from-blue-600 via-green-400 to-indigo-400",

@@ -2,46 +2,40 @@
 import Link from 'next/link'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
-import { getRoutes } from 'actions/routes'
 import { LogoName } from './Logo'
-import { Suspense } from 'react'
 import { ActionButton } from '../Buttons/ActionButton'
-import { Loading } from '../Loading'
 
-function NavBar() {
+
+export function NavBar() {
+  
+  const routes = [
+    { title: "blog", path: `/blog`},
+    { title: "motion", path: `/inputs`},
+    { title: "paintings", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
+    { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
+  ]
+  
   return (
     <header className={classNames(
-      "px-[20px] py-2 md:tracking-widest md:px-[40px]",
+      "p-2 md:p-4 md:tracking-widest",
       "flex flex-col justify-between items-center md:flex-row",
       "bg-slate-200 dark:bg-slate-950 rounded",
     )}>
       <div className='flex items-center'>
-        <ThemeButton/>
-        <LogoName/>
+        <ThemeButton />
+        <LogoName />
       </div>
-      <Suspense fallback={<Loading/>}>
-        <SuspenseRoutes/>
-      </Suspense>
+      <nav className='flex justify-center items-center gap-4 uppercase text-xs'>
+        { routes.map((link,i)=> 
+          <Link key={i} href={link.path}>
+            {link.title}
+          </Link>
+        )}
+        <Link href={"/accounts"}>
+          <ActionButton color={"blue"} idleTxt='login' />
+        </Link>
+      </nav>
     </header>
   )
 }
 
-async function SuspenseRoutes() {
-  const routes = await getRoutes()
-  return (
-    <nav className='flex justify-center items-center p-2'>
-      { routes.map((link,i)=> 
-        <Link key={i} href={link.path} className={classNames("uppercase text-xs m-2")}>
-          {link.title}
-        </Link>
-      )}
-      <div className='flex mx-4 gap-4'>
-        <Link href={"/accounts"}>
-          <ActionButton color={"blue"} idleTxt='login' />
-        </Link>
-      </div>
-  </nav>
-  )
-}
-
-export { NavBar }
