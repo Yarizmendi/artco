@@ -13,14 +13,22 @@ void main () {
 
   color = texture2D( u_texture, pos);
 
-  if ( color.g < .2 ) {
-    pos += ( cos( pos.y * u_time /15. ));
-    pos.x += u_pan + u_time / 15.;
-  } else {
-    pos.x += u_pan - u_time / 15.;
-    pos *= ( cos( pos.y * u_time * 5. ));
-  }
-    pos = fract(pos);
+  if ( color.g > .66 ) {
+
+    if ( pos.x < .33 ) {
+      pos.x += u_pan + u_time / 50.;
+        pos.x = fract( pos.x );
+    }
+    else {
+     pos.x -= u_pan + u_time / 50.;
+       pos.x = fract( pos.x);
+    }
+  pos.y += cos( pos.y * 20. + u_time ) / ( 15.0 + 20. + u_time );
+  } 
+  // else {
+  //   pos.y += sin( pos.y * u_time ) / ( u_time );
+  // }
+
 
   color = texture2D( u_texture, pos);
   gl_FragColor = vec4( color );

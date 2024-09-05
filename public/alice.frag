@@ -13,7 +13,7 @@ float time = u_time + 20.0;
 vec4 color;
 
 mat2 scale(vec2 _scale) {
-  return mat2( _scale.x, .1, 0.1, _scale.y );
+  return mat2( _scale.x, 0.0, 0.1, _scale.y );
 }
 
 vec2 rollingWaves( vec2 pos ) {
@@ -32,13 +32,14 @@ void main () {
   color = texture2D( u_texture, pos );
 
 
-  if ( color.r < .33 || color.b < .33 || color.g < .33) {
-   pos.y += cos( pos.y * u_waves + u_time ) / ( u_waves - u_time );
+  if ( color.r > .66 || color.b > .66 || color.g > .66) {
+   pos.y += cos( pos.y * u_waves / 2.0 + time ) / ( u_waves/ 3.0  + time );
+      pos = rollingWaves( pos );
   } 
   
   else {
-    pos.x += cos( pos.y * u_waves + u_time ) / ( u_waves - u_time );
-   // pos = rollingWaves( pos );
+    pos.x += cos( pos.x * u_waves + time ) / ( u_waves - time );
+
   }
 
 

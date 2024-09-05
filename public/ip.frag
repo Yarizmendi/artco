@@ -3,10 +3,13 @@ precision mediump float;
 uniform float u_time;
 uniform float u_waves;
 uniform float u_zoom;
+uniform float u_scale_x;
+uniform float u_scale_y;
 uniform sampler2D u_texture;
 
 varying vec2 vTexCoord;
 
+float time;
 vec4 color;
 
 mat2 scale(vec2 _scale) {
@@ -22,27 +25,25 @@ vec2 increasingWaves( vec2 pos ) {
   return pos;
 }
 
-float time = u_waves + u_time; 
-vec3 yellow = vec3(1.0, 0.0, 1.0);
- 
-
 void main () {
-
   vec2 pos = vTexCoord;
-  pos *= ( 0.99 );
+  // pos *= ( 0.90 );
 
   color = texture2D( u_texture, pos );
 
-  if ( color.r > .33 && color.b > .33 ) {
-    pos = rollingWaves( pos );
-     pos += cos( pos.y * u_waves - time ) / ( u_waves - time );
-  }
 
+  if ( color.r > .33 || color.b > .33 ) {
+    pos = increasingWaves( pos );
+
+  } 
   else {
-    pos += cos( pos.x * u_waves - time ) / ( u_waves - time );
+    pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
+        pos = rollingWaves( pos );
   }
 
+
   color = texture2D( u_texture, pos );
+
   gl_FragColor = vec4( color );
 
 }
