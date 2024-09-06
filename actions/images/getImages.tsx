@@ -2,6 +2,17 @@
 "use server"
 import connect from 'mongo/index.js'
 import ImageModel from '@/mongo/models/image.model'
+import CollectionsModel from '@/mongo/models/collections.model'
+
+export async function getUserImgCollections ({ uploaderId }) {
+    await connect()
+    return CollectionsModel.find({ uploaderId }).populate("images").sort({ createdAt: "desc"}).exec()
+}
+
+export async function getUserImgCollectionById ({ collectionId }) {
+    await connect()
+    return CollectionsModel.findOne({ _id: collectionId }).select("-_id -uploaderId -__v").exec()
+}
 
 export async function getMongoImagesByUploaderId ({ uploaderId }) {
     await connect()

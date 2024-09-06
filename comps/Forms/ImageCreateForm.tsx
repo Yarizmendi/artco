@@ -2,25 +2,28 @@
 "use client"
 import { Input } from './FormInput'
 import { ActionButton } from '../Buttons/ActionButton'
-import { uploadImageAction } from 'actions/images/createImage'
+// import { uploadImageAction } from 'actions/images/createImage'
 import { useState } from 'react'
 import Image from 'next/image'
  
 interface ICreateForm {
   uploaderId: string,
   btnColor?: string,
-  mutate?: any
+  mutate?: any,
+  isCollection: number,
+  actionFunction: any
 }
 
-export function ImageCreateForm({ uploaderId, btnColor="green", mutate } : ICreateForm ) {
+export function ImageCreateForm({ uploaderId, btnColor="green", mutate, actionFunction, isCollection } : ICreateForm ) {
   const [files, setFiles ] = useState(null)
   return (
     <form action={ async formData => {
-      await uploadImageAction(formData)
+      await actionFunction(formData)
       mutate()
       setFiles(null)
     }} className="flex flex-col gap-4 mt-2">
       <input type="hidden" name="uploaderId" defaultValue={uploaderId} />
+      <input type="hidden" name="isCollection" defaultValue={isCollection} />
       <Input title="title" placeholder={"title"} />
       <Input title="description" placeholder={"description"} />
       <Input title="displayName" placeholder={"display name"} />

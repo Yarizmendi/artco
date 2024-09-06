@@ -5,12 +5,11 @@ import { ThemeButton } from './ThemeButton'
 import { LogoName } from './Logo'
 import { ActionButton } from '../Buttons/ActionButton'
 
-
 export function NavBar() {
   
   const routes = [
     { title: "blog", path: `/blog`},
-    { title: "motion", path: `/inputs`},
+    { title: "collections", path: `/${"66bd62276d3999b70d5fd91b"}/collections`},
     { title: "paintings", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
     { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
   ]

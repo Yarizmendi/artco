@@ -2,15 +2,20 @@
 import mongoose from 'mongoose'
 
 const imageSchema = new mongoose.Schema({
+    type: String,
     blob: String,
     size: Number,
     title: String,
-    displayName: String,
     pathname: String,
     description: String,
     downloadUrl: String,
-    type: String,
     contentType: String,
+    displayName: String,
+
+    collectionId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Collection',
+    },
 
     createdAt: {
       type: Date,

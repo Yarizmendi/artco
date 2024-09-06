@@ -5,6 +5,7 @@ import { Loading } from "@/comps/Loading"
 import { NotFound } from "@/comps/NotFound"
 import { UsePaintings } from "./api/UsePainting"
 import { ImageCreateForm } from "@/comps/Forms/ImageCreateForm"
+import { uploadImageAction } from "actions/images/createImage"
 
 export function PaintingsList({ uploaderId }) {
  return (
@@ -17,11 +18,18 @@ export function PaintingsList({ uploaderId }) {
 
 function PaintList({ uploaderId }) {
   const { data, error, isLoading, isValidating, mutate } = UsePaintings({ uploaderId })
+  // let collectionName: string
   if ( error ) return <NotFound />
   if ( isLoading || isValidating ) return <Loading />
   if ( data ) return (
     <div className=" mx-8 w-11/12 md:w-2/3 h-[500px] flex flex-wrap justify-center overflow-auto">
-    { data.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
+    { data.map( art => {
+      // if (art.collectionId) {
+      //   collectionName = art.collectionId
+      //   return <CollectionLink images={art.images} key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> 
+      // }
+      if (!art.collectionId) return <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> 
+    })}
    </div>
   )
 }
@@ -29,7 +37,7 @@ function PaintList({ uploaderId }) {
 function PaintForm({ uploaderId }) {
   const { mutate } = UsePaintings({ uploaderId })
   return <div className="w-10/12 mb-8 md:w-1/3">
-    <ImageCreateForm uploaderId={uploaderId} mutate={mutate} />
+    <ImageCreateForm uploaderId={uploaderId} mutate={mutate} actionFunction={uploadImageAction} isCollection={0}/>
   </div>
 }
 
