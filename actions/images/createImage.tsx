@@ -27,9 +27,9 @@ export async function uploadImageAction(formData: FormData) {
         uploaderId,
         images: [],
         blob: "", 
-        title: "test_collection",
-        displayName: "Test Collection",
-        description: "test collection"
+        title: title,
+        description: description,
+        displayName: displayName,
       })
     }
 
@@ -41,7 +41,7 @@ export async function uploadImageAction(formData: FormData) {
         addRandomSuffix: false
       }).then( blob => {
           const { url, downloadUrl, pathname } = blob
-          imageMongo["title"] = title || blob.pathname
+          imageMongo["title"] = isCollection ? pathname : (title || pathname)
           imageMongo["displayname"] = displayName
           imageMongo["description"] = description
           imageMongo["uploaderId"] = uploaderId
@@ -49,9 +49,7 @@ export async function uploadImageAction(formData: FormData) {
           imageMongo["pathname"] = pathname
           imageMongo["downloadUrl"] = downloadUrl
           imageMongo["collectionId"] = createdCollectionId._id
-          if (i==0) { 
-            collectionBlob = url
-          }
+          if (i==0) collectionBlob = url
     })
     const imageId = await ImageModel.create(imageMongo)
     imageMongoIds.push(imageId)

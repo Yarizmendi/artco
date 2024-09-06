@@ -24,13 +24,15 @@ export async function deleteCollectionAction({ id, uploaderId, images }) {
   await connect()
   await ImageModel.deleteMany({ collectionId: id })
 
-  for (let i=0; i<images.length; i++) {
-    const blob = images[i].blob
-    try {
-      await del(blob)
-    }
-    catch {
-      console.log("already deleted")
+  if ( images && images.length ) {
+    for (let i=0; i<images.length; i++) {
+      const blob = images[i].blob
+      try {
+        await del(blob)
+      }
+      catch {
+        console.log("already deleted")
+      }
     }
   }
 

@@ -7,7 +7,7 @@ import { useState } from "react"
 import { ICONLINED } from "data/css"
 import { updateCollectionAction } from "actions/images/updateImageAction"
 import { ActionButton } from "../Buttons/ActionButton"
-import Link from "next/link"
+// import Link from "next/link"
 
 export function CollectionLink({ id, uploaderId, blob, title, description, displayName, images, mutate }) {
   const [isEditing, setIsEditing] = useState(false)

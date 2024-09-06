@@ -28,7 +28,7 @@ function PaintList({ uploaderId }) {
       //   collectionName = art.collectionId
       //   return <CollectionLink images={art.images} key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> 
       // }
-      if (!art.collectionId) return <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> 
+      return <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> 
     })}
    </div>
   )
