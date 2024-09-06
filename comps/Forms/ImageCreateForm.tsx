@@ -1,27 +1,27 @@
 
 "use client"
+import Image from 'next/image'
+import { useState } from 'react'
 import { Input } from './FormInput'
 import { ActionButton } from '../Buttons/ActionButton'
-// import { uploadImageAction } from 'actions/images/createImage'
-import { useState } from 'react'
-import Image from 'next/image'
+import { uploadImageAction } from 'actions/images/createImage'
  
 interface ICreateForm {
   uploaderId: string,
   btnColor?: string,
   mutate?: any,
-  isCollection: number,
-  actionFunction: any
+  isCollection?: any,
 }
 
-export function ImageCreateForm({ uploaderId, btnColor="green", mutate, actionFunction, isCollection } : ICreateForm ) {
+export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollection } : ICreateForm ) {
   const [files, setFiles ] = useState(null)
   return (
-    <form action={ async formData => {
-      await actionFunction(formData)
-      mutate()
-      setFiles(null)
-    }} className="flex flex-col gap-4 mt-2">
+    <form className="flex flex-col gap-4"
+      action={ async formData => {
+        await uploadImageAction(formData)
+        mutate()
+        setFiles(null)
+    }}>
       <input type="hidden" name="uploaderId" defaultValue={uploaderId} />
       <input type="hidden" name="isCollection" defaultValue={isCollection} />
       <Input title="title" placeholder={"title"} />
@@ -36,7 +36,7 @@ export function ImageCreateForm({ uploaderId, btnColor="green", mutate, actionFu
         }} />   
         <ActionButton idleTxt={"create"} loadingTxt='...creating' color={btnColor} btnType={"submit"}/>
       </div>
-      { files &&  <div className='h-[280px] w-full my-2 flex flex-wrap gap-8 overflow-auto'>
+      { files && <div className='h-[280px] w-full my-2 flex flex-wrap gap-8 overflow-auto'>
         { files.map( (url, idx) => <Image className={"w-[100px] h-[100px]"} key={idx} src={url} width={100} height={100} alt={"img"} /> )}
       </div>}
     </form>

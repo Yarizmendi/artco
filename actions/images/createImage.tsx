@@ -22,7 +22,7 @@ export async function uploadImageAction(formData: FormData) {
 
     await connect()
 
-    if (isCollection) {
+    if (isCollection == "1") {
       createdCollectionId = await CollectionsModel.create({
         uploaderId,
         images: [],
@@ -48,13 +48,17 @@ export async function uploadImageAction(formData: FormData) {
           imageMongo["blob"] = url
           imageMongo["pathname"] = pathname
           imageMongo["downloadUrl"] = downloadUrl
-          imageMongo["collectionId"] = createdCollectionId._id
-          if (i==0) collectionBlob = url
+
+          if (isCollection=="1") {
+            imageMongo["collectionId"] = createdCollectionId._id
+            if (i==0) collectionBlob = url
+          }
+
     })
     const imageId = await ImageModel.create(imageMongo)
     imageMongoIds.push(imageId)
     }
 
-    await CollectionsModel.findByIdAndUpdate({ _id: createdCollectionId._id }, { images: imageMongoIds, blob: collectionBlob })
+    if (isCollection == "1") await CollectionsModel.findByIdAndUpdate({ _id: createdCollectionId._id }, { images: imageMongoIds, blob: collectionBlob })
 
 }

@@ -1,11 +1,9 @@
 
 "use client"
-import { Painting } from "@/comps/Links/PaintingLink"
 import { Loading } from "@/comps/Loading"
 import { NotFound } from "@/comps/NotFound"
 import { UseCollections } from "./api/UseCollections"
 import { ImageCreateForm } from "@/comps/Forms/ImageCreateForm"
-import { uploadImageAction } from "actions/images/createImage"
 import { CollectionLink } from "@/comps/Links/CollectionLink"
 
 export function CollectionsList({ uploaderId }) {
@@ -31,6 +29,6 @@ export function CollectionList({ uploaderId }) {
 function CollectionForm({ uploaderId }) {
   const { mutate } = UseCollections({ uploaderId })
   return <div className="w-10/12 mb-8 md:w-1/3">
-    <ImageCreateForm uploaderId={uploaderId} mutate={mutate} actionFunction={uploadImageAction} isCollection={1} />
+    <ImageCreateForm uploaderId={uploaderId} mutate={mutate} isCollection={"1"} />
   </div>
 }

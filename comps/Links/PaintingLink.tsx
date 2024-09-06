@@ -22,7 +22,7 @@ export function Painting({ id, uploaderId, blob, title, description, displayName
         width={ 300 }
         height={ 300 }
         quality={ 100 }
-        className="w-[340px] h-[300px] sm:w-[200px] sm:h-[200px] md:w-[240px] md:h-[230px] rounded"
+        className="w-fill h-[260px] md:w-[240px] md:h-[220px] rounded"
       />
     </Link>
 
