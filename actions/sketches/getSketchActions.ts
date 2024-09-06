@@ -33,7 +33,7 @@ export async function getSketchByTitle ({ title }) {
                 "settings": {
                     "min": 0,
                     "max": 240,
-                    "value": 20,
+                    "value": 100,
                     "step": 1
                 },
                 "description": "controls the strength of the wave affect",
@@ -48,7 +48,7 @@ export async function getSketchByTitle ({ title }) {
                     "min": 0,
                     "max": 120,
                     "step": 1,
-                    "value": 80
+                    "value": 90
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },

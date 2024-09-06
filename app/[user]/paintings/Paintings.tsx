@@ -7,9 +7,10 @@ import { UsePaintings } from "./api/UsePainting"
 import { ImageCreateForm } from "@/comps/Forms/ImageCreateForm"
 import { uploadImageAction } from "actions/images/createImage"
 import { useState } from "react"
+import { shuffleArray } from "actions/utils"
 
 export function PaintingsList({ uploaderId }) {
- const [showCollections, setShowCollections] = useState("paintings")
+ const [showCollections, setShowCollections] = useState("all")
  return (
     <div className="flex flex-col items-center justify-center grow md:flex-row md:items-start mt-8 px-4">
       <PaintForm uploaderId={uploaderId} />
@@ -27,15 +28,16 @@ export function PaintingsList({ uploaderId }) {
 
 function PaintList({ uploaderId, showCollections }) {
   const {data, error, isLoading, isValidating, mutate} = UsePaintings({ uploaderId })
-  const singles = data && data.filter(data => !data.collectionId)
-  const collections = data && data.filter(data => data.collectionId)
+  const singles = data && shuffleArray(data.filter(data => !data.collectionId))
+  const collections = data && shuffleArray(data.filter(data => data.collectionId))
+  const all = data && shuffleArray(data)
 
   if ( error ) return <NotFound />
   if ( isLoading || isValidating ) return <Loading />
 
   if ( data ) return (
     <div className="h-[500px] flex flex-wrap justify-center overflow-auto">
-    { showCollections == "all" && data.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
+    { showCollections == "all" && all.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
     { showCollections == "paintings" && singles.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
     { showCollections == "collections" && collections.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
    </div>

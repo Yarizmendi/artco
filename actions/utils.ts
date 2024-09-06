@@ -5,6 +5,13 @@ export const getDistanceBetweenPoints = ( p1, p2 ): number => {
   return Math.sqrt( deltaX ** 2 + deltaY ** 2 )
 }
 
+export function shuffleArray(arr) {
+  return arr.sort(function (a, b) {
+    return Math.random() - 0.5;
+  });
+}
+
+
 export const getRandomElement = ( arr: any[] ): any => {
   return arr[ Math.floor( Math.random() * arr.length ) ]
 }
