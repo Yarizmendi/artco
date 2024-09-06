@@ -1,46 +1,23 @@
 
 "use client"
 import p5Types from "p5"
-import InitP5 from "@/p5/Instance"
+import classnames from "classnames"
+import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
-import { useState, useRef, useEffect } from "react"
-import { ShaderIcon } from "@/p5/inputs/ShaderIcon"
-import { Slider } from "@/p5/Slider"
-import classnames from "classnames"
+import { P5Provider } from "hooks/contexts/useP5"
 
-export default function PathSKetch({ 
-  vert,
-  frag,
-  title, 
-  images,
-  noises,
-  inputs, 
-  textures,
-  displayName,
-  transitions,
-  description
+export default function PathSKetch({
+  title, vert, frag, displayName, description,
+  images, inputs, textures, noises, transitions
 }) {
 
-  let mp5 = null
-  let parentRef = useRef()
-  const [ isMounted, setIsMounted ] = useState(false)
-
-  useEffect(() => { if ( !isMounted ) setIsMounted( true )}, [])
-
-  useEffect( () => { 
-    if ( isMounted ) {
-      if ( !mp5 ) mp5 = InitP5( sketch, parentRef )
-      else return mp5.remove() 
-  }}, [ isMounted ]) 
-
-  function sketch( p: p5Types ) {
+  function sketch( p: p5Types ){
     let idx = 0
     let seconds
     let ActiveShader
     let Overlay, MediaRecorder
-    let Parent = parentRef.current && parentRef.current
-    let changeEvery = transitions && inputs[2]["settings"].value
+    let changeEvery = 5
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
     // Set the noise level and scale.
@@ -63,7 +40,7 @@ export default function PathSKetch({
     }
   
     p.setup = () => {
-      createElements(Parent)
+      createElements()
     }
 
     p.draw = () => {
@@ -118,13 +95,13 @@ export default function PathSKetch({
     function handleTransitions() {
       if ( seconds > changeEvery && images.length-1 > idx ) {
         idx+=1
-        inputs[2] ? changeEvery += inputs[2]["Slider"].value(): changeEvery += 5
+        changeEvery += 5
         ActiveShader.setUniform( "u_timeout", drawPlayTimer )
       } 
     }
 
-    function createElements(parent) {
-      p.createCanvas( parent.offsetWidth, parent.offsetHeight, p.WEBGL ).parent( parent )
+    function createElements() {
+      p.createCanvas( 600, 600, p.WEBGL ).parent("Parent")
 
       inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
@@ -178,21 +155,12 @@ export default function PathSKetch({
   }
 
   return (
-    <div className={classnames("flex grow flex-col md:flex-row dark:bg-slate-950")}>
-      <div className={classnames("h-full w-[80px]")} />
-      <div className={classnames("min-h-[550px] w-full md:w-1/2 md:h-full flex justify-center text-[30px]")}
-       ref={parentRef} 
-       id={"Parent"} />
-      <div className={classnames("flex h-full w-[80px] md:flex-col")}>
-        { inputs && inputs.map( inpt => <ShaderIcon {...inpt} />)}
-      </div>
+    <P5Provider sketch={sketch}>
       <div className={classnames("flex flex-col md:w-1/2 dark:bg-slate-900 p-4 gap-2")}>
         { displayName && <p className={classnames("text-lg uppercase")}>{displayName} sketch</p> }
         { description && <p className="text-sm">{description}</p> }
-        { inputs && inputs.map( inpt => <Slider key={inpt.id} {...inpt} /> )}
+        { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
       </div>
-      <div className={classnames("h-full w-[80px]")} />
-      <a id="download" className="hidden"/>
-  </div>
+  </P5Provider>
   )
 }

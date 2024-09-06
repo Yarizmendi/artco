@@ -4,7 +4,7 @@ import { Input } from "@/comps/Forms/FormInput"
 import { ActionButton } from "@/comps/Buttons/ActionButton"
 import { createSketchAction } from "actions/sketches/createSketchAction"
 // import { BoolSelect } from "@/comps/Forms/DataList"
-import { ImageSelect, InputSelect, TextureSelect } from "./ImageSelect"
+import { ImageSelect } from "./ImageSelect"
 import { UseSketches } from "../../app/[user]/sketches/api/UseSketches"
 
 export function CreateSketchForm ({ params }) {
@@ -24,8 +24,8 @@ export function CreateSketchForm ({ params }) {
         <Input title={"blob"} value={"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sid.jpg"} />
         {/* <BoolSelect title={"transitions"} list={"transitions"} dataArr={transitionsOptions} /> */}
         <ImageSelect />
-        <InputSelect />
-        <TextureSelect />
+        {/* <InputSelect />
+        <TextureSelect /> */}
         <ActionButton idleTxt="create sketch" btnType={"submit"}/>
         </form>
     )

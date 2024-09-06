@@ -64,9 +64,7 @@ export async function getSketchByTitle ({ title }) {
       const clickedImg =  await getMongoImageByTitle(title )
       newSketch["images"] = [ clickedImg ]
       return newSketch
-    }
-
-    else return sk
+    } else return sk
 }
 
 export async function getSketchById (id) {

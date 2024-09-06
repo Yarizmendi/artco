@@ -7,7 +7,7 @@ async function InitP5(
   parentRef,
 ) {
   let p5 = ( await import( "p5" )).default
-  p = new p5( sketch, parentRef.current )
+  p = new p5( sketch, parentRef )
   return p
 }
 export default InitP5

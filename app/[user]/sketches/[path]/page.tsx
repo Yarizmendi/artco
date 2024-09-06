@@ -1,6 +1,7 @@
 
-import Sketch from "./PathSketch"
 import { getSketchByTitle } from "actions/sketches/getSketchActions"
+import Sketch from "./PathSketch"
+// import { SketchData } from "./SketchData"
 
 export default async function Page({ params }) {
   // missing texture model error when using findOne as opposed to find

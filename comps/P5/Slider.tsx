@@ -45,14 +45,3 @@ export const InputSliderWithDescription = ({
     </div>
   )
 }
-
-export const Sliders = ({ 
-  sliders
-}) => {
-  const styles = classnames("p-2")
-  return (
-    <div className={styles}>
-      {sliders.map((slider, idx) => <Slider key={idx} {...slider} /> )}
-    </div>
-  )
-}
