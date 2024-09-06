@@ -6,7 +6,7 @@ import CollectionsModel from '@/mongo/models/collections.model'
 
 export async function getUserImgCollections ({ uploaderId }) {
     await connect()
-    return CollectionsModel.find({ uploaderId }).populate("images").sort({ createdAt: "desc"}).exec()
+    return CollectionsModel.find({ uploaderId }).populate("images").sort({ createdAt: "desc"}).select("-uploaderId -__v").exec()
 }
 
 export async function getUserImgCollectionById ({ collectionId }) {

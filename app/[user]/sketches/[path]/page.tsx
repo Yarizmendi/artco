@@ -1,10 +1,8 @@
 
 import { getSketchByTitle } from "actions/sketches/getSketchActions"
 import Sketch from "./PathSketch"
-// import { SketchData } from "./SketchData"
 
 export default async function Page({ params }) {
-  // missing texture model error when using findOne as opposed to find
   const { vert, frag, title, images, noises, inputs, displayName, description, textures } = await getSketchByTitle({ title: params.path })
 
   return <Sketch 

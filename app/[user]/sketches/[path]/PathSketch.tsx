@@ -6,11 +6,15 @@ import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
+// import { UseStockData } from "app/stocks/UseStockData"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
   images, inputs, textures, noises, transitions
 }) {
+
+  // const {data, error, isLoading} = UseStockData()
+  // console.log(data)
 
   function sketch( p: p5Types ){
     let idx = 0
@@ -64,10 +68,6 @@ export default function PathSKetch({
 
     }
     
-    p.windowResized = () => {
-      // @ts-ignore
-      p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight )
-    }
 
     function handleControls() {
 
@@ -101,7 +101,7 @@ export default function PathSKetch({
     }
 
     function createElements() {
-      p.createCanvas( 600, 600, p.WEBGL ).parent("Parent")
+      p.createCanvas( 600, 570, p.WEBGL ).parent("Parent")
 
       inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
@@ -152,6 +152,7 @@ export default function PathSKetch({
       })
 
     }
+    
   }
 
   return (

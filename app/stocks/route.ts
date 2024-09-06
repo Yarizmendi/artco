@@ -1,0 +1,2359 @@
+
+import { NextRequest, NextResponse } from "next/server"
+
+const data = {
+    "items": "50",
+    "sentiment_score_definition": "x <= -0.35: Bearish; -0.35 < x <= -0.15: Somewhat-Bearish; -0.15 < x < 0.15: Neutral; 0.15 <= x < 0.35: Somewhat_Bullish; x >= 0.35: Bullish",
+    "relevance_score_definition": "0 < x <= 1, with a higher score indicating higher relevance.",
+    "feed": [
+        {
+            "title": "ONWARD® Medical Launches Capital Increase by Way of an Accelerated Bookbuild Offering and of a Public Offering in France for an Indicative Amount of EUR 15 Million, with an Up to EUR 5 Million Upsize Option",
+            "url": "https://www.globenewswire.com/news-release/2024/03/20/2849696/0/en/ONWARD-Medical-Launches-Capital-Increase-by-Way-of-an-Accelerated-Bookbuild-Offering-and-of-a-Public-Offering-in-France-for-an-Indicative-Amount-of-EUR-15-Million-with-an-Up-to-EUR.html",
+            "time_published": "20240320T172400",
+            "authors": [
+                "ONWARD Medical NV"
+            ],
+            "summary": "EINDHOVEN, the Netherlands, March 20, 2024 ( GLOBE NEWSWIRE ) -- NOT FOR DISTRIBUTION OR RELEASE, DIRECTLY OR INDIRECTLY, IN OR INTO THE UNITED STATES, CANADA, AUSTRALIA OR JAPAN OR ANY OTHER JURISDICTION IN WHICH THE DISTRIBUTION OR RELEASE WOULD BE UNLAWFUL. OTHER RESTRICTIONS ARE APPLICABLE. ...",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/394fa020-511d-4331-9279-c835d2daf4d6",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.999855"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.162888,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.010393",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "ONWRF",
+                    "relevance_score": "0.082999",
+                    "ticker_sentiment_score": "0.064053",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Reddit prices hotly anticipated IPO at $34 per share, valuing the social media platform at around $6.4 billion",
+            "url": "https://markets.businessinsider.com/news/stocks/reddit-ipo-price-stock-offering-social-media-retail-2024-3",
+            "time_published": "20240320T214600",
+            "authors": [
+                "Erin Snodgrass",
+                "Jennifer Sor"
+            ],
+            "summary": "Reddit IPO: Company Prices Shares at $34 for an Around $6.4 Billion Valuation - Markets Insider ...",
+            "banner_image": null,
+            "source": "Business Insider",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "markets.businessinsider.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.990678"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.955357"
+                }
+            ],
+            "overall_sentiment_score": 0.144272,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.08687",
+                    "ticker_sentiment_score": "0.112272",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "ABNB",
+                    "relevance_score": "0.08687",
+                    "ticker_sentiment_score": "0.029979",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Reddit to make stock market debut today, prices IPO at $34/ share",
+            "url": "https://www.business-standard.com/markets/ipo/reddit-to-make-stock-market-debut-today-prices-ipo-at-34-share-124032100169_1.html",
+            "time_published": "20240321T072728",
+            "authors": [
+                "AP"
+            ],
+            "summary": "The IPO will test the quirky company's ability to overcome a nearly 20-year history coloured by uninterrupted losses, management turmoil and occasional user backlashes | Photo: Pexels Reddit and its eclectic bazaar of online communities is ready to plumb high-stakes territory the stock market.",
+            "banner_image": "https://bsmedia.business-standard.com/_media/bs/img/article/2023-06/13/full/1686638656-8372.jpg?im=FitAndFill=(826,465)",
+            "source": "Business Standard",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.983605"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.918141"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.918141"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.052705,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "PYPL",
+                    "relevance_score": "0.04111",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.04111",
+                    "ticker_sentiment_score": "0.124195",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.082111",
+                    "ticker_sentiment_score": "0.11946",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "54% IPO shares allotted to investors sold within a week, shows Sebi study",
+            "url": "https://www.business-standard.com/markets/news/54-ipo-shares-allotted-to-investors-sold-within-a-week-shows-sebi-study-124090200856_1.html",
+            "time_published": "20240902T120944",
+            "authors": [
+                "Press Trust of India"
+            ],
+            "summary": "A study by markets regulator Sebi highlighted flipping behaviour among investors in the initial share-sale market with investors (excluding anchor) selling 54 per cent of IPO shares allotted to them by value within a week.",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.972193"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.158519"
+                }
+            ],
+            "overall_sentiment_score": 0.262813,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SSTK",
+                    "relevance_score": "0.061003",
+                    "ticker_sentiment_score": "0.343564",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Reddit, the self-anointed the 'front page of the internet,' set to make its stock market debut",
+            "url": "https://apnews.com/article/reddit-ipo-nyse-stock-debut-77d428f98654dbbb87b242c2f625131d",
+            "time_published": "20240321T040100",
+            "authors": [
+                "MICHAEL LIEDTKE"
+            ],
+            "summary": "SAN FRANCISCO ( AP ) - Reddit and its eclectic bazaar of online communities is ready to plumb high-stakes territory - the stock market. The company said Wednesday that it had priced its IPO at $34 a share.",
+            "banner_image": "https://dims.apnews.com/dims4/default/8ea54ef/2147483647/strip/true/crop/7037x4687+0+2/resize/599x399!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F80%2Fc0%2Fd4b96e8724fc6aa6421c8b89c300%2F7ab3cf05afae41d5a783836862b0d9ce",
+            "source": "Associated Press",
+            "category_within_source": "Markets",
+            "source_domain": "apnews.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.972193"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.918141"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.918141"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.07161,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "PYPL",
+                    "relevance_score": "0.043421",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.086713",
+                    "ticker_sentiment_score": "0.118443",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Reddit has been around since the early days of social media. Here's why it's finally going public now | Business",
+            "url": "https://www.cnn.com/2024/03/20/tech/reddit-ipo-nyse-debut/index.html",
+            "time_published": "20240320T222600",
+            "authors": [
+                "Clare Duffy"
+            ],
+            "summary": "Reddit has been around since the early days of social media. Here's why it's finally going public now ...",
+            "banner_image": "https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-2023785321-1-copy.jpg?c=16x9&q=h_144,w_256,c_fill",
+            "source": "CNN",
+            "category_within_source": "Economy",
+            "source_domain": "www.cnn.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.972193"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.858979"
+                }
+            ],
+            "overall_sentiment_score": 0.188307,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.051441",
+                    "ticker_sentiment_score": "0.184485",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Once hottest thing on Wall Street, where have all Chinese IPOs gone?",
+            "url": "https://www.business-standard.com/world-news/once-hottest-thing-on-wall-street-where-have-all-chinese-ipos-gone-124062600015_1.html",
+            "time_published": "20240625T190825",
+            "authors": [
+                "NYT"
+            ],
+            "summary": "There was a time when a Chinese internet company's initial public offering ( IPO ) was the hottest thing on Wall Street. Click here to connect with us on WhatsApp As the e-commerce giant Alibaba prepared to go public on the New York Stock Exchange a decade ago, the world's biggest banks ...",
+            "banner_image": "https://bsmedia.business-standard.com/_media/bs/img/article/2024-06/26/full/1719342446-9548.jpg",
+            "source": "Business Standard",
+            "category_within_source": "GoogleRSS",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.9545"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.995973"
+                }
+            ],
+            "overall_sentiment_score": 0.080772,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "BABA",
+                    "relevance_score": "0.055364",
+                    "ticker_sentiment_score": "0.088852",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "BZ",
+                    "relevance_score": "0.055364",
+                    "ticker_sentiment_score": "-0.047879",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "YMM",
+                    "relevance_score": "0.055364",
+                    "ticker_sentiment_score": "-0.047879",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "SFTBF",
+                    "relevance_score": "0.055364",
+                    "ticker_sentiment_score": "0.083853",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Zacks Investment Ideas feature highlights: Airbnb, Uber Technologies, Robinhood, Meta Platforms and Reddit",
+            "url": "https://www.zacks.com/stock/news/2288957/zacks-investment-ideas-feature-highlights-airbnb-uber-technologies-robinhood-meta-platforms-and-reddit",
+            "time_published": "20240617T113200",
+            "authors": [
+                "Zacks Equity Research"
+            ],
+            "summary": "Airbnb, Uber Technologies, Robinhood, Meta Platforms and Reddit are part of the Zacks Investment Ideas article.",
+            "banner_image": "https://staticx-tuner.zacks.com/images/articles/main/44/1814.jpg",
+            "source": "Zacks Commentary",
+            "category_within_source": "n/a",
+            "source_domain": "www.zacks.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.9545"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999975"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.744043"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.233403,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.244846",
+                    "ticker_sentiment_score": "0.096073",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "ABNB",
+                    "relevance_score": "0.148426",
+                    "ticker_sentiment_score": "0.067304",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "RDDT",
+                    "relevance_score": "0.148426",
+                    "ticker_sentiment_score": "0.147677",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "UBER",
+                    "relevance_score": "0.148426",
+                    "ticker_sentiment_score": "0.067304",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "How to Trade IPOs: Private vs. Public Investing",
+            "url": "https://www.zacks.com/commentary/2286225/how-to-trade-ipos-private-vs-public-investing",
+            "time_published": "20240614T130000",
+            "authors": [
+                "Andrew Rocco"
+            ],
+            "summary": "Public and private investing each have pros and cons. To be successful in public investing, investors should avoid three common pitfalls.",
+            "banner_image": "https://staticx-tuner.zacks.com/images/default_article_images/default217.jpg",
+            "source": "Zacks Commentary",
+            "category_within_source": "n/a",
+            "source_domain": "www.zacks.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.9545"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999763"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.744043"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.224615,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.211191",
+                    "ticker_sentiment_score": "0.129359",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "ABNB",
+                    "relevance_score": "0.106541",
+                    "ticker_sentiment_score": "0.090847",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "RDDT",
+                    "relevance_score": "0.106541",
+                    "ticker_sentiment_score": "0.219891",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "UBER",
+                    "relevance_score": "0.106541",
+                    "ticker_sentiment_score": "0.090847",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Welcome to the stock market, RDDT! Reddit is now a public company | Business",
+            "url": "https://www.cnn.com/2024/03/21/investing/reddit-ipo/index.html",
+            "time_published": "20240321T174200",
+            "authors": [
+                "Clare Duffy"
+            ],
+            "summary": "Welcome to the stock market, RDDT! Reddit is now a public company ...",
+            "banner_image": "https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-1224274755.jpg?c=16x9&q=w_800,c_fill",
+            "source": "CNN",
+            "category_within_source": "Economy",
+            "source_domain": "www.cnn.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.9545"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.977154"
+                }
+            ],
+            "overall_sentiment_score": 0.195119,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.184431",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Welcome to the market, RDDT! Reddit stock jumps on first day as a public company | Business",
+            "url": "https://www.cnn.com/2024/03/21/investing/reddit-ipo",
+            "time_published": "20240321T174200",
+            "authors": [
+                "Clare Duffy"
+            ],
+            "summary": "Welcome to the stock market, RDDT! Reddit is now a public company ...",
+            "banner_image": "https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-1224274755.jpg?c=16x9&q=w_800,c_fill",
+            "source": "CNN",
+            "category_within_source": "Economy",
+            "source_domain": "www.cnn.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.9545"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.977154"
+                }
+            ],
+            "overall_sentiment_score": 0.195119,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.051111",
+                    "ticker_sentiment_score": "0.184431",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Stock market today: Sensex, Nifty at record; Premier Energies IPO listing",
+            "url": "https://www.business-standard.com/markets/news/stock-market-today-sensex-nifty-at-record-premier-energies-ipo-listing-124090300062_1.html",
+            "time_published": "20240903T015847",
+            "authors": [
+                "Sirali Gupta"
+            ],
+            "summary": "Share Market Today, Tuesday, September 3, 2024: Baazar Style IPO, Premiere Energies IPO, economic data across countries to be on investors' radar today ...",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.928139"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999822"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.142828,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "IBN",
+                    "relevance_score": "0.045054",
+                    "ticker_sentiment_score": "-0.003974",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "SPGI",
+                    "relevance_score": "0.045054",
+                    "ticker_sentiment_score": "-0.085468",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "ONWARD® Medical Launches Capital Increase by Way of an Accelerated Bookbuild Offering and of a Public Offering in France for an Indicative Amount of EUR 15 Million, with an Up to EUR 5 Million Upsize Option",
+            "url": "https://www.globenewswire.com/news-release/2024/03/20/2849700/0/en/ONWARD-Medical-Launches-Capital-Increase-by-Way-of-an-Accelerated-Bookbuild-Offering-and-of-a-Public-Offering-in-France-for-an-Indicative-Amount-of-EUR-15-Million-with-an-Up-to-EUR.html",
+            "time_published": "20240320T172900",
+            "authors": [
+                "ONWARD Medical NV"
+            ],
+            "summary": "EINDHOVEN, the Netherlands, March 20, 2024 ( GLOBE NEWSWIRE ) -- NOT FOR DISTRIBUTION OR RELEASE, DIRECTLY OR INDIRECTLY, IN OR INTO THE UNITED STATES, CANADA, AUSTRALIA OR JAPAN OR ANY OTHER JURISDICTION IN WHICH THE DISTRIBUTION OR RELEASE WOULD BE UNLAWFUL. OTHER RESTRICTIONS ARE APPLICABLE. ...",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/394fa020-511d-4331-9279-c835d2daf4d6",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.890401"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.183184,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.0139",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "ONWRF",
+                    "relevance_score": "0.124593",
+                    "ticker_sentiment_score": "0.07084",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Ekso Bionics Announces Pricing of $6.0 Million Underwritten Public Offering",
+            "url": "https://www.globenewswire.com/news-release/2024/08/30/2938231/29945/en/Ekso-Bionics-Announces-Pricing-of-6-0-Million-Underwritten-Public-Offering.html",
+            "time_published": "20240830T024200",
+            "authors": [
+                "Ekso Bionics Holdings",
+                "Inc."
+            ],
+            "summary": "SAN RAFAEL, Calif., Aug. 29, 2024 ( GLOBE NEWSWIRE ) -- Ekso Bionics Holdings, Inc. ( Nasdaq: EKSO ) ( the \"Company\" or \"Ekso Bionics\" ) , an industry leader in exoskeleton technology for medical and industrial use, today announced the pricing of an underwritten public offering of 6,000,000 ...",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/b8eb3344-76d5-498f-a377-85b7a2d47c60",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.838487"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.996718"
+                }
+            ],
+            "overall_sentiment_score": 0.177592,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "EKSO",
+                    "relevance_score": "0.259727",
+                    "ticker_sentiment_score": "0.184301",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Airship AI Announces Pricing of $8.0 Million Public Offering Priced At-Market According to Nasdaq Rules - Airship AI Holdings  ( NASDAQ:AISP ) ",
+            "url": "https://www.benzinga.com/pressreleases/24/08/g40643119/airship-ai-announces-pricing-of-8-0-million-public-offering-priced-at-market-according-to-nasdaq-r",
+            "time_published": "20240830T010051",
+            "authors": [
+                "Globe Newswire"
+            ],
+            "summary": "REDMOND, Wash., Aug. 29, 2024 ( GLOBE NEWSWIRE ) -- Airship AI Holdings, Inc.",
+            "banner_image": "https://www.benzinga.com/next-assets/images/schema-image-default.png",
+            "source": "Benzinga",
+            "category_within_source": "News",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.838487"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.988915"
+                }
+            ],
+            "overall_sentiment_score": 0.18126,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "AIHZF",
+                    "relevance_score": "0.04882",
+                    "ticker_sentiment_score": "0.100333",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "AISP",
+                    "relevance_score": "0.28664",
+                    "ticker_sentiment_score": "0.246478",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Airship AI Announces Pricing of $8.0 Million Public Offering Priced At-Market According to Nasdaq Rules",
+            "url": "https://www.globenewswire.com/news-release/2024/08/30/2938223/0/en/Airship-AI-Announces-Pricing-of-8-0-Million-Public-Offering-Priced-At-Market-According-to-Nasdaq-Rules.html",
+            "time_published": "20240830T010000",
+            "authors": [
+                "INC.",
+                "AIRSHIP AI HOLDINGS"
+            ],
+            "summary": "REDMOND, Wash., Aug. 29, 2024 ( GLOBE NEWSWIRE ) -- Airship AI Holdings, Inc. ( NASDAQ: AISP ) ( \"Airship AI\" or the \"Company\" ) , a leader in AI-driven video, sensor, and data management surveillance solutions, today announced the pricing of a public offering priced at-market according to ...",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/0c31a9b6-3a2e-4711-9619-85c79b2bf41d",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.838487"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.976913"
+                }
+            ],
+            "overall_sentiment_score": 0.17429,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "AIHZF",
+                    "relevance_score": "0.051774",
+                    "ticker_sentiment_score": "0.102698",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "AISP",
+                    "relevance_score": "0.303175",
+                    "ticker_sentiment_score": "0.261514",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "SHAREHOLDER ALERT: Pomerantz Law Firm Reminds Shareholders with Losses on their Investment in Ventyx Biosciences, Inc. of Class Action Lawsuit and Upcoming Deadlines - VTYX - Ventyx Biosciences  ( NASDAQ:VTYX ) ",
+            "url": "https://www.benzinga.com/pressreleases/24/03/g38015486/shareholder-alert-pomerantz-law-firm-reminds-shareholders-with-losses-on-their-investment-in-venty",
+            "time_published": "20240331T191300",
+            "authors": [
+                "Globe Newswire"
+            ],
+            "summary": "NEW YORK, March 31, 2024 ( GLOBE NEWSWIRE ) -- Pomerantz LLP announces that a class action lawsuit has been filed against Ventyx Biosciences, Inc. ( \"Ventyx\" or the \"Company\" ) VTYX and certain officers.",
+            "banner_image": "https://www.benzinga.com/next-assets/images/schema-image-default.png",
+            "source": "Benzinga",
+            "category_within_source": "News",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.838487"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.996718"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.108179"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.0744,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "VTYX",
+                    "relevance_score": "0.088964",
+                    "ticker_sentiment_score": "0.061348",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Sebi considers sweeping changes to disclosure, listing requirements",
+            "url": "https://www.business-standard.com/markets/news/sebi-considers-sweeping-changes-to-disclosure-listing-requirements-124062700396_1.html",
+            "time_published": "20240627T071957",
+            "authors": [
+                "Khushboo Tiwari"
+            ],
+            "summary": "Former WTM SK Mohanty -chaired committee submits over 200-page report on streamlining regulations ...",
+            "banner_image": "https://bsmedia.business-standard.com/_media/bs/img/article/2024-05/14/full/1715667211-6221.jpg?im=FeatureCrop,size=(826,465)",
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.769861"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.538269"
+                }
+            ],
+            "overall_sentiment_score": 0.138072,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SSTK",
+                    "relevance_score": "0.066784",
+                    "ticker_sentiment_score": "-0.042337",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Reddit IPO: Billionaire Investors Are Getting Rich on the New AI Stock. Should You Buy Too?",
+            "url": "https://www.fool.com/investing/2024/03/26/reddit-ipo-billionaires-are-buying-the-ai-stock/",
+            "time_published": "20240326T100200",
+            "authors": [
+                "Jeremy Bowman"
+            ],
+            "summary": "The Reddit IPO is attracting a lot of attention. Is it worth buying.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F770312%2Fhong-kong-woman-on-a-laptop.jpg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.769861"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.692272"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.858979"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.262824,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "RDDT",
+                    "relevance_score": "0.773363",
+                    "ticker_sentiment_score": "0.401753",
+                    "ticker_sentiment_label": "Bullish"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.060236",
+                    "ticker_sentiment_score": "0.106471",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Should You Buy Reddit Stock After Its Sizzling IPO?",
+            "url": "https://www.fool.com/investing/2024/03/24/should-you-buy-reddit-stock-after-its-sizzling-ipo/",
+            "time_published": "20240324T094500",
+            "authors": [
+                "Keith Speights"
+            ],
+            "summary": "There's a new social media stock in town, but not a new social media platform.",
+            "banner_image": "https://g.foolcdn.com/editorial/images/770292/smartphones-four-young-people.jpg",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.769861"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.977154"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.684621"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.251425,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.158173",
+                    "ticker_sentiment_score": "0.26632",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.105836",
+                    "ticker_sentiment_score": "0.04848",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "PINS",
+                    "relevance_score": "0.053035",
+                    "ticker_sentiment_score": "0.044766",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "RDDT",
+                    "relevance_score": "0.837555",
+                    "ticker_sentiment_score": "0.42983",
+                    "ticker_sentiment_label": "Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Reddit vs. Pinterest Stock: Which Is Best for Your Portfolio?",
+            "url": "https://www.fool.com/investing/2024/03/22/reddit-vs-pinterest-stock-which-is-best-for-your-p/",
+            "time_published": "20240322T173922",
+            "authors": [
+                "Matt Frankel"
+            ],
+            "summary": "Now that Reddit is a public company, is it the better social media investment for you?",
+            "banner_image": "https://g.foolcdn.com/editorial/images/770291/man-on-laptop-2022.jpg",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.769861"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.990999"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.988915"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.346873,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "PINS",
+                    "relevance_score": "0.56296",
+                    "ticker_sentiment_score": "0.534665",
+                    "ticker_sentiment_label": "Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Social media company Reddit soars to $9bn valuation in Wall Street debut",
+            "url": "https://www.aljazeera.com/economy/2024/3/22/social-media-company-reddit-soars-to-9bn-valuation-in-wall-street-debut",
+            "time_published": "20240322T023216",
+            "authors": [
+                "Al Jazeera"
+            ],
+            "summary": "Shares of Reddit soared nearly 50 percent as the social media platform made its long-awaited stock market debut. Investors pushed Reddit's value close to $9bn after it began trading on the New York Stock Exchange on Thursday, with the company's share price peaking at $57.80 before closing at $50.44.",
+            "banner_image": "https://www.aljazeera.com/wp-content/uploads/2024/03/AP24080684478976-1710985352.jpg?resize=770%2C513&quality=80",
+            "source": "Al Jareeza",
+            "category_within_source": "n/a",
+            "source_domain": "www.aljazeera.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.769861"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.858979"
+                }
+            ],
+            "overall_sentiment_score": 0.095295,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.113597",
+                    "ticker_sentiment_score": "0.138692",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Bull of the Day: UiPath  ( PATH ) ",
+            "url": "https://www.zacks.com/commentary/2243696/bull-of-the-day-uipath-path",
+            "time_published": "20240321T103000",
+            "authors": [
+                "Jeremy Mullin"
+            ],
+            "summary": "Investors should be looking for an entry into this overlooked AI play.",
+            "banner_image": "https://staticx-tuner.zacks.com/images/default_article_images/default139.jpg",
+            "source": "Zacks Commentary",
+            "category_within_source": "n/a",
+            "source_domain": "www.zacks.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.769861"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999993"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.998932"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.121868,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "PATH",
+                    "relevance_score": "0.573213",
+                    "ticker_sentiment_score": "0.186959",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Reddit poised to make its stock market debut after IPO prices at $34 per share amid strong demand",
+            "url": "https://apnews.com/article/reddit-ipo-challenges-losses-social-media-c729af0c3b8ac5128d49460f1c063fd2",
+            "time_published": "20240320T225100",
+            "authors": [
+                "MICHAEL LIEDTKE"
+            ],
+            "summary": "SAN FRANCISCO ( AP ) - Reddit will enter a new era as a publicly traded company with a market value of $6.4 billion after the social media platform's initial public offering was priced at $34 per share.",
+            "banner_image": "https://dims.apnews.com/dims4/default/b1bcd6e/2147483647/strip/true/crop/4969x3310+15+0/resize/599x399!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F95%2F50%2F60e1a65ebcaf7052d9aaa90348d1%2F4aef673a801a4a209bdd46b1cebe234f",
+            "source": "Associated Press",
+            "category_within_source": "Markets",
+            "source_domain": "apnews.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.769861"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.87644"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.684621"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.087978,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.18046",
+                    "ticker_sentiment_score": "0.084413",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Pheton Holdings Ltd Announces Pricing of Initial Public Offering",
+            "url": "https://www.globenewswire.com/news-release/2024/09/05/2941463/0/en/Pheton-Holdings-Ltd-Announces-Pricing-of-Initial-Public-Offering.html",
+            "time_published": "20240905T133100",
+            "authors": [
+                "Pheton Holdings Ltd."
+            ],
+            "summary": "BEIJING, China, Sept. 05, 2024 ( GLOBE NEWSWIRE ) -- Pheton Holdings Ltd ( the \"Company\" or \"Pheton\" ) , a healthcare solution provider specializing in treatment planning systems for brachytherapy and other related products and services, today announced the pricing of its initial public offering ...",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/7785d449-a9e0-4ea1-86eb-ff46d45db4db",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.857896"
+                }
+            ],
+            "overall_sentiment_score": 0.190637,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "DOMH",
+                    "relevance_score": "0.05387",
+                    "ticker_sentiment_score": "0.150758",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Ekso Bionics Announces Pricing of $6.0 Million Underwritten Public Offering - Ekso Bionics Holdings  ( NASDAQ:EKSO ) ",
+            "url": "https://www.benzinga.com/pressreleases/24/08/g40643799/ekso-bionics-announces-pricing-of-6-0-million-underwritten-public-offering",
+            "time_published": "20240830T024242",
+            "authors": [
+                "Globe Newswire"
+            ],
+            "summary": "SAN RAFAEL, Calif., Aug. 29, 2024 ( GLOBE NEWSWIRE ) -- Ekso Bionics Holdings, Inc.",
+            "banner_image": "https://ml.globenewswire.com/media/b8eb3344-76d5-498f-a377-85b7a2d47c60/small/ekso-jpg.jpg",
+            "source": "Benzinga",
+            "category_within_source": "News",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.990893"
+                }
+            ],
+            "overall_sentiment_score": 0.210832,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "EKSO",
+                    "relevance_score": "0.34648",
+                    "ticker_sentiment_score": "0.220795",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Bluestone raises Rs 900 cr in pre-IPO round, valuation doubles to $970 mn",
+            "url": "https://www.business-standard.com/markets/ipo/bluestone-raises-rs-900-cr-in-pre-ipo-round-valuation-doubles-to-970-mn-124082200241_1.html",
+            "time_published": "20240822T063247",
+            "authors": [
+                "Vasudha Mukherjee"
+            ],
+            "summary": "Rs 900 crore raised by Bluestone includes Rs 600 crore in primary capital infusion, while the remaining Rs 300 crore came from secondary share sales ...",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.858979"
+                }
+            ],
+            "overall_sentiment_score": 0.227544,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "INFY",
+                    "relevance_score": "0.114682",
+                    "ticker_sentiment_score": "0.040968",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "PROSY",
+                    "relevance_score": "0.227007",
+                    "ticker_sentiment_score": "0.003444",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Newly Public Silvaco Stock Builds IPO Base After Q1 Report",
+            "url": "https://www.investors.com/news/technology/silvaco-stock-builds-ipo-base-after-q1-report/",
+            "time_published": "20240621T194100",
+            "authors": [
+                "Investor's Business Daily",
+                "PATRICK SEITZ"
+            ],
+            "summary": "Recent initial public offering Silvaco ( SVCO ) earned respectful applause from Wall Street analysts Friday after its first-quarter report. Meanwhile, Silvaco stock is forming an IPO base. The Santa Clara, Calif.-based company went public on May 9 with its shares priced at $19 each.",
+            "banner_image": "https://www.investors.com/wp-content/uploads/2019/06/Stock-IPO-32-adobe.jpg",
+            "source": "Investors Business Daily",
+            "category_within_source": "n/a",
+            "source_domain": "www.investors.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999186"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.108179"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.234379,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SPOT",
+                    "relevance_score": "0.075161",
+                    "ticker_sentiment_score": "0.269778",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "SVCO",
+                    "relevance_score": "0.742397",
+                    "ticker_sentiment_score": "0.301838",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "AvidXchange Announces Board Additions and Transitions",
+            "url": "https://www.globenewswire.com/news-release/2024/03/26/2852211/37161/en/AvidXchange-Announces-Board-Additions-and-Transitions.html",
+            "time_published": "20240326T110000",
+            "authors": [
+                "AvidXchange"
+            ],
+            "summary": "--Pre-IPO investors and current Board members Matthew Harris and Wendy Murdock to transition out--Tech and software business scaling executives Arthur J. Rubado and Oni Chukwu are two new additions to the Board ...",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/fa56700d-6114-439a-8e6a-00b3cee83675",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.744043"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.161647"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.179912,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "AVDX",
+                    "relevance_score": "0.346319",
+                    "ticker_sentiment_score": "0.292013",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "AWON",
+                    "relevance_score": "0.023861",
+                    "ticker_sentiment_score": "0.118209",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "FOREX:GBP",
+                    "relevance_score": "0.023861",
+                    "ticker_sentiment_score": "0.045161",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "VENTYX BIOSCIENCES, INC.  ( NASDAQ: VTYX )  DEADLINE ALERT: Bernstein Liebhard LLP Reminds Investors of the Deadline to File a Lead Plaintiff Motion in a Securities Class Action Lawsuit Against Ventyx Biosciences, Inc. - Ventyx Biosciences  ( NASDAQ:VTYX ) ",
+            "url": "https://www.benzinga.com/pressreleases/24/03/g37918167/ventyx-biosciences-inc-nasdaq-vtyx-deadline-alert-bernstein-liebhard-llp-reminds-investors-of-the-",
+            "time_published": "20240325T163000",
+            "authors": [
+                "Globe Newswire"
+            ],
+            "summary": "NEW YORK, March 25, 2024 ( GLOBE NEWSWIRE ) -- Bernstein Liebhard LLP: Do you, or did you, own shares of Ventyx Biosciences, Inc. VTYX? Did you purchase your shares pursuant and/or traceable to the Company's October 21, 2021 IPO, or between October 21, 2021 and November 6, 2023, inclusive?",
+            "banner_image": "https://www.benzinga.com/next-assets/images/schema-image-default.png",
+            "source": "Benzinga",
+            "category_within_source": "News",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.938793"
+                },
+                {
+                    "topic": "Mergers & Acquisitions",
+                    "relevance_score": "0.108179"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.141247,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "VTYX",
+                    "relevance_score": "0.247838",
+                    "ticker_sentiment_score": "0.103547",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Could Reddit Become the Next Meta Platforms?",
+            "url": "https://www.fool.com/investing/2024/03/25/could-reddit-become-the-next-meta-platforms/",
+            "time_published": "20240325T071500",
+            "authors": [
+                "Leo Sun"
+            ],
+            "summary": "The social news website still has a lot to prove.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F770251%2Fyoung-people-smartphones.jpg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.108179"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.997405"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.13023,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "RDDT",
+                    "relevance_score": "0.51647",
+                    "ticker_sentiment_score": "0.243601",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "META",
+                    "relevance_score": "0.249873",
+                    "ticker_sentiment_score": "0.09954",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "PINS",
+                    "relevance_score": "0.101367",
+                    "ticker_sentiment_score": "0.041463",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "ONWARD® Medical Successfully Raises €20 Million in a Capital Increase by Way of an Accelerated Bookbuild Offering and by Way of a Public Offering in France",
+            "url": "https://www.globenewswire.com/news-release/2024/03/21/2849893/0/en/ONWARD-Medical-Successfully-Raises-20-Million-in-a-Capital-Increase-by-Way-of-an-Accelerated-Bookbuild-Offering-and-by-Way-of-a-Public-Offering-in-France.html",
+            "time_published": "20240321T020300",
+            "authors": [
+                "ONWARD Medical NV"
+            ],
+            "summary": "NOT FOR DISTRIBUTION OR RELEASE, DIRECTLY OR INDIRECTLY, IN OR INTO THE UNITED STATES, CANADA, AUSTRALIA OR JAPAN OR ANY OTHER JURISDICTION IN WHICH THE DISTRIBUTION OR RELEASE WOULD BE UNLAWFUL. OTHER RESTRICTIONS ARE APPLICABLE. PLEASE SEE THE IMPORTANT NOTICE AT THE END OF THE PRESS RELEASE.",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/61f4df5c-e8ac-4d1d-9edf-b7e4b6235f3b/Results2.png",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.206298,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.014675",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "ONWRF",
+                    "relevance_score": "0.145937",
+                    "ticker_sentiment_score": "0.105445",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "China's ex-financial regulator urges easing to boost market growth",
+            "url": "https://www.scmp.com/business/china-business/article/3277544/chinas-former-top-regulator-calls-easing-ipo-curbs-support-market-growth",
+            "time_published": "20240906T124508",
+            "authors": [
+                "Daniel Ren"
+            ],
+            "summary": "The capital market fares better than banks in supporting start-ups and promising technology firms, Shang Fulin tells the Bund Summit financial forum.",
+            "banner_image": "https://img.i-scmp.com/cdn-cgi/image/fit=contain,width=1024,format=auto/sites/default/files/d8/images/canvas/2024/09/06/8ee32fb0-6d0f-4031-a809-e35ddd4c4423_c79ce972.jpg",
+            "source": "South China Morning Post",
+            "category_within_source": "Companies",
+            "source_domain": "www.scmp.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999997"
+                }
+            ],
+            "overall_sentiment_score": 0.067113,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "MSFT",
+                    "relevance_score": "0.072655",
+                    "ticker_sentiment_score": "0.084555",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "SZIHF",
+                    "relevance_score": "0.144708",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Airship AI Announces Closing of $8.0 Million Public Offering - Airship AI Holdings  ( NASDAQ:AISP ) ",
+            "url": "https://www.benzinga.com/pressreleases/24/09/g40736273/airship-ai-announces-closing-of-8-0-million-public-offering",
+            "time_published": "20240905T164500",
+            "authors": [
+                "Globe Newswire"
+            ],
+            "summary": "REDMOND, Wash., Sept. 05, 2024 ( GLOBE NEWSWIRE ) -- Airship AI Holdings, Inc.",
+            "banner_image": "https://www.benzinga.com/next-assets/images/schema-image-default.png",
+            "source": "Benzinga",
+            "category_within_source": "Markets",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.988915"
+                }
+            ],
+            "overall_sentiment_score": 0.171871,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "AIHZF",
+                    "relevance_score": "0.051221",
+                    "ticker_sentiment_score": "0.077657",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "AISP",
+                    "relevance_score": "0.300088",
+                    "ticker_sentiment_score": "0.224114",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Airship AI Announces Closing of $8.0 Million Public Offering",
+            "url": "https://www.globenewswire.com/news-release/2024/09/05/2941671/0/en/Airship-AI-Announces-Closing-of-8-0-Million-Public-Offering.html",
+            "time_published": "20240905T164500",
+            "authors": [
+                "INC.",
+                "AIRSHIP AI HOLDINGS"
+            ],
+            "summary": "REDMOND, Wash., Sept. 05, 2024 ( GLOBE NEWSWIRE ) -- Airship AI Holdings, Inc. ( NASDAQ: AISP ) ( \"Airship AI\" or the \"Company\" ) , a leader in AI-driven video, sensor, and data management surveillance solutions, announced the closing of its previously announced public offering with net proceeds ...",
+            "banner_image": "https://ml.globenewswire.com/Resource/Download/0c31a9b6-3a2e-4711-9619-85c79b2bf41d",
+            "source": "GlobeNewswire",
+            "category_within_source": "n/a",
+            "source_domain": "www.globenewswire.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.976913"
+                }
+            ],
+            "overall_sentiment_score": 0.162584,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "AIHZF",
+                    "relevance_score": "0.054483",
+                    "ticker_sentiment_score": "0.080893",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "AISP",
+                    "relevance_score": "0.318211",
+                    "ticker_sentiment_score": "0.236633",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Gala Precision IPO subscribed 201.44 times on last day of bidding",
+            "url": "https://www.business-standard.com/markets/ipo/gala-precision-ipo-subscribed-201-44-times-on-last-day-of-bidding-124090401103_1.html",
+            "time_published": "20240904T183046",
+            "authors": [
+                "Press Trust of India"
+            ],
+            "summary": "The initial public offer of Gala Precision Engineering garnered 201.44 times subscription on the closing day of bidding on Wednesday. The initial share sale received bids for 44,79,68,752 shares against 22,23,830 shares on offer, as per NSE data.",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.161647"
+                }
+            ],
+            "overall_sentiment_score": 0.190513,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SSTK",
+                    "relevance_score": "0.102013",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Stock Split Watch: Is MongoDB Next?",
+            "url": "https://www.fool.com/investing/2024/09/04/stock-split-watch-is-mongodb-next/",
+            "time_published": "20240904T085200",
+            "authors": [
+                "Leo Sun"
+            ],
+            "summary": "The database services provider's stock has soared 1,100% since its October 2017 IPO.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F789285%2Fcloud-laptop-tablet-phone.jpg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.658903"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.999975"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.149923,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "MSFT",
+                    "relevance_score": "0.109206",
+                    "ticker_sentiment_score": "0.058915",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "MDB",
+                    "relevance_score": "0.463325",
+                    "ticker_sentiment_score": "0.169188",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Indices end almost flat, Nifty ends near 25,280; VIX below 14 mark",
+            "url": "https://www.business-standard.com/markets/capital-market-news/indices-end-almost-flat-nifty-ends-near-25-280-vix-below-14-mark-124090301040_1.html",
+            "time_published": "20240903T123500",
+            "authors": [
+                "Capital Market"
+            ],
+            "summary": "Domestic stock market took a breather today, ending almost flat. Mixed global cues, coupled with a slight slowdown in India's manufacturing activity, tempered investor enthusiasm. However, positive outlooks on monsoon and government capex supported consumption and rural-based stocks.",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999995"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Economy - Macro",
+                    "relevance_score": "0.158519"
+                }
+            ],
+            "overall_sentiment_score": 0.170938,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "PGPGF",
+                    "relevance_score": "0.03853",
+                    "ticker_sentiment_score": "0.046006",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.03853",
+                    "ticker_sentiment_score": "-0.106365",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "FOREX:USD",
+                    "relevance_score": "0.076971",
+                    "ticker_sentiment_score": "0.004072",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Sensex, Nifty ends near flat line; consumer durables shares in demand",
+            "url": "https://www.business-standard.com/markets/capital-market-news/sensex-nifty-ends-near-flat-line-consumer-durables-shares-in-demand-124090300775_1.html",
+            "time_published": "20240903T101100",
+            "authors": [
+                "Capital Market"
+            ],
+            "summary": "As per provisional closing, the barometer index, the S&P BSE Sensex, fell 4.40 points or 0.01% to 82,555.44. The Nifty 50 index rose 1.15 points or 0.00% to 25,279.85. The Nifty50 extended its gaining streak for 14th day.",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999186"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.147705,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "PGPGF",
+                    "relevance_score": "0.042647",
+                    "ticker_sentiment_score": "0.046672",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "GOOG",
+                    "relevance_score": "0.042647",
+                    "ticker_sentiment_score": "-0.107194",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "DTTVY",
+                    "relevance_score": "0.042647",
+                    "ticker_sentiment_score": "0.060375",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Nifty hits record high; IT shares rally; VIX rises 2.32%",
+            "url": "https://www.business-standard.com/markets/capital-market-news/nifty-hits-record-high-it-shares-rally-vix-rises-2-32-124082800785_1.html",
+            "time_published": "20240828T101900",
+            "authors": [
+                "Capital Market"
+            ],
+            "summary": "As per provisional closing data, the barometer index, the S&P BSE Sensex rose 73.80 points or 0.09% to 81,785.56. The Nifty 50 index added 34.60 points or 0.14% to 25,052.35.",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.310843"
+                },
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.99793"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.162543,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "INFY",
+                    "relevance_score": "0.049835",
+                    "ticker_sentiment_score": "0.052478",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "WIT",
+                    "relevance_score": "0.049835",
+                    "ticker_sentiment_score": "0.052478",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Ahmedabad-based Aeron Composite raises Rs 15.17 crore from anchor investors",
+            "url": "https://www.business-standard.com/companies/news/ahmedabad-based-aeron-composite-raises-rs-15-17-crore-from-anchor-investors-124082800265_1.html",
+            "time_published": "20240828T065156",
+            "authors": [
+                "Press Trust of India"
+            ],
+            "summary": "Fibreglass reinforced polymer products supplier Aeron Composite Ltd has said it has raised Rs 15.17 crore from the anchor investors. The Ahmedabad-based company has allotted 12,14,000 equity shares to as many as 10 fund schemes at Rs 125 per share, the upper end of its IPO price band, Aeron ...",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Companies",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.796627"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.650727"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.188797,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SSTK",
+                    "relevance_score": "0.112532",
+                    "ticker_sentiment_score": "0.157978",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Nifty above 25,050 mark; IT shares rally",
+            "url": "https://www.business-standard.com/markets/capital-market-news/nifty-above-25-050-mark-it-shares-rally-124082800328_1.html",
+            "time_published": "20240828T060300",
+            "authors": [
+                "Capital Market"
+            ],
+            "summary": "At 11:28 IST, the barometer index, the S&P BSE Sensex rose 124.39 points or 0.15% to 81,834.81. The Nifty 50 index added 37.85 points or 0.15% to 25,055.60.",
+            "banner_image": null,
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.977154"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.451494"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.189316,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "INFY",
+                    "relevance_score": "0.080188",
+                    "ticker_sentiment_score": "0.053824",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "WIT",
+                    "relevance_score": "0.080188",
+                    "ticker_sentiment_score": "0.053824",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Sweetgreen Stock: Buy, Sell, or Hold?",
+            "url": "https://www.fool.com/investing/2024/08/24/sweetgreen-stock-buy-sell-or-hold/",
+            "time_published": "20240824T101300",
+            "authors": [
+                "Leo Sun"
+            ],
+            "summary": "The fast-casual salad chain is still expanding at a healthy rate.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F787671%2Fwoman-eating-salad.jpg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.459462"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.917436"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.119787,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "SG",
+                    "relevance_score": "0.514619",
+                    "ticker_sentiment_score": "0.327476",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        },
+        {
+            "title": "Market outlook Jun 28: GIFT Nifty hints quiet open; telecom stocks in focus",
+            "url": "https://www.business-standard.com/markets/news/market-outlook-jun-28-gift-nifty-hints-quiet-open-telecom-stocks-in-focus-124062800077_1.html",
+            "time_published": "20240628T013915",
+            "authors": [
+                "Rex Cano"
+            ],
+            "summary": "Pre-market update for Friday: Shares of telecom companies are likely to be in focus following the up to 25 per cent tariff hike by Reliance Jio. .",
+            "banner_image": "https://bsmedia.business-standard.com/_media/bs/img/article/2024-06/13/full/1718250218-5517.jpg?im=FeatureCrop,size=(336,188)",
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.168191,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "AVPI",
+                    "relevance_score": "0.03786",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "VOD",
+                    "relevance_score": "0.03786",
+                    "ticker_sentiment_score": "-0.042036",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Sensex rallies 569 pts, Nifty ends above 24K; IT stocks climb",
+            "url": "https://www.business-standard.com/markets/capital-market-news/sensex-rallies-569-pts-nifty-ends-above-24k-it-stocks-climb-124062700918_1.html",
+            "time_published": "20240627T113700",
+            "authors": [
+                "Capital Market"
+            ],
+            "summary": "Domestic equity barometers stocks notched gains for a fourth day, capping a volatile session fueled by monthly derivatives expiry. The Nifty50 index climbed above 24,000, shrugging off early weakness. IT, oil & gas, and auto stocks led the advance, reflecting optimism around specific sectors.",
+            "banner_image": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_685x385.jpg",
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.998682"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.650727"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Economy - Macro",
+                    "relevance_score": "0.158519"
+                }
+            ],
+            "overall_sentiment_score": 0.12271,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "INFY",
+                    "relevance_score": "0.042571",
+                    "ticker_sentiment_score": "0.169118",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "UCLQF",
+                    "relevance_score": "0.085022",
+                    "ticker_sentiment_score": "0.135583",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "HLN",
+                    "relevance_score": "0.042571",
+                    "ticker_sentiment_score": "0.141275",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "FOREX:USD",
+                    "relevance_score": "0.085022",
+                    "ticker_sentiment_score": "0.049139",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Sensex, Nifty hit fresh record highs; Nifty tops 24K; Sensex jumps 569 pts",
+            "url": "https://www.business-standard.com/markets/capital-market-news/sensex-nifty-hit-fresh-record-highs-nifty-tops-24k-sensex-jumps-569-pts-124062700693_1.html",
+            "time_published": "20240627T101200",
+            "authors": [
+                "Capital Market"
+            ],
+            "summary": "The key equity indices ended with strong gains on Thursday, gaining for fourth day in a row. The Nifty closed above the 24,000 level after hitting days low of 23,805.40 in early trade. IT, oil & gas and auto stocks were in demand while media, PSU bank and pharma shares declined.",
+            "banner_image": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_685x385.jpg",
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.99393"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.650727"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.139406,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "INFY",
+                    "relevance_score": "0.046633",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "HLN",
+                    "relevance_score": "0.046633",
+                    "ticker_sentiment_score": "0.142473",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "WIT",
+                    "relevance_score": "0.046633",
+                    "ticker_sentiment_score": "0.0",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "UCLQF",
+                    "relevance_score": "0.093108",
+                    "ticker_sentiment_score": "0.081349",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Benchmarks hit record highs, Nifty ends above 23,850; RIL climbs over 4%",
+            "url": "https://www.business-standard.com/markets/capital-market-news/benchmarks-hit-record-highs-nifty-ends-above-23-850-ril-climbs-over-4-124062600901_1.html",
+            "time_published": "20240626T122700",
+            "authors": [
+                "Capital Market"
+            ],
+            "summary": "Domestic equity benchmarks continued their upward trajectory today, marking their third consecutive day of gains. The Nifty50 crossed a significant milestone, settling above the 23,850 mark for the first time. The surge was driven by buying in banking, oil & gas, and telecom heavyweights.",
+            "banner_image": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_685x385.jpg",
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "Economy - Monetary",
+                    "relevance_score": "0.682689"
+                },
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Economy - Fiscal",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.999612"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Economy - Macro",
+                    "relevance_score": "0.158519"
+                }
+            ],
+            "overall_sentiment_score": 0.090604,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "TATLY",
+                    "relevance_score": "0.040416",
+                    "ticker_sentiment_score": "0.03959",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "IBN",
+                    "relevance_score": "0.040416",
+                    "ticker_sentiment_score": "0.157342",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "SBKFF",
+                    "relevance_score": "0.040416",
+                    "ticker_sentiment_score": "-0.079474",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "MAHMF",
+                    "relevance_score": "0.040416",
+                    "ticker_sentiment_score": "0.038493",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "FOREX:USD",
+                    "relevance_score": "0.080728",
+                    "ticker_sentiment_score": "0.0041",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Haoxi Health Tech Returns To Capital Markets Six Months After IPO - Baidu  ( NASDAQ:BIDU ) , Haoxi Health Technology  ( NASDAQ:HAO ) ",
+            "url": "https://www.benzinga.com/news/24/06/39436092/haoxi-health-tech-returns-to-capital-markets-six-months-after-ipo",
+            "time_published": "20240621T155318",
+            "authors": [
+                "The Bamboo Works"
+            ],
+            "summary": "Haoxi Health Tech's shares tanked by 28% after it announced plans to raise additional funds just a half year after its Nasdaq listing The provider of digital advertising services for healthcare companies has expanded quickly since its 2018 launch, with both strong top- and bottom-line growth",
+            "banner_image": "https://cdn.benzinga.com/files/tech-daily-ztymiqecyh4-unsplash_0.jpg?width=1200&height=800&fit=crop",
+            "source": "Benzinga",
+            "category_within_source": "General",
+            "source_domain": "www.benzinga.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.995077"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.214378"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.111329,
+            "overall_sentiment_label": "Neutral",
+            "ticker_sentiment": [
+                {
+                    "ticker": "BIDU",
+                    "relevance_score": "0.074576",
+                    "ticker_sentiment_score": "0.171861",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "HAO",
+                    "relevance_score": "0.074576",
+                    "ticker_sentiment_score": "0.076649",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "Allied Blenders IPO to open June 25; Sensex, FTSE rejig on Friday",
+            "url": "https://www.business-standard.com/markets/news/allied-blenders-ipo-to-open-june-25-sensex-ftse-rejig-on-friday-124062000682_1.html",
+            "time_published": "20240620T110752",
+            "authors": [
+                "BS Reporter"
+            ],
+            "summary": "NSE Indices has launched the thematic index Nifty India Tourism Index ...",
+            "banner_image": "https://bsmedia.business-standard.com/_media/bs/img/article/2024-06/13/full/1718250218-5517.jpg?im=FeatureCrop,size=(826,465)",
+            "source": "Business Standard",
+            "category_within_source": "Markets",
+            "source_domain": "www.business-standard.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.310843"
+                },
+                {
+                    "topic": "Earnings",
+                    "relevance_score": "0.158519"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                }
+            ],
+            "overall_sentiment_score": 0.233574,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "WIT",
+                    "relevance_score": "0.15347",
+                    "ticker_sentiment_score": "0.144196",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "FOREX:GBP",
+                    "relevance_score": "0.15347",
+                    "ticker_sentiment_score": "0.142105",
+                    "ticker_sentiment_label": "Neutral"
+                }
+            ]
+        },
+        {
+            "title": "OpenAI Billionaire Sam Altman Has Invested in These 4 Tech Stocks. Which Is the Best Buy Now?",
+            "url": "https://www.fool.com/investing/2024/03/31/openai-billionaire-sam-altman-has-invested-in-thes/",
+            "time_published": "20240331T071500",
+            "authors": [
+                "Jeremy Bowman"
+            ],
+            "summary": "OpenAI isn't Altman's only success.",
+            "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F770774%2Finvesting-screen-analysis-investor-growth-stocks.jpg&op=resize&w=700",
+            "source": "Motley Fool",
+            "category_within_source": "n/a",
+            "source_domain": "www.fool.com",
+            "topics": [
+                {
+                    "topic": "IPO",
+                    "relevance_score": "0.576289"
+                },
+                {
+                    "topic": "Technology",
+                    "relevance_score": "1.0"
+                },
+                {
+                    "topic": "Financial Markets",
+                    "relevance_score": "0.99793"
+                }
+            ],
+            "overall_sentiment_score": 0.19288,
+            "overall_sentiment_label": "Somewhat-Bullish",
+            "ticker_sentiment": [
+                {
+                    "ticker": "MSFT",
+                    "relevance_score": "0.050148",
+                    "ticker_sentiment_score": "-0.001995",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "ASAN",
+                    "relevance_score": "0.294093",
+                    "ticker_sentiment_score": "0.094801",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "ABNB",
+                    "relevance_score": "0.510952",
+                    "ticker_sentiment_score": "0.332645",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "RDDT",
+                    "relevance_score": "0.340245",
+                    "ticker_sentiment_score": "0.150253",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                },
+                {
+                    "ticker": "DASH",
+                    "relevance_score": "0.050148",
+                    "ticker_sentiment_score": "0.075381",
+                    "ticker_sentiment_label": "Neutral"
+                },
+                {
+                    "ticker": "UBER",
+                    "relevance_score": "0.385137",
+                    "ticker_sentiment_score": "0.211928",
+                    "ticker_sentiment_label": "Somewhat-Bullish"
+                }
+            ]
+        }
+    ]
+  }
+
+export async function GET(req: NextRequest) {
+    return NextResponse.json(data)
+}
