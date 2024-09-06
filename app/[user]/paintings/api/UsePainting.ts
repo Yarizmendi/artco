@@ -1,10 +1,9 @@
 
 import useSWR from "swr"
-import { USERID } from "data/id"
 
-export function UsePaintings() {
+export function UsePaintings({ uploaderId }) {
   const fetcher = url => fetch(url).then((res) => res.json())
-  const { data, error, isLoading, isValidating, mutate} = useSWR(`/${USERID}/paintings/api`, fetcher)
+  const { data, error, isLoading, isValidating, mutate} = useSWR(`/${uploaderId}/paintings/api/?user=${uploaderId}`, fetcher)
   return {
     data, 
     error, 

@@ -7,8 +7,8 @@ import { UsePaintings } from "app/[user]/paintings/api/UsePainting"
 // import { UseInputs } from "app/inputs/api/UseInputs"
 // import { UseTextures } from "app/textures/api/UseShaders"
 
-export function ImageSelect() {
-  const { data, error, isLoading } = UsePaintings()
+export function ImageSelect({ uploaderId }) {
+  const { data, error, isLoading } = UsePaintings({ uploaderId })
   if ( error ) return <NotFound />
   if ( isLoading ) return <Loading />
   if ( data ) return <Datalist title={"images"} list="images" dataArr={data} />

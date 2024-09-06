@@ -16,7 +16,7 @@ export function PaintingsList({ uploaderId }) {
 }
 
 function PaintList({ uploaderId }) {
-  const { data, error, isLoading, isValidating, mutate } = UsePaintings()
+  const { data, error, isLoading, isValidating, mutate } = UsePaintings({ uploaderId })
   if ( error ) return <NotFound />
   if ( isLoading || isValidating ) return <Loading />
   if ( data ) return (
@@ -27,7 +27,7 @@ function PaintList({ uploaderId }) {
 }
 
 function PaintForm({ uploaderId }) {
-  const { mutate } = UsePaintings()
+  const { mutate } = UsePaintings({ uploaderId })
   return <div className="w-10/12 mb-8 md:w-1/3">
     <ImageCreateForm uploaderId={uploaderId} mutate={mutate} />
   </div>

@@ -23,7 +23,7 @@ export function CreateSketchForm ({ params }) {
         <Input title={"description"} value={"test description"} />
         <Input title={"blob"} value={"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/sid.jpg"} />
         {/* <BoolSelect title={"transitions"} list={"transitions"} dataArr={transitionsOptions} /> */}
-        <ImageSelect />
+        <ImageSelect uploaderId={params.user} />
         {/* <InputSelect />
         <TextureSelect /> */}
         <ActionButton idleTxt="create sketch" btnType={"submit"}/>

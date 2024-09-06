@@ -1,8 +1,10 @@
 
 import { getMongoImagesByUploaderId } from "actions/images/getImages"
-import { USERID } from "data/id"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function GET( req: Request ) {
-    const data = await getMongoImagesByUploaderId({ uploaderId: USERID })
-    return Response.json(data)
+export async function GET( req: NextRequest ) {
+    const {searchParams} = req.nextUrl
+    const uploaderId = searchParams.get("user")
+    const data = await getMongoImagesByUploaderId({ uploaderId })
+    return NextResponse.json(data)
 }
