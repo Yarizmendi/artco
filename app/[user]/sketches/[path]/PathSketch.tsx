@@ -53,8 +53,8 @@ export default function PathSKetch({
       handleControls()
 
       inputs.map(( input ) => {
-        input["Paragraph"].html( input["Slider"].value() + pNoise() )
-        ActiveShader.setUniform( input.uniform, input["Slider"].value() + pNoise() )
+        input["Paragraph"].html( input["Slider"].value()  )
+        ActiveShader.setUniform( input.uniform, input["Slider"].value() )
       })
   
       textures.map(( texture, i ) => {
@@ -78,7 +78,7 @@ export default function PathSKetch({
         seconds = drawPlayTimer / 1000 
 
         if ( transitions ) {
-          ActiveShader.setUniform( "u_time", drawPlayTimer )
+          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
           handleTransitions()
         } else {
           ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
@@ -93,10 +93,10 @@ export default function PathSKetch({
     }
 
     function handleTransitions() {
-      if ( seconds > changeEvery && images.length-1 > idx ) {
+      if ( drawPlayTimer < changeEvery && images.length-1 > idx ) {
         idx+=1
-        changeEvery += 5
-        ActiveShader.setUniform( "u_timeout", drawPlayTimer )
+        changeEvery -= p.millis()
+        ActiveShader.setUniform( "u_timeout", p.millis() )
       } 
     }
 

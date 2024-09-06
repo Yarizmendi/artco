@@ -38,9 +38,10 @@ export default function SketchLink({
           await updateSketchAction( formData )
           mutate()
         }}>
+        <input name={"id"} defaultValue={id} />
 
         <div className="flex items-center dark:bg-slate-950">
-          <input hidden name={"id"} defaultValue={id} />
+
           <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
           <Input title="title" value={title} placeholder="title"/>
         </div>

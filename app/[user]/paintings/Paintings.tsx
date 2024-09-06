@@ -37,12 +37,12 @@ function UploadForm({uploaderId, mutateAllUploads, showCollections}) {
 }
 
 function UploadsMenu({setShowCollections}) {
+  const activeBtnStyle = "focus:border-green-500 focus:border-b"
+  const filterStates = ["all", "paintings", "collections"]
   return (
     <div className={"flex self-end gap-4 mx-10 mt-4 md:my-1 text-xs"}>
-    <button onClick={()=>setShowCollections("all")}>all</button>
-    <button onClick={()=>setShowCollections("paintings")}>paintings</button>
-    <button onClick={()=>setShowCollections("collections")}>collections</button>
-  </div>
+      {filterStates.map((filter, idx) => <button className={activeBtnStyle} onClick={()=>setShowCollections(filter)}>{filter}</button> )}
+   </div>
   )
 }
 
