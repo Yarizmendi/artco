@@ -53,7 +53,7 @@ function UploadsList({uploaderId, showCollections, paintingsRes, collectionsRes}
 
   if (paintingsRes.error || collectionsRes.error) return <NotFound />
   if (paintingsRes.isLoading || collectionsRes.isLoading) return <Loading />
-  if (paintingsRes.isValidating || collectionsRes.isValidating) return <Loading />
+  // if (paintingsRes.isValidating || collectionsRes.isValidating) return <Loading />
 
   if (paintings && collections) return (
     <div className="h-[480px] w-full flex flex-wrap justify-center overflow-auto">

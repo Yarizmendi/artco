@@ -4,9 +4,6 @@ import p5Types from "p5"
 import classnames from "classnames"
 import {createContext, useCallback, useEffect, useState} from 'react'
 
-import { Controls } from "@/p5/Controls"
-import { Recorder } from "@/p5/Recorder"
-
 export const P5Context = createContext({
   instRef: null,
   isMounted: false,
