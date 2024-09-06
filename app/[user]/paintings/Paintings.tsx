@@ -6,30 +6,38 @@ import { NotFound } from "@/comps/NotFound"
 import { UsePaintings } from "./api/UsePainting"
 import { ImageCreateForm } from "@/comps/Forms/ImageCreateForm"
 import { uploadImageAction } from "actions/images/createImage"
+import { useState } from "react"
 
 export function PaintingsList({ uploaderId }) {
+ const [showCollections, setShowCollections] = useState("paintings")
  return (
     <div className="flex flex-col items-center justify-center grow md:flex-row md:items-start mt-8 px-4">
       <PaintForm uploaderId={uploaderId} />
-      <PaintList uploaderId={uploaderId} />
+      <div className={"flex flex-col mx-8 w-11/12 md:w-2/3"}>
+        <div className={"flex self-end gap-4 mr-14 mx-2 text-xs"}>
+          <button onClick={()=>setShowCollections("all")}>all</button>
+          <button onClick={()=>setShowCollections("paintings")}>paintings</button>
+          <button onClick={()=>setShowCollections("collections")}>collections</button>
+        </div>
+        <PaintList uploaderId={uploaderId} showCollections={showCollections} />
+      </div>
     </div>
   )
 }
 
-function PaintList({ uploaderId }) {
-  const { data, error, isLoading, isValidating, mutate } = UsePaintings({ uploaderId })
-  // let collectionName: string
+function PaintList({ uploaderId, showCollections }) {
+  const {data, error, isLoading, isValidating, mutate} = UsePaintings({ uploaderId })
+  const singles = data && data.filter(data => !data.collectionId)
+  const collections = data && data.filter(data => data.collectionId)
+
   if ( error ) return <NotFound />
   if ( isLoading || isValidating ) return <Loading />
+
   if ( data ) return (
-    <div className=" mx-8 w-11/12 md:w-2/3 h-[500px] flex flex-wrap justify-center overflow-auto">
-    { data.map( art => {
-      // if (art.collectionId) {
-      //   collectionName = art.collectionId
-      //   return <CollectionLink images={art.images} key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> 
-      // }
-      return <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> 
-    })}
+    <div className="h-[500px] flex flex-wrap justify-center overflow-auto">
+    { showCollections == "all" && data.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
+    { showCollections == "paintings" && singles.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
+    { showCollections == "collections" && collections.map( art => <Painting key={art._id} mutate={mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
    </div>
   )
 }
