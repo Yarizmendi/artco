@@ -1,19 +1,20 @@
 
 "use client"
 import p5Types from "p5"
+import Image from "next/image"
 import classnames from "classnames"
 import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
-// import { UseStockData } from "app/stocks/UseStockData"
+import { UseStockData } from "app/stocks/UseStockData"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
   images, inputs, textures, noises, transitions
 }) {
 
-  // const {data, error, isLoading} = UseStockData()
+  const {data, error, isLoading} = UseStockData()
   // console.log(data)
 
   function sketch( p: p5Types ){
@@ -81,7 +82,7 @@ export default function PathSKetch({
           ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
           handleTransitions()
         } else {
-          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
+          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
         }
 
       } 
@@ -112,7 +113,7 @@ export default function PathSKetch({
       })
 
       MediaRecorder = Recorder(title)
-      Overlay = Controls( p )
+      Overlay = Controls(p)
 
       Overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
@@ -158,9 +159,20 @@ export default function PathSKetch({
   return (
     <P5Provider sketch={sketch}>
       <div className={classnames("flex flex-col md:w-1/2 dark:bg-slate-900 p-4 gap-2")}>
-        { displayName && <p className={classnames("text-lg uppercase")}>{displayName} sketch</p> }
+        { (displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
         { description && <p className="text-sm">{description}</p> }
         { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
+        <p className="self-end text-xs">{images.length} images</p>
+        <div className="flex flex-wrap w-[500px]">
+        { images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} />)}
+        </div>
+      </div>
+      <div className="text-sm p-4 gap-4 flex flex-col h-[600px] w-1/3 overflow-auto">
+        { data && data.feed.map(img => <div>
+            <p className="text-md max-h-[60px] overflow-hidden">{img.title}</p> 
+            <p className="flex text-xs mt-1 justify-end">{img.overall_sentiment_label} {img.overall_sentiment_score}</p>
+          </div>
+        )}
       </div>
   </P5Provider>
   )

@@ -1,45 +1,42 @@
 
-import { getPreviewCollectionSketch, getSketchByTitle } from "actions/sketches/getSketchActions"
 import Sketch from "./PathSketch"
-import { getUserImgCollectionById } from "actions/images/getImages"
-
-
+import { getUserImgCollectionById, getMongoImageById } from "actions/images/getImages"
+import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } from "actions/sketches/getSketchActions"
 
 export default async function Page({ params }) {
+  const [id, type] = params.path.split("-")
 
-  const { vert, frag, title, noises, inputs, displayName, description, textures, transitions } = getPreviewCollectionSketch()
-  const {images} = await getUserImgCollectionById("66da83cf5d6b96614f57d6aa")
-
-
-  // // if (!isPreview) {
-  // //   const { vert, frag, title, images, noises, inputs, displayName, description, textures, transitions } = await getSketchByTitle({ title: params.path })
-  // //   return (
-  // //     <Sketch 
-  // //     vert={vert} frag={frag} transitions={transitions} 
-  // //     title={title} displayName={displayName} description={description} 
-  // //     images={images} noises={noises} inputs={inputs} textures={textures} />
-  // //   )
-  // // }
-
-
-
-  // // if (isPreview=="collection") {
-  //   // const { vert, frag, title, images, noises, inputs, displayName, description, textures, transitions } = await getPreviewCollectionSketch({ collectionId: params.path.split("-")[1]})
-  //   // console.log(images)
-  //   // return ( 
-  //   //   <Sketch 
-  //   //   vert={vert} frag={frag} transitions={transitions} 
-  //   //   title={title} displayName={displayName} description={description} 
-  //   //   images={images} noises={noises} inputs={inputs} textures={textures} />
-  //   // )
-  // //  }
-
+  if ( type == "collection") {
+    const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewCollectionSketch()
+    const {images} = await getUserImgCollectionById(id)
     return ( 
       <Sketch images={images}
       vert={vert} frag={frag} transitions={transitions} 
       title={title} displayName={displayName} description={description} 
-       noises={noises} inputs={inputs} textures={textures} />
+      noises={noises} inputs={inputs} textures={textures} />
     )
+  }
+
+  if ( type == "sketch" ) {
+   const { vert, frag, title, images, noises, inputs, displayName, description, textures, transitions } = await getSketchById(id)
+    return ( 
+      <Sketch images={images}
+      vert={vert} frag={frag} transitions={transitions} 
+      title={title} displayName={displayName} description={description} 
+      noises={noises} inputs={inputs} textures={textures} />
+    )
+  }
+
+  if ( type == "painting") {
+    const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewPaintingSketch()
+    const images = [await getMongoImageById(id)]
+    return ( 
+      <Sketch images={images}
+      vert={vert} frag={frag} transitions={transitions} 
+      title={title} displayName={displayName} description={description} 
+      noises={noises} inputs={inputs} textures={textures} />
+    )
+  }
 
   }
 

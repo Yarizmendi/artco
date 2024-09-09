@@ -37,11 +37,8 @@ export function P5Provider({ sketch, children }) {
   return (
     <P5Context.Provider value={{isMounted, instRef}}>
       <div className={classnames("flex grow flex-col md:flex-row dark:bg-slate-950")}>
-        <div className={classnames("h-full w-[80px]")} />
         <div ref={instRef} id={"Parent"} className={classnames("min-h-[550px] w-full md:w-1/2 flex justify-center text-[30px] p5_loading")}/>
-        <div className={classnames("flex h-full w-[80px] md:flex-col")}/>
           {children}
-        <div className={classnames("h-full w-[80px]")} />
         <a id="download" className="hidden"/>
       </div>
     </P5Context.Provider>

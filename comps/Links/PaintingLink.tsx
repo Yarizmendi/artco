@@ -15,7 +15,13 @@ export function Painting({ id, uploaderId, blob, title, description, displayName
   return (
   <div className="p-4">
 
-    <Link href={`sketches/${title}`} prefetch={false}>
+    <Link href={{
+      pathname: `sketches/${id}-painting`,
+      // query: { type: "collection" }
+    }} 
+    replace={true}
+    prefetch={false}
+    >
       <Image 
         src= {blob} 
         alt={title} 
