@@ -16,7 +16,7 @@ export function Painting({ id, uploaderId, blob, title, description, displayName
   <div className="p-4">
 
     <Link href={{
-      pathname: `sketches/${id}-painting`,
+      pathname: `sketches/${id}-painting-${title}`,
       // query: { type: "collection" }
     }} 
     replace={true}

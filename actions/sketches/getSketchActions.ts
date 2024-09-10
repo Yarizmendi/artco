@@ -96,15 +96,15 @@ export function getPreviewCollectionSketch() {
 
 }
 
-export function getPreviewPaintingSketch() {
+export function getPreviewPaintingSketch(title) {
 
     return {
         vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
         frag: "/matrixScale.frag",
-        title: "painting_collection",
-        displayName: "Painting",
-        description: "Preview Painting Sketch",
-        transitions: true, 
+        title: title,
+        displayName: title ?? "Painting",
+        description: "Preview Painting Sketch -" + title,
+        transitions: false, 
         inputs: [
             {
                 "icon": "zoom_in_map",
@@ -115,7 +115,7 @@ export function getPreviewPaintingSketch() {
                     "min": 0,
                     "max": 100,
                     "step": 1,
-                    "value": 14
+                    "value": (title == "fountain") ? 80 : 15
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },

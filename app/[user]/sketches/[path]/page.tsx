@@ -4,7 +4,7 @@ import { getUserImgCollectionById, getMongoImageById } from "actions/images/getI
 import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } from "actions/sketches/getSketchActions"
 
 export default async function Page({ params }) {
-  const [id, type] = params.path.split("-")
+  const [id, type, title] = params.path.split("-")
 
   if ( type == "collection") {
     const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewCollectionSketch()
@@ -28,11 +28,12 @@ export default async function Page({ params }) {
   }
 
   if ( type == "painting") {
-    const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewPaintingSketch()
+    const {vert, noises, inputs, displayName, description, textures, transitions} = getPreviewPaintingSketch(title)
     const images = [await getMongoImageById(id)]
     return ( 
-      <Sketch images={images}
-      vert={vert} frag={frag} transitions={transitions} 
+      <Sketch frag={title=="fountain" ? "/fountain.frag" : "/matrixScale.frag"}
+      images={images}
+      vert={vert}  transitions={transitions} 
       title={title} displayName={displayName} description={description} 
       noises={noises} inputs={inputs} textures={textures} />
     )

@@ -65,11 +65,12 @@ export default function PathSKetch({
 
       noises && noises.length && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
 
-      if (!pixels) {
-        pixels = p.pixels
-        console.log(pixels)
-        const color = p.color(226, 131, 3)
-      }
+      // if (!pixels) {
+      //   pixels = p.pixels
+      //   console.log(pixels)
+      //   console.log(frag)
+      //   const color = p.color(226, 131, 3)
+      // }
 
 
       p.shader( ActiveShader )
