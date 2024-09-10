@@ -28,7 +28,7 @@ export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollec
       <Input title="description" placeholder={"description"} />
       <Input title="displayName" placeholder={"display name"} />
       <div className='flex justify-between items-center'>
-        <input className='text-xs' type="file" name="image" multiple={true} required onChange={ e => {
+        <input className='text-[10px] file:p-1 font-normal file:mr-4 file:text-xs' type="file" name="image" multiple={true} required onChange={ e => {
           e.preventDefault()
           const files = Array.from( e.target.files)
           const urls = files.map( file => URL.createObjectURL(file))

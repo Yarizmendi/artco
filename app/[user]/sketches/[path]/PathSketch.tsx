@@ -1,19 +1,20 @@
 
 "use client"
 import p5Types from "p5"
+import Image from "next/image"
 import classnames from "classnames"
 import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
-// import { UseStockData } from "app/stocks/UseStockData"
+import { UseStockData } from "app/stocks/UseStockData"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
   images, inputs, textures, noises, transitions
 }) {
 
-  // const {data, error, isLoading} = UseStockData()
+  const {data, error, isLoading} = UseStockData()
   // console.log(data)
 
   function sketch( p: p5Types ){
@@ -23,6 +24,7 @@ export default function PathSKetch({
     let Overlay, MediaRecorder
     let changeEvery = 5
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
+    let pixels = null
 
     // Set the noise level and scale.
     let noiseLevel = 1;
@@ -53,8 +55,8 @@ export default function PathSKetch({
       handleControls()
 
       inputs.map(( input ) => {
-        input["Paragraph"].html( input["Slider"].value() + pNoise() )
-        ActiveShader.setUniform( input.uniform, input["Slider"].value() + pNoise() )
+        input["Paragraph"].html( input["Slider"].value()  )
+        ActiveShader.setUniform( input.uniform, input["Slider"].value() )
       })
   
       textures.map(( texture, i ) => {
@@ -62,6 +64,13 @@ export default function PathSKetch({
       })
 
       noises && noises.length && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
+
+      if (!pixels) {
+        pixels = p.pixels
+        console.log(pixels)
+        const color = p.color(226, 131, 3)
+      }
+
 
       p.shader( ActiveShader )
       p.rect( 0, 0, 0 )
@@ -78,10 +87,10 @@ export default function PathSKetch({
         seconds = drawPlayTimer / 1000 
 
         if ( transitions ) {
-          ActiveShader.setUniform( "u_time", drawPlayTimer )
+          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
           handleTransitions()
         } else {
-          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000 )
+          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
         }
 
       } 
@@ -93,10 +102,10 @@ export default function PathSKetch({
     }
 
     function handleTransitions() {
-      if ( seconds > changeEvery && images.length-1 > idx ) {
+      if ( drawPlayTimer < changeEvery && images.length-1 > idx ) {
         idx+=1
-        changeEvery += 5
-        ActiveShader.setUniform( "u_timeout", drawPlayTimer )
+        changeEvery -= p.millis()
+        ActiveShader.setUniform( "u_timeout", p.millis() )
       } 
     }
 
@@ -112,7 +121,7 @@ export default function PathSKetch({
       })
 
       MediaRecorder = Recorder(title)
-      Overlay = Controls( p )
+      Overlay = Controls(p)
 
       Overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
@@ -158,9 +167,24 @@ export default function PathSKetch({
   return (
     <P5Provider sketch={sketch}>
       <div className={classnames("flex flex-col md:w-1/2 dark:bg-slate-900 p-4 gap-2")}>
-        { displayName && <p className={classnames("text-lg uppercase")}>{displayName} sketch</p> }
+        { (displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
         { description && <p className="text-sm">{description}</p> }
         { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
+        <p className="self-end text-xs">{images.length} images</p>
+        <div className="flex flex-wrap w-[500px]">
+        { images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} quality={100} />)}
+        </div>
+      </div>
+      <div className=" w-full h-[300px] text-sm p-4 gap-4 flex flex-col md:h-[600px] md:w-1/3 overflow-auto">
+        { data && data.feed.map(img => <div>
+            <p className="text-md max-h-[60px] overflow-hidden">{img.title}</p> 
+            <p className="flex text-xs mt-1 justify-end">{img.overall_sentiment_label} <span className="text-green-500"> <p>{img.overall_sentiment_score}</p> </span></p>
+            <div className="relative">
+            {img.topics && img.topics.map(topic => <p>{topic.topic}</p>)} 
+            {img.ticker_sentiment && img.ticker_sentiment.map(topic => <p>{topic.ticker}</p>)} 
+            </div>
+          </div>
+        )}
       </div>
   </P5Provider>
   )

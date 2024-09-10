@@ -23,7 +23,13 @@ export default function SketchLink({
   return (
     <div className="px-4 pb-4">
 
-      <Link href={`sketches/${title}`} prefetch={false}>
+      <Link href={{
+      pathname: `sketches/${id}-sketch`,
+      // query: { type: "collection" }
+    }} 
+    replace={true}
+    prefetch={false}
+    >
         <Image 
           src={blob} 
           alt={title} 
@@ -38,9 +44,10 @@ export default function SketchLink({
           await updateSketchAction( formData )
           mutate()
         }}>
+        <input name={"id"} defaultValue={id} />
 
         <div className="flex items-center dark:bg-slate-950">
-          <input hidden name={"id"} defaultValue={id} />
+
           <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
           <Input title="title" value={title} placeholder="title"/>
         </div>

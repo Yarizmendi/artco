@@ -9,9 +9,10 @@ export async function getUserImgCollections ({ uploaderId }) {
     return CollectionsModel.find({ uploaderId }).populate("images").sort({ createdAt: "desc"}).select("-uploaderId -__v").exec()
 }
 
-export async function getUserImgCollectionById ({ collectionId }) {
+export async function getUserImgCollectionById (id ) {
     await connect()
-    return CollectionsModel.findOne({ _id: collectionId }).select("-_id -uploaderId -__v").exec()
+    const data = await CollectionsModel.findById(id).populate("images", "-_id -collectionId -uploaderId -__v").limit(2).exec()
+    return data.toObject()
 }
 
 export async function getMongoImagesByUploaderId ({ uploaderId }) {

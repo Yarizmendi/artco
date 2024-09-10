@@ -40,7 +40,7 @@ void main () {
     pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
   }
 
-
+  pos = fract(pos);
   color = texture2D( u_texture, pos );
 
   gl_FragColor = vec4( color );

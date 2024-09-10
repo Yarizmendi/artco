@@ -27,6 +27,18 @@ converted using methods like `formData.get()` and `Array.from()`
 ##### 
 - Error: Server Functions cannot be called during initial render. This would create a fetch waterfall. Try to use a Server Component to pass data to Client Components instead. 
 
+  [cause]: AggregateError [ETIMEDOUT]: 
+      at internalConnectMultiple (node:net:1117:18)
+      at internalConnectMultiple (node:net:1185:5)
+      at Timeout.internalConnectMultipleTimeout (node:net:1711:5)
+      at listOnTimeout (node:internal/timers:575:11)
+      at process.processTimers (node:internal/timers:514:7) 
+    code: 'ETIMEDOUT',
+    [errors]: [ [Error], [Error], [Error], [Error] ]
+
+    
 ```js
 const advancing: boolean = true
 ```
+
+  

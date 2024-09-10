@@ -1,5 +1,5 @@
 
-import { getUserImgCollections } from "actions/images/getImages"
+import { getUserImgCollectionById, getUserImgCollections } from "actions/images/getImages"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET( req: NextRequest ) {

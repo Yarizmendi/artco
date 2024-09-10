@@ -7,7 +7,7 @@ import { useState } from "react"
 import { ICONLINED } from "data/css"
 import { updateCollectionAction } from "actions/images/updateImageAction"
 import { ActionButton } from "../Buttons/ActionButton"
-// import Link from "next/link"
+import Link from "next/link"
 
 export function CollectionLink({ id, uploaderId, blob, title, description, displayName, images, mutate }) {
   const [isEditing, setIsEditing] = useState(false)
@@ -15,7 +15,12 @@ export function CollectionLink({ id, uploaderId, blob, title, description, displ
   return (
   <div className="p-4">
 
-    {/* <Link href={`sketches/${title}`} prefetch={false}> */}
+    <Link href={{
+      pathname: `sketches/${id}-collection`,
+      // query: { type: "collection" }
+    }}
+    replace={true}
+    prefetch={false}>
       <Image 
         src= {blob} 
         alt={title} 
@@ -24,13 +29,13 @@ export function CollectionLink({ id, uploaderId, blob, title, description, displ
         quality={ 100 }
         className="w-fill h-[260px] md:w-[240px] md:h-[220px] rounded"
       />
-    {/* </Link> */}
+    </Link>
 
     <form action={ async formData => {
       await updateCollectionAction( formData )
       mutate()
     }} className="w-full flex flex-col dark:bg-slate-950">
-      <input hidden name={"id"} defaultValue={id} />
+      <input name={"id"} defaultValue={id} />
 
       <div className="flex items-center dark:bg-slate-950">
         <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>

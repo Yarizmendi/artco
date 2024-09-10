@@ -1,7 +1,6 @@
 
 import connect from 'mongo/index.js'
 import SketchModel from '@/mongo/models/sketch.model.js'
-import { getMongoImageByTitle } from 'actions/images/getImages'
 
 export async function getSKetches () {
     await connect()
@@ -15,56 +14,7 @@ export async function getSKetchesByCreatorId ({ creatorId }) {
 
 export async function getSketchByTitle ({ title }) {
     await connect()
-    const sk = await SketchModel.findOne({ title }).exec()
-
-    const newSketch = {
-        vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
-        frag: "/matrixScale.frag",
-        title: title,
-        displayName: "Image",
-        description: "User image sketch",
-        transitons: false, 
-        inputs: [
-            {
-                "icon": "heat",
-                "type": "slider",
-                "label": "waves",
-                "uniform": "u_waves",
-                "settings": {
-                    "min": 0,
-                    "max": 240,
-                    "value": 100,
-                    "step": 1
-                },
-                "description": "controls the strength of the wave affect",
-            },
-            {
-
-                "icon": "zoom_in_map",
-                "type": "slider",
-                "label": "zoom",
-                "uniform": "u_zoom",
-                "settings": {
-                    "min": 0,
-                    "max": 120,
-                    "step": 1,
-                    "value": 90
-                },
-                "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
-            },
-        ],
-        textures: [
-            {
-                "uniform": "u_texture",
-            },
-        ],
-    }
-
-    if ( !sk ) {
-      const clickedImg =  await getMongoImageByTitle(title )
-      newSketch["images"] = [ clickedImg ]
-      return newSketch
-    } else return sk
+    return await SketchModel.findOne({ title }).select("-__v -creatorId -uploaderId").exec()
 }
 
 export async function getSketchById (id) {
@@ -73,33 +23,122 @@ export async function getSketchById (id) {
     return sketches
 }
 
+export function getPreviewCollectionSketch() {
 
+    return {
+        vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
+        frag: "/stem.frag",
+        title: "preview_collection",
+        displayName: "Image",
+        description: "Preview Collection Sketch",
+        transitions: true, 
+        inputs: [
+            {
+                "icon": "zoom_in_map",
+                "type": "slider",
+                "label": "waves",
+                "uniform": "u_waves",
+                "settings": {
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "value": 15
+                },
+                "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            },
+            {
+                "icon": "zoom_in_map",
+                "type": "slider",
+                "label": "range",
+                "uniform": "u_range",
+                "settings": {
+                    "min": 0,
+                    "max": 1,
+                    "step": .25,
+                    "value": .25
+                },
+                "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            },
+            // {
+            //     "icon": "zoom_in_map",
+            //     "type": "slider",
+            //     "label": "threshold",
+            //     "uniform": "u_threshold",
+            //     "settings": {
+            //         "min": 0,
+            //         "max": 1,
+            //         "step": .01,
+            //         "value": .5
+            //     },
+            //     "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            // },
+            {
+                "icon": "zoom_in_map",
+                "type": "slider",
+                "label": "timer",
+                "uniform": "u_timeout",
+                "settings": {
+                    "min": 0,
+                    "max": 60,
+                    "step": 1,
+                    "value": 9
+                },
+                "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            },
+        ],
+        textures: [
+            { "uniform": "u_background"},
+            { "uniform": "u_foreground"},
+        ],
 
-// const newSketch = {
-//     id: 0,
-//     vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
-//     frag: "/new.frag",
-//     title: 'image',
-//     displayName: "Image Sketch",
-//     description: "User image sketch",
-//     transitons: false, 
-//     inputs: [
-//         {
-//             icon: 'heat',
-//             type: 'slider',
-//             label: 'waves',
-//             uniform: 'u_waves',
-//             description: 'amplitude of trig function',
-//             settings: { min: 0, max: 100, step: 1, value: 10 }
-//         },
-//     ],
-//     textures: [
-//         { uniform: "u_texture", type: "texture"}
-//     ]
-// }
+        noises: [{ blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png"}]
+    }
 
-// if ( !sk ) {
-//   const clickedImg =  await getMongoImageByTitle(sketchTitle )
-//   newSketch["images"] = [ clickedImg ]
-//   return newSketch
-// }
+}
+
+export function getPreviewPaintingSketch() {
+
+    return {
+        vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
+        frag: "/matrixScale.frag",
+        title: "painting_collection",
+        displayName: "Painting",
+        description: "Preview Painting Sketch",
+        transitions: true, 
+        inputs: [
+            {
+                "icon": "zoom_in_map",
+                "type": "slider",
+                "label": "waves",
+                "uniform": "u_waves",
+                "settings": {
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "value": 14
+                },
+                "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            },
+            {
+                "icon": "zoom_in_map",
+                "type": "slider",
+                "label": "zoom",
+                "uniform": "u_zoom",
+                "settings": {
+                    "min": 0,
+                    "max": 120,
+                    "step": 1,
+                    "value": 60
+                },
+                "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            }
+        ],
+        textures: [
+            { "uniform": "u_texture"},
+            // { "uniform": "u_foreground"},
+        ],
+
+        noises: [{ blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png"}]
+    }
+
+}

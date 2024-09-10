@@ -12,11 +12,6 @@ const imageSchema = new mongoose.Schema({
     contentType: String,
     displayName: String,
 
-    collectionId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Collection',
-    },
-
     createdAt: {
       type: Date,
       default: () => Date.now(),
