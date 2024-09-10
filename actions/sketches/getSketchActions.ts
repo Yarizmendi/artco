@@ -36,29 +36,42 @@ export function getPreviewCollectionSketch() {
             {
                 "icon": "zoom_in_map",
                 "type": "slider",
-                "label": "range",
-                "uniform": "u_range",
+                "label": "waves",
+                "uniform": "u_waves",
                 "settings": {
                     "min": 0,
-                    "max": 1,
-                    "step": .1,
-                    "value": .5
+                    "max": 100,
+                    "step": 1,
+                    "value": 15
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },
             {
                 "icon": "zoom_in_map",
                 "type": "slider",
-                "label": "threshold",
-                "uniform": "u_threshold",
+                "label": "range",
+                "uniform": "u_range",
                 "settings": {
                     "min": 0,
                     "max": 1,
-                    "step": .01,
-                    "value": .5
+                    "step": .25,
+                    "value": .25
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },
+            // {
+            //     "icon": "zoom_in_map",
+            //     "type": "slider",
+            //     "label": "threshold",
+            //     "uniform": "u_threshold",
+            //     "settings": {
+            //         "min": 0,
+            //         "max": 1,
+            //         "step": .01,
+            //         "value": .5
+            //     },
+            //     "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            // },
             {
                 "icon": "zoom_in_map",
                 "type": "slider",
@@ -102,7 +115,7 @@ export function getPreviewPaintingSketch() {
                     "min": 0,
                     "max": 100,
                     "step": 1,
-                    "value": 15
+                    "value": 14
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },

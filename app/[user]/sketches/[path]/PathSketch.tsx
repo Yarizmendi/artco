@@ -24,6 +24,7 @@ export default function PathSKetch({
     let Overlay, MediaRecorder
     let changeEvery = 5
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
+    let pixels = null
 
     // Set the noise level and scale.
     let noiseLevel = 1;
@@ -63,6 +64,13 @@ export default function PathSKetch({
       })
 
       noises && noises.length && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
+
+      if (!pixels) {
+        pixels = p.pixels
+        console.log(pixels)
+        const color = p.color(226, 131, 3)
+      }
+
 
       p.shader( ActiveShader )
       p.rect( 0, 0, 0 )
@@ -164,13 +172,17 @@ export default function PathSKetch({
         { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
         <p className="self-end text-xs">{images.length} images</p>
         <div className="flex flex-wrap w-[500px]">
-        { images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} />)}
+        { images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} quality={100} />)}
         </div>
       </div>
-      <div className="text-sm p-4 gap-4 flex flex-col h-[600px] w-1/3 overflow-auto">
+      <div className=" w-full h-[300px] text-sm p-4 gap-4 flex flex-col md:h-[600px] md:w-1/3 overflow-auto">
         { data && data.feed.map(img => <div>
             <p className="text-md max-h-[60px] overflow-hidden">{img.title}</p> 
-            <p className="flex text-xs mt-1 justify-end">{img.overall_sentiment_label} {img.overall_sentiment_score}</p>
+            <p className="flex text-xs mt-1 justify-end">{img.overall_sentiment_label} <span className="text-green-500"> <p>{img.overall_sentiment_score}</p> </span></p>
+            <div className="relative">
+            {img.topics && img.topics.map(topic => <p>{topic.topic}</p>)} 
+            {img.ticker_sentiment && img.ticker_sentiment.map(topic => <p>{topic.ticker}</p>)} 
+            </div>
           </div>
         )}
       </div>
