@@ -77,6 +77,11 @@ export default function PathSKetch({
       p.rect( 0, 0, 0 )
 
     }
+
+    p.windowResized = () => {
+      // @ts-ignore
+      p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight)
+    }
     
 
     function handleControls() {
@@ -111,7 +116,8 @@ export default function PathSKetch({
     }
 
     function createElements() {
-      p.createCanvas( 600, 570, p.WEBGL ).parent("Parent")
+      // @ts-ignore
+      p.createCanvas( Parent.offsetWidth, 550, p.WEBGL ).parent("Parent")
 
       inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
@@ -167,15 +173,17 @@ export default function PathSKetch({
 
   return (
     <P5Provider sketch={sketch}>
-      <div className={classnames("flex flex-col md:w-1/2 dark:bg-slate-900 p-4 gap-2")}>
+      <div className={classnames("flex flex-col md:w-1/2 dark:bg-slate-900 px-4 py-2 gap-2")}>
         { (displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
         { description && <p className="text-sm">{description}</p> }
         { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
         <p className="self-end text-xs">{images.length} images</p>
-        <div className="flex flex-wrap w-[500px]">
+
+        <div className="flex flex-wrap">
         { images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} quality={100} />)}
         </div>
       </div>
+
       <div className=" w-full h-[300px] text-sm p-4 gap-4 flex flex-col md:h-[600px] md:w-1/3 overflow-auto">
         { data && data.feed.map(img => <div>
             <p className="text-md max-h-[60px] overflow-hidden">{img.title}</p> 

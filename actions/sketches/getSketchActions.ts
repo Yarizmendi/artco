@@ -104,7 +104,7 @@ export function getPreviewPaintingSketch(title) {
         title: title,
         displayName: title ?? "Painting",
         description: "Preview Painting Sketch -" + title,
-        transitions: false, 
+        transitions: true, 
         inputs: [
             {
                 "icon": "zoom_in_map",
