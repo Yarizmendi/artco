@@ -117,7 +117,7 @@ export default function PathSKetch({
 
     function createElements() {
       // @ts-ignore
-      p.createCanvas( Parent.offsetWidth, 550, p.WEBGL ).parent("Parent")
+      p.createCanvas( Parent.offsetWidth, 500, p.WEBGL ).parent("Parent")
 
       inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
