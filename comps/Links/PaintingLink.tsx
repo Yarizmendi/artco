@@ -9,7 +9,7 @@ import { updateImageAction } from "actions/images/updateImageAction"
 import { ActionButton } from "../Buttons/ActionButton"
 import Link from "next/link"
 
-export function Painting({ id, uploaderId, blob, title, description, displayName, mutate }) {
+export function Painting({ id, positionIdx, uploaderId, blob, title, description, displayName, mutate }) {
   const [isEditing, setIsEditing] = useState(false)
 
   return (
@@ -45,6 +45,7 @@ export function Painting({ id, uploaderId, blob, title, description, displayName
 
       { isEditing && 
         <div>
+          <Input title="positionIdx" value={positionIdx} placeholder='position' required={false} />
           <Input title="description" value={description} placeholder='description' required={false} />
           <Input title="displayName" value={displayName} placeholder='display name'/>
           <div className="flex items-end justify-between p-2">

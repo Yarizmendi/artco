@@ -8,7 +8,9 @@ export default async function Page({ params }) {
 
   if ( type == "collection") {
     const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewCollectionSketch()
-    const {images} = await getUserImgCollectionById(id)
+    let {images} = await getUserImgCollectionById(id)
+    images = images.sort( (a,b) => Number(a.positionIdx) - Number(b.positionIdx) )
+
     return ( 
       <Sketch images={images}
       vert={vert} frag={frag} transitions={transitions} 

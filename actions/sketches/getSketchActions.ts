@@ -42,7 +42,7 @@ export function getPreviewCollectionSketch() {
                     "min": 0,
                     "max": 100,
                     "step": 1,
-                    "value": 15
+                    "value": 5
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },
@@ -54,7 +54,7 @@ export function getPreviewCollectionSketch() {
                 "settings": {
                     "min": 0,
                     "max": 1,
-                    "step": .25,
+                    "step": .1,
                     "value": .25
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",

@@ -57,9 +57,9 @@ function UploadsList({uploaderId, showCollections, paintingsRes, collectionsRes}
 
   if (paintings && collections) return (
     <div className="h-[480px] w-full flex flex-wrap justify-center overflow-auto">
-    { showCollections == "all" && paintings.map( art => <Painting key={art._id} mutate={paintingsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
-    { showCollections == "paintings" && filteredPaintings.map( art => <Painting key={art._id} mutate={paintingsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
-    { showCollections == "collections" && collections.map( art => <CollectionLink key={art._id} mutate={collectionsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} images={art.images} /> )}
+    { showCollections == "all" && paintings.map( art => <Painting key={art._id} positionIdx={art.positionIdx} mutate={paintingsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
+    { showCollections == "paintings" && filteredPaintings.map( art => <Painting positionIdx={art.positionIdx} key={art._id} mutate={paintingsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
+    { showCollections == "collections" && collections.map( art => <CollectionLink positionIdx={art.positionIdx} key={art._id} mutate={collectionsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} images={art.images} /> )}
    </div>
   )
 }

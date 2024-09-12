@@ -9,7 +9,7 @@ import { updateCollectionAction } from "actions/images/updateImageAction"
 import { ActionButton } from "../Buttons/ActionButton"
 import Link from "next/link"
 
-export function CollectionLink({ id, uploaderId, blob, title, description, displayName, images, mutate }) {
+export function CollectionLink({ id, positionIdx, uploaderId, blob, title, description, displayName, images, mutate }) {
   const [isEditing, setIsEditing] = useState(false)
 
   return (
@@ -35,7 +35,7 @@ export function CollectionLink({ id, uploaderId, blob, title, description, displ
       await updateCollectionAction( formData )
       mutate()
     }} className="w-full flex flex-col dark:bg-slate-950">
-      <input name={"id"} defaultValue={id} />
+      <input name={"positionIdx"} defaultValue={positionIdx} />
 
       <div className="flex items-center dark:bg-slate-950">
         <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>

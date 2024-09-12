@@ -12,6 +12,8 @@ const imageSchema = new mongoose.Schema({
     contentType: String,
     displayName: String,
 
+    positionIdx: String || Number,
+
     createdAt: {
       type: Date,
       default: () => Date.now(),

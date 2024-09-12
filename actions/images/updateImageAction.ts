@@ -9,11 +9,13 @@ export async function updateImageAction( formData: FormData ) {
     const title = formData.get("title")
     const displayName = formData.get("displayName")
     const description = formData.get("description")
+    const positionIdx = formData.get("positionIdx")
     await connect()
     await ImageModel.findByIdAndUpdate({ _id }, {
         title,
         displayName,
-        description
+        description, 
+        positionIdx
     }).exec()
 }
 

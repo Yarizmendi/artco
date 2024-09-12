@@ -19,10 +19,10 @@ export default function PathSKetch({
 
   function sketch( p: p5Types ){
     let idx = 0
-    let seconds
+    let seconds = 0
     let ActiveShader
     let Overlay, MediaRecorder
-    let changeEvery = 5
+    let changeEvery = 8000
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
     let pixels = null
 
@@ -108,16 +108,16 @@ export default function PathSKetch({
     }
 
     function handleTransitions() {
-      if ( drawPlayTimer < changeEvery && images.length-1 > idx ) {
+      if ( drawPlayTimer > changeEvery && images.length-2 > idx ) {
         idx+=1
-        changeEvery -= p.millis()
-        ActiveShader.setUniform( "u_timeout", p.millis() )
+        changeEvery += 8000
+        ActiveShader.setUniform( "u_timeout", drawPlayTimer )
       } 
     }
 
     function createElements() {
       // @ts-ignore
-      p.createCanvas( Parent.offsetWidth, 500, p.WEBGL ).parent("Parent")
+      p.createCanvas( Parent.offsetWidth, 540, p.WEBGL ).parent("Parent")
 
       inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
@@ -160,10 +160,12 @@ export default function PathSKetch({
 
       Overlay.resetBtn.mouseClicked(() => {
         isPlaying = false
+        idx = 0
         drawPlayTimer = 0
         drawPauseTimer = 0
         Overlay.playBtnLabel.html("play")
         Overlay.recordBtnLabel.html("record")
+        p.resetShader()
         setTimeout(() => document.getElementById("playbtn").click(), 1000)
       })
 
