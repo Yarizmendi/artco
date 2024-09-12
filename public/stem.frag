@@ -19,18 +19,18 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
   vec4 noise = texture2D( u_noise, pos );
 
   float t = smoothstep(
-    ( 1.0 - u_range  ),
-    ( 1.0 + u_range  ),
+    ( 0.0  ),
+    ( 1.0   ),
     noise.r
   );
 
-  vec4 res = mix( color1, color2, abs(sin(timeout * .33 )) );
+  vec4 res = mix( color1, color2, abs(sin(timeout * .55 )) );
   return res;
 }
 
 void main () {
   vec2 pos = vTexCoord;
-  pos.x += (cos(pos.x * u_waves ) / 30. ) * (sin( u_time ));
+  pos.x += (cos(pos.x * u_waves ) / 50. ) * (sin( u_time ));
   pos.y += cos( pos.y * u_waves + u_time ) / ( 15.0 + u_waves + u_time );
   pos = fract(pos);
   vec4 col = transition( pos, u_foreground, u_background, u_time );

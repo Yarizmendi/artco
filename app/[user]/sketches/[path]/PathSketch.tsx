@@ -22,7 +22,7 @@ export default function PathSKetch({
     let seconds = 0
     let ActiveShader
     let Overlay, MediaRecorder
-    let changeEvery = 8000
+    let changeEvery = 9500
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
     let pixels = null
 
@@ -110,14 +110,14 @@ export default function PathSKetch({
     function handleTransitions() {
       if ( drawPlayTimer > changeEvery && images.length-2 > idx ) {
         idx+=1
-        changeEvery += 8000
-        ActiveShader.setUniform( "u_timeout", drawPlayTimer )
+        changeEvery += 9500
+        ActiveShader.setUniform( "u_timeout", (p.millis() - drawPlayTimer) )
       } 
     }
 
     function createElements() {
       // @ts-ignore
-      p.createCanvas( Parent.offsetWidth, 540, p.WEBGL ).parent("Parent")
+      p.createCanvas( Parent.offsetWidth, 580, p.WEBGL ).parent("Parent")
 
       inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
