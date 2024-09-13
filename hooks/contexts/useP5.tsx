@@ -11,12 +11,10 @@ export const P5Context = createContext({
 
 export function P5Provider({ sketch, children }) {
 
-  let mp5
-
   async function InitP5({sketch, instRef}) {
     let pImport = (await import("p5")).default
-    let p: p5Types = new pImport(sketch, instRef())
-    return p
+    let pSound =  await import("../../lib/p5.sound")
+    return new pImport(sketch, instRef())
   }
 
   const [isMounted, setIsMounted] = useState(false)
@@ -30,8 +28,9 @@ export function P5Provider({ sketch, children }) {
 
   useEffect(() => { 
     if (isMounted) {
+      let mp5
       if (!mp5) mp5 = InitP5({sketch, instRef})
-      else mp5.remove() 
+      else return mp5.remove() 
   }}, [isMounted]) 
 
   return (

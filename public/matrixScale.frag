@@ -5,6 +5,8 @@ uniform float u_waves;
 uniform float u_zoom;
 uniform float u_scale_x;
 uniform float u_scale_y;
+uniform float uWavesX;
+uniform float uWavesY;
 uniform sampler2D u_texture;
 
 varying vec2 vTexCoord;
@@ -38,6 +40,7 @@ void main () {
   } 
   else {
     pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
+    pos.y += cos( pos.y * (uWavesX/100.) + u_time );
   }
 
   pos = fract(pos);

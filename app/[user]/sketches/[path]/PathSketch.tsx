@@ -8,6 +8,7 @@ import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
 import { UseStockData } from "app/stocks/UseStockData"
+// import p5Sound from "lib/p5.sound"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
@@ -15,9 +16,10 @@ export default function PathSKetch({
 }) {
 
   const {data, error, isLoading} = UseStockData()
-  // console.log(data)
 
-  function sketch( p: p5Types ){
+
+
+  function sketch( p, pSound ){
     let idx = 0
     let seconds = 0
     let ActiveShader
@@ -26,6 +28,12 @@ export default function PathSKetch({
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
     let pixels = null
 
+    let song
+    let isSongPlaying = false
+
+    let fft = null
+
+
     // Set the noise level and scale.
     let noiseLevel = 1;
     let noiseScale = 0.005;
@@ -33,7 +41,12 @@ export default function PathSKetch({
     let nt = noiseScale * p.frameCount;
     let pNoise = () => p.round(noiseLevel * p.noise(nt))
 
+
     p.preload = () => {
+
+      p.soundFormats('mp3', 'ogg');
+      song = p.loadSound('/truckin.mp3')
+    
       noises && noises.length && noises.map( noise => {
         noise["Noise"] = p.loadImage( noise.blob )
       })  
@@ -46,6 +59,7 @@ export default function PathSKetch({
     }
   
     p.setup = () => {
+      fft = new p.constructor.FFT()
       createElements()
     }
 
@@ -65,6 +79,7 @@ export default function PathSKetch({
 
       noises && noises.length && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
 
+
       // if (!pixels) {
       //   pixels = p.pixels
       //   console.log(pixels)
@@ -74,7 +89,14 @@ export default function PathSKetch({
 
 
       p.shader( ActiveShader )
+
+      
       p.rect( 0, 0, 0 )
+
+
+
+      
+ 
 
     }
 
@@ -87,6 +109,29 @@ export default function PathSKetch({
     function handleControls() {
 
       if (isPlaying) {
+
+        !isSongPlaying && song.play()
+        !isSongPlaying && (isSongPlaying = true)
+        let waveform = fft.waveform()
+        // waveform.setInput(song)
+
+        for (let i = 0; i < waveform.length; i++){
+          // @ts-ignore
+          let x = p.map(i, 0, waveform.length, 0, Parent.offsetWidth);
+              // @ts-ignore
+          let y = p.map( waveform[i], -1, 1, 0, Parent.offsetHeight);
+              // @ts-ignore
+
+          // console.log(x)
+
+          ActiveShader.setUniform( "uWavesX", x)
+          ActiveShader.setUniform( "uWavesY", y)
+        }
+
+        // if (p.frameCount == 1 ) console.log(waveform)
+
+
+
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
 
@@ -102,6 +147,10 @@ export default function PathSKetch({
       } 
 
       if (!isPlaying) {
+        if(isSongPlaying) {
+          song.stop()
+          isSongPlaying=false
+        }
         drawPauseTimer = p.millis() - drawPlayTimer
         seconds = drawPauseTimer / 1000
       }
@@ -172,6 +221,7 @@ export default function PathSKetch({
     }
     
   }
+
 
   return (
     <P5Provider sketch={sketch}>
