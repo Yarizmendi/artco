@@ -104,6 +104,10 @@ export default function PathSKetch({
       // @ts-ignore
       p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight)
     }
+
+    p.mouseClicked = () => {
+      p.saveCanvas(title + p.frameCount)
+    }
     
 
     function handleControls() {
@@ -127,9 +131,6 @@ export default function PathSKetch({
           ActiveShader.setUniform( "uWavesX", x)
           ActiveShader.setUniform( "uWavesY", y)
         }
-
-        // if (p.frameCount == 1 ) console.log(waveform)
-
 
 
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
