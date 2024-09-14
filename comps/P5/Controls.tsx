@@ -48,6 +48,10 @@ export function Controls( p5 ) {
     let resetBtn = Button( p5, ctn )
     Icon( p5, ICONS_OUTLINE, "reset_settings", resetBtn )
     let resetBtnP = Paragraph( p5, "reset", resetBtn )
+
+    let downloadBtn = Button( p5, ctn )
+    Icon( p5, ICONS_OUTLINE, "download", downloadBtn )
+    let downloadBtnP = Paragraph( p5, "download", downloadBtn )
   
     let sketchTime = Paragraph( p5, "0 seconds", ctn )
 
@@ -60,7 +64,8 @@ export function Controls( p5 ) {
       playBtnP: playBtn,
       sketchTime: sketchTime,
       resetBtn: resetBtn,
-      resetBtnLabel: resetBtnP
+      resetBtnLabel: resetBtnP,
+      downloadBtn, downloadBtnP
     }
   
     return res

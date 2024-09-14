@@ -152,10 +152,6 @@ export default function PathSKetch({
         seconds = drawPauseTimer / 1000
       }
 
-      if (p.keyIsPressed && p.keyCode == p.RIGHT_ARROW ) {
-        p.saveCanvas(title + p.frameCount)
-      }
-      
     }
 
     function handleTransitions() {
@@ -218,6 +214,10 @@ export default function PathSKetch({
         Overlay.recordBtnLabel.html("record")
         p.resetShader()
         setTimeout(() => document.getElementById("playbtn").click(), 1000)
+      })
+
+      Overlay.downloadBtn.mouseClicked(() => {
+        p.saveCanvas(title + p.frameCount)
       })
 
     }
