@@ -105,10 +105,6 @@ export default function PathSKetch({
       p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight)
     }
 
-    p.mouseClicked = () => {
-      p.saveCanvas(title + p.frameCount)
-    }
-    
 
     function handleControls() {
 
@@ -155,6 +151,11 @@ export default function PathSKetch({
         drawPauseTimer = p.millis() - drawPlayTimer
         seconds = drawPauseTimer / 1000
       }
+
+      if (p.keyIsPressed && p.keyCode == p.RIGHT_ARROW ) {
+        p.saveCanvas(title + p.frameCount)
+      }
+      
     }
 
     function handleTransitions() {
