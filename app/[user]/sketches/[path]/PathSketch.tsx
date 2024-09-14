@@ -227,7 +227,7 @@ export default function PathSKetch({
 
   return (
     <P5Provider sketch={sketch}>
-      <div className={classnames("flex flex-col md:w-1/2 dark:bg-slate-900 px-4 py-2 gap-2")}>
+      <div className={classnames("flex flex-col md:w-1/3 dark:bg-slate-900 px-4 py-2 gap-2")}>
         { (displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
         { description && <p className="text-sm">{description}</p> }
         { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
@@ -238,7 +238,7 @@ export default function PathSKetch({
         </div>
       </div>
 
-      <div className=" w-full h-[300px] text-sm p-4 gap-4 flex flex-col md:h-[600px] md:w-1/3 overflow-auto">
+      <div className="w-full h-[300px] text-sm p-4 gap-4 flex flex-col md:h-[600px] md:w-1/3 overflow-auto">
         { data && data.feed.map(img => <div>
             <p className="text-md max-h-[60px] overflow-hidden">{img.title}</p> 
             <p className="flex text-xs mt-1 justify-end">{img.overall_sentiment_label} <span className="text-green-500"> <p>{img.overall_sentiment_score}</p> </span></p>
