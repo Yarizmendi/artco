@@ -1,4 +1,9 @@
+
+#ifdef GL_ES
 precision mediump float;
+#endif
+
+#define PI 3.14159265359
 
 uniform float u_time;
 uniform float u_waves;
@@ -23,7 +28,7 @@ vec2 rollingWaves( vec2 pos ) {
 }
 
 vec2 increasingWaves( vec2 pos ) {
-  pos.y += cos( pos.y * (u_waves/2.) + u_time ) / ( 30.0 - (u_waves/2.) + u_time );
+  pos.y += cos( pos.y * (u_waves+PI) + u_time ) / ( 30.0 - (u_waves+PI) + u_time );
   return pos;
 }
 
