@@ -30,12 +30,17 @@ export function Icon( p5: p5Types, icon_class: string, icon_text:string, parent?
   }
 
 export function Controls( p5 ) {
-    let className = "bg-stone-500 bg-opacity-10 backdrop-blur-sm rounded drop-shadow-lg px-4 py-2 text-white"  
+    // let className = "bg-stone-500 bg-opacity-10 backdrop-blur-sm rounded drop-shadow-lg px-4 py-2 text-white"  
     let ctn = p5.createDiv()
-    ctn.position( 10, 80 )
-    ctn.class( className )
-    ctn.parent( "Parent" )
-    ctn.draggable()
+    // ctn.position( p5.canvasWidth, 600 )
+    ctn.class("h-[50px] w-full flex flex-row justify-between items-center")
+    ctn.parent( "menu" )
+    ctn.id("ctrls2")
+    // ctn.draggable()
+
+    let downloadBtn = Button( p5, ctn )
+    Icon( p5, ICONS_OUTLINE, "download", downloadBtn )
+    let downloadBtnP = Paragraph( p5, "download", downloadBtn )
   
     let recordBtn = Button( p5, ctn )
     Icon( p5, ICONS_OUTLINE, RECORD_ICON_TEXT, recordBtn )
@@ -49,13 +54,9 @@ export function Controls( p5 ) {
     Icon( p5, ICONS_OUTLINE, "reset_settings", resetBtn )
     let resetBtnP = Paragraph( p5, "reset", resetBtn )
 
-    let downloadBtn = Button( p5, ctn )
-    Icon( p5, ICONS_OUTLINE, "download", downloadBtn )
-    let downloadBtnP = Paragraph( p5, "download", downloadBtn )
-  
-    let sketchTime = Paragraph( p5, "0 seconds", ctn )
+    let sketchInfo = p5.createDiv().parent("ctrls2")
+    let sketchTime = Paragraph( p5, "0 seconds", sketchInfo )
 
-    
     let res = {
       recordBtn: recordBtn,
       recordBtnLabel: recordBtnP,

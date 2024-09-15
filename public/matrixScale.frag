@@ -40,7 +40,7 @@ void main () {
   } 
   else {
     pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
-    pos.y += cos( pos.y * (uWavesX/100.) + u_time );
+    pos.y += cos( pos.y * (uWavesX/1000.) + u_time );
   }
 
   pos = fract(pos);

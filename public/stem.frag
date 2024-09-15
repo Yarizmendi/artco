@@ -24,7 +24,7 @@ vec4 transition( vec2 pos, sampler2D bg, sampler2D fg, float timeout ) {
     noise.r
   );
 
-  vec4 res = mix( color1, color2, abs(sin(timeout * .55 )) );
+  vec4 res = mix( color1, color2, abs(sin(timeout * .05 + 5000.)) );
   return res;
 }
 

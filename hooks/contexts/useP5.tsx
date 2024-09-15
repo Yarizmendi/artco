@@ -3,6 +3,7 @@
 import p5Types from "p5"
 import classnames from "classnames"
 import {createContext, useCallback, useEffect, useState} from 'react'
+import { Loading } from "@/comps/Loading"
 
 export const P5Context = createContext({
   instRef: null,
@@ -10,6 +11,7 @@ export const P5Context = createContext({
 })
 
 export function P5Provider({ sketch, children }) {
+  let mp5
 
   async function InitP5({sketch, instRef}) {
     let pImport = (await import("p5")).default
@@ -28,7 +30,6 @@ export function P5Provider({ sketch, children }) {
 
   useEffect(() => { 
     if (isMounted) {
-      let mp5
       if (!mp5) mp5 = InitP5({sketch, instRef})
       else return mp5.remove() 
   }}, [isMounted]) 
@@ -36,9 +37,16 @@ export function P5Provider({ sketch, children }) {
   return (
     <P5Context.Provider value={{isMounted, instRef}}>
       <div className={classnames("flex grow w-full flex-col md:flex-row dark:bg-slate-950")}>
-        <div ref={instRef} id={"Parent"} className={classnames("min-h-[500px] w-full md:w-1/2 flex justify-center text-[30px]")}/>
-        {children}
-        <a id="download" className="hidden"/>
+
+      <div id="p5_loading" className="w-full flex items-center justify-center border">
+          <Loading />
+        </div>
+
+        <div ref={instRef} id={"Parent"} className={"h-full w-full md:w-1/2 flex flex-col col-reverse justify-between text-[30px] text-center" } />
+     
+       {children}
+       <a id="download" className="hidden"/>
+  
       </div>
     </P5Context.Provider>
   )

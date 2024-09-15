@@ -6,17 +6,14 @@ import classnames from "classnames"
 import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
-import { P5Provider } from "hooks/contexts/useP5"
+import { P5Context, P5Provider } from "hooks/contexts/useP5"
 import { UseStockData } from "app/stocks/UseStockData"
-// import p5Sound from "lib/p5.sound"
+import { useContext } from "react"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
   images, inputs, textures, noises, transitions
 }) {
-
-  const {data, error, isLoading} = UseStockData()
-
 
 
   function sketch( p, pSound ){
@@ -26,26 +23,21 @@ export default function PathSKetch({
     let Overlay, MediaRecorder
     let changeEvery = 9500
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
-    let pixels = null
 
-    let song
+
+    let song = null
     let isSongPlaying = false
-
     let fft = null
 
 
-    // Set the noise level and scale.
-    let noiseLevel = 1;
-    let noiseScale = 0.005;
-    // Scale the input coordinate.
-    let nt = noiseScale * p.frameCount;
-    let pNoise = () => p.round(noiseLevel * p.noise(nt))
+
+    let Parent
 
 
     p.preload = () => {
 
       p.soundFormats('mp3', 'ogg');
-      song = p.loadSound('/truckin.mp3')
+      title == "grateful_dead" && (song = p.loadSound('/truckin.mp3'))
     
       noises && noises.length && noises.map( noise => {
         noise["Noise"] = p.loadImage( noise.blob )
@@ -59,8 +51,10 @@ export default function PathSKetch({
     }
   
     p.setup = () => {
-      fft = new p.constructor.FFT()
+      Parent = document.getElementById("Parent")
+      song && (fft = new p.constructor.FFT())
       createElements()
+      p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight)
     }
 
     p.draw = () => {
@@ -80,28 +74,12 @@ export default function PathSKetch({
       noises && noises.length && ActiveShader.setUniform( "u_noise", noises[ 0 ]["Noise"] )
 
 
-      // if (!pixels) {
-      //   pixels = p.pixels
-      //   console.log(pixels)
-      //   console.log(frag)
-      //   const color = p.color(226, 131, 3)
-      // }
-
-
       p.shader( ActiveShader )
-
-      
-      p.rect( 0, 0, 0 )
-
-
-
-      
+      p.rect( 0, 0, 0 )     
  
-
     }
 
     p.windowResized = () => {
-      // @ts-ignore
       p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight)
     }
 
@@ -110,24 +88,19 @@ export default function PathSKetch({
 
       if (isPlaying) {
 
-        !isSongPlaying && song.play()
-        !isSongPlaying && (isSongPlaying = true)
-        let waveform = fft.waveform()
-        // waveform.setInput(song)
+        song && !isSongPlaying && song.play()
+        song && !isSongPlaying && (isSongPlaying = true)
 
-        for (let i = 0; i < waveform.length; i++){
-          // @ts-ignore
-          let x = p.map(i, 0, waveform.length, 0, Parent.offsetWidth);
-              // @ts-ignore
-          let y = p.map( waveform[i], -1, 1, 0, Parent.offsetHeight);
-              // @ts-ignore
-
-          // console.log(x)
-
-          ActiveShader.setUniform( "uWavesX", x)
-          ActiveShader.setUniform( "uWavesY", y)
+        if ( song ) {
+          let waveform = fft.waveform()
+  
+          for (let i = 0; i < waveform.length; i++){
+            let x = p.map(i, 0, waveform.length, 0, Parent.offsetWidth);
+            let y = p.map( waveform[i], -1, 1, 0, Parent.offsetHeight);
+            ActiveShader.setUniform( "uWavesX", x)
+            ActiveShader.setUniform( "uWavesY", y)
+          }
         }
-
 
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
@@ -163,8 +136,11 @@ export default function PathSKetch({
     }
 
     function createElements() {
-      // @ts-ignore
-      p.createCanvas( Parent.offsetWidth, 580, p.WEBGL ).parent("Parent")
+
+      let _w = Parent.offsetWidth;
+      let _h = Parent.offsetHeight;
+
+      p.createCanvas( _w, _h, p.WEBGL ).parent("Parent")
 
       inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
@@ -221,24 +197,32 @@ export default function PathSKetch({
       })
 
     }
+
     
   }
 
 
   return (
     <P5Provider sketch={sketch}>
-      <div className={classnames("flex flex-col md:w-1/3 dark:bg-slate-900 px-4 py-2 gap-2")}>
-        { (displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
-        { description && <p className="text-sm">{description}</p> }
-        { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
-        <p className="self-end text-xs">{images.length} images</p>
 
-        <div className="flex flex-wrap">
-        { images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} quality={100} />)}
+      <div className={classnames("flex flex-col dark:bg-slate-900 px-4 py-2 gap-2")}>
+
+        <div className="w-full min-w-[300px]">
+          { (displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
+          { description && <p className="text-sm">{description}</p> }
+          { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
+          <p className="text-end text-xs">{images.length} images</p>
         </div>
+
+        <div id="menu" />
+
+
+        <div className="flex flex-wrap gap-4">
+        { images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} />)}
+        </div> 
       </div>
 
-      <div className="w-full h-[300px] text-sm p-4 gap-4 flex flex-col md:h-[600px] md:w-1/3 overflow-auto">
+      {/* <div className="w-full h-[300px] text-sm p-4 gap-4 flex flex-col md:h-[600px] md:w-1/4 overflow-auto">
         { data && data.feed.map(img => <div>
             <p className="text-md max-h-[60px] overflow-hidden">{img.title}</p> 
             <p className="flex text-xs mt-1 justify-end">{img.overall_sentiment_label} <span className="text-green-500"> <p>{img.overall_sentiment_score}</p> </span></p>
@@ -247,8 +231,9 @@ export default function PathSKetch({
             {img.ticker_sentiment && img.ticker_sentiment.map(topic => <p>{topic.ticker}</p>)} 
             </div>
           </div>
-        )}
-      </div>
+        )} 
+      </div> */}
+
   </P5Provider>
   )
 }

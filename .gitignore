@@ -76,3 +76,5 @@ typings/
 *.code-workspace
 .vercel
 
+.vscode
+
