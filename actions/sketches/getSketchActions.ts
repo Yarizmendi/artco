@@ -113,9 +113,9 @@ export function getPreviewPaintingSketch(title) {
                 "uniform": "u_waves",
                 "settings": {
                     "min": 0,
-                    "max": 100,
+                    "max": 1000,
                     "step": 1,
-                    "value": (title == "fountain") ? 80 : (title == "grateful_dead") ? 30 : 15
+                    "value": (title == "fountain") ? 80 : 10
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },

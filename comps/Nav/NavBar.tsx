@@ -30,9 +30,9 @@ export function NavBar() {
             {link.title}
           </Link>
         )}
-        <Link href={"/accounts"}>
+        {/* <Link href={"/accounts"}>
           <ActionButton color={"blue"} idleTxt='login' />
-        </Link>
+        </Link> */}
       </nav>
     </header>
   )
