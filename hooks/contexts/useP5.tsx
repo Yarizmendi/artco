@@ -1,9 +1,10 @@
 
 "use client"
-import p5Types from "p5"
+// import p5Types from "p5"
 import classnames from "classnames"
 import {createContext, useCallback, useEffect, useState} from 'react'
 import { Loading } from "@/comps/Loading"
+import { mqStyles } from "app/[user]/sketches/[path]/PathSketch"
 
 export const P5Context = createContext({
   instRef: null,
@@ -25,8 +26,7 @@ export function P5Provider({ sketch, children }) {
     if (node) return node
   }, [])
 
-  useEffect(() => {
-    if (!isMounted) setIsMounted(true)}, [])
+  useEffect(() => { if (!isMounted) setIsMounted(true)}, [])
 
   useEffect(() => { 
     if (isMounted) {
@@ -36,18 +36,27 @@ export function P5Provider({ sketch, children }) {
 
   return (
     <P5Context.Provider value={{isMounted, instRef}}>
-      <div className={classnames("flex grow w-full flex-col md:flex-row dark:bg-slate-950")}>
 
-      <div id="p5_loading" className="w-full flex items-center justify-center border">
-          <Loading />
+        <div className={classnames([
+          mqStyles +
+          "relative flex flex-col h-vh md:flex-row w-full" 
+        ])}>
+
+          <div className={classnames([
+            mqStyles +
+            " absolute flex items-center justify-center w-[800px] lg:min-w-[800px]  py-12 bg-slate-950"
+          ])} id="p5_loading">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500" id="p5_loading"></div>
+          </div>
+
+          <div ref={instRef} id={"Parent"} className={classnames(
+            mqStyles + 
+            " relative w-full md:w-2/3 flex flex-col grow col-reverse justify-between text-[30px] text-center"
+          )} /> 
+
+          {children}
         </div>
 
-        <div ref={instRef} id={"Parent"} className={"h-full w-full md:w-1/2 flex flex-col col-reverse justify-between text-[30px] text-center" } />
-     
-       {children}
-       <a id="download" className="hidden"/>
-  
-      </div>
     </P5Context.Provider>
   )
 }

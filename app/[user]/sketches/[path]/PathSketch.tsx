@@ -9,14 +9,17 @@ import { Recorder } from "@/p5/Recorder"
 import { P5Context, P5Provider } from "hooks/contexts/useP5"
 import { UseStockData } from "app/stocks/UseStockData"
 import { useContext } from "react"
+//  border-2 sm:border-red-500 md:border-blue-500 lg:border-green-500 
+export const mqStyles = ""
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
   images, inputs, textures, noises, transitions
 }) {
 
+  function sketch(p){
 
-  function sketch( p, pSound ){
+    let Parent =  document.getElementById("Parent")
     let idx = 0
     let seconds = 0
     let ActiveShader
@@ -24,15 +27,9 @@ export default function PathSKetch({
     let changeEvery = 9500
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
-
     let song = null
     let isSongPlaying = false
     let fft = null
-
-
-
-    let Parent
-
 
     p.preload = () => {
 
@@ -54,10 +51,15 @@ export default function PathSKetch({
       Parent = document.getElementById("Parent")
       song && (fft = new p.constructor.FFT())
       createElements()
-      p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight)
+
     }
 
     p.draw = () => {
+      (p.frameCount==1) && p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight)
+  // Integer RGBA notation.
+  p.background('rgba(0, 255, 0, 0.25)');
+
+
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
 
       handleControls()
@@ -137,10 +139,8 @@ export default function PathSKetch({
 
     function createElements() {
 
-      let _w = Parent.offsetWidth;
-      let _h = Parent.offsetHeight;
+      p.createCanvas( Parent.offsetWidth, Parent.offsetHeight, p.WEBGL ).parent("Parent").addClass("w-full h-full")
 
-      p.createCanvas( _w, _h, p.WEBGL ).parent("Parent")
 
       inputs && inputs.length && inputs.map( input => {
         if ( input.type == "slider" ) {
@@ -197,30 +197,51 @@ export default function PathSKetch({
       })
 
     }
-
     
   }
+
 
 
   return (
     <P5Provider sketch={sketch}>
 
-      <div className={classnames("flex flex-col dark:bg-slate-900 px-4 py-2 gap-2")}>
+      <div className={classnames(
+       mqStyles,
+       "flex flex-col p-4"
+      )}>
+        
+        <div id="menu" className={classnames(mqStyles + "h-[50px] border-b")} />
 
-        <div className="w-full min-w-[300px]">
-          { (displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
-          { description && <p className="text-sm">{description}</p> }
-          { inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
-          <p className="text-end text-xs">{images.length} images</p>
+        <div className={classnames(
+         mqStyles,
+         "flex w-full gap-4 h-[150px] overflow-auto p-4 mb-8"
+          )}> {images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} />)}
+        </div> 
+        
+        <div className={classnames(
+          mqStyles + 
+          "flex flex-col mb-8 gap-4 md:min-h-[350px] md:min-w-[400px]"
+        )}>
+          {(displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
+          {description && <p className="text-sm">{description}</p> }
+          {inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
         </div>
 
-        <div id="menu" />
-
-
-        <div className="flex flex-wrap gap-4">
-        { images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} />)}
-        </div> 
       </div>
+
+      {/* <div className={classnames("flex grow w-full flex-col md:flex-row dark:bg-slate-950")}> */}
+
+        {/* <div className="h-full w-full md:w-1/2 flex flex-col col-reverse justify-between text-[30px] text-center" /> */}
+
+ 
+        {/* <a id="download" className="hidden"/>
+      </div>
+      <div className={classnames("flex flex-col dark:bg-slate-900 px-4 py-2 gap-2")}>
+
+
+    
+
+      </div> */}
 
       {/* <div className="w-full h-[300px] text-sm p-4 gap-4 flex flex-col md:h-[600px] md:w-1/4 overflow-auto">
         { data && data.feed.map(img => <div>

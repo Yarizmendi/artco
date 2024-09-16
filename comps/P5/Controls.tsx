@@ -33,7 +33,7 @@ export function Controls( p5 ) {
     // let className = "bg-stone-500 bg-opacity-10 backdrop-blur-sm rounded drop-shadow-lg px-4 py-2 text-white"  
     let ctn = p5.createDiv()
     // ctn.position( p5.canvasWidth, 600 )
-    ctn.class("h-[50px] w-full flex flex-row justify-between items-center")
+    ctn.class("h-[50px] w-full flex flex-row flex-wrap justify-around items-center")
     ctn.parent( "menu" )
     ctn.id("ctrls2")
     // ctn.draggable()
@@ -47,8 +47,8 @@ export function Controls( p5 ) {
     let recordBtnP = Paragraph( p5, "record", recordBtn )
   
     let playBtn = Button( p5, ctn ).id("playbtn")
-    Icon( p5, ICONS_OUTLINE, PLAY_ICON_TEXT, playBtn )
-    let playBtnP = Paragraph( p5, "play", playBtn )
+    Icon( p5, ICONS_OUTLINE, "play_circle", playBtn ).addClass('text-4xl')
+    let playBtnP = Paragraph( p5, "", playBtn )
 
     let resetBtn = Button( p5, ctn )
     Icon( p5, ICONS_OUTLINE, "reset_settings", resetBtn )
