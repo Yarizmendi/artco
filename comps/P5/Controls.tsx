@@ -48,7 +48,7 @@ export function Controls( p5 ) {
   
     let playBtn = Button( p5, ctn ).id("playbtn")
     Icon( p5, ICONS_OUTLINE, "play_circle", playBtn ).addClass('text-4xl')
-    let playBtnP = Paragraph( p5, "", playBtn )
+    let playBtnP = Paragraph( p5, "play", playBtn )
 
     let resetBtn = Button( p5, ctn )
     Icon( p5, ICONS_OUTLINE, "reset_settings", resetBtn )

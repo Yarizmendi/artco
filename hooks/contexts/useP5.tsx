@@ -51,7 +51,7 @@ export function P5Provider({ sketch, children }) {
 
           <div ref={instRef} id={"Parent"} className={classnames(
             mqStyles + 
-            " relative w-full md:w-2/3 flex flex-col grow col-reverse justify-between text-[30px] text-center"
+            " relative w-full md:w-2/3"
           )} /> 
 
           {children}

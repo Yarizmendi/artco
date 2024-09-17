@@ -139,7 +139,7 @@ export default function PathSKetch({
 
     function createElements() {
 
-      p.createCanvas( Parent.offsetWidth, Parent.offsetHeight, p.WEBGL ).parent("Parent").addClass("w-full h-full")
+      p.createCanvas( Parent.offsetWidth, 550, p.WEBGL ).parent("Parent").addClass("w-full h-full min-h-[550px]")
 
 
       inputs && inputs.length && inputs.map( input => {
@@ -220,7 +220,7 @@ export default function PathSKetch({
         
         <div className={classnames(
           mqStyles + 
-          "flex flex-col mb-8 gap-4 md:min-h-[350px] md:min-w-[400px]"
+          "flex flex-col mb-8 gap-4 md:min-h-[350px] md:min-w-[300px]"
         )}>
           {(displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
           {description && <p className="text-sm">{description}</p> }
