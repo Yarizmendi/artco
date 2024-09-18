@@ -146,6 +146,7 @@ export default function PathSKetch({
         Overlay.recordBtnLabel.html("record")
         // auto restart after delay
         p.resetShader()
+        song && song.stop()
         setTimeout(() => document.getElementById("playbtn").click(), 500)
       })
     }
