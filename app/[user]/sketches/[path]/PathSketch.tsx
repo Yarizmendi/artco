@@ -19,7 +19,7 @@ export default function PathSKetch({
 
     let Parent =  document.getElementById("Parent")
     let idx = 0
-    // let seconds = 0
+    let seconds = 0
     let ActiveShader
     let Overlay, MediaRecorder
     let changeEvery = 2500
@@ -69,10 +69,10 @@ export default function PathSKetch({
 
       handleControls()
 
-      // inputs.map(( input ) => {
-      //   input["Paragraph"].html( input["Slider"].value()  )
-      //   ActiveShader.setUniform( input.uniform, input["Slider"].value() )
-      // })
+      inputs.map(( input ) => {
+        // input["Paragraph"].html( input["Slider"].value()  )
+        ActiveShader.setUniform( input.uniform, input.settings.value )
+      })
   
       textures.map(( texture, i ) => {
         ActiveShader.setUniform( texture.uniform, images[ i + idx ]["Image"])
@@ -98,9 +98,9 @@ export default function PathSKetch({
         song && !isSongPlaying && song.play()
         song && !isSongPlaying && (isSongPlaying = true)
 
-        if ( song ) {
+        if (song) {
+
           let waveform = fft.waveform()
-  
           for (let i = 0; i < waveform.length; i++){
             let x = p.map(i, 0, waveform.length, 0, Parent.offsetWidth);
             let y = p.map( waveform[i], -1, 1, 0, Parent.offsetHeight);
@@ -112,12 +112,12 @@ export default function PathSKetch({
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
 
-        // seconds = drawPlayTimer / 1000 
-        ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
+        seconds = drawPlayTimer / 1000 
 
 
-        transitions && handleTransitions()
-
+     
+        if (transitions) handleTransitions()
+        ActiveShader.setUniform( "u_time", seconds)
 
       } 
 
@@ -127,15 +127,16 @@ export default function PathSKetch({
           isSongPlaying=false
         }
         drawPauseTimer = p.millis() - drawPlayTimer
-        // seconds = drawPauseTimer / 1000
+        seconds = drawPauseTimer / 1000
       }
+
 
     }
 
     function handleTransitions() {
-      if ( drawPlayTimer > changeEvery && images.length-2 > idx ) {
+      if ( seconds > changeEvery && images.length-2 > idx ) {
         idx+=1
-        changeEvery += 9500
+        changeEvery += 2500
         ActiveShader.setUniform( "u_timeout", (p.millis() - drawPlayTimer) )
       } 
     }
@@ -159,10 +160,14 @@ export default function PathSKetch({
       Overlay.playBtn.mouseClicked(() => {
         if ( !isPlaying ) {
           isPlaying = true
+          isSongPlaying = true
+          song && song.play()
           Overlay.playBtnLabel.html("pause")
         }
         else if ( isPlaying ) {
           isPlaying = false
+          isSongPlaying = false
+          song && song.pause()
           Overlay.playBtnLabel.html("play")
         }
       })
@@ -176,7 +181,7 @@ export default function PathSKetch({
           MediaRecorder.start()
         }
         else if ( MediaRecorder.state == "recording" ) {
-          if ( isPlaying ) isPlaying = false
+          // if ( isPlaying ) isPlaying = false
           Overlay.playBtnLabel.html("play")
           Overlay.recordBtnLabel.html("record")
           Overlay.recordBtn.removeClass("text-red-500")
@@ -189,6 +194,7 @@ export default function PathSKetch({
         idx = 0
         drawPlayTimer = 0
         drawPauseTimer = 0
+        seconds = 0
         Overlay.playBtnLabel.html("play")
         Overlay.recordBtnLabel.html("record")
         p.resetShader()
@@ -216,7 +222,7 @@ export default function PathSKetch({
 
         <div className={classnames(
          "flex w-full gap-4 h-[150px] overflow-auto p-4 mb-8"
-          )}> {images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} />)}
+          )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} />)}
         </div> 
         
         <div className={classnames(
