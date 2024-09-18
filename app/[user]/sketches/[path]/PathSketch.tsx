@@ -8,7 +8,7 @@ import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Context, P5Provider } from "hooks/contexts/useP5"
 //  border-2 sm:border-red-500 md:border-blue-500 lg:border-green-500 
-export const mqStyles = ""
+// export const mqStyles = ""
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
@@ -19,10 +19,10 @@ export default function PathSKetch({
 
     let Parent =  document.getElementById("Parent")
     let idx = 0
-    let seconds = 0
+    // let seconds = 0
     let ActiveShader
     let Overlay, MediaRecorder
-    let changeEvery = 9500
+    let changeEvery = 2500
     let isPlaying = false, drawPlayTimer = 0, drawPauseTimer = 0
 
     let song = null
@@ -43,6 +43,12 @@ export default function PathSKetch({
       })
 
       ActiveShader = p.loadShader( vert, frag ) 
+
+      inputs.map(( input ) => {
+        // input["Paragraph"].html( input["Slider"].value()  )
+        // ActiveShader.setUniform( input.uniform, input["Slider"].value() )
+        ActiveShader.setUniform( input.uniform, input.settings.value )
+      })
     }
   
     p.setup = () => {
@@ -54,18 +60,19 @@ export default function PathSKetch({
 
     p.draw = () => {
       (p.frameCount==1) && p.resizeCanvas( Parent.offsetWidth, Parent.offsetHeight)
-  // Integer RGBA notation.
-  p.background('rgba(0, 255, 0, 0.25)');
+
+      // Integer RGBA notation.
+      // p.background('rgba(0, 255, 0, 0.25)');
 
 
       Overlay.sketchTime.html(`${ p.round( drawPlayTimer / 1000 )} seconds`)
 
       handleControls()
 
-      inputs.map(( input ) => {
-        input["Paragraph"].html( input["Slider"].value()  )
-        ActiveShader.setUniform( input.uniform, input["Slider"].value() )
-      })
+      // inputs.map(( input ) => {
+      //   input["Paragraph"].html( input["Slider"].value()  )
+      //   ActiveShader.setUniform( input.uniform, input["Slider"].value() )
+      // })
   
       textures.map(( texture, i ) => {
         ActiveShader.setUniform( texture.uniform, images[ i + idx ]["Image"])
@@ -105,14 +112,12 @@ export default function PathSKetch({
         if ( !drawPauseTimer ) drawPlayTimer = p.millis()
         else if ( drawPauseTimer ) drawPlayTimer = p.millis() - drawPauseTimer
 
-        seconds = drawPlayTimer / 1000 
+        // seconds = drawPlayTimer / 1000 
+        ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
 
-        if ( transitions ) {
-          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
-          handleTransitions()
-        } else {
-          ActiveShader.setUniform( "u_time", drawPlayTimer / 1000)
-        }
+
+        transitions && handleTransitions()
+
 
       } 
 
@@ -122,7 +127,7 @@ export default function PathSKetch({
           isSongPlaying=false
         }
         drawPauseTimer = p.millis() - drawPlayTimer
-        seconds = drawPauseTimer / 1000
+        // seconds = drawPauseTimer / 1000
       }
 
     }
@@ -140,13 +145,13 @@ export default function PathSKetch({
       p.createCanvas( Parent.offsetWidth, 550, p.WEBGL ).parent("Parent").addClass("w-full h-full min-h-[550px]")
 
 
-      inputs && inputs.length && inputs.map( input => {
-        if ( input.type == "slider" ) {
-          const { min, max, value, step } = input.settings
-          input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
-          input["Paragraph"] = p.createP( value ).parent(input.uniform+"Value")
-        }
-      })
+      // inputs && inputs.length && inputs.map( input => {
+      //   if ( input.type == "slider" ) {
+      //     const { min, max, value, step } = input.settings
+      //     input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
+      //     input["Paragraph"] = p.createP( value ).parent(input.uniform+"Value")
+      //   }
+      // })
 
       MediaRecorder = Recorder(title)
       Overlay = Controls(p)
@@ -204,25 +209,22 @@ export default function PathSKetch({
     <P5Provider sketch={sketch}>
 
       <div className={classnames(
-       mqStyles,
        "flex flex-col p-4"
       )}>
         
-        <div id="menu" className={classnames(mqStyles + "h-[50px] border-b")} />
+        <div id="menu" className={classnames("h-[50px] border-b")} />
 
         <div className={classnames(
-         mqStyles,
          "flex w-full gap-4 h-[150px] overflow-auto p-4 mb-8"
           )}> {images && images.map(img => <Image src={img.blob} width={100} alt={"img"} height={100} />)}
         </div> 
         
         <div className={classnames(
-          mqStyles + 
           "flex flex-col mb-8 gap-4 md:min-h-[350px] md:min-w-[300px]"
         )}>
           {(displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p> }
           {description && <p className="text-sm">{description}</p> }
-          {inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
+          {/* {inputs && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )} */}
         </div>
 
       </div>

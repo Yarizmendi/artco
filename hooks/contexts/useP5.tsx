@@ -4,7 +4,7 @@
 import classnames from "classnames"
 import {createContext, useCallback, useEffect, useState} from 'react'
 import { Loading } from "@/comps/Loading"
-import { mqStyles } from "app/[user]/sketches/[path]/PathSketch"
+// import { mqStyles } from "app/[user]/sketches/[path]/PathSketch"
 
 export const P5Context = createContext({
   instRef: null,
@@ -38,20 +38,17 @@ export function P5Provider({ sketch, children }) {
     <P5Context.Provider value={{isMounted, instRef}}>
 
         <div className={classnames([
-          mqStyles +
           "relative flex flex-col h-vh md:flex-row w-full" 
         ])}>
 
           <div className={classnames([
-            mqStyles +
-            " absolute flex items-center justify-center w-[800px] lg:min-w-[800px]  py-12 bg-slate-950"
+            "absolute flex items-center justify-center w-[800px] lg:min-w-[800px]  py-12 bg-slate-950"
           ])} id="p5_loading">
             <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500" id="p5_loading"></div>
           </div>
 
           <div ref={instRef} id={"Parent"} className={classnames(
-            mqStyles + 
-            " relative w-full md:w-2/3"
+            "relative w-full md:w-2/3"
           )} /> 
 
           {children}
