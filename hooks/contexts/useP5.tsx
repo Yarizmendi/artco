@@ -42,19 +42,18 @@ export function P5Provider({ sketch, children }) {
         ])}>
 
           <div className={classnames([
-            "absolute flex items-center justify-center w-[800px] lg:min-w-[800px]  py-12 bg-slate-950"
+            "w-full md:w-2/3" +
+            "flex items-center justify-center lg:min-w-[800px] bg-slate-950"
           ])} id="p5_loading">
             <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500" id="p5_loading"></div>
           </div>
 
-          <div ref={instRef} id={"Parent"} className={classnames(
-            "relative w-full md:w-2/3"
-          )} /> 
-
+          <div ref={instRef} id={"Parent"} className={classnames("flex w-full md:w-2/3")} /> 
+          
           {children}
-        </div>
+          <a id="download" />
 
-        <a id="download" />
+        </div>
 
     </P5Context.Provider>
   )

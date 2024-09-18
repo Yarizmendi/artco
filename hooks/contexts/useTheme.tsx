@@ -11,7 +11,7 @@ export function DarkModeProvider({children}) {
     const [ themeClass, setThemeClass ] = useState("dark")
     return (
       <DarkModeContext.Provider value={{themeClass, setThemeClass}}>
-        <body className={" flex flex-col h-screen w-screen " + themeClass}>{children}</body>
+        <body className={themeClass}>{children}</body>
       </DarkModeContext.Provider>
     )
 }
