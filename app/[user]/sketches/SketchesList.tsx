@@ -12,29 +12,29 @@ export function SketchesList({ creatorId }) {
   if ( isLoading || isValidating ) return <Loading />
 
   if ( data ) return (
-    <div className="mx-4 w-11/12 md:min-w-2/3 h-[550px] px-2 flex flex-wrap overflow-auto justify-center">
-      { data.map( art => { 
-        return <SketchLink 
-          id={art._id} 
-          key={art._id} 
+      <div className="mx-4 w-11/12 md:min-w-2/3 h-[550px] px-2 flex flex-wrap overflow-auto justify-center">
+        { data.map( art => { 
+          return <SketchLink 
+            id={art._id} 
+            key={art._id} 
 
-          tags={art.tags} 
-          images={art.images}
-          inputs={art.inputs}
-          textures={art.textures}
+            tags={art.tags} 
+            images={art.images}
+            inputs={art.inputs}
+            textures={art.textures}
 
-          vert={art.vert}
-          frag={art.frag}
-          blob={art.blob} 
-          title={art.title} 
+            vert={art.vert}
+            frag={art.frag}
+            blob={art.blob} 
+            title={art.title} 
 
-          displayName={art.displayName} 
-          description={art.description}
-    
-          mutate={mutate}
+            displayName={art.displayName} 
+            description={art.description}
+      
+            mutate={mutate}
 
-        /> })}
-   </div>
+          /> })}
+    </div>
   )
 }
 

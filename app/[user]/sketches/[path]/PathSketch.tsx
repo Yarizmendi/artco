@@ -2,12 +2,13 @@
 "use client"
 import Image from "next/image"
 import classnames from "classnames"
+import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
 
 export default function PathSKetch({
-  title, vert, frag, displayName,
+  title, vert, frag, displayName, description,
   images, inputs, textures, noises, transitions
 }) {
 
@@ -27,15 +28,14 @@ export default function PathSKetch({
     p.preload = () => {
       p.soundFormats('mp3', 'ogg')
       title == "grateful_dead" && (song = p.loadSound('/truckin.mp3'))
-    
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
       noises && noises.length && noises.map(noise => noise["Noise"] = p.loadImage(noise.blob))  
-
       ActiveShader = p.loadShader(vert, frag) 
     }
   
     p.setup = () => {
-      createElements()
+      createSliders()
+      createControls()
       song && (fft = new p.constructor.FFT())
       Parent = document.getElementById("Parent")
       p.createCanvas(0, 580, p.WEBGL).parent("Parent").addClass("min-h-[580]")
@@ -44,19 +44,14 @@ export default function PathSKetch({
 
     p.draw = () => {
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
-
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
-      inputs && inputs.length && inputs.map((input) => ActiveShader.setUniform(input.uniform, input.settings.value))
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
-
+      
+      handleSliders()
       handleControls()
+
       p.shader(ActiveShader)
       p.rect(0,0,0)     
-
-      Overlay.downloadBtn.mouseClicked(() => {
-        p.saveCanvas(title + p.frameCount)
-      })
- 
     }
 
     p.windowResized = () => {
@@ -101,7 +96,14 @@ export default function PathSKetch({
       } 
     }
 
-    function createElements() {
+    function handleSliders() {
+      inputs && inputs.length && inputs.map((input) => {
+        input["Paragraph"].html( input["Slider"].value())
+        ActiveShader.setUniform( input.uniform, input["Slider"].value())
+      })
+    }
+
+    function createControls() {
       MediaRecorder = Recorder(title)
       Overlay = Controls(p)
 
@@ -150,7 +152,17 @@ export default function PathSKetch({
         setTimeout(() => document.getElementById("playbtn").click(), 500)
       })
     }
-    
+
+    function createSliders() {
+      inputs && inputs.length && inputs.map( input => {
+        if ( input.type == "slider" ) {
+          const { min, max, value, step } = input.settings
+          input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
+          input["Paragraph"] = p.createP( value ).parent(input.uniform+"Value")
+        }
+      })
+    }
+
   }
 
   return (
@@ -158,15 +170,14 @@ export default function PathSKetch({
       <div className={classnames(
        "flex flex-col grow p-4"
       )}>
-        {(displayName || title) && <p className={classnames("text-lg uppercase")}>{displayName || title} sketch</p>}
-
+        {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
         <div id="menu" className={classnames("w-full md:min-w-1/3 h-[50px] border-b")} />
-
+        { inputs && inputs.length && inputs.map( (inpt, id) => <Slider key={id} {...inpt} /> )}
         <div className={classnames(
          "flex gap-4 overflow-auto p-4 w-full"
           )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
-
+        {description && <p className="text-sm">{description}</p>}
       </div>
   </P5Provider>
   )

@@ -6,7 +6,6 @@ import { UseCollections } from "./api/UseCollections"
 import { CollectionLink } from "@/comps/Links/CollectionLink"
 import { ImageCreateForm } from "@/comps/Forms/ImageCreateForm"
 
-
 export function CollectionsList({uploaderId}) {
   const collectionsRes = UseCollections({ uploaderId })
  
@@ -38,6 +37,6 @@ function UploadsList({uploaderId, collectionsRes}) {
       {collectionsRes.data.map( (art, i) => <CollectionLink key={art._id} mutate={collectionsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} images={collectionsRes.data} positionIdx={i} /> )}
      </div>
     )
-  }
+}
   
 
