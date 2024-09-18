@@ -4,7 +4,13 @@ import createMDX from '@next/mdx'
 import rehypeHighlight from 'rehype-highlight'
 
 const nextConfig = {
-  webpack: ( config ) => {
+  webpack: ( config, {webpack} ) => {
+
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /^vertx/,
+        '@vertx/core'
+  ));
     config.module.rules.push({
         test: /\.(glsl|vs|fs|vert|frag)$/,
         use: {
