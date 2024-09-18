@@ -1,18 +1,24 @@
 
 import fs from 'fs'
 import path from 'path'
+import ffmpeg from "ffmpeg"
+import { NextRequest, NextResponse } from "next/server"
 
+export async function GET( req: NextRequest ) {
+    // const pathToSrcFile = path.join(process.cwd(), 'public/highway.webm')
 
-export async function GET( req: Request ) {
-    // const publicDirectory = path.join(process.cwd(), 'public');
-    // fs.readdir(publicDirectory, (err, files) => {
-    //     console.log(files)
-    // })
-    try {  
-        const data = fs.readFileSync('public/oceans.frag', 'utf8')
-        return Response.json(data)
-    } catch(e) {
-        console.log('Error:', e.stack)
-    }
+    // try {  
+    //     const readStream = fs.createReadStream(pathToSrcFile)
+    //     const writeStream = fs.createWriteStream('public/output.mp4')
+    //     ffmpeg(readStream)
+    //         .addOutputOptions('-movflags +frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov')
+    //         .format('mp4')
+    //         .pipe(writeStream);
+    //     return NextResponse.json({message: "video converted!"})
+    // } catch(e) {
+    //     console.log('Error:', e.stack)
+    //     return NextResponse.json({...e.stack})
+    // }
+    return NextResponse.json({})
 
 }

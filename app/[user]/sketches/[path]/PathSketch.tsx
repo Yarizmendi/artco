@@ -7,9 +7,6 @@ import { Slider } from "@/p5/Slider"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Context, P5Provider } from "hooks/contexts/useP5"
-import { UseStockData } from "app/stocks/UseStockData"
-import { useContext } from "react"
-import { CanvasCapture } from 'canvas-capture'
 //  border-2 sm:border-red-500 md:border-blue-500 lg:border-green-500 
 export const mqStyles = ""
 
