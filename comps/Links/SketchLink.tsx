@@ -2,7 +2,6 @@
 'use client'
 import Link from "next/link"
 import Image from "next/image"
-import Tag from "@/comps/Tags/tag"
 import { useState } from "react"
 import { updateSketchAction } from "actions/sketches/updateSketchAction"
 import { ICONLINED } from "data/css"
@@ -22,10 +21,8 @@ export default function SketchLink({
 
   return (
     <div className="px-4 pb-4">
-
       <Link href={{
       pathname: `sketches/${id}-sketch`,
-      // query: { type: "collection" }
     }} 
     replace={true}
     prefetch={false}
@@ -44,7 +41,7 @@ export default function SketchLink({
           await updateSketchAction( formData )
           mutate()
         }}>
-        <input name={"id"} defaultValue={id} />
+        <input name={"id"} defaultValue={id} hidden />
 
         <div className="flex items-center dark:bg-slate-950">
 

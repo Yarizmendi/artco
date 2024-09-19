@@ -36,7 +36,7 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
       await updateImageAction( formData )
       mutate()
     }} className="w-full flex flex-col dark:bg-slate-950">
-      <input name={"id"} defaultValue={id} />
+  <input name={"id"} defaultValue={id} hidden />
 
       <div className="flex items-center dark:bg-slate-950">
         <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>

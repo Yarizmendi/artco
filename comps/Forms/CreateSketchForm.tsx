@@ -9,7 +9,7 @@ import { UseSketches } from "../../app/[user]/sketches/api/UseSketches"
 export function CreateSketchForm ({ user }) {
     const { mutate } = UseSketches({ creatorId: user })
     return (
-      <form className="w-full md:w-1/3 h-fit flex flex-col gap-2 flex-wrap overflow-auto px-2 border" action={ async formData =>{
+      <form className="w-full md:w-1/3 h-fit flex flex-col gap-2 flex-wrap overflow-auto px-2" action={ async formData =>{
         await createSketchAction(formData)
         mutate()
       }}>   
