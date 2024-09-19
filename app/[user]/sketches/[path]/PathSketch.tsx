@@ -151,6 +151,10 @@ export default function PathSKetch({
         song && song.stop()
         setTimeout(() => document.getElementById("playbtn").click(), 500)
       })
+
+      Overlay.downloadBtn.mouseClicked(() => {
+        p.saveCanvas(title + p.frameCount)
+      })
     }
 
     function createSliders() {
