@@ -36,6 +36,5 @@ const sketch = {
     textures: [
         {"uniform": "u_texture"},
     ],
-
     noises: [{blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png"}]
 }

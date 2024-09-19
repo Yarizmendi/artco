@@ -177,7 +177,7 @@ export default function PathSKetch({
          "flex gap-4 overflow-auto p-4 w-full"
           )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
-        {description && <p className="text-sm">{description}</p>}
+        {/* {description && <p className="text-sm">{description}</p>} */}
       </div>
   </P5Provider>
   )

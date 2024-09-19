@@ -5,7 +5,7 @@ export function Datalist({ title, list, dataArr }: { title: string, list?: strin
         <div className={"font-light text-sm"}>
             <label htmlFor={title}>{title}:</label>
             <select 
-              multiple
+              // multiple
               name={title} 
               id={list} 
               className="dark:bg-slate-950 w-full py-1 px-2 rounded" >
