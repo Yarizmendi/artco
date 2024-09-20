@@ -35,11 +35,63 @@ export default function PathSKetch({
   
     p.setup = () => {
       createSliders()
-      createControls()
       song && (fft = new p.constructor.FFT())
       Parent = document.getElementById("Parent")
       p.createCanvas(0, 580, p.WEBGL).parent("Parent").addClass("min-h-[580]")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
+
+      MediaRecorder = Recorder(title)
+      Overlay = Controls(p)
+
+      Overlay.playBtn.mouseClicked(() => {
+        if (!isPlaying) {
+          song && song.play()
+          isPlaying = true
+          Overlay.playBtnLabel.html("pause")
+        }
+        else if (isPlaying) {
+          song && song.pause()
+          isPlaying = false
+          Overlay.playBtnLabel.html("play")
+        }
+      })
+
+      Overlay.resetBtn.mouseClicked(() => {
+        // reset variables
+        idx = 0
+        seconds = 0
+        isPlaying = false
+        drawPlayTimer = 0
+        drawPauseTimer = 0
+        // reset html
+        Overlay.playBtnLabel.html("play")
+        Overlay.recordBtnLabel.html("record")
+        // auto restart after delay
+        p.resetShader()
+        song && song.stop()
+        setTimeout(() => document.getElementById("playbtn").click(), 500)
+      })
+
+      Overlay.downloadBtn.mouseClicked(() => {
+        p.saveCanvas(title + p.frameCount)
+      })
+
+      Overlay.recordBtn.mouseClicked(() => {
+        if (MediaRecorder.state == "inactive") {
+          if (!isPlaying) isPlaying = true
+          Overlay.playBtnLabel.html("pause")
+          Overlay.recordBtnLabel.html("recording")
+          Overlay.recordBtn.addClass("text-red-500")
+          MediaRecorder.start()
+        }
+        else if (MediaRecorder.state == "recording") {
+          Overlay.playBtnLabel.html("play")
+          Overlay.recordBtnLabel.html("record")
+          Overlay.recordBtn.removeClass("text-red-500")
+          MediaRecorder.stop()
+        }
+      })
+
     }
 
     p.draw = () => {
@@ -103,59 +155,6 @@ export default function PathSKetch({
       })
     }
 
-    function createControls() {
-      MediaRecorder = Recorder(title)
-      Overlay = Controls(p)
-
-      Overlay.playBtn.mouseClicked(() => {
-        if (!isPlaying) {
-          song && song.play()
-          isPlaying = true
-          Overlay.playBtnLabel.html("pause")
-        }
-        else if (isPlaying) {
-          song && song.pause()
-          isPlaying = false
-          Overlay.playBtnLabel.html("play")
-        }
-      })
-    
-      Overlay.recordBtn.mouseClicked(() => {
-        if (MediaRecorder.state == "inactive") {
-          if (!isPlaying) isPlaying = true
-          Overlay.playBtnLabel.html("pause")
-          Overlay.recordBtnLabel.html("recording")
-          Overlay.recordBtn.addClass("text-red-500")
-          MediaRecorder.start()
-        }
-        else if (MediaRecorder.state == "recording") {
-          Overlay.playBtnLabel.html("play")
-          Overlay.recordBtnLabel.html("record")
-          Overlay.recordBtn.removeClass("text-red-500")
-          MediaRecorder.stop()
-        }
-      })
-
-      Overlay.resetBtn.mouseClicked(() => {
-        // reset variables
-        idx = 0
-        seconds = 0
-        isPlaying = false
-        drawPlayTimer = 0
-        drawPauseTimer = 0
-        // reset html
-        Overlay.playBtnLabel.html("play")
-        Overlay.recordBtnLabel.html("record")
-        // auto restart after delay
-        p.resetShader()
-        song && song.stop()
-        setTimeout(() => document.getElementById("playbtn").click(), 500)
-      })
-
-      Overlay.downloadBtn.mouseClicked(() => {
-        p.saveCanvas(title + p.frameCount)
-      })
-    }
 
     function createSliders() {
       inputs && inputs.length && inputs.map( input => {
