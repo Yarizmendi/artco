@@ -3,7 +3,6 @@ import Link from 'next/link'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
 import { LogoName } from './Logo'
-import { ActionButton } from '../Buttons/ActionButton'
 
 export function NavBar() {
   
@@ -30,9 +29,6 @@ export function NavBar() {
             {link.title}
           </Link>
         )}
-        {/* <Link href={"/accounts"}>
-          <ActionButton color={"blue"} idleTxt='login' />
-        </Link> */}
       </nav>
     </header>
   )

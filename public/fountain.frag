@@ -29,7 +29,7 @@ vec4 afterColor;
 
 void main () {
   vec2 pos = vTexCoord;
-  pos *= vec2( .99, .8 );
+  pos *= vec2( .9, .9 );
 
   color = texture2D( u_texture, pos );
 

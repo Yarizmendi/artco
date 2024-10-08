@@ -5,7 +5,7 @@ import classnames from "classnames"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
-import { Sliders } from "../helpers/Sliders"
+import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
 import p5Types from "p5"
 
 export default function PathSKetch({
@@ -13,48 +13,41 @@ export default function PathSKetch({
   images, inputs, textures, noises, transitions
 }) {
 
-  function sketch(p: p5Types ){
+  function sketch(
+    p: p5Types, 
+    Parent, 
 
-    let Parent
+) {
+
     let idx = 0
+    let frameRate 
     let seconds = 0
-    let ActiveShader
-    let Overlay, MediaRecorder
     let changeEvery = 2500
+    let ActiveShader = null
+    let Overlay, MediaRecorder
     let isPlaying, drawPlayTimer = 0, drawPauseTimer = 0
 
-    let song = null
-    let fft = null
 
     p.preload = () => {
-      // @ts-ignore
-      p.soundFormats('mp3', 'ogg')
-      // @ts-ignore
-      title == "grateful_dead" && (song = p.loadSound('/truckin.mp3'))
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
       noises && noises.length && noises.map(noise => noise["Noise"] = p.loadImage(noise.blob))  
       ActiveShader = p.loadShader(vert, frag) 
     }
   
     p.setup = () => {
-      createSliders()
-      // @ts-ignore
-      song && (fft = new p.constructor.FFT())
-      Parent = document.getElementById("Parent")
-      p.createCanvas(0, 650, p.WEBGL).parent("Parent").addClass("min-h-[580]")
-      p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
+      createSliders({ inputs, p })
+    //   frameRate = p.createP(String(p.frameRate()))
+      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent")
 
       MediaRecorder = Recorder(title)
       Overlay = Controls(p)
 
       Overlay.playBtn.mouseClicked(() => {
         if (!isPlaying) {
-          song && song.play()
           isPlaying = true
           Overlay.playBtnLabel.html("pause")
         }
         else if (isPlaying) {
-          song && song.pause()
           isPlaying = false
           Overlay.playBtnLabel.html("play")
         }
@@ -72,7 +65,6 @@ export default function PathSKetch({
         Overlay.recordBtnLabel.html("record")
         // auto restart after delay
         p.resetShader()
-        song && song.stop()
         setTimeout(() => document.getElementById("playbtn").click(), 500)
       })
 
@@ -100,10 +92,11 @@ export default function PathSKetch({
 
     p.draw = () => {
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
+    //   frameRate.html(`${p.frameRate()}`)
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
       
-      handleSliders()
+      handleSliders({ inputs, ActiveShader })
       handleControls()
 
       p.shader(ActiveShader)
@@ -111,23 +104,9 @@ export default function PathSKetch({
       p.rect(0,0,0)     
     }
 
-    p.windowResized = () => {
-      p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
-    }
-
     function handleControls() {
 
       if (isPlaying) {
-
-        if (song) {
-          let waveform = fft.waveform()
-          for (let i = 0; i < waveform.length; i++){
-            let x = p.map(i, 0, waveform.length, 0, Parent.offsetWidth);
-            let y = p.map( waveform[i], -1, 1, 0, Parent.offsetHeight);
-            ActiveShader.setUniform("uWavesX", x)
-            ActiveShader.setUniform("uWavesY", y)
-          }
-        }
 
         if (!drawPauseTimer) drawPlayTimer = p.millis()
         else if (drawPauseTimer) drawPlayTimer = p.millis() - drawPauseTimer
@@ -151,23 +130,6 @@ export default function PathSKetch({
         changeEvery += 2500
         ActiveShader.setUniform("u_timeout", (p.millis() - drawPlayTimer))
       } 
-    }
-
-    function handleSliders() {
-      inputs && inputs.length && inputs.map((input) => {
-        input["Paragraph"].html( input["Slider"].value())
-        ActiveShader.setUniform( input.uniform, input["Slider"].value())
-      })
-    }
-
-    function createSliders() {
-      inputs && inputs.length && inputs.map( input => {
-        if ( input.type == "slider" ) {
-          const { min, max, value, step } = input.settings
-          input["Slider"] = p.createSlider( min, max, value, step ).parent(input.uniform+"Input"), 
-          input["Paragraph"] = p.createP( value ).parent(input.uniform+"Value")
-        }
-      })
     }
 
   }

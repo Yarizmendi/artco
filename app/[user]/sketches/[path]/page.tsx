@@ -1,5 +1,5 @@
 
-import Sketch from "./PathSketch"
+import Sketch from "./Refactor"
 import { getUserImgCollectionById, getMongoImageById } from "actions/images/getImages"
 import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } from "actions/sketches/getSketchActions"
 
@@ -41,7 +41,7 @@ export default async function Page({ params }) {
     )
   }
 
-  }
+}
 
 
 

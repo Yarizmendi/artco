@@ -1,60 +1,56 @@
 
 "use client"
-// import p5Types from "p5"
 import classnames from "classnames"
-import {createContext, useCallback, useEffect, useState} from 'react'
-import { Loading } from "@/comps/Loading"
-// import { mqStyles } from "app/[user]/sketches/[path]/PathSketch"
+import {createContext, useEffect, useState} from 'react'
 
 export const P5Context = createContext({
-  instRef: null,
   isMounted: false,
 })
 
 export function P5Provider({ sketch, children }) {
   let mp5
 
-  async function InitP5({sketch, instRef}) {
-    let pImport = (await import("p5")).default
-    let pSound =  await import("../../lib/p5.sound")
-    return new pImport(sketch, instRef())
+  async function InitP5({ sketch }) {
+    const pImport = (await import("p5")).default
+    const pSound =  await import("../../lib/p5.sound")
+    const Parent = document.getElementById("Parent")
+
+    return new pImport( p => {
+      p.windowResized = () => {
+        p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
+      }
+      return sketch(p, Parent)
+    })
+
   }
 
   const [isMounted, setIsMounted] = useState(false)
-
-  const instRef = useCallback(node =>{
-    if (node) return node
-  }, [])
 
   useEffect(() => { if (!isMounted) setIsMounted(true)}, [])
 
   useEffect(() => { 
     if (isMounted) {
-      if (!mp5) mp5 = InitP5({sketch, instRef})
+      if (!mp5) mp5 = InitP5({sketch })
       else return mp5.remove() 
   }}, [isMounted]) 
 
   return (
-    <P5Context.Provider value={{isMounted, instRef}}>
-
+    <P5Context.Provider value={{ isMounted }}>
         <div className={classnames([
-          "relative flex flex-col h-vh md:flex-row w-full" 
+          "flex flex-col md:flex-row w-full" 
         ])}>
-
-          <div className={classnames([
-            "w-full md:w-2/3" +
-            "flex items-center justify-center lg:min-w-[800px] bg-slate-950"
-          ])} id="p5_loading">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500" id="p5_loading"></div>
+          <div id={"Parent"} className={classnames(
+            "flex w-full h-[600px] md:w-2/3 dark:bg-slate-950" 
+          )}>
+            <div id="p5_loading" className="w-full flex items-center justify-center">
+              <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500"/>
+            </div>
+            <a id="download" />
           </div>
-
-          <div ref={instRef} id={"Parent"} className={classnames("flex w-full md:w-2/3")} /> 
-          
           {children}
-          <a id="download" />
-
         </div>
 
+       {/* <div id="frameRateCtn"></div> */}
     </P5Context.Provider>
   )
 }

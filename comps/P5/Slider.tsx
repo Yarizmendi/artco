@@ -10,18 +10,7 @@ export const box = classnames(
   "flex items-center justify-center"
 )
 
-export const Slider = ({
-  uniform,
-  label,
-  description,
-}) => {
-  return (
-    <div className="flex items-center font-bold p-2">
-      <InputValueWithLabel uniform={uniform} label={label}/>
-      <InputSliderWithDescription uniform={uniform} description={description || DESCRIPTION}/>
-    </div>
-  )
-}
+
 
 export const InputValueWithLabel = ({ 
     label,

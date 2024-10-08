@@ -29,7 +29,7 @@ vec2 increasingWaves( vec2 pos ) {
 
 void main () {
   vec2 pos = vTexCoord;
-  pos *= ( 0.90 );
+  pos *= vec2( .9, .9 );
 
   color = texture2D( u_texture, pos );
 
@@ -44,7 +44,7 @@ void main () {
   pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
   pos = increasingWaves( pos );
 
-  pos = fract(pos);
+  // pos = fract(pos);
   color = texture2D( u_texture, pos );
 
   gl_FragColor = vec4( color );
