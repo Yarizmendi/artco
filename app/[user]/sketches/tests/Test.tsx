@@ -30,7 +30,7 @@ export default function PathSKetch({
     let mainCanvas
     let topLayer
     let shaderLayer
-    let offest = 5
+    let offest = 0
 
     let x1, y1
     let x2, y2
@@ -57,7 +57,7 @@ export default function PathSKetch({
       p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
    
     
-      topLayer.background(0)
+      topLayer.background(220)
       topLayer.strokeWeight(.5)
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
@@ -115,7 +115,6 @@ export default function PathSKetch({
 
     }
 
-    let angle = 45;
 
     p.draw = () => {
 
@@ -133,7 +132,7 @@ export default function PathSKetch({
       shaderLayer.end()
       
       p.scale(1,-1)
-      p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
+      p.image( shaderLayer, 0, 0, Parent.offsetWidth*.9, Parent.offsetHeight*.9, 0, 0, p.width, p.height, p.COVER)
 
   
       x1 = p.noise(offest+5)*topLayer.width
@@ -146,16 +145,16 @@ export default function PathSKetch({
       y3 = p.noise(offest+35)*topLayer.height
       y4 = p.noise(offest+40)*topLayer.height
  
-      offest += p.noise(offest)
+      offest += 0.01
 
 
 
       // topLayer.begin()
       // p.rotateY( drawPlayTimer/ 2000 )
       topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4)
-      topLayer.bezier(-x1, x2, x3, x4, y1, y2, y3, y4)
-      topLayer.bezier(-x1, -x2, -x3, x4, y1, y2, y3, y4)
-      topLayer.bezier(-x1, -x2, -x3, -x4, y1, y2, y3, y4)
+      // topLayer.bezier(-x1, x2, x3, x4, y1, y2, y3, y4)
+      // topLayer.bezier(-x1, -x2, -x3, x4, y1, y2, y3, y4)
+      // topLayer.bezier(-x1, -x2, -x3, -x4, y1, y2, y3, y4)
  
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, y2, y3, y4)
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, y3, y4)
@@ -167,11 +166,10 @@ export default function PathSKetch({
 
 
       p.scale(1,-1)
-      // p.rotateZ( p.frameCount/100 )
-      p.rotateZ( p.frameCount/240 )
-      p.rotateY( p.frameCount/240 )
-      p.rotateX( p.frameCount/240 )
-      p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width, p.height, p.COVER)
+      p.rotateZ( p.frameCount/100 )
+      p.image(topLayer, 0, 0, Parent.offsetWidth*1.5, Parent.offsetHeight*1.5, 0, 0, p.width*1.5, p.height*1.5, p.COVER)
+
+  
 
   
     }
