@@ -21,7 +21,7 @@ function RootLayout({ children }: IRootLayout ): JSX.Element {
           <div className="flex grow">
             {children}
           </div>
-          <footer className="bg-slate-200 dark:bg-slate-950 h-[90px]" />
+          <footer className="bg-slate-200 dark:bg-slate-950 h-[50px]" />
         </div>
 
       </DarkModeProvider>

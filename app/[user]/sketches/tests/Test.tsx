@@ -7,7 +7,6 @@ import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
 import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
 import p5Types from "p5"
-import { off } from "process"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
@@ -30,7 +29,7 @@ export default function PathSKetch({
     let mainCanvas
     let topLayer
     let shaderLayer
-    let offest = 0
+    let offest = 0.05
 
     let x1, y1
     let x2, y2
@@ -57,7 +56,7 @@ export default function PathSKetch({
       p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
    
     
-      topLayer.background(220)
+      topLayer.background(0)
       topLayer.strokeWeight(.5)
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
@@ -132,7 +131,7 @@ export default function PathSKetch({
       shaderLayer.end()
       
       p.scale(1,-1)
-      p.image( shaderLayer, 0, 0, Parent.offsetWidth*.9, Parent.offsetHeight*.9, 0, 0, p.width, p.height, p.COVER)
+      p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, p.width, p.height, p.COVER)
 
   
       x1 = p.noise(offest+5)*topLayer.width
@@ -152,22 +151,31 @@ export default function PathSKetch({
       // topLayer.begin()
       // p.rotateY( drawPlayTimer/ 2000 )
       topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4)
-      // topLayer.bezier(-x1, x2, x3, x4, y1, y2, y3, y4)
-      // topLayer.bezier(-x1, -x2, -x3, x4, y1, y2, y3, y4)
-      // topLayer.bezier(-x1, -x2, -x3, -x4, y1, y2, y3, y4)
- 
-      // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, y2, y3, y4)
-      // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, y3, y4)
-      // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, y4)
-      // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, -y4)
+      topLayer.bezier(-x1, -x2, -x3, -x4, y1, y2, y3, y4)
+      topLayer.bezier(x1, x2, x3, x4, -y1, -y2, -y3, -y4)
+      topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, -y4)
  
 
       // topLayer.bezier( p.pmouseX, p.pmouseY, p.mouseX, p.mouseY,  p.pmouseX, p.pmouseY, p.mouseX, p.mouseY)
 
 
       p.scale(1,-1)
-      p.rotateZ( p.frameCount/100 )
-      p.image(topLayer, 0, 0, Parent.offsetWidth*1.5, Parent.offsetHeight*1.5, 0, 0, p.width*1.5, p.height*1.5, p.COVER)
+      p.rotateZ( p.frameCount/180 )
+      // p.rotateY( p.frameCount/90 )
+      
+      p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, topLayer.width, topLayer.height, p.COVER)
+
+      // p.rotateZ( p.frameCount/90 )
+      // p.rotateX( p.frameCount/90 )
+      // p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width*4, p.height*4, p.COVER)
+
+      // p.rotateZ( p.frameCount/90 )
+      // p.rotateX( p.frameCount/90 )
+      // p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width*4, p.height*4, p.COVER)
+
+      // p.rotateZ( p.frameCount/90 )
+      // p.rotateX( p.frameCount/90 )
+      // p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width*4, p.height*4, p.COVER)
 
   
 
