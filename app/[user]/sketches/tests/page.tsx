@@ -3,7 +3,7 @@ import Sketch from "../tests/Test"
 
 const sketch = {
     vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
-    frag: "/test.frag",
+    frag: "/matrixScale.frag",
     title: "test",
     displayName: "test",
     description: "test",
@@ -16,25 +16,25 @@ const sketch = {
             "uniform": "u_waves",
             "settings": {
                 "min": 0,
-                "max": 1000,
-                "step": 10,
-                "value": 50
+                "max": 500,
+                "step": 1,
+                "value": 15
             },
             "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
         },
-        // {
-        //     "icon": "zoom_in_map",
-        //     "type": "slider",
-        //     "label": "zoom",
-        //     "uniform": "u_zoom",
-        //     "settings": {
-        //         "min": 0,
-        //         "max": 120,
-        //         "step": 1,
-        //         "value": 120
-        //     },
-        //     "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
-        // }
+        {
+            "icon": "zoom_in_map",
+            "type": "slider",
+            "label": "zoom",
+            "uniform": "u_zoom",
+            "settings": {
+                "min": 0,
+                "max": 120,
+                "step": 1,
+                "value": 120
+            },
+            "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+        }
     ],
     textures: [
         {"uniform": "u_texture"},

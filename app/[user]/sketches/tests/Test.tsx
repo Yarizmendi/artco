@@ -144,16 +144,17 @@ export default function PathSKetch({
       y3 = p.noise(offest+35)*topLayer.height
       y4 = p.noise(offest+40)*topLayer.height
  
-      offest += 0.01
+      offest += 0.05
 
 
 
       // topLayer.begin()
       // p.rotateY( drawPlayTimer/ 2000 )
       topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4)
-      topLayer.bezier(-x1, -x2, -x3, -x4, y1, y2, y3, y4)
-      topLayer.bezier(x1, x2, x3, x4, -y1, -y2, -y3, -y4)
       topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, -y4)
+
+      // topLayer.bezier(-p.pmouseX, -x2, -x3, -x4, p.pmouseY, y2, y3, y4)
+      // topLayer.bezier(x1, x2, x3, p.pmouseX, -y1, -y2, -y3, -p.pmouseY)
  
 
       // topLayer.bezier( p.pmouseX, p.pmouseY, p.mouseX, p.mouseY,  p.pmouseX, p.pmouseY, p.mouseX, p.mouseY)
