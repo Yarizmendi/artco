@@ -30,7 +30,7 @@ export default function PathSKetch({
     let mainCanvas
     let topLayer
     let shaderLayer
-    let offest = 0
+    let offest = 5
 
     let x1, y1
     let x2, y2
@@ -57,8 +57,8 @@ export default function PathSKetch({
       p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
    
     
-      topLayer.background(220)
-      topLayer.strokeWeight(.1)
+      topLayer.background(0)
+      topLayer.strokeWeight(.5)
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
 
@@ -141,12 +141,12 @@ export default function PathSKetch({
       x3 = p.noise(offest+15)*topLayer.width
       x4 = p.noise(offest+20)*topLayer.width
 
-      y1 = p.noise(offest+25)*topLayer.height
-      y2 = p.noise(offest+30)*topLayer.height
-      y3 = p.noise(offest+35)*topLayer.height
-      y4 = p.noise(offest+40)*topLayer.height
+      y1 = p.noise(offest+25)*topLayer.height*2
+      y2 = p.noise(offest+30)*topLayer.height*2
+      y3 = p.noise(offest+35)*topLayer.height*2
+      y4 = p.noise(offest+40)*topLayer.height*2
  
-      offest += .05
+      offest += .005
 
 
 
@@ -160,7 +160,7 @@ export default function PathSKetch({
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, y2, y3, y4)
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, y3, y4)
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, y4)
-      // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, -y4)
+      topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, -y4)
  
 
       // topLayer.bezier( p.pmouseX, p.pmouseY, p.mouseX, p.mouseY,  p.pmouseX, p.pmouseY, p.mouseX, p.mouseY)
@@ -168,10 +168,10 @@ export default function PathSKetch({
 
       p.scale(1,-1)
       // p.rotateZ( p.frameCount/100 )
-      p.rotateZ( p.frameCount/60 )
+      p.rotateZ( p.frameCount/240 )
       p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width, p.height, p.COVER)
 
-    
+  
     }
 
     function handleControls() {
