@@ -15,11 +15,15 @@ function RootLayout({ children }: IRootLayout ): JSX.Element {
   return (
     <html lang="en">
       <DarkModeProvider>
-        <NavBar/>
-        {/* <div className="flex flex-col justify-center"> */}
-          {children}
-        {/* </div> */}
-        {/* <footer className="bg-slate-200 dark:bg-slate-950 h-[40px]" /> */}
+
+        <div className="flex flex-col h-screen">
+          <NavBar/>
+          <div className="flex grow">
+            {children}
+          </div>
+          <footer className="bg-slate-200 dark:bg-slate-950 h-[30px]" />
+        </div>
+
       </DarkModeProvider>
     </html>
   )
