@@ -36,9 +36,6 @@ export default function PathSKetch({
     let x2, y2
     let x3, y3
     let x4, y4
-    let z1
-
-    let n 
 
 
     p.preload = () => {
@@ -56,11 +53,11 @@ export default function PathSKetch({
       shaderLayer = p.createFramebuffer({ width: Parent.offsetWidth, height: Parent.offsetHeight })
 
       p.imageMode(p.CENTER)
-      p.background(0)
+      // p.background(220)
       p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
    
     
-      topLayer.background(0)
+      topLayer.background(220)
       topLayer.strokeWeight(.1)
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
@@ -136,7 +133,6 @@ export default function PathSKetch({
       shaderLayer.end()
       
       p.scale(1,-1)
-      // p.rotateY( drawPlayTimer/ 2000 )
       p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
 
   
@@ -149,30 +145,22 @@ export default function PathSKetch({
       y2 = p.noise(offest+30)*topLayer.height
       y3 = p.noise(offest+35)*topLayer.height
       y4 = p.noise(offest+40)*topLayer.height
-
-      z1 = p.noise(offest+25)
  
-      offest += .01
+      offest += .05
 
 
 
       // topLayer.begin()
       // p.rotateY( drawPlayTimer/ 2000 )
       topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4)
-      // topLayer.end()
       // topLayer.bezier(-x1, x2, x3, x4, y1, y2, y3, y4)
       // topLayer.bezier(-x1, -x2, -x3, x4, y1, y2, y3, y4)
       // topLayer.bezier(-x1, -x2, -x3, -x4, y1, y2, y3, y4)
-      // topLayer.bezier(x1*50, x2*50, x3*50, x4*50, y1*50, y2*50, y3*50, y4*50)
-      // topLayer.bezier(x1*250, x2*25, x3*25, x4*25, y1*25, y2*25, y3*25, y4*25)
+ 
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, y2, y3, y4)
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, y3, y4)
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, y4)
-      topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, -y4)
-      // topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4)
       // topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, -y4)
-
-
  
 
       // topLayer.bezier( p.pmouseX, p.pmouseY, p.mouseX, p.mouseY,  p.pmouseX, p.pmouseY, p.mouseX, p.mouseY)
@@ -180,8 +168,8 @@ export default function PathSKetch({
 
       p.scale(1,-1)
       // p.rotateZ( p.frameCount/100 )
-      p.rotateZ( p.frameCount/100 )
-      p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width/1.5, p.height/1.5, p.COVER)
+      p.rotateZ( p.frameCount/60 )
+      p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width, p.height, p.COVER)
 
     
     }

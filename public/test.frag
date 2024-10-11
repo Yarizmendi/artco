@@ -31,7 +31,7 @@ void main () {
   // originalColor = texture2D( u_texture, pos );
   // modifiedColor = texture2D( u_texture, pos );
 
-  vec4 colorMix = mix( originalColor, modifiedColor, .6 );
+  vec4 colorMix = mix( originalColor, modifiedColor, .5 );
   
 
   gl_FragColor = vec4( colorMix ) ;

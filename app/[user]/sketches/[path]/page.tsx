@@ -33,7 +33,7 @@ export default async function Page({ params }) {
     const {vert, noises, inputs, displayName, description, textures, transitions} = getPreviewPaintingSketch(title)
     const images = [await getMongoImageById(id)]
     return ( 
-      <Sketch frag={title=="fountain" ? "/fountain.frag" : "/matrixScale.frag"}
+      <Sketch frag={title=="fountain" ? "/fountain.frag" : "/test.frag"}
       images={images}
       vert={vert}  transitions={transitions} 
       title={title} displayName={displayName} description={description} 
