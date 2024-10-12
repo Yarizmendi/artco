@@ -28,6 +28,7 @@ export default function PathSKetch({
     let isPlaying, drawPlayTimer = 0, drawPauseTimer = 0
 
 
+
     p.preload = () => {
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
       noises && noises.length && noises.map(noise => noise["Noise"] = p.loadImage(noise.blob))  

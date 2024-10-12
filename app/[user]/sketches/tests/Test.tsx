@@ -29,7 +29,7 @@ export default function PathSKetch({
     let mainCanvas
     let topLayer
     let shaderLayer
-    let offest = 0.05
+    let offest = 0.001
 
     let x1, y1
     let x2, y2
@@ -56,7 +56,7 @@ export default function PathSKetch({
       p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
    
     
-      topLayer.background(0)
+      topLayer.background(220)
       topLayer.strokeWeight(.5)
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
@@ -161,8 +161,8 @@ export default function PathSKetch({
 
 
       p.scale(1,-1)
-      p.rotateZ( p.frameCount/180 )
-      // p.rotateY( p.frameCount/90 )
+      // p.rotateZ( p.noise(p.frameCount) )
+      // p.rotateZ( p.frameCount/100 )
       
       p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, topLayer.width, topLayer.height, p.COVER)
 
@@ -216,7 +216,7 @@ export default function PathSKetch({
   return (
     <P5Provider sketch={sketch}>
       <div className={classnames(
-       "flex flex-col grow p-4 w-3/5"
+       "flex flex-col grow p-4"
       )}>
         {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
         <div id="menu" className={classnames("w-full md:min-w-1/3 h-[50px] border-b")} />

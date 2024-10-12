@@ -42,24 +42,16 @@ const sketch = {
     noises: [{blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png"}],
     images: [
 
+
         {
-            "_id": "66f254e311cb1072bc57a59e",
-            "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/inbound2772130963691182903.jpg",
-            "title": "womelon",
-            "pathname": "inbound2772130963691182903.jpg",
+            "_id": "66f4c56c2715853f18d2b573",
+            "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/inbound4921452217638769424.png",
+            "title": "Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
+            "pathname": "Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
             "description": "",
-            "downloadUrl": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/inbound2772130963691182903.jpg?download=1",
-            "createdAt": "2024-09-24T05:57:55.106Z"
+            "downloadUrl": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png?download=1",
+            "createdAt": "2024-09-26T02:22:36.574Z"
         },
-        // {
-        //     "_id": "66f4c56c2715853f18d2b573",
-        //     "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
-        //     "title": "Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
-        //     "pathname": "Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
-        //     "description": "",
-        //     "downloadUrl": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png?download=1",
-        //     "createdAt": "2024-09-26T02:22:36.574Z"
-        // },
 ]
 }
 
