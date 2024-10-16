@@ -18,7 +18,7 @@ const sketch = {
                 "min": 0,
                 "max": 1,
                 "step": .005,
-                "value": .005
+                "value": .5
             },
             "description": "Implements spacing between bezier curves",
         },
