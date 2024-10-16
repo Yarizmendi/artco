@@ -10,6 +10,19 @@ const sketch = {
     transitions: false, 
     inputs: [
         {
+            "icon": "airwave",
+            "type": "slider",
+            "label": "offset",
+            "uniform": "u_offset",
+            "settings": {
+                "min": 0,
+                "max": 1,
+                "step": .005,
+                "value": .005
+            },
+            "description": "Implements spacing between bezier curves",
+        },
+        {
             "icon": "zoom_in_map",
             "type": "slider",
             "label": "waves",
@@ -42,16 +55,16 @@ const sketch = {
     noises: [{blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/perlin.png"}],
     images: [
 
-
-        {
-            "_id": "66f4c56c2715853f18d2b573",
-            "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/inbound4921452217638769424.png",
-            "title": "Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
-            "pathname": "Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
-            "description": "",
-            "downloadUrl": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png?download=1",
-            "createdAt": "2024-09-26T02:22:36.574Z"
-        },
+        {"blob":"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png","title":"ballerina","pathname":"ballerina.png","description":"quantum ballerina","downloadUrl":"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png?download=1","uploaderId":{"$oid":"66bd62276d3999b70d5fd91b"},"createdAt":{"$date":{"$numberLong":"1725050762230"}},"__v":{"$numberInt":"0"}}
+        // {
+        //     "_id": "66f4c56c2715853f18d2b573",
+        //     "blob": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
+        //     "title": "Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
+        //     "pathname": "Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png",
+        //     "description": "",
+        //     "downloadUrl": "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/Messenger_creation_3A9B32CE-BB98-44EB-A40F-DEA475FC809B.png?download=1",
+        //     "createdAt": "2024-09-26T02:22:36.574Z"
+        // },
 ]
 }
 

@@ -29,12 +29,14 @@ export default function PathSKetch({
     let mainCanvas
     let topLayer
     let shaderLayer
-    let offest = 0.001
+    let offest = 0
 
     let x1, y1
     let x2, y2
     let x3, y3
     let x4, y4
+    let z1, z2
+    let z3, z4
 
 
     p.preload = () => {
@@ -45,22 +47,20 @@ export default function PathSKetch({
   
     p.setup = () => {
 
-   
-
       topLayer = p.createGraphics(Parent.offsetWidth, Parent.offsetHeight)
       mainCanvas = p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent")
       shaderLayer = p.createFramebuffer({ width: Parent.offsetWidth, height: Parent.offsetHeight })
 
       p.imageMode(p.CENTER)
-      // p.background(220)
+      p.background(220)
       p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
    
-    
-      topLayer.background(220)
+  
+      // topLayer.background(images[0]["Image"])
+      topLayer.background("rgb(120, 9, 17)")
       topLayer.strokeWeight(.5)
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
-
 
       createSliders({ inputs, p })
       MediaRecorder = Recorder(title)
@@ -117,7 +117,6 @@ export default function PathSKetch({
 
     p.draw = () => {
 
-
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
@@ -133,7 +132,6 @@ export default function PathSKetch({
       p.scale(1,-1)
       p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, p.width, p.height, p.COVER)
 
-  
       x1 = p.noise(offest+5)*topLayer.width
       x2 = p.noise(offest+10)*topLayer.width
       x3 = p.noise(offest+15)*topLayer.width
@@ -143,44 +141,24 @@ export default function PathSKetch({
       y2 = p.noise(offest+30)*topLayer.height
       y3 = p.noise(offest+35)*topLayer.height
       y4 = p.noise(offest+40)*topLayer.height
+
+      z1 = p.noise(offest+45)*topLayer.height
+      z2 = p.noise(offest+50)*topLayer.height
+      z3 = p.noise(offest+55)*topLayer.height
+      z4 = p.noise(offest+60)*topLayer.height
  
-      offest += 0.05
+      offest += inputs[0]["Slider"].value()
 
-
-
-      // topLayer.begin()
-      // p.rotateY( drawPlayTimer/ 2000 )
-      topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4)
-      topLayer.bezier(-x1, -x2, -x3, -x4, -y1, -y2, -y3, -y4)
-
-      // topLayer.bezier(-p.pmouseX, -x2, -x3, -x4, p.pmouseY, y2, y3, y4)
-      // topLayer.bezier(x1, x2, x3, p.pmouseX, -y1, -y2, -y3, -p.pmouseY)
- 
-
+     
       // topLayer.bezier( p.pmouseX, p.pmouseY, p.mouseX, p.mouseY,  p.pmouseX, p.pmouseY, p.mouseX, p.mouseY)
 
+      p.rotateZ( drawPlayTimer/ 1000 )
+      topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4)
 
       p.scale(1,-1)
-      // p.rotateZ( p.noise(p.frameCount) )
-      // p.rotateZ( p.frameCount/100 )
-      
-      p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, topLayer.width, topLayer.height, p.COVER)
+      p.image(topLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, topLayer.width, topLayer.height, p.COVER)
+    
 
-      // p.rotateZ( p.frameCount/90 )
-      // p.rotateX( p.frameCount/90 )
-      // p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width*4, p.height*4, p.COVER)
-
-      // p.rotateZ( p.frameCount/90 )
-      // p.rotateX( p.frameCount/90 )
-      // p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width*4, p.height*4, p.COVER)
-
-      // p.rotateZ( p.frameCount/90 )
-      // p.rotateX( p.frameCount/90 )
-      // p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, p.width*4, p.height*4, p.COVER)
-
-  
-
-  
     }
 
     function handleControls() {
