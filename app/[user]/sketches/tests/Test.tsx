@@ -152,11 +152,11 @@ export default function PathSKetch({
      
       // topLayer.bezier( p.pmouseX, p.pmouseY, p.mouseX, p.mouseY,  p.pmouseX, p.pmouseY, p.mouseX, p.mouseY)
 
-      p.rotateZ( drawPlayTimer/ 1000 )
+      // p.rotateZ( drawPlayTimer/ 1000 )
       topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4)
 
       p.scale(1,-1)
-      p.image(topLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, topLayer.width, topLayer.height, p.COVER)
+      p.image(topLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, Parent.offsetWidth, Parent.offsetHeight, p.COVER)
     
 
     }
