@@ -16,7 +16,7 @@ const sketch = {
             "uniform": "u_offset",
             "settings": {
                 "min": .001,
-                "max": 1,
+                "max": 100,
                 "step": .001,
                 "value": .001
             },

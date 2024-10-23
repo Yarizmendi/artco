@@ -7,11 +7,14 @@ import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
 import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
 import p5Types from "p5"
+import { useState } from "react"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
   images, inputs, textures, noises, transitions
 }) {
+
+  const [files, setFiles ] = useState(images)
 
   function sketch(
     p: p5Types, 
@@ -39,11 +42,33 @@ export default function PathSKetch({
     let z3, z4
 
 
+    function handleImage(file) {
+      if (file.type === 'image') {
+ 
+        const fileList= document.getElementById("pUpload")
+
+
+//@ts-ignore
+        let blob = URL.createObjectURL( fileList.files[0] )
+
+        const pImgUrl = p.createImg(file.data,"tmp")
+        pImgUrl.hide()
+        images.unshift({ "Image": pImgUrl , "blob": blob })
+        setFiles(images)
+        console.log(images)
+        // topLayer.remove()
+        // topLayer = undefined
+        // topLayer = p.createGraphics(Parent.offsetWidth, Parent.offsetHeight)
+      } 
+    }
+
     p.preload = () => {
       images.map(img => img["Image"] = p.loadImage(img.blob))
       noises.map(noise => noise["Noise"] = p.loadImage(noise.blob))  
       ActiveShader = p.loadShader(vert, frag) 
     }
+
+
   
     p.setup = () => {
 
@@ -62,7 +87,9 @@ export default function PathSKetch({
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
 
+      p.createFileInput(handleImage).id("pUpload").parent("menu")
       createSliders({ inputs, p })
+
       MediaRecorder = Recorder(title)
       Overlay = Controls(p)
 
@@ -120,6 +147,8 @@ export default function PathSKetch({
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
+
+  
       
       handleSliders({ inputs, ActiveShader })
       handleControls()
@@ -197,11 +226,13 @@ export default function PathSKetch({
        "flex flex-col grow p-4"
       )}>
         {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
+
         <div id="menu" className={classnames("w-full md:min-w-1/3 h-[50px] border-b")} />
+
         <Sliders inputs={inputs} />
-        <div className={classnames(
+        <div id="pImages" className={classnames(
          "flex gap-4 overflow-auto p-4 w-full"
-          )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
+          )}> { files.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
         {/* {description && <p className="text-sm">{description}</p>} */}
       </div>

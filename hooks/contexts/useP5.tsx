@@ -25,6 +25,7 @@ export function P5Provider({ sketch, children }) {
 
   const [isMounted, setIsMounted] = useState(false)
 
+
   useEffect(() => { if (!isMounted) setIsMounted(true)}, [])
 
   useEffect(() => { 
@@ -52,7 +53,6 @@ export function P5Provider({ sketch, children }) {
 
 
           {children}
-    
         </div>
 
     </P5Context.Provider>
