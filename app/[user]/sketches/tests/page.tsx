@@ -15,10 +15,10 @@ const sketch = {
             "label": "offset",
             "uniform": "u_offset",
             "settings": {
-                "min": 0,
+                "min": .001,
                 "max": 1,
-                "step": .005,
-                "value": .5
+                "step": .001,
+                "value": .001
             },
             "description": "Implements spacing between bezier curves",
         },
