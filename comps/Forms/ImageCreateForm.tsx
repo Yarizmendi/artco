@@ -27,6 +27,15 @@ export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollec
       <Input title="title" placeholder={"title"} />
       <Input title="description" placeholder={"description"} />
       <Input title="displayName" placeholder={"display name"} />
+      <div className='flex justify-between items-center'>
+        <input className='text-[10px] file:p-1 font-normal file:mr-4 file:text-xs' type="file" name="image" multiple={true} required onChange={ e => {
+          e.preventDefault()
+          const files = Array.from( e.target.files)
+          const urls = files.map( file => URL.createObjectURL(file))
+          setFiles( urls )
+        }} />   
+        <ActionButton idleTxt={"create"} loadingTxt='...creating' color={btnColor} btnType={"submit"}/>
+      </div>
       { files && <div className='h-[280px] w-full my-2 flex flex-wrap gap-8 overflow-auto'>
         { files.map( (url, idx) => <Image className={"w-[100px] h-[100px]"} key={idx} src={url} width={100} height={100} alt={"img"} /> )}
       </div>}
