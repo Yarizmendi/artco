@@ -113,7 +113,7 @@ export function getPreviewPaintingSketch(title) {
                 "uniform": "u_waves",
                 "settings": {
                     "min": 0,
-                    "max": 100,
+                    "max": 1000,
                     "step": 1,
                     "value": (title == "fountain") ? 80 : 15
                 },
@@ -128,7 +128,7 @@ export function getPreviewPaintingSketch(title) {
                     "min": 0,
                     "max": 120,
                     "step": 1,
-                    "value": 60
+                    "value": 120
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             }

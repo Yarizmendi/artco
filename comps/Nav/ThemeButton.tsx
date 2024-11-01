@@ -2,7 +2,7 @@
 "use client"
 import { useContext } from 'react'
 import classNames from 'classnames'
-import { DarkModeContext } from '@/hooks/index.ts'
+import { DarkModeContext } from 'hooks/contexts'
 
 function ThemeButton() {
     const { themeClass, setThemeClass} = useContext(DarkModeContext)

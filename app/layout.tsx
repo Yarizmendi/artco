@@ -1,7 +1,7 @@
 
 import { NavBar } from "@/comps/Nav/NavBar"
 import "./globals.css"
-import { DarkModeProvider } from "hooks"
+import { DarkModeProvider } from "hooks/contexts"
 
 export const metadata = {
   title: "The Art Co.",
