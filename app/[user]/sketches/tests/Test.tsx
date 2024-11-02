@@ -1,13 +1,13 @@
 
 "use client"
-import p5Types from "p5"
 import Image from "next/image"
-import { useState } from "react"
 import classnames from "classnames"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
 import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
+import p5Types from "p5"
+import { useState } from "react"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
@@ -41,6 +41,7 @@ export default function PathSKetch({
     let z1, z2
     let z3, z4
 
+
     function handleImage(file) {
       if (file.type === 'image') {
  
@@ -67,6 +68,8 @@ export default function PathSKetch({
       ActiveShader = p.loadShader(vert, frag) 
     }
 
+
+  
     p.setup = () => {
 
       topLayer = p.createGraphics(Parent.offsetWidth, Parent.offsetHeight)
@@ -84,7 +87,7 @@ export default function PathSKetch({
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
 
-      p.createFileInput(handleImage).id("pUpload").parent("menu").addClass("w-[100px] overflow-hidden")
+      p.createFileInput(handleImage).id("pUpload").parent("menu")
       createSliders({ inputs, p })
 
       MediaRecorder = Recorder(title)
@@ -138,11 +141,14 @@ export default function PathSKetch({
 
     }
 
+
     p.draw = () => {
 
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
+
+  
       
       handleSliders({ inputs, ActiveShader })
       handleControls()
@@ -175,7 +181,7 @@ export default function PathSKetch({
      
       // topLayer.bezier( p.pmouseX, p.pmouseY, p.mouseX, p.mouseY,  p.pmouseX, p.pmouseY, p.mouseX, p.mouseY)
 
-      p.rotateZ( drawPlayTimer/ 3000 )
+      p.rotateZ( drawPlayTimer/ 6000 )
       topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4)
 
       p.scale(1,-1)
@@ -221,7 +227,7 @@ export default function PathSKetch({
       )}>
         {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
 
-        <div id="menu" className={classnames("w-full w-[500px] h-[50px] border-4 flex items-center")} />
+        <div id="menu" className={classnames("w-full md:min-w-1/3 h-[50px] border-b")} />
 
         <Sliders inputs={inputs} />
         <div id="pImages" className={classnames(

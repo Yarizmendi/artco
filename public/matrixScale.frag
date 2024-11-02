@@ -23,25 +23,23 @@ vec2 rollingWaves( vec2 pos ) {
 }
 
 vec2 increasingWaves( vec2 pos ) {
-  pos.y += cos( pos.y * (u_waves) + u_time ) / ( 30.0 - (u_waves) + u_time );
+  pos.y += cos( pos.y * (u_waves/2.5) + u_time ) / ( 30.0 - (u_waves/2.5) + u_time );
   return pos;
 }
 
 void main () {
   vec2 pos = vTexCoord;
-  // pos *= ( 0.90 );
+  pos *= vec2( .9, .9 );
 
   color = texture2D( u_texture, pos );
-  pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
 
-  if ( color.r > .33 ) {
-    pos = increasingWaves( pos );
+  if ( color.r > .33 || color.b > .33 ) {
     pos = rollingWaves( pos );
   } 
-  else {
-    // pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
-    pos.y += pos.y * (uWavesX/500.) + u_time;
-  }
+
+
+  pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
+  pos = increasingWaves( pos );
 
   pos = fract(pos);
   color = texture2D( u_texture, pos );

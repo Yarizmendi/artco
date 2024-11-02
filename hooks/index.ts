@@ -3,12 +3,12 @@
 import { 
     DarkModeContext, 
     DarkModeProvider
-} from "./useTheme"
+} from "./contexts/useTheme"
 
 import { 
     P5Context,
     P5Provider
-} from "./useP5"
+} from "./contexts/useP5"
 
 export {
     DarkModeContext, DarkModeProvider,

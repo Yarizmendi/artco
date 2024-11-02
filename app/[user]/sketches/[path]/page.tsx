@@ -1,5 +1,5 @@
 
-import Sketch from "./PathSketch"
+import Sketch from "./Refactor"
 import { getUserImgCollectionById, getMongoImageById } from "actions/images/getImages"
 import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } from "actions/sketches/getSketchActions"
 
@@ -32,16 +32,9 @@ export default async function Page({ params }) {
   if ( type == "painting") {
     const {vert, noises, inputs, displayName, description, textures, transitions} = getPreviewPaintingSketch(title)
     const images = [await getMongoImageById(id)]
-
-    let song, frag
-
-
-    if ( title == "fountain" ) frag = "/fountain.frag"
-    if ( title == "grateful_dead") frag = "/grateful.frag"
-
-
     return ( 
-      <Sketch frag={frag} images={images}
+      <Sketch frag={title=="fountain" ? "/fountain.frag" : "/test.frag"}
+      images={images}
       vert={vert}  transitions={transitions} 
       title={title} displayName={displayName} description={description} 
       noises={noises} inputs={inputs} textures={textures} />
