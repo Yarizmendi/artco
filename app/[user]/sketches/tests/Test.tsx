@@ -44,13 +44,9 @@ export default function PathSKetch({
 
     function handleImage(file) {
       if (file.type === 'image') {
- 
-        const fileList= document.getElementById("pUpload")
-
-
-//@ts-ignore
+        const fileList = document.getElementById("pUpload")
+        //@ts-ignore
         let blob = URL.createObjectURL( fileList.files[0] )
-
         const pImgUrl = p.createImg(file.data,"tmp")
         pImgUrl.hide()
         images.unshift({ "Image": pImgUrl , "blob": blob })
@@ -68,8 +64,6 @@ export default function PathSKetch({
       ActiveShader = p.loadShader(vert, frag) 
     }
 
-
-  
     p.setup = () => {
 
       topLayer = p.createGraphics(Parent.offsetWidth, Parent.offsetHeight)
@@ -78,8 +72,7 @@ export default function PathSKetch({
 
       p.imageMode(p.CENTER)
       p.background(220)
-      p.image( shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
-   
+      p.image(shaderLayer, 0, 0, Parent.offsetWidth, Parent.offsetHeight, 0, 0, shaderLayer.width, shaderLayer.height, p.COVER)
   
       // topLayer.background(images[0]["Image"])
       topLayer.background("rgb(120, 9, 17)")
@@ -87,7 +80,7 @@ export default function PathSKetch({
       topLayer.noFill()
       topLayer.blendMode(p.REMOVE)
 
-      p.createFileInput(handleImage).id("pUpload").parent("menu")
+      // p.createFileInput(handleImage).id("pUpload").parent("menu")
       createSliders({ inputs, p })
 
       MediaRecorder = Recorder(title)
@@ -147,8 +140,6 @@ export default function PathSKetch({
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
-
-  
       
       handleSliders({ inputs, ActiveShader })
       handleControls()
@@ -178,16 +169,12 @@ export default function PathSKetch({
  
       offest += inputs[0]["Slider"].value()
 
-     
       // topLayer.bezier( p.pmouseX, p.pmouseY, p.mouseX, p.mouseY,  p.pmouseX, p.pmouseY, p.mouseX, p.mouseY)
-
       p.rotateZ( drawPlayTimer/ 6000 )
       topLayer.bezier(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4)
-
       p.scale(1,-1)
       p.image(topLayer, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, 0, 0, Parent.offsetWidth*2, Parent.offsetHeight*2, p.COVER)
     
-
     }
 
     function handleControls() {
@@ -234,7 +221,7 @@ export default function PathSKetch({
          "flex gap-4 overflow-auto p-4 w-full"
           )}> { files.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
-        {/* {description && <p className="text-sm">{description}</p>} */}
+
       </div>
   </P5Provider>
   )

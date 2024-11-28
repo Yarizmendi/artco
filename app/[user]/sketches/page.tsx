@@ -5,7 +5,7 @@ import { SketchesList } from "./SketchesList"
 export default function Sketches({ params }) {
   return (
     <div className="flex flex-col items-center justify-center grow md:flex-row md:items-start m-4 p-4 gap-4">
-      <CreateSketchForm user={params.user} /> 
+      {/* <CreateSketchForm user={params.user} />  */}
       <SketchesList creatorId={params.user} />
     </div>
   )

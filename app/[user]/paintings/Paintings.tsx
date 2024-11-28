@@ -32,10 +32,10 @@ function UploadForm({uploaderId, mutateAllUploads }) {
 function UploadsList({uploaderId, paintingsRes}) {
   const paintings = paintingsRes && paintingsRes.data
   if (paintingsRes.error) return <NotFound />
-  if (paintingsRes.isLoading ) return <Loading />
-  if (paintings ) return (
+  if (paintingsRes.isLoading) return <Loading />
+  if (paintings) return (
     <div className="h-[480px] w-full flex flex-wrap justify-center overflow-auto">
-    { paintings.map( art => <Painting key={art._id} positionIdx={art.positionIdx} mutate={paintingsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
+      {paintings.map( art => <Painting key={art._id} positionIdx={art.positionIdx} mutate={paintingsRes.mutate} id={art._id} title={art.title} blob={art.blob} uploaderId={uploaderId} description={art.description} displayName={art.displayName} /> )}
    </div>
   )
 }
