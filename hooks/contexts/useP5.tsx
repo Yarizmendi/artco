@@ -39,13 +39,13 @@ export function P5Provider({ sketch, children }) {
 
         <div className={classnames([
           "flex flex-col md:flex-row",
-          "w-full" 
+          "w-full h-full" 
         ])}>
 
           <div id={"Parent"} className={classnames(
             "flex", 
             "w-full md:w-2/3",
-            "h-[500px] md:h-full" 
+            "h-full" 
           )}>
             <div id="p5_loading" className="w-full flex items-center justify-center">
               <a id="download" />   

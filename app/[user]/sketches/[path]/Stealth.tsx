@@ -36,7 +36,7 @@ export default function PathSKetch({
     }
   
     p.setup = () => {
-    //   createSliders({ inputs, p })
+      createSliders({ inputs, p })
     //   frameRate = p.createP(String(p.frameRate()))
       p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent")
 
@@ -97,7 +97,7 @@ export default function PathSKetch({
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
       
-    //   handleSliders({ inputs, ActiveShader })
+      handleSliders({ inputs, ActiveShader })
       handleControls()
 
       p.shader(ActiveShader)
@@ -142,6 +142,7 @@ export default function PathSKetch({
       )}>
         {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
         <div id="menu" className={classnames("w-full md:min-w-1/3 h-[50px] border-b")} />
+        <Sliders inputs={inputs} />
         <div className={classnames(
          "flex gap-4 overflow-auto p-4 w-full"
           )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
