@@ -7,14 +7,17 @@ import { LogoName } from './Logo'
 export function NavBar() {
   
   const routes = [
-    { title: "paintings", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
-    { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
-    { title: "tests", path: `/${"66bd62276d3999b70d5fd91b"}/sketches/tests`},
+    // { title: "paintings", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
+    // { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
+    // { title: "tests", path: `/${"66bd62276d3999b70d5fd91b"}/sketches/tests`},
+    { title: "Login", path: "/auth/login"},
+    { title: "SignUp", path: "/auth/create"},
+    { title: "Explore", path: `/${"66bd62276d3999b70d5fd91b"}/sketches` },
   ]
   
   return (
     <header className={classNames(
-      "p-2 md:p-4 md:tracking-widest",
+      "p-4 md:p-6 md:tracking-widest",
       "flex flex-col justify-between items-center md:flex-row",
       "bg-slate-200 dark:bg-slate-950 rounded",
     )}>
