@@ -212,17 +212,17 @@ export default function PathSKetch({
       <div className={classnames(
        "flex flex-col grow p-4"
       )}>
-        {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
+        {(displayName) && <p className={classnames("text-lg uppercase")}>{ displayName || "Preview" } sketch</p>}
 
-        <div id="menu" className={classnames("w-full md:min-w-1/3 h-[50px] border-b")} />
+        <div id="menu" className={classnames("w-full h-[50px] border-b")} />
+          <Sliders inputs={inputs} />
+          <div 
+            id="pImages" 
+            className={classnames("flex gap-4 overflow-auto p-4 w-full")}> 
+            { files.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
+          </div> 
+        </div>
 
-        <Sliders inputs={inputs} />
-        <div id="pImages" className={classnames(
-         "flex gap-4 overflow-auto p-4 w-full"
-          )}> { files.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
-        </div> 
-
-      </div>
   </P5Provider>
   )
 }

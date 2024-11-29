@@ -1,3 +1,4 @@
+
 import Link from "next/link"
 import Image from "next/image"
 
@@ -11,9 +12,9 @@ export default function ArtistPage({ params }) {
   return (
     <div>
       <div className={"flex flex-wrap items-center overflow-auto justify-center md:justify-start"}>
-      { collections.map(({ title, path, blob }, key)=>
+      { collections.map(({ title, path, blob }, key ) =>
         <Link 
-          href={ params.user + path } 
+          href={params.user + path} 
           className={"p-2 m-2"}
           key={key}>
           <Image 
