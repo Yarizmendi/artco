@@ -1,18 +1,18 @@
 
 import Image from "next/image"
-import { getUserByUsernameAction } from "actions/users/getUserAction"
+import { loginUserAction, createUserAction } from "actions/users/getUserAction"
 
 export function LoginForm() {
     return (
-      <div className="w-full flex justify-center md:justify-between dark:bg-slate-900 dark:text-gray-100 text-gray-700">
+      <div className="w-full flex justify-center md:justify-between dark:bg-slate-900 dark:text-gray-900 text-gray-700">
 
         <div className="w-full dark:bg-slate-900 p-8 rounded-lg">
           <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
-          <form action={getUserByUsernameAction}>
+          <form action={loginUserAction}>
             <div className="mb-4">
               <label htmlFor="username" className="block text-sm font-bold mb-2">Username</label>
               <input
-                type="text" id="username" name="username" 
+                type="text" id="username" name="username"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" 
                 placeholder="Benji" required />
             </div>
