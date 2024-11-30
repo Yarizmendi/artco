@@ -39,21 +39,20 @@ export function P5Provider({ sketch, children }) {
 
         <div className={classnames([
           "flex flex-col md:flex-row",
-          "w-full h-full" 
+          "w-full" 
         ])}>
 
           <div id={"Parent"} className={classnames(
             "flex", 
-            "w-full md:w-2/3",
-            "h-full" 
+            "w-full md:w-2/3 h-screen border-2 border-red-500"
           )}>
             <div id="p5_loading" className="w-full flex items-center justify-center">
-              <a id="download" />   
               <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500"/>
             </div>
           </div>
 
           {children}
+          <a id="download" />   
         </div>
 
     </P5Context.Provider>

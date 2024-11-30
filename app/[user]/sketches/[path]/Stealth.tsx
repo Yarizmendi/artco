@@ -1,12 +1,12 @@
 
 "use client"
+import p5Types from "p5"
 import Image from "next/image"
 import classnames from "classnames"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
 import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
-import p5Types from "p5"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
@@ -26,8 +26,6 @@ export default function PathSKetch({
     let ActiveShader = null
     let Overlay, MediaRecorder
     let isPlaying, drawPlayTimer = 0, drawPauseTimer = 0
-
-
 
     p.preload = () => {
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
@@ -92,6 +90,7 @@ export default function PathSKetch({
     }
 
     p.draw = () => {
+      p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
     //   frameRate.html(`${p.frameRate()}`)
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
