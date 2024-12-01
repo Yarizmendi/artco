@@ -20,14 +20,12 @@ export default function PathSKetch({
 ) {
 
     let idx = 0
-    let frameRate 
+    // let frameRate 
     let seconds = 0
     let changeEvery = 2500
     let ActiveShader = null
     let Overlay, MediaRecorder
     let isPlaying, drawPlayTimer = 0, drawPauseTimer = 0
-
-
 
     p.preload = () => {
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
@@ -37,7 +35,7 @@ export default function PathSKetch({
   
     p.setup = () => {
       createSliders({ inputs, p })
-    //   frameRate = p.createP(String(p.frameRate()))
+      // frameRate = p.createP(String(p.frameRate()))
       p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent")
 
       MediaRecorder = Recorder(title)
@@ -93,7 +91,7 @@ export default function PathSKetch({
 
     p.draw = () => {
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
-    //   frameRate.html(`${p.frameRate()}`)
+      // frameRate.html(`${p.frameRate()}`)
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
       
@@ -140,8 +138,8 @@ export default function PathSKetch({
       <div className={classnames(
        "flex flex-col grow p-4"
       )}>
-        {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
-        <div id="menu" className={classnames("w-full md:min-w-1/3 h-[50px] border-b")} />
+        {/* {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>} */}
+        <div id="menu" className={classnames("w-full h-[50px]")} />
         <Sliders inputs={inputs} />
         <div className={classnames(
          "flex gap-4 overflow-auto p-4 w-full"

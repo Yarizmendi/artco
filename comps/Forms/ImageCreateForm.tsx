@@ -14,7 +14,7 @@ interface ICreateForm {
 }
 
 export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollection } : ICreateForm ) {
-  const [files, setFiles ] = useState(null)
+  const [files, setFiles] = useState(null)
   return (
     <form className="flex flex-col gap-4"
       action={ async formData => {

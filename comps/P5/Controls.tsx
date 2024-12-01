@@ -33,7 +33,7 @@ export function Controls( p5 ) {
     // let className = "bg-stone-500 bg-opacity-10 backdrop-blur-sm rounded drop-shadow-lg px-4 py-2 text-white"  
     let ctn = p5.createDiv()
     // ctn.position( p5.canvasWidth, 600 )
-    ctn.class("h-[50px] w-full flex flex-row flex-wrap justify-around items-center")
+    ctn.class("h-[30px] w-full flex flex-row flex-wrap gap-2 items-center")
     ctn.parent( "menu" )
     ctn.id("ctrls2")
     // ctn.draggable()

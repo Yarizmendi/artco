@@ -25,12 +25,11 @@ export function P5Provider({ sketch, children }) {
 
   const [isMounted, setIsMounted] = useState(false)
 
-
   useEffect(() => { if (!isMounted) setIsMounted(true)}, [])
 
   useEffect(() => { 
     if (isMounted) {
-      if (!mp5) mp5 = InitP5({sketch })
+      if (!mp5) mp5 = InitP5({ sketch })
       else return mp5.remove() 
   }}, [isMounted]) 
 
@@ -38,23 +37,20 @@ export function P5Provider({ sketch, children }) {
     <P5Context.Provider value={{ isMounted }}>
 
         <div className={classnames([
-          "flex flex-col md:flex-row w-full" 
+          "flex flex-col md:flex-row w-full h-full"
         ])}>
 
           <div id={"Parent"} className={classnames(
-            "flex w-full h-[500px] md:w-2/3 md:h-[700px] " 
+            "flex w-full sm:h-[500px] h-full md:w-2/3" 
           )}>
             <div id="p5_loading" className="w-full flex items-center justify-center">
               <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500"/>
             </div>
-            <a id="download" />
-   
           </div>
 
-
+          <a id="download" />
           {children}
         </div>
-
     </P5Context.Provider>
   )
 }
