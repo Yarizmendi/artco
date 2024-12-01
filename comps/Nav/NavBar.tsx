@@ -16,7 +16,7 @@ export function NavBar() {
   
   return (
     <header className={classNames(
-      "p-2 md:py-4 md:px-8 md:tracking-widest",
+      "p-2 md:py-4 md:px-8 md:tracking-widest gap-4",
       "flex flex-col justify-between items-center md:flex-row",
       "bg-slate-200 dark:bg-slate-950 rounded",
     )}>
@@ -25,7 +25,7 @@ export function NavBar() {
         <LogoName />
       </div>
       <nav className='flex justify-center items-center gap-8 uppercase text-xs'>
-        <h2 className='underline text-lg'>ben arizmendi </h2>
+        <h2 className='underline text-md'>ben arizmendi </h2>
         { routes.map((link,i)=> 
           <Link key={i} href={link.path}>
             {link.title}

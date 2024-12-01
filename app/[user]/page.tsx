@@ -11,7 +11,7 @@ const collections = [
 export default function ArtistPage({ params }) {
   const defaultUser = "66bd62276d3999b70d5fd91b"
   return (
-    <div className="flex flex-col p-8 grow">
+    <div className="flex flex-col grow">
       <div className={"flex flex-wrap items-center gap-4 overflow-auto"}>
       { collections.map(({ title, path, blob },key)=>
         <Link href={ params.user || defaultUser + path } className={"p-2 m-2"} key={key}>
