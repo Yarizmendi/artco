@@ -9,7 +9,7 @@ export function Datalist({ title, list, dataArr }: { title: string, list?: strin
               name={title} 
               id={list} 
               className="dark:bg-slate-950 w-full py-1 px-2 rounded" >
-              {dataArr.map((st, idx) => <option className="text-sm font-light" key={idx} value={st._id}>{ st.label || st.title || st.uniform } </option> )}
+              {dataArr.map((st, idx) => <option className="text-sm font-light" key={idx} value={st._id}>{ st.label || st.title || st.uniform || st } </option> )}
             </select>
         </div>
     )

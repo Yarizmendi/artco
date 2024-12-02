@@ -1,11 +1,13 @@
 
-// import fs from 'fs'
+import fs from 'fs'
 import path from 'path'
 // import ffmpeg from "ffmpeg"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET( req: NextRequest ) {
-    const pathToSrcFile = path.join(process.cwd(), 'public/highway.webm')
+    const currentPath = path.join(process.cwd())
+    const publicFolderPath = currentPath + "/public"
+    const fileList = fs.readdirSync(publicFolderPath)
 
     // try {  
     //     const readStream = fs.createReadStream(pathToSrcFile)
@@ -19,6 +21,7 @@ export async function GET( req: NextRequest ) {
     //     console.log('Error:', e.stack)
     //     return NextResponse.json({...e.stack})
     // }
-    return NextResponse.json({})
+
+    return NextResponse.json(fileList)
 
 }
