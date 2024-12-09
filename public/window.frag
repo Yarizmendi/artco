@@ -29,7 +29,12 @@ vec2 increasingWaves( vec2 pos ) {
 
 void main () {
   vec2 pos = vTexCoord;
-  pos *= ( 0.90 );
+  pos *= ( 0.9 );
+
+  if ( st.y < .47 ) {
+    st.x += ( sin( st.x * u_time ) / ( 8.0 + u_time )); 
+    color = texture2D( u_texture, st );
+  }
 
   color = texture2D( u_texture, pos );
 

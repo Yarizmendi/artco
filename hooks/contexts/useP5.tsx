@@ -41,7 +41,7 @@ export function P5Provider({ sketch, children }) {
         ])}>
 
           <div id={"Parent"} className={classnames(
-            "flex w-full h-full xs:h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] md:w-2/3" 
+            "flex w-full h-[550px] xs:h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] md:w-2/3" 
           )}>
             <div id="p5_loading" className="w-full flex items-center justify-center">
               <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500"/>
