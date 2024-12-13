@@ -36,14 +36,45 @@ export default async function Page({ params }) {
   }
 
   if ( type == "painting") {
-    const {vert, noises, inputs, displayName, description, textures, transitions} = getPreviewPaintingSketch(title)
+    let {vert, noises, inputs, displayName, description, textures, transitions} = getPreviewPaintingSketch(title)
     const images = [await getMongoImageById(id)]
 
     if (title == "window") frag = "/window.frag"
     if (title == "fountain") frag = "/fountain.frag"
+    if (title == "luigi") {
+      frag = "/luigi.frag"
+      inputs = [
+        {
+            "icon": "zoom_in_map",
+            "type": "slider",
+            "label": "waves",
+            "uniform": "u_waves",
+            "settings": {
+                "min": 0,
+                "max": 10,
+                "step": 1,
+                "value": 2
+            },
+            "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+        },
+        {
+            "icon": "zoom_in_map",
+            "type": "slider",
+            "label": "zoom",
+            "uniform": "u_zoom",
+            "settings": {
+                "min": 0,
+                "max": 120,
+                "step": 1,
+                "value": 60
+            },
+            "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+        }
+    ]
+    }
     if (!frag) frag = "/concept.frag"
 
-    console.log(type, title, frag)
+    console.log(type, title, inputs)
 
     return ( 
       <Sketch frag={frag}
