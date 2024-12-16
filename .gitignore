@@ -71,10 +71,6 @@ typings/
 .serverless/
 
 # IDE / Editor directories
-.idea/
-.vscode/
 *.code-workspace
 .vercel
-
-.vscode
 

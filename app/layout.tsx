@@ -15,7 +15,6 @@ function RootLayout({ children }: IRootLayout ): JSX.Element {
   return (
     <html lang="en">
       <DarkModeProvider>
-
         <div className="flex flex-col h-screen">
           <NavBar/>
           <div className="flex grow">
@@ -23,7 +22,6 @@ function RootLayout({ children }: IRootLayout ): JSX.Element {
           </div>
           <footer className="bg-slate-200 dark:bg-slate-950 h-[50px]" />
         </div>
-
       </DarkModeProvider>
     </html>
   )

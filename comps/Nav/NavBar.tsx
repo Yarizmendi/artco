@@ -1,11 +1,10 @@
 
-import Link from 'next/link'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
 import { LogoName } from './Logo'
+import { AuthedLinks } from './AuthedLinks'
 
 export function NavBar() {
-  
   const routes = [
     // { title: "blog", path: `/blog`},
     // { title: "collections", path: `/${"66bd62276d3999b70d5fd91b"}/collections`},
@@ -24,13 +23,8 @@ export function NavBar() {
         <ThemeButton />
         <LogoName />
       </div>
-      <nav className='flex justify-center items-center gap-8 uppercase text-xs'>
-        <h2 className='underline text-md'>ben arizmendi </h2>
-        { routes.map((link,i)=> 
-          <Link key={i} href={link.path}>
-            {link.title}
-          </Link>
-        )}
+      <nav>
+        <AuthedLinks />
       </nav>
     </header>
   )
