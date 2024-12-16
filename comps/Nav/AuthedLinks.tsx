@@ -9,9 +9,11 @@ export function AuthedLinks() {
     const { user } = useContext(UserAccountContxt)
 
     let routes = [
+        { title: "uploads", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
+        { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
+        { title: "tests", path: `/${"66bd62276d3999b70d5fd91b"}/sketches/tests`},
         { title: "Login", path: "/auth/login"},
         { title: "SignUp", path: "/auth/create"},
-        { title: "Explore", path: `/${"66bd62276d3999b70d5fd91b"}/sketches` },
       ]
 
       if (user) routes = [

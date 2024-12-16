@@ -1,7 +1,6 @@
-
+import { LogoName } from './Logo'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
-import { LogoName } from './Logo'
 import { AuthedLinks } from './AuthedLinks'
 
 export function NavBar() {

@@ -7,7 +7,7 @@ export function SignUpForm() {
       <div className="w-full flex justify-center md:justify-between dark:bg-slate-900 dark:text-gray-900 text-gray-700">
 
         <div className="w-full dark:bg-slate-900 p-8 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Sign Up</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-center text-black dark:text-white">Sign Up</h2>
           <form action={createUserAction}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-sm font-bold mb-2">Organization Name</label>
