@@ -115,7 +115,7 @@ export function getPreviewPaintingSketch(title) {
                     "min": 0,
                     "max": 100,
                     "step": 1,
-                    "value": (title == "fountain") ? 80 : 15
+                    "value": (title == "fountain") ? 80 : (title == "luigi") ? 5 : 15
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             },
