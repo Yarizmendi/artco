@@ -12,7 +12,7 @@ export default function ArtistPage({ params }) {
   const defaultUser = "66bd62276d3999b70d5fd91b"
   return (
     <div>
-      <div className={"flex flex-wrap items-center overflow-auto justify-center md:justify-start"}>
+      <div className={"flex flex-wrap items-center overflow-auto justify-center md:justify-start m-8"}>
       { collections.map(({ title, path, blob }, key ) =>
         <Link 
           href={params.user || defaultUser + path} 
