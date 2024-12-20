@@ -39,7 +39,7 @@ export function P5Provider({ sketch, children }) {
           "flex flex-col md:flex-row w-full"
         ])}>
 
-          <div id={"Parent"} className="w-full flex justify-center">
+          <div id={"Parent"} className="w-full flex justify-center min-h-[500px]">
 
             <div id="p5_loading" className="w-full flex items-center justify-center">
               <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-indigo-500"/>

@@ -37,7 +37,6 @@ export default function PathSKetch({
       createSliders({ inputs, p })
       
       p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent")
-      .addClass("min-h-[500px]")
 
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
 
