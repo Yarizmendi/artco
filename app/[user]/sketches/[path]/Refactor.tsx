@@ -35,8 +35,11 @@ export default function PathSKetch({
   
     p.setup = () => {
       createSliders({ inputs, p })
-      // frameRate = p.createP(String(p.frameRate()))
+      
       p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent")
+      .addClass("min-h-[500px]")
+
+      p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
 
       MediaRecorder = Recorder(title)
       Overlay = Controls(p)
