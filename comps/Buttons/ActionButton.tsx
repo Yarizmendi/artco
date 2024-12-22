@@ -26,7 +26,7 @@ export const ActionButton = ({
     color == "red" && "bg-red-900",
     color == "blue" && "bg-blue-900",
     color == "green" && "bg-green-900",
-    color == "orange" && "dark:bg-orange-700",
+    color == "orange" && "bg-orange-700",
   )
 
   return (

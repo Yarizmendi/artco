@@ -1,16 +1,16 @@
 
 "use client"
+import p5Types from "p5"
 import Image from "next/image"
 import classnames from "classnames"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
 import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
-import p5Types from "p5"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
-  images, inputs, textures, noises, transitions
+  images, inputs, textures, noises, transitions, shaderOptions
 }) {
 
   function sketch(
@@ -20,12 +20,19 @@ export default function PathSKetch({
 ) {
 
     let idx = 0
-    // let frameRate 
     let seconds = 0
+    let fragSelect = null
     let changeEvery = 2500
     let ActiveShader = null
     let Overlay, MediaRecorder
     let isPlaying, drawPlayTimer = 0, drawPauseTimer = 0
+
+    function handleFragChange(fragUrl) {
+      p.loadShader(vert, "/" + fragUrl, (shader) => { 
+        ActiveShader = shader 
+        p.shader(ActiveShader)
+      })
+    }
 
     p.preload = () => {
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
@@ -34,12 +41,19 @@ export default function PathSKetch({
     }
   
     p.setup = () => {
-      createSliders({ inputs, p })
       
-      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent")
-
+      // ensures canvas is sized to parent on all screen sizes
+      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").addClass("min-h-[500px]")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
 
+      // create a fragment shader input switcher
+      p.shader(ActiveShader)
+      fragSelect = p.createSelect(frag).parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
+      shaderOptions && shaderOptions.map(shader => fragSelect.option(shader, shader))
+      fragSelect.changed(() => handleFragChange(fragSelect.value()))
+
+      // create sliders and controls
+      createSliders({ inputs, p })
       MediaRecorder = Recorder(title)
       Overlay = Controls(p)
 
@@ -66,6 +80,7 @@ export default function PathSKetch({
         Overlay.recordBtnLabel.html("record")
         // auto restart after delay
         p.resetShader()
+        p.shader(ActiveShader)
         setTimeout(() => document.getElementById("playbtn").click(), 500)
       })
 
@@ -92,6 +107,7 @@ export default function PathSKetch({
     }
 
     p.draw = () => {
+
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
       // frameRate.html(`${p.frameRate()}`)
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
@@ -100,7 +116,6 @@ export default function PathSKetch({
       handleSliders({ inputs, ActiveShader })
       handleControls()
 
-      p.shader(ActiveShader)
       p.rectMode(p.CENTER)
       p.rect(0,0,0)     
     }
@@ -140,9 +155,14 @@ export default function PathSKetch({
       <div className={classnames(
        "flex flex-col grow p-4"
       )}>
-        {/* {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>} */}
+        <div>
+          {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
+        </div>
+
         <div id="menu" className={classnames("w-full h-[50px]")} />
+
         <Sliders inputs={inputs} />
+
         <div className={classnames(
          "flex gap-4 overflow-auto p-4 w-full"
           )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}

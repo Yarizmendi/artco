@@ -6,29 +6,28 @@ import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } f
 export default async function Page({ params }) {
   let frag
   const [id, type, title] = params.path.split("-")
+  const shaderOptions = await fetch("https://artco.netlify.app/api/shaders", { mode: "cors" }).then(res => res.json())
 
-  if ( type == "collection") {
-    const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewCollectionSketch()
-    let {images} = await getUserImgCollectionById(id)
-    images = images.sort( (a,b) => Number(a.positionIdx) - Number(b.positionIdx) )
+  // if ( type == "collection") {
+  //   const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewCollectionSketch()
+  //   let {images} = await getUserImgCollectionById(id)
+  //   images = images.sort((a,b) => Number(a.positionIdx) - Number(b.positionIdx))
 
-    console.log(type, title, frag)
+  //   console.log(type, title, frag)
 
-    return ( 
-      <Sketch images={images}
-      vert={vert} frag={frag} transitions={transitions} 
-      title={title} displayName={displayName} description={description} 
-      noises={noises} inputs={inputs} textures={textures} />
-    )
-  }
+  //   return ( 
+  //     <Sketch images={images}
+  //     vert={vert} frag={frag} transitions={transitions} 
+  //     title={title} displayName={displayName} description={description} 
+  //     noises={noises} inputs={inputs} textures={textures} />
+  //   )
+  // }
 
   if ( type == "sketch" ) {
    const { vert, frag, title, images, noises, inputs, displayName, description, textures, transitions } = await getSketchById(id)
 
-   console.log(type, title, frag)
-
     return ( 
-      <Sketch images={images}
+      <Sketch images={images} shaderOptions={shaderOptions}
       vert={vert} frag={frag} transitions={transitions} 
       title={title} displayName={displayName} description={description} 
       noises={noises} inputs={inputs} textures={textures} />
@@ -77,7 +76,7 @@ export default async function Page({ params }) {
     console.log(type, title, inputs)
 
     return ( 
-      <Sketch frag={frag}
+      <Sketch frag={frag} shaderOptions={shaderOptions}
       images={images}
       vert={vert}  transitions={transitions} 
       title={title} displayName={displayName} description={description} 

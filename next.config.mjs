@@ -41,7 +41,7 @@ const nextConfig = {
     ],
 
   },
-
+  crossOrigin: 'anonymous'
 }
 
 const withMDX = createMDX({

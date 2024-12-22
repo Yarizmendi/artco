@@ -36,21 +36,20 @@ export default function SketchLink({
           className="min-w-[300px] h-[300px] sm:min-w-[200px] sm:h-[200px] md:w-[250px] md:h-[230px] rounded" />
       </Link>
   
-      <form className="w-full flex flex-col dark:bg-slate-950" 
+      <form className="w-full flex flex-col dark:bg-slate-950 bg-slate-200" 
         action={ async formData => {
           await updateSketchAction( formData )
           mutate()
         }}>
         <input name={"id"} defaultValue={id} hidden />
 
-        <div className="flex items-center dark:bg-slate-950">
-
+        <div className="flex items-center bg-slate-200 dark:bg-slate-950">
           <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
           <Input title="title" value={title} placeholder="title"/>
         </div>
   
         { isEditing && 
-          <div>
+          <div className="flex flex-col mt-2 gap-2 dark:bg-slate-950">
             <Input title="frag" value={frag} placeholder='frag' />
             <Input title="description" value={description} placeholder='description' required={false} />
             <Input title="displayName" value={displayName} placeholder='display name'/>
@@ -60,7 +59,7 @@ export default function SketchLink({
             {/* <Datalist title={"inputs"} dataArr={inputs} /> */}
             {/* <Datalist title={"textures"} dataArr={textures} /> */}
 
-            <div className="flex items-end justify-between p-2">
+            <div className="flex items-end justify-between p-2 dark:bg-slate-950 bg-slate-100">
               <SketchDeleteIcon id={id} mutate={mutate} />
               <ActionButton mutate={mutate} idleTxt={"update"} loadingTxt={"...updating"} color={"orange"} btnType={"submit"} />
             </div> 
