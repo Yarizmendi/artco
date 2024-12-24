@@ -46,12 +46,14 @@ export default function PathSKetch({
       p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").addClass("min-h-[500px]")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
 
-      // create a fragment shader input switcher
       p.shader(ActiveShader)
-      fragSelect = p.createSelect(frag).parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
-      shaderOptions && shaderOptions.map(shader => fragSelect.option(shader, shader))
-      fragSelect.changed(() => handleFragChange(fragSelect.value()))
-
+      if ( title == "inbound8661079161443213041.jpg") {
+        // create a fragment shader input switcher
+        fragSelect = p.createSelect(frag).parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
+        shaderOptions && shaderOptions.map(shader => fragSelect.option(shader, shader))
+        fragSelect.changed(() => handleFragChange(fragSelect.value()))
+      }
+ 
       // create sliders and controls
       createSliders({ inputs, p })
       MediaRecorder = Recorder(title)

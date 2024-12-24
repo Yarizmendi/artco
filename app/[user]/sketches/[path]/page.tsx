@@ -40,6 +40,7 @@ export default async function Page({ params }) {
 
     if (title == "window") frag = "/window.frag"
     if (title == "fountain") frag = "/fountain.frag"
+    if (title == "inbound8661079161443213041.jpg") frag = "/walking.frag"
     if (title == "luigi") {
       frag = "/luigi.frag"
       inputs = [
