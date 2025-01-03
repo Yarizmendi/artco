@@ -16,10 +16,10 @@ export async function getBlobMeta(vercelBlob) {
   }
   return blobMetadata
 }
-// const listOfBlobs = await list({
-//     cursor,
-//     limit: 10,
-//     prefix: 'folder/',
-//   });
+
+export async function getVercelBlobs() {
+  const listOfBlobs = await list({ prefix: 'shaders/'})
+}
+
 
 

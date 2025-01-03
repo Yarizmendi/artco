@@ -9,7 +9,19 @@ import { updateImageAction } from "actions/images/updateImageAction"
 import { ActionButton } from "../Buttons/ActionButton"
 import Link from "next/link"
 
-export function Painting({ id, positionIdx, uploaderId, blob, title, description, displayName, mutate }) {
+
+interface PaintingProps {
+  id: number
+  positionIdx: number
+  uploaderId: number
+  blob: string
+  title: string
+  description: string
+  displayName: string
+  mutate?: any
+}
+
+export function Painting({ id, positionIdx, uploaderId, blob, title, description, displayName, mutate }: PaintingProps) {
   const [isEditing, setIsEditing] = useState(false)
 
   return (

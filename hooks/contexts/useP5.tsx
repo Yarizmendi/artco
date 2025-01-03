@@ -12,7 +12,7 @@ export function P5Provider({ sketch, children }) {
 
   async function InitP5({ sketch }) {
     const pImport = (await import("p5")).default
-    const pSound =  await import("../../lib/p5.sound")
+    const pSound =  await import("../../p5/p5.sound")
     const Parent = document.getElementById("Parent")
 
     return new pImport( p => {

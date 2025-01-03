@@ -47,12 +47,12 @@ export default function PathSKetch({
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
 
       p.shader(ActiveShader)
-      if ( title == "inbound8661079161443213041.jpg") {
+      // if ( title == "inbound8661079161443213041.jpg") {
         // create a fragment shader input switcher
         fragSelect = p.createSelect(frag).parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
         shaderOptions && shaderOptions.map(shader => fragSelect.option(shader, shader))
         fragSelect.changed(() => handleFragChange(fragSelect.value()))
-      }
+      //}
  
       // create sliders and controls
       createSliders({ inputs, p })
