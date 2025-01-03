@@ -75,6 +75,52 @@ export default async function Page({ params }) {
     if (!frag) frag = "/concept.frag"
     if (title == "kk") frag = "/kk.frag"
 
+    if (title == "bol") {
+      frag = "/bol.frag"
+      inputs = [
+        {
+            "icon": "zoom_in_map",
+            "type": "slider",
+            "label": "red",
+            "uniform": "u_red",
+            "settings": {
+                "min": 0.0,
+                "max": 1.0,
+                "step": 0.001,
+                "value": 1.0
+            },
+            "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+        },
+        {
+          "icon": "zoom_in_map",
+          "type": "slider",
+          "label": "green",
+          "uniform": "u_green",
+          "settings": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.001,
+              "value": 1.0
+          },
+          "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+      },
+
+      {
+          "icon": "zoom_in_map",
+          "type": "slider",
+          "label": "blue",
+          "uniform": "u_blue",
+          "settings": {
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.001,
+              "value": .781
+          },
+          "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+      },
+    ]
+    }
+
     console.log(type, title, inputs)
 
     return ( 

@@ -13,6 +13,13 @@ export default function PathSKetch({
   images, inputs, textures, noises, transitions, shaderOptions
 }) {
 
+  const origin = "https://ffmpeg.wide.video";
+  const commands = [
+    `fetch /videos/highway.webm`,
+    `ffmpeg -i input.mp4 -vframes 4 -r .1 output%03d.jpg`];
+  const params = {command:commands[0], placeholder:commands[0]};
+  const hash = encodeURIComponent(JSON.stringify(params));
+
   function sketch(
     p: p5Types, 
     Parent, 
@@ -170,6 +177,7 @@ export default function PathSKetch({
           )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
         {/* {description && <p className="text-sm">{description}</p>} */}
+        <iframe src={`${origin}/#${hash}`} width="100%" height="100%" />
       </div>
   </P5Provider>
   )
