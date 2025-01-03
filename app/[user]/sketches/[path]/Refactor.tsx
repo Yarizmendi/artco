@@ -177,7 +177,6 @@ export default function PathSKetch({
           )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
         {/* {description && <p className="text-sm">{description}</p>} */}
-        <iframe src={`${origin}/#${hash}`} width="100%" height="100%" />
       </div>
   </P5Provider>
   )
