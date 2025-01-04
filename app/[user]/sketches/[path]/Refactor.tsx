@@ -13,12 +13,12 @@ export default function PathSKetch({
   images, inputs, textures, noises, transitions, shaderOptions
 }) {
 
-  const origin = "https://ffmpeg.wide.video";
-  const commands = [
-    `fetch /videos/highway.webm`,
-    `ffmpeg -i input.mp4 -vframes 4 -r .1 output%03d.jpg`];
-  const params = {command:commands[0], placeholder:commands[0]};
-  const hash = encodeURIComponent(JSON.stringify(params));
+  // const origin = "https://ffmpeg.wide.video";
+  // const commands = [
+  //   `fetch /videos/highway.webm`,
+  //   `ffmpeg -i input.mp4 -vframes 4 -r .1 output%03d.jpg`];
+  // const params = {command:commands[0], placeholder:commands[0]};
+  // const hash = encodeURIComponent(JSON.stringify(params));
 
   function sketch(
     p: p5Types, 

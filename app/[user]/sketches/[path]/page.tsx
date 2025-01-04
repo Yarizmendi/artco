@@ -121,7 +121,7 @@ export default async function Page({ params }) {
     ]
     }
 
-    console.log(type, title, inputs)
+    // console.log(type, title, inputs)
 
     return ( 
       <Sketch frag={frag} shaderOptions={shaderOptions}
