@@ -10,7 +10,7 @@ import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
 // import { CCapture } from "ccapture.js"
 import { CanvasCapture } from 'canvas-capture';
 import { headers } from "next/headers"
-import Home from "app/ffmpeg/page"
+// import Home from "app/ffmpeg/page"
 import { useRef, useState } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 import { toBlobURL } from "@ffmpeg/util"
@@ -232,7 +232,7 @@ export default function PathSKetch({
           log && console.log('Images turned into promises!', uIntArray);
           chunkIndex = 0;
           uIntArray = [];
-          
+
           const ffmpeg = ffmpegRef.current;
           for (let { filename, content } of files) {
               ffmpeg.writeFile(filename, content);
