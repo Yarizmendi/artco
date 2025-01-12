@@ -41,7 +41,24 @@ const nextConfig = {
     ],
 
   },
-  crossOrigin: 'anonymous'
+  crossOrigin: 'anonymous',
+  async headers() {
+    return [
+      {
+        source: '/:user*',
+        headers: [
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'credentialless',
+          },
+        ],
+      },
+    ]
+  }
 }
 
 const withMDX = createMDX({

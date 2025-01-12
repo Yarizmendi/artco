@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@ffmpeg/ffmpeg':
+        specifier: ^0.12.15
+        version: 0.12.15
+      '@ffmpeg/util':
+        specifier: ^0.12.2
+        version: 0.12.2
       '@mdx-js/loader':
         specifier: ^3.0.1
         version: 3.0.1(webpack@5.92.1)
@@ -47,6 +53,9 @@ importers:
       canvas-capture:
         specifier: ^2.1.1
         version: 2.1.1(encoding@0.1.13)
+      ccapture.js:
+        specifier: ^1.1.0
+        version: 1.1.0
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -65,6 +74,9 @@ importers:
       glslify-loader:
         specifier: ^2.0.0
         version: 2.0.0
+      jszip:
+        specifier: ^3.10.1
+        version: 3.10.1
       mongodb:
         specifier: ^6.8.0
         version: 6.8.0
@@ -148,6 +160,18 @@ packages:
   '@ffmpeg/ffmpeg@0.10.1':
     resolution: {integrity: sha512-ChQkH7Rh57hmVo1LhfQFibWX/xqneolJKSwItwZdKPcLZuKigtYAYDIvB55pDfP17VtR1R77SxgkB2/UApB+Og==}
     engines: {node: '>=12.16.1'}
+
+  '@ffmpeg/ffmpeg@0.12.15':
+    resolution: {integrity: sha512-1C8Obr4GsN3xw+/1Ww6PFM84wSQAGsdoTuTWPOj2OizsRDLT4CXTaVjPhkw6ARyDus1B9X/L2LiXHqYYsGnRFw==}
+    engines: {node: '>=18.x'}
+
+  '@ffmpeg/types@0.12.4':
+    resolution: {integrity: sha512-k9vJQNBGTxE5AhYDtOYR5rO5fKsspbg51gbcwtbkw2lCdoIILzklulcjJfIDwrtn7XhDeF2M+THwJ2FGrLeV6A==}
+    engines: {node: '>=16.x'}
+
+  '@ffmpeg/util@0.12.2':
+    resolution: {integrity: sha512-ouyoW+4JB7WxjeZ2y6KpRvB+dLp7Cp4ro8z0HIVpZVCM7AwFlHa0c4R8Y/a4M3wMqATpYKhC7lSFHQ0T11MEDw==}
+    engines: {node: '>=18.x'}
 
   '@formatjs/ecma402-abstract@2.0.0':
     resolution: {integrity: sha512-rRqXOqdFmk7RYvj4khklyqzcfQl9vEL/usogncBHRZfZBDOwMGuSRNFl02fu5KGHXdbinju+YXyuR+Nk8xlr/g==}
@@ -805,6 +829,9 @@ packages:
 
   canvas-capture@2.1.1:
     resolution: {integrity: sha512-fY1iCk0xajXm1pCYUSW3gyDGqSyQdejwPcbXAEUFajg7Hy3SX/tSsKwdWnZf6lXa3VwTXl2TNEJ5P1dVfGM1qQ==}
+
+  ccapture.js@1.1.0:
+    resolution: {integrity: sha512-28kiHJzFsZ6b0OTfKpWpEwK2n/LTAgytK1uzB+413dzjHltdh2hP5Yg2qR0+9Xw3XoBMz5UkGCh8Ektr2rVlmw==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -2311,6 +2338,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  '@ffmpeg/ffmpeg@0.12.15':
+    dependencies:
+      '@ffmpeg/types': 0.12.4
+
+  '@ffmpeg/types@0.12.4': {}
+
+  '@ffmpeg/util@0.12.2': {}
+
   '@formatjs/ecma402-abstract@2.0.0':
     dependencies:
       '@formatjs/intl-localematcher': 0.5.4
@@ -3160,6 +3195,8 @@ snapshots:
       micromodal: 0.4.10
     transitivePeerDependencies:
       - encoding
+
+  ccapture.js@1.1.0: {}
 
   ccount@2.0.1: {}
 

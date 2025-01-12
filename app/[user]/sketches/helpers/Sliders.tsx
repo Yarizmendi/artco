@@ -8,7 +8,6 @@ import classnames from "classnames"
     "flex items-center justify-center"
   )
   
-
   export const Sliders = ({ inputs }) => {
     return <section>
       { inputs.map( inpt => <div className="flex items-center font-bold p-2">
