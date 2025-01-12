@@ -9,13 +9,11 @@ import { P5Provider } from "hooks/contexts/useP5"
 import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
 // import { CCapture } from "ccapture.js"
 import { CanvasCapture } from 'canvas-capture';
-import { headers } from "next/headers"
 // import Home from "app/ffmpeg/page"
 import { useRef, useState } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 import { toBlobURL } from "@ffmpeg/util"
 import JSZip from "jszip"
-import { f } from "@nextui-org/slider/dist/use-slider-a94a4c83"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
