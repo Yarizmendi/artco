@@ -7,11 +7,11 @@ export const metadata = {
   title: "The Art Co.",
 } 
 
-interface IRootLayout {
-  children: JSX.Element[]
-}
+// interface IRootLayout {
+//   children: JSX.Element[]
+// }
 
-function RootLayout({ children }: IRootLayout ): JSX.Element {
+function RootLayout({ children }: any ): any {
   return (
     <html lang="en">
       <DarkModeProvider>
