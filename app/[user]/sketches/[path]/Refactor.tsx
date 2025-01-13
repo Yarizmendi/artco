@@ -47,9 +47,9 @@ export default function PathSKetch({
           `${baseURL}/ffmpeg-core.wasm`,
           "application/wasm"
         ),
-        onprogress: (progress) => {
-          console.log("progress", progress);
-        }
+        // onprogress: (progress) => {
+        //   console.log("progress", progress);
+        // }
       });
       setLoaded(true);
       setIsLoading(false);
