@@ -36,8 +36,19 @@ export default function PathSKetch({
       setIsLoading(true);
       const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
       const ffmpeg = ffmpegRef.current;
-      ffmpeg.on("log", ({ message }) => {
+
+      ffmpeg.on('log', ({ message }) => {
+        messageRef.current.innerHTML = message;
+        console.log(message);
+      });
+
+      ffmpeg.on("error", ({ message }) => {
+        console.error(message);
         if (messageRef.current) messageRef.current.innerHTML = message;
+      });
+      
+      ffmpeg.on('progress', ({ progress, time }) => {
+        messageRef.current.innerHTML = `${progress * 100} % (transcoded time: ${time / 1000000} s)`;
       });
       // toBlobURL is used to bypass CORS issue, urls with the same
       // domain can be used directly.
@@ -373,7 +384,7 @@ export default function PathSKetch({
          "flex gap-4 overflow-auto p-4 w-full"
           )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
-        
+        <p ref={messageRef}></p>
         <video ref={videoRef} controls></video>
       </div>
   </P5Provider>
