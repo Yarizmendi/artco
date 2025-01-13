@@ -89,7 +89,7 @@ export default function PathSKetch({
       load()
     }
 
-    const frameRate = 24
+    const frameRate = 10
   
     p.setup = () => {
       
@@ -193,7 +193,7 @@ export default function PathSKetch({
         console.log('Creating video...');
         await ffmpeg.exec([
           // Input framerate - how many images per second
-          '-framerate', '24',
+          '-framerate', '10',
           // Tell FFmpeg how our files are named
           '-pattern_type', 'glob',
           '-i', 'img*.jpg',
