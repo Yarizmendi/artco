@@ -1,6 +1,6 @@
 
 import ArtistPage from "./[user]/page"
-import Sketch from "./[user]/sketches/[path]/Stealth"
+// import Sketch from "./[user]/sketches/[path]/Stealth"
 import { getSketchById } from "actions/sketches/getSketchActions"
 
 export default ArtistPage

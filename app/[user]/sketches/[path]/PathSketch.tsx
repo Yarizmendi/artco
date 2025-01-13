@@ -43,8 +43,7 @@ export default function PathSKetch({
       Parent = document.getElementById("Parent")
       p.createCanvas(0, 650, p.WEBGL).parent("Parent").addClass("min-h-[580]")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
-
-      MediaRecorder = Recorder(title)
+      // MediaRecorder = Recorder(title, ffmpegRef.current, videoRef)
       Overlay = Controls(p)
 
       Overlay.playBtn.mouseClicked(() => {

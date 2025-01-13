@@ -13,8 +13,9 @@ import { CanvasCapture } from 'canvas-capture';
 import { useRef, useState } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 import { toBlobURL } from "@ffmpeg/util"
-import JSZip from "jszip"
 import { fetchFile } from "@ffmpeg/util"
+import JSZip from "jszip"
+
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
@@ -46,6 +47,9 @@ export default function PathSKetch({
           `${baseURL}/ffmpeg-core.wasm`,
           "application/wasm"
         ),
+        onprogress: (progress) => {
+          console.log("progress", progress);
+        }
       });
       setLoaded(true);
       setIsLoading(false);
@@ -181,12 +185,6 @@ export default function PathSKetch({
         unZipContent({zipFile, log: true})
         .then(zipContent => parallelProcessImgs({ zipContent, log: true }))
         .then(createMP4Video)
-        // const url = window.URL.createObjectURL(blob);
-        // const link = document.createElement('a');
-        // link.href = url;
-        // link.download = 'archive.zip';
-        // link.click();
-        // window.URL.revokeObjectURL(url);
       },  
       onExportProgress: (progress: number) => console.log(progress), // progress: range [0-1]/.
       onError: (error: Error | any) => console.log(error), // Callback on error.
@@ -278,10 +276,13 @@ export default function PathSKetch({
         const videoData = (await ffmpeg.readFile("output.mp4")) as any;
         console.log(videoData)
 
+        // const videoBlob = new Blob([videoData.buffer], { type: "video/mp4" });
+        // const videoUrl = URL.createObjectURL(videoData.buffer)
+
         // Create a URL for the video file
         if (videoRef.current) {
           videoRef.current.src = URL.createObjectURL(
-            new Blob([videoData.buffer])
+            new Blob([videoData.buffer], { type: "video/mp4" })
           );
         }
 

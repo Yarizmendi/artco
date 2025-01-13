@@ -83,7 +83,7 @@ export default function PathSKetch({
       // p.createFileInput(handleImage).id("pUpload").parent("menu")
       createSliders({ inputs, p })
 
-      MediaRecorder = Recorder(title)
+      // MediaRecorder = Recorder(title)
       Overlay = Controls(p)
 
       Overlay.playBtn.mouseClicked(() => {
@@ -122,7 +122,7 @@ export default function PathSKetch({
           Overlay.playBtnLabel.html("pause")
           Overlay.recordBtnLabel.html("recording")
           Overlay.recordBtn.addClass("text-red-500")
-          MediaRecorder.start()
+          // MediaRecorder.start()
         }
         else if (MediaRecorder.state == "recording") {
           Overlay.playBtnLabel.html("play")
