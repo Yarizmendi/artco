@@ -41,28 +41,24 @@ const nextConfig = {
     ],
 
   },
-  crossOrigin: 'anonymous',
+  // Add these headers for SharedArrayBuffer support
   async headers() {
     return [
-      {
-        source: '/:user*',
-        headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*',
-          },
-          {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin',
-          },
-          {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'credentialless',
-          },
-        ],
-      },
-    ]
-  }
+        {
+            source: '/(.*)',
+            headers: [
+                {
+                    key: 'Cross-Origin-Embedder-Policy',
+                    value: 'require-corp',
+                },
+                {
+                    key: 'Cross-Origin-Opener-Policy',
+                    value: 'same-origin',
+                },
+            ],
+        },
+    ];
+},
 }
 
 const withMDX = createMDX({
