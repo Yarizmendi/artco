@@ -12,7 +12,8 @@ export function SketchesList({ creatorId }) {
   if ( isLoading || isValidating ) return <Loading />
 
   if ( data ) return (
-      <div className="w-9/12 md:min-w-1/2 h-[550px] px-2 flex justify-center flex-wrap overflow-auto gap-2 md:m-8">
+   <div className="w-full h-full flex flex-col items-center justify-center md:flex-row md:items-start m-2 p-2 gap-2">
+    <div className="w-10/12 md:min-w-1/2 h-[550px] flex justify-center flex-wrap overflow-auto  md:m-8">
         { data.map( art => { 
           return <SketchLink 
             id={art._id} 
@@ -35,6 +36,8 @@ export function SketchesList({ creatorId }) {
 
           /> })}
     </div>
+    </div>
+  
   )
 }
 

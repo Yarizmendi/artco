@@ -7,24 +7,17 @@ import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
 import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
-// import { CCapture } from "ccapture.js"
 import { CanvasCapture } from 'canvas-capture';
-// import Home from "app/ffmpeg/page"
 import { useRef, useState } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 import { toBlobURL } from "@ffmpeg/util"
 import { fetchFile } from "@ffmpeg/util"
-import JSZip from "jszip"
 
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
   images, inputs, textures, noises, transitions, shaderOptions
 }) {
-
-  const fps = 30
-  const duration = 500
-  const imageFiles = [];
 
     const [loaded, setLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -34,21 +27,21 @@ export default function PathSKetch({
 
     const load = async () => {
       setIsLoading(true);
-      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+      const baseURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.5/dist/umd";
       const ffmpeg = ffmpegRef.current;
 
       ffmpeg.on('log', ({ message }) => {
-        messageRef.current.innerHTML = message;
+        // messageRef.current.innerHTML = message;
         console.log(message);
       });
 
       ffmpeg.on("error", ({ message }) => {
         console.error(message);
-        if (messageRef.current) messageRef.current.innerHTML = message;
+        // if (messageRef.current) messageRef.current.innerHTML = message;
       });
       
       ffmpeg.on('progress', ({ progress, time }) => {
-        messageRef.current.innerHTML = `${progress * 100} % (transcoded time: ${time / 1000000} s)`;
+        // messageRef.current.innerHTML = `${progress * 100} % (transcoded time: ${time / 1000000} s)`;
       });
       // toBlobURL is used to bypass CORS issue, urls with the same
       // domain can be used directly.
@@ -58,15 +51,14 @@ export default function PathSKetch({
           `${baseURL}/ffmpeg-core.wasm`,
           "application/wasm"
         ),
-        // onprogress: (progress) => {
-        //   console.log("progress", progress);
-        // }
+        workerURL: await toBlobURL(
+          `${baseURL}/ffmpeg-core.worker.js`,
+          "text/javascript"
+        ),
       });
       setLoaded(true);
       setIsLoading(false);
     }
-
-
 
   function sketch(
     p: p5Types, 
@@ -80,7 +72,8 @@ export default function PathSKetch({
     let changeEvery = 2500
     let ActiveShader = null
     let Overlay, MediaRecorder
-    let isPlaying, drawPlayTimer = 0, drawPauseTimer = 0
+    let isPlaying = false, isRecording = false
+    let drawPlayTimer = 0, drawPauseTimer = 0
 
     function handleFragChange(fragUrl) {
       p.loadShader(vert, "/" + fragUrl, (shader) => { 
@@ -101,7 +94,6 @@ export default function PathSKetch({
     p.setup = () => {
       
       p.frameRate(frameRate)
-
       // ensures canvas is sized to parent on all screen sizes
       p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").addClass("min-h-[500px]")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
@@ -147,7 +139,6 @@ export default function PathSKetch({
       Overlay.downloadBtn.mouseClicked(() => {
         p.saveCanvas(title + p.frameCount)
       })
-
       
     // Initialize and pass in canvas.
     CanvasCapture.init(
@@ -159,105 +150,37 @@ export default function PathSKetch({
         showAlerts: true, // Default is false.
         // Show informational dialogs during export.
         showDialogs: true, // Default is false.
-        ffmpegCorePath: './node_modules/@ffmpeg/core/dist/ffmpeg-core.js', 
+        // ffmpegCorePath: './node_modules/@ffmpeg/core/dist/ffmpeg-core.js', 
        }, 
     );
 
-
       Overlay.recordBtn.mouseClicked(() => {
-        // if (MediaRecorder.state == "inactive") {
-        if (CanvasCapture.isRecording() == false) {
-          if (!isPlaying) isPlaying = true
+        if (!isRecording) {
+          isRecording = true;
+          isPlaying = true;
           Overlay.playBtnLabel.html("pause")
-          Overlay.recordBtnLabel.html("recording")
-          Overlay.recordBtn.addClass("text-red-500")
-          // MediaRecorder.start()
-          // console.log("recording started", MediaRecorder.state)
-          CanvasCapture.beginJPEGFramesRecord(jpegOptions);
+          Overlay.recordBtnLabel.html("recording");
+          Overlay.recordBtn.addClass("text-red-500");
         }
-        // else if (MediaRecorder.state == "recording") { 
-        else if (CanvasCapture.isRecording() == true) {
-          if (isPlaying) isPlaying = false
-          // MediaRecorder.stop()
+        else if (isRecording) {
+          isPlaying = false;
           Overlay.playBtnLabel.html("play")
-          Overlay.recordBtnLabel.html("record")
-          Overlay.recordBtn.removeClass("text-red-500")
-          CanvasCapture.stopRecord();
+          Overlay.recordBtnLabel.html("record");
+          Overlay.recordBtn.removeClass("text-red-500");
+          isRecording = false;
+          setTimeout(()=>{
+            console.log(p.frameCount, arrayBuffers)
+            createMP4Video().then(res => alert("video created!"))
+          }, 1000)
+    
         }
       })
 
     }
 
 
-    // let startMillis = null
-
-    let jpegOptions = {
-      onExport: (zipFile: Blob, filename: string) => {
-        unZipContent({zipFile, log: true})
-        .then(zipContent => parallelProcessImgs({ zipContent, log: true }))
-        .then(createMP4Video)
-      },  
-      onExportProgress: (progress: number) => console.log(progress), // progress: range [0-1]/.
-      onError: (error: Error | any) => console.log(error), // Callback on error.
-    }
-
-    async function unZipContent({ zipFile, log }: { zipFile: Blob, log: boolean }) {
-      /**
-       * Load the zip file and return the zip object
-       */
-      log && console.log('Loading zip file...');
-      const zip = new JSZip();
-      const zipContent = await zip.loadAsync(zipFile);
-
-      log && zipContent && console.log('Zip file loaded!', zipContent);
-      return zipContent;
-    }
-
-    async function parallelProcessImgs({ zipContent, log }: { zipContent: any, log: boolean }) {
-      /**
-       * Process all images in parallel, converting them to Uint8Array
-       */
-      log && console.log('Processing images in parallel...');
-    
-      let uIntArray = [];
-      let chunkIndex = 0;
-      let globalIndex = 0;
-      const chunkSize = 10;
-
-      for (let file in zipContent.files) {
-        if (chunkIndex < chunkSize) {
-          // log && console.log("chunking images...");
-          const filename = `img${String(globalIndex).padStart(3, '0')}.jpg`;
-          const currFile =  zipContent.files[file];
-          const contentPromise = new Promise((resolve, reject) => {
-            // currFile.arrayBuffer().then(buffer => { resolve({ filename, content: new Uint8Array(buffer) }) })
-            currFile.async('uint8array').then(content => resolve({ filename, content }))
-            // fetchFile(currFile).then(content => resolve({ filename, content }))
-          });
-          const contentFetchFile = fetchFile(currFile);
-          // uIntArray.push(contentPromise);
-          uIntArray.push(contentPromise);
-          chunkIndex++;
-          globalIndex++;
-        }
-        else {
-          log && console.log('Processing chunk of images...');
-          const files = await Promise.all(uIntArray);
-          log && console.log('Images turned into promises!', uIntArray);
-          chunkIndex = 0;
-          uIntArray = [];
-
-          const ffmpeg = ffmpegRef.current;
-          for (let { filename, content } of files) {
-              ffmpeg.writeFile(filename, content);
-              log && console.log("file written to ffmpeg filesystem...");
-              content = null;
-          }
-
-          log && console.log( `done uploading chunk to ffmpeg file system ...`);
-        }
-      }
-    }
+    let arrayBuffers = []
+    let framesRecordedCount = 0
 
     async function createMP4Video() {
       /**
@@ -270,12 +193,13 @@ export default function PathSKetch({
         console.log('Creating video...');
         await ffmpeg.exec([
           // Input framerate - how many images per second
-          '-framerate', frameRate.toString(),
+          '-framerate', '24',
           // Tell FFmpeg how our files are named
           '-pattern_type', 'glob',
           '-i', 'img*.jpg',
           // Output video settings
           '-c:v', 'libx264',       // Use H.264 codec
+          '-preset', 'ultrafast',
           '-pix_fmt', 'yuv420p',   // Standard pixel format for compatibility
           '-vf', 'scale=1920:1080',// Scale to 1080p
           // Output filename
@@ -285,16 +209,23 @@ export default function PathSKetch({
         console.log('Video created!');
         // Read the video file from FFmpeg's virtual filesystem
         const videoData = (await ffmpeg.readFile("output.mp4")) as any;
-        console.log(videoData)
-
-        // const videoBlob = new Blob([videoData.buffer], { type: "video/mp4" });
-        // const videoUrl = URL.createObjectURL(videoData.buffer)
 
         // Create a URL for the video file
         if (videoRef.current) {
-          videoRef.current.src = URL.createObjectURL(
+
+          const videoMp4Url = URL.createObjectURL(
             new Blob([videoData.buffer], { type: "video/mp4" })
           );
+
+          videoRef.current.src = videoMp4Url;
+
+          const videoElement = document.querySelector('video');
+          const link = document.createElement('a');
+          link.href = videoElement.src;
+          link.download = 'video.mp4';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         }
 
       }
@@ -303,8 +234,11 @@ export default function PathSKetch({
       }
 
       console.log('Video creation complete! view in the video component');
+      return true
     }
 
+    let startMillis = null
+    const ffmpeg = ffmpegRef.current
 
     p.draw = () => {
 
@@ -322,11 +256,27 @@ export default function PathSKetch({
         // CanvasCapture.stopRecord();
       // } 
 
-      CanvasCapture.checkHotkeys();
-      if (CanvasCapture.isRecording())  CanvasCapture.recordFrame();
-    
+
+      if (isRecording) {
+ 
+        const filename = `img${String(framesRecordedCount).padStart(3, '0')}`;
+        framesRecordedCount++;
+        
+        CanvasCapture.takeJPEGSnapshot({
+          name: filename,
+          onExport: async (jpegBlob, filename) => {
+            const jpeg = await fetchFile(jpegBlob);
+            await ffmpeg.writeFile(filename, jpeg)
+            arrayBuffers.push({ filename, jpeg });
+            console.log(arrayBuffers.length);
+          }
+        })
+
+      } 
+
+      // Update Seconds Running Timer
       Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
-      // frameRate.html(`${p.frameRate()}`)
+
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
       
@@ -334,7 +284,8 @@ export default function PathSKetch({
       handleControls()
 
       p.rectMode(p.CENTER)
-      p.rect(0,0,0)     
+      p.rect(0,0,0)    
+      
     }
 
     function handleControls() {
@@ -384,8 +335,12 @@ export default function PathSKetch({
          "flex gap-4 overflow-auto p-4 w-full"
           )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
-        <p ref={messageRef}></p>
-        <video ref={videoRef} controls></video>
+
+        <div>
+          {/* <p ref={messageRef}></p> */}
+          <video ref={videoRef} id="mp4" controls className="max-w-[300px]"></video>
+        </div>
+
       </div>
   </P5Provider>
   )

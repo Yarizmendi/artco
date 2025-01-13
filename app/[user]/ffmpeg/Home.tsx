@@ -13,7 +13,7 @@ export default function Home() {
 
   const load = async () => {
     setIsLoading(true);
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+    const baseURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.5/dist/umd";
     const ffmpeg = ffmpegRef.current;
     ffmpeg.on("log", ({ message }) => {
       if (messageRef.current) messageRef.current.innerHTML = message;
@@ -26,25 +26,32 @@ export default function Home() {
         `${baseURL}/ffmpeg-core.wasm`,
         "application/wasm"
       ),
-      // workerURL: await toBlobURL(
-      //   `${baseURL}/ffmpeg-worker.js`,
-      //   "text/javascript"
-      // ),
+      workerURL: await toBlobURL(
+        `${baseURL}/ffmpeg-core.worker.js`,
+        "text/javascript"
+      ),
     });
     setLoaded(true);
     setIsLoading(false);
   };
 
+  const publicWebM = "https://artco.netlify.app//videos/highway.webm"
+  const testAvi = "https://raw.githubusercontent.com/ffmpegwasm/testdata/master/video-15s.avi"
+  const vercelWebm = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/highway.webm"
+
+  // WEBM Conversion Commands 
+  const webmConversions = {
+    "fasterLower": ["-i", "input.webm", ""]
+  }
+  
   const transcode = async () => {
     const ffmpeg = ffmpegRef.current;
     // u can use 'https://ffmpegwasm.netlify.app/video/video-15s.avi' to download the video to public folder for testing
     await ffmpeg.writeFile(
-      "input.avi",
-      await fetchFile(
-        "https://raw.githubusercontent.com/ffmpegwasm/testdata/master/video-15s.avi"
-      )
+      "input.webm",
+      await fetchFile(vercelWebm)
     );
-    await ffmpeg.exec(["-i", "input.avi", "output.mp4"]);
+    await ffmpeg.exec(["-i", "input.webm", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "23", "output.mp4"]);
     const data = (await ffmpeg.readFile("output.mp4")) as any;
     if (videoRef.current)
       videoRef.current.src = URL.createObjectURL(

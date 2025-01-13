@@ -24,7 +24,7 @@ const nextConfig = {
 
   experimental: {
     serverActions: {
-      allowedOrigins: ["zany-garbanzo-7vw7p9jvx6w3xgvv.github.dev", "localhost:3000"],
+      allowedOrigins: ["zany-garbanzo-7vw7p9jvx6w3xgvv.github.dev", "localhost:3000", "artco.netlify.app"],
     }
   },
 
