@@ -71,7 +71,7 @@ export default async function Page({ params }) {
         }
     ]
     }
-    if (!frag) frag = "/concept.frag"
+    if (!frag) frag = "/test.frag"
 
     console.log(type, title, inputs)
 

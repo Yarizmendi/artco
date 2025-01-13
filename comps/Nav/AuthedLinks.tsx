@@ -12,8 +12,8 @@ export function AuthedLinks() {
         { title: "uploads", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
         { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
         { title: "tests", path: `/${"66bd62276d3999b70d5fd91b"}/sketches/tests`},
-        { title: "Login", path: "/auth/login"},
-        { title: "SignUp", path: "/auth/create"},
+        // { title: "Login", path: "/auth/login"},
+        // { title: "SignUp", path: "/auth/create"},
       ]
 
       if (user) routes = [

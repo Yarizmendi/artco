@@ -14,6 +14,7 @@ import { useRef, useState } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 import { toBlobURL } from "@ffmpeg/util"
 import JSZip from "jszip"
+import { fetchFile } from "@ffmpeg/util"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
@@ -98,7 +99,7 @@ export default function PathSKetch({
 
       // create sliders and controls
       createSliders({ inputs, p })
-      MediaRecorder = Recorder(title)
+      MediaRecorder = Recorder(title, ffmpegRef.current, videoRef)
       Overlay = Controls(p)
 
       Overlay.playBtn.mouseClicked(() => {
@@ -140,9 +141,9 @@ export default function PathSKetch({
       { 
         showRecDot: true,
         verbose: true,
-        // showAlerts: true, // Default is false.
+        showAlerts: true, // Default is false.
         // Show informational dialogs during export.
-        // showDialogs: true, // Default is false.
+        showDialogs: true, // Default is false.
         ffmpegCorePath: './node_modules/@ffmpeg/core/dist/ffmpeg-core.js', 
        }, 
     );
@@ -156,14 +157,16 @@ export default function PathSKetch({
           Overlay.recordBtnLabel.html("recording")
           Overlay.recordBtn.addClass("text-red-500")
           // MediaRecorder.start()
+          // console.log("recording started", MediaRecorder.state)
           CanvasCapture.beginJPEGFramesRecord(jpegOptions);
         }
+        // else if (MediaRecorder.state == "recording") { 
         else if (CanvasCapture.isRecording() == true) {
+          if (isPlaying) isPlaying = false
+          // MediaRecorder.stop()
           Overlay.playBtnLabel.html("play")
           Overlay.recordBtnLabel.html("record")
           Overlay.recordBtn.removeClass("text-red-500")
-          // MediaRecorder.stop()
-          if (isPlaying) isPlaying = false;
           CanvasCapture.stopRecord();
         }
       })
@@ -218,8 +221,12 @@ export default function PathSKetch({
           const filename = `img${String(globalIndex).padStart(3, '0')}.jpg`;
           const currFile =  zipContent.files[file];
           const contentPromise = new Promise((resolve, reject) => {
+            // currFile.arrayBuffer().then(buffer => { resolve({ filename, content: new Uint8Array(buffer) }) })
             currFile.async('uint8array').then(content => resolve({ filename, content }))
+            // fetchFile(currFile).then(content => resolve({ filename, content }))
           });
+          const contentFetchFile = fetchFile(currFile);
+          // uIntArray.push(contentPromise);
           uIntArray.push(contentPromise);
           chunkIndex++;
           globalIndex++;
@@ -269,11 +276,12 @@ export default function PathSKetch({
         console.log('Video created!');
         // Read the video file from FFmpeg's virtual filesystem
         const videoData = (await ffmpeg.readFile("output.mp4")) as any;
+        console.log(videoData)
 
         // Create a URL for the video file
         if (videoRef.current) {
           videoRef.current.src = URL.createObjectURL(
-            new Blob([videoData.buffer], { type: "video/mp4" })
+            new Blob([videoData.buffer])
           );
         }
 

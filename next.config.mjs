@@ -36,7 +36,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: `https://static.wixstatic.com`
+        hostname: `https://artco.netlify.app`,
       }
     ],
 
@@ -47,6 +47,10 @@ const nextConfig = {
       {
         source: '/:user*',
         headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
           {
             key: 'Cross-Origin-Opener-Policy',
             value: 'same-origin',
