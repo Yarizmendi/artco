@@ -34,7 +34,7 @@ export default function PathSKetch({
 
     const load = async () => {
       setIsLoading(true);
-      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
+      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
       const ffmpeg = ffmpegRef.current;
 
       ffmpeg.on('log', ({ message }) => {
