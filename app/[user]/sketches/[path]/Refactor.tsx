@@ -6,12 +6,12 @@ import classnames from "classnames"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { P5Provider } from "hooks/contexts/useP5"
-import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
-import { CanvasCapture } from 'canvas-capture';
+import { CanvasCapture } from 'canvas-capture'
 import { useRef, useState } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 import { toBlobURL } from "@ffmpeg/util"
 import { fetchFile } from "@ffmpeg/util"
+import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
 
 
 export default function PathSKetch({
@@ -66,12 +66,13 @@ export default function PathSKetch({
 
 ) {
 
+  let Overlay, MediaRecorder
     let idx = 0
     let seconds = 0
+    const frameRate = 24
     let fragSelect = null
     let changeEvery = 2500
     let ActiveShader = null
-    let Overlay, MediaRecorder
     let isPlaying = false, isRecording = false
     let drawPlayTimer = 0, drawPauseTimer = 0
 
@@ -89,8 +90,6 @@ export default function PathSKetch({
       load()
     }
 
-    const frameRate = 10
-  
     p.setup = () => {
       
       p.frameRate(frameRate)
@@ -193,7 +192,7 @@ export default function PathSKetch({
         console.log('Creating video...');
         await ffmpeg.exec([
           // Input framerate - how many images per second
-          '-framerate', '10',
+          '-framerate', `${frameRate}`,
           // Tell FFmpeg how our files are named
           '-pattern_type', 'glob',
           '-i', 'img*.jpg',
