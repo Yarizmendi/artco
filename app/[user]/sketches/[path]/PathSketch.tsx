@@ -4,36 +4,82 @@ import Image from "next/image"
 import classnames from "classnames"
 import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
+import { useRef, useState } from "react"
 import { P5Provider } from "hooks/contexts/useP5"
-import { Sliders } from "../helpers/Sliders"
 import p5Types from "p5"
+import { FFmpeg } from "@ffmpeg/ffmpeg"
+import { toBlobURL } from "@ffmpeg/util"
+import { fetchFile } from "@ffmpeg/util"
+import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
-  images, inputs, textures, noises, transitions
+  images, inputs, textures, noises, transitions, shaderOptions
 }) {
 
-  function sketch(p: p5Types ){
+  const ffmpegRef = useRef(new FFmpeg());
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    let Parent
-    let idx = 0
-    let seconds = 0
-    let ActiveShader
-    let Overlay, MediaRecorder
-    let changeEvery = 2500
-    let isPlaying, drawPlayTimer = 0, drawPauseTimer = 0
+  const load = async () => {
+    setIsLoading(true);
+    const baseURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.5/dist/umd";
+    const ffmpeg = ffmpegRef.current;
+
+    ffmpeg.on('log', ({ message }) => {
+      // messageRef.current.innerHTML = message;
+      console.log(message);
+    });
+
+    ffmpeg.on("error", ({ message }) => {
+      console.error(message);
+      // if (messageRef.current) messageRef.current.innerHTML = message;
+    });
+    
+    ffmpeg.on('progress', ({ progress, time }) => {
+      // messageRef.current.innerHTML = `${progress * 100} % (transcoded time: ${time / 1000000} s)`;
+    });
+    // toBlobURL is used to bypass CORS issue, urls with the same
+    // domain can be used directly.
+    await ffmpeg.load({
+      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
+      wasmURL: await toBlobURL(
+        `${baseURL}/ffmpeg-core.wasm`,
+        "application/wasm"
+      ),
+      workerURL: await toBlobURL(
+        `${baseURL}/ffmpeg-core.worker.js`,
+        "text/javascript"
+      ),
+    });
+    setLoaded(true);
+    setIsLoading(false);
+  }
+
+  function sketch( p: p5Types ){
 
     let song = null
     let fft = null
 
+    let idx = 0
+    let Overlay
+    let seconds = 0
+    let MediaRecorder
+    let Parent
+
+    const frameRate = 24
+    let fragSelect = null
+    let changeEvery = 2500
+    let ActiveShader = null
+    let isPlaying = false, isRecording = false
+    let drawPlayTimer = 0, drawPauseTimer = 0
+
+
     p.preload = () => {
-      // @ts-ignore
-      p.soundFormats('mp3', 'ogg')
-      // @ts-ignore
-      title == "grateful_dead" && (song = p.loadSound('/truckin.mp3'))
+      ActiveShader = p.loadShader(vert, frag) 
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
       noises && noises.length && noises.map(noise => noise["Noise"] = p.loadImage(noise.blob))  
-      ActiveShader = p.loadShader(vert, frag) 
     }
   
     p.setup = () => {

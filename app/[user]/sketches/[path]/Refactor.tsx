@@ -66,9 +66,14 @@ export default function PathSKetch({
 
 ) {
 
-  let Overlay, MediaRecorder
+    let song = null
+    let fft = null
+
     let idx = 0
+    let Overlay
     let seconds = 0
+    let MediaRecorder
+
     const frameRate = 24
     let fragSelect = null
     let changeEvery = 2500
@@ -83,15 +88,37 @@ export default function PathSKetch({
       })
     }
 
+    function loadSongs(p) {
+      // @ts-ignore
+      p.soundFormats('mp3', 'ogg')
+      // @ts-ignore
+      song = p.loadSound('/songs/piano.mp3')
+      title == "grateful_dead" && (song = p.loadSound('/songs/truckin.mp3'))
+
+    }
+
+    let fftanaylsis = null
+    let amp = null
+
+    function setupSong(p) {
+      // @ts-ignore
+      song && (fft = new p.constructor.FFT())
+      // fftanaylsis = fft.analyze()
+
+    }
+
     p.preload = () => {
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
       noises && noises.length && noises.map(noise => noise["Noise"] = p.loadImage(noise.blob))  
       ActiveShader = p.loadShader(vert, frag) 
       load()
+      loadSongs(p)
     }
 
     p.setup = () => {
       
+      setupSong(p)
+
       p.frameRate(frameRate)
       // ensures canvas is sized to parent on all screen sizes
       p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").addClass("min-h-[500px]")
@@ -110,10 +137,12 @@ export default function PathSKetch({
 
       Overlay.playBtn.mouseClicked(() => {
         if (!isPlaying) {
+          song && song.play()
           isPlaying = true
           Overlay.playBtnLabel.html("pause")
         }
         else if (isPlaying) {
+          song && song.pause()
           isPlaying = false
           Overlay.playBtnLabel.html("play")
         }
@@ -155,6 +184,8 @@ export default function PathSKetch({
 
       Overlay.recordBtn.mouseClicked(() => {
         if (!isRecording) {
+          song && song.play()
+          song.S
           isRecording = true;
           isPlaying = true;
           Overlay.playBtnLabel.html("pause")
@@ -163,6 +194,7 @@ export default function PathSKetch({
         }
         else if (isRecording) {
           isPlaying = false;
+          song && song.pause()
           Overlay.playBtnLabel.html("play")
           Overlay.recordBtnLabel.html("record");
           Overlay.recordBtn.removeClass("text-red-500");
@@ -240,7 +272,7 @@ export default function PathSKetch({
     const ffmpeg = ffmpegRef.current
 
     p.draw = () => {
-
+      amp = fft.getEnergy("bass", "treble") 
       // if (startMillis == null) {
       //   startMillis = p.millis();
       // }
@@ -287,9 +319,33 @@ export default function PathSKetch({
       
     }
 
+    function playSong(song) {
+      let waveform = fft.waveform()
+      let x, y
+      if (song) {
+        for (let i = 0; i < waveform.length; i++){
+          x = p.map(i, 0, waveform.length, 0, Parent.offsetWidth);
+          y = p.map( waveform[i]*100000, -1, 1, 0, Parent.offsetHeight);
+          ActiveShader.setUniform("uWavesX", amp)
+          ActiveShader.setUniform("uWavesY", amp)
+
+          // console.log("waveform", x, y)
+    
+          // console.log("waveform", waveform[i])
+        }
+      }
+      return(y)
+    }
+
     function handleControls() {
 
       if (isPlaying) {
+
+        let songValue = playSong(song)
+
+        setTimeout(() => {
+          console.log("waveform value is", songValue/100000)
+        }, 5000)
 
         if (!drawPauseTimer) drawPlayTimer = p.millis()
         else if (drawPauseTimer) drawPlayTimer = p.millis() - drawPauseTimer

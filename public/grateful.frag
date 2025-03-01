@@ -37,8 +37,8 @@ void main () {
     pos = rollingWaves( pos );
   } 
   else {
-    pos.x += (uWavesX + u_time);
-    pos.y += uWavesY + u_time;
+    pos.x += (uWavesX);
+    pos.y += uWavesY;
   }
 
   pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
