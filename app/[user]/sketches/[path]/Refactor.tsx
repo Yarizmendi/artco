@@ -3,15 +3,15 @@
 import p5Types from "p5"
 import Image from "next/image"
 import classnames from "classnames"
-import { Controls } from "@/p5/Controls"
-import { Recorder } from "@/p5/Recorder"
-import { P5Provider } from "hooks/contexts/useP5"
-import { CanvasCapture } from 'canvas-capture'
-import { useRef, useState } from "react"
 import { FFmpeg } from "@ffmpeg/ffmpeg"
+import { useRef, useState } from "react"
 import { toBlobURL } from "@ffmpeg/util"
 import { fetchFile } from "@ffmpeg/util"
-import { createSliders, handleSliders, Sliders } from "../helpers/Sliders"
+import { Controls } from "@/p5/Controls"
+import { Recorder } from "@/p5/Recorder"
+import { CanvasCapture } from 'canvas-capture'
+import { P5Provider } from "hooks/contexts/useP5"
+import { CreateSliders, HandleSliders, Sliders } from "../helpers/Sliders"
 
 
 export default function PathSKetch({
@@ -25,7 +25,55 @@ export default function PathSKetch({
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const messageRef = useRef<HTMLParagraphElement | null>(null);
 
-    const load = async () => {
+  function sketch(
+    p: p5Types, 
+    Parent, 
+) {
+    let amp = 0    
+    let fft = null
+    let song = null
+    let spectrum = null
+
+    let idx = 0
+    let Overlay
+    let seconds = 0
+    let MediaRecorder
+
+    let arrayBuffers = []
+    let startMillis = null
+    let framesRecordedCount = 0
+    const ffmpeg = ffmpegRef.current
+
+    const frameRate = 24
+    let fragSelect = null
+    let changeEvery = 2500
+    let ActiveShader = null
+    let isPlaying = false, isRecording = false
+    let drawPlayTimer = 0, drawPauseTimer = 0
+
+
+    const PreloadSong = () => {
+      // @ts-ignore
+      p.soundFormats('mp3', 'ogg')
+      // @ts-ignore
+      song = p.loadSound('/songs/piano.mp3')
+      // @ts-ignore
+      title == "grateful_dead" && (song = p.loadSound('/songs/truckin.mp3'))
+    }
+
+    const PreloadImages = () => {
+      images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
+    }
+
+    const PreloadNoise = () => {
+      noises && noises.length && noises.map(noise => noise["Noise"] = p.loadImage(noise.blob))
+    }
+
+    const PreloadShaders = () => {
+      ActiveShader = p.loadShader(vert, frag) 
+    }
+    
+    const PreloadFFMEPG = async () => {
       setIsLoading(true);
       const baseURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.5/dist/umd";
       const ffmpeg = ffmpegRef.current;
@@ -35,6 +83,7 @@ export default function PathSKetch({
         console.log(message);
       });
 
+      // @ts-ignore
       ffmpeg.on("error", ({ message }) => {
         console.error(message);
         // if (messageRef.current) messageRef.current.innerHTML = message;
@@ -60,80 +109,27 @@ export default function PathSKetch({
       setIsLoading(false);
     }
 
-  function sketch(
-    p: p5Types, 
-    Parent, 
-
-) {
-
-    let song = null
-    let fft = null
-
-    let idx = 0
-    let Overlay
-    let seconds = 0
-    let MediaRecorder
-
-    const frameRate = 24
-    let fragSelect = null
-    let changeEvery = 2500
-    let ActiveShader = null
-    let isPlaying = false, isRecording = false
-    let drawPlayTimer = 0, drawPauseTimer = 0
-
-    function handleFragChange(fragUrl) {
-      p.loadShader(vert, "/" + fragUrl, (shader) => { 
-        ActiveShader = shader 
-        p.shader(ActiveShader)
-      })
-    }
-
-    function loadSongs(p) {
-      // @ts-ignore
-      p.soundFormats('mp3', 'ogg')
-      // @ts-ignore
-      song = p.loadSound('/songs/piano.mp3')
-      title == "grateful_dead" && (song = p.loadSound('/songs/truckin.mp3'))
-
-    }
-
-    let fftanaylsis = null
-    let amp = null
-
-    function setupSong(p) {
-      // @ts-ignore
-      song && (fft = new p.constructor.FFT())
-      // fftanaylsis = fft.analyze()
-
-    }
-
+ 
     p.preload = () => {
-      images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
-      noises && noises.length && noises.map(noise => noise["Noise"] = p.loadImage(noise.blob))  
-      ActiveShader = p.loadShader(vert, frag) 
-      load()
-      loadSongs(p)
+      PreloadSong()
+      PreloadNoise()
+      PreloadImages()
+      PreloadFFMEPG()
+      PreloadShaders()
     }
 
-    p.setup = () => {
-      
-      setupSong(p)
 
+    const SetupCanvas = () => {
       p.frameRate(frameRate)
       // ensures canvas is sized to parent on all screen sizes
       p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").addClass("min-h-[500px]")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
+    }
 
-      // create a fragment shader input switcher
-      p.shader(ActiveShader)
-      fragSelect = p.createSelect(frag).parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
-      shaderOptions && shaderOptions.map(shader => fragSelect.option(shader, shader))
-      fragSelect.changed(() => handleFragChange(fragSelect.value()))
-
-      // create sliders and controls
-      createSliders({ inputs, p })
+    const CreateControls = () => {
       MediaRecorder = Recorder(title, ffmpegRef.current, videoRef)
       Overlay = Controls(p)
+      
 
       Overlay.playBtn.mouseClicked(() => {
         if (!isPlaying) {
@@ -209,9 +205,31 @@ export default function PathSKetch({
 
     }
 
+    const InitializeAudio = () => {
+      // @ts-ignore
+      song && (fft = new p.constructor.FFT())
+      // fftanaylsis = fft.analyze()
+    }
 
-    let arrayBuffers = []
-    let framesRecordedCount = 0
+    const CreateShaderDropdown = ({ ActiveShader, shaderOptions }): { fragSelect } => {
+     // create a fragment shader input switcher
+     p.shader(ActiveShader)
+     fragSelect = p.createSelect(frag).parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
+     shaderOptions && shaderOptions.map(shader => fragSelect.option(shader, shader))
+     fragSelect.changed(() => HandleShaderChange(fragSelect.value()))
+     return fragSelect
+    }
+
+
+    p.setup = () => {
+      SetupCanvas()
+      CreateControls()
+      InitializeAudio()
+
+      CreateSliders({ inputs, p })
+      CreateShaderDropdown({ ActiveShader, shaderOptions})
+    }
+
 
     async function createMP4Video() {
       /**
@@ -268,11 +286,7 @@ export default function PathSKetch({
       return true
     }
 
-    let startMillis = null
-    const ffmpeg = ffmpegRef.current
-
-    p.draw = () => {
-      amp = fft.getEnergy("bass", "treble") 
+    const HandleTimer = () => {
       // if (startMillis == null) {
       //   startMillis = p.millis();
       // }
@@ -285,14 +299,31 @@ export default function PathSKetch({
         // startMillis = null;
         // p.noLoop();
         // CanvasCapture.stopRecord();
-      // } 
+      // }
+    }
 
+    function HandleControls() {
 
+      if (isPlaying) {
+        if (!drawPauseTimer) drawPlayTimer = p.millis()
+        else if (drawPauseTimer) drawPlayTimer = p.millis() - drawPauseTimer
+        seconds = drawPlayTimer/1000 
+        ActiveShader.setUniform("u_time", seconds)
+      } 
+
+      if (!isPlaying) {
+        drawPauseTimer = p.millis() - drawPlayTimer
+        seconds = drawPauseTimer/1000
+      }
+
+      if (transitions) HandleTransitions()
+
+    }
+
+    const HandleRecording = () => {
       if (isRecording) {
- 
         const filename = `img${String(framesRecordedCount).padStart(3, '0')}`;
         framesRecordedCount++;
-        
         CanvasCapture.takeJPEGSnapshot({
           name: filename,
           onExport: async (jpegBlob, filename) => {
@@ -304,23 +335,39 @@ export default function PathSKetch({
         })
 
       } 
-
-      // Update Seconds Running Timer
-      Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
-
-      noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
-      textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
-      
-      handleSliders({ inputs, ActiveShader })
-      handleControls()
-
-      p.rectMode(p.CENTER)
-      p.rect(0,0,0)    
-      
     }
 
-    function playSong(song) {
+    const HandleSketchTimer = () => {
+      // Update Seconds Running Timer
+      Overlay.sketchTime.html(`${ p.round(drawPlayTimer/1000)} seconds`)
+    }
+
+    const HandleShaderChange = (fragUrl) => {
+      p.loadShader(vert, "/" + fragUrl, (shader) => { 
+        ActiveShader = shader 
+        p.shader(ActiveShader)
+      })
+    }
+
+
+    const HandleShaderDraw = () => {
+      noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
+      textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
+    }
+
+    
+    function HandleTransitions() {
+      if (seconds > changeEvery && images.length-2 > idx) {
+        idx+=1
+        changeEvery += 2500
+        ActiveShader.setUniform("u_timeout", (p.millis() - drawPlayTimer))
+      } 
+    }
+
+    
+    function HandleSongDraw(song) {
       let waveform = fft.waveform()
+      amp = fft.getEnergy("bass", "treble") 
       let x, y
       if (song) {
         for (let i = 0; i < waveform.length; i++){
@@ -337,38 +384,18 @@ export default function PathSKetch({
       return(y)
     }
 
-    function handleControls() {
+    p.draw = () => {
+      HandleControls()
+      HandleRecording()
+      HandleShaderDraw()
+      HandleSketchTimer()
 
-      if (isPlaying) {
+      HandleSongDraw(song)
+      HandleSliders({ inputs, ActiveShader })
 
-        let songValue = playSong(song)
-
-        setTimeout(() => {
-          console.log("waveform value is", songValue/100000)
-        }, 5000)
-
-        if (!drawPauseTimer) drawPlayTimer = p.millis()
-        else if (drawPauseTimer) drawPlayTimer = p.millis() - drawPauseTimer
-
-        seconds = drawPlayTimer/1000 
-        ActiveShader.setUniform("u_time", seconds)
-      } 
-
-      if (!isPlaying) {
-        drawPauseTimer = p.millis() - drawPlayTimer
-        seconds = drawPauseTimer/1000
-      }
-
-      if (transitions) handleTransitions()
-
-    }
-
-    function handleTransitions() {
-      if (seconds > changeEvery && images.length-2 > idx) {
-        idx+=1
-        changeEvery += 2500
-        ActiveShader.setUniform("u_timeout", (p.millis() - drawPlayTimer))
-      } 
+      p.rectMode(p.CENTER)
+      p.rect(0,0,0)    
+      
     }
 
   }

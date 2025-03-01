@@ -23,7 +23,7 @@ import classnames from "classnames"
     </section>
   }
 
-  export function createSliders({ inputs, p }) {
+  export const CreateSliders = ({ inputs, p }) => {
     inputs && inputs.length && inputs.map( input => {
       if ( input.type == "slider" ) {
         const { min, max, value, step } = input.settings
@@ -33,7 +33,7 @@ import classnames from "classnames"
     })
   }
 
-  export function handleSliders({ inputs, ActiveShader }) {
+  export function HandleSliders({ inputs, ActiveShader }) {
     inputs && inputs.length && inputs.map((input) => {
       input["Paragraph"].html( input["Slider"].value())
       ActiveShader.setUniform( input.uniform, input["Slider"].value())
