@@ -5,7 +5,8 @@ import Image from "next/image"
 const collections = [
   { title: "uploads", id: 2, path: "/paintings", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/alice_falls.webp" },
   { title: "tests", id: 0, path: "/sketches/tests", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/ballerina.png" },
-  { title: "sketches", id: 0, path: "/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/industrial_ocean.jpg" },
+  { title: "sketches", id: 1, path: "/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/industrial_ocean.jpg" },
+  { title: "sketches", id: 3, path: "/collections", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/window.jpg" },
 ]
 
 export default function ArtistPage({ params }) {

@@ -5,10 +5,19 @@ import { NotFound } from "@/comps/NotFound"
 import { UsePaintings } from "./api/UsePainting"
 import { Painting } from "@/comps/Links/PaintingLink"
 import { ImageCreateForm } from "@/comps/Forms/ImageCreateForm"
+import { useEffect, useState } from "react"
 
 export function PaintingsList({ uploaderId }) {
   const paintingsRes = UsePaintings({ uploaderId })
   const paintings = paintingsRes && paintingsRes.data
+
+  const [selected, setSelected] = useState([])
+  const [isSelecting, setIsSelecting] = useState("0")
+
+   // Update isCollecting whenever borderedDivs changes
+   useEffect(() => {
+    setIsSelecting(selected.length > 1 ? "1" : "0");
+  }, [selected]);
  
   function mutateAllUploads() {
     paintingsRes.mutate()
@@ -20,13 +29,20 @@ export function PaintingsList({ uploaderId }) {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center md:flex-row md:items-start m-2 p-2 gap-2">
 
+      {/* <div>
+        <button onClick={() => setIsSelecting(!isSelecting)} className="p-2 bg-slate-200 dark:bg-slate-800 rounded"> {isSelecting ? "cancel" : "select"} </button>
+      </div> */}
+
       <div className="w-11/12 md:w-1/3 my-4 md:my-10">
-        <ImageCreateForm uploaderId={uploaderId} mutate={mutateAllUploads} isCollection={0} />
+        <ImageCreateForm uploaderId={uploaderId} mutate={mutateAllUploads} isCollection={isSelecting} selection={selected} />
       </div>
 
       <div className="w-11/12 md:w-2/3 h-[500px] md:h-vh flex flex-wrap overflow-auto">
         { paintings && paintings.map( art => {
           return <Painting 
+            isSelecting={isSelecting}
+            selected={selected}
+            setSelected={setSelected}
             key={art._id} 
             positionIdx={art.positionIdx} 
             mutate={paintingsRes.mutate} 

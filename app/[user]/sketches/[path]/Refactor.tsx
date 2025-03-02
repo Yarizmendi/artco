@@ -44,7 +44,7 @@ export default function PathSKetch({
     let framesRecordedCount = 0
     const ffmpeg = ffmpegRef.current
 
-    const frameRate = 24
+    const frameRate = 60
     let fragSelect = null
     let changeEvery = 2500
     let ActiveShader = null
@@ -246,13 +246,9 @@ export default function PathSKetch({
           // Tell FFmpeg how our files are named
           '-pattern_type', 'glob',
           '-i', 'img*.jpg',
-          // Output video settings
-          '-c:v', 'libx264',       // Use H.264 codec
-          '-preset', 'ultrafast',
-          '-pix_fmt', 'yuv420p',   // Standard pixel format for compatibility
-          '-vf', 'scale=1920:1080',// Scale to 1080p
+
           // Output filename
-          'output.mp4'
+          'output.gif'
         ]);
  
         console.log('Video created!');

@@ -4,6 +4,8 @@ uniform float u_time;
 uniform float u_range;
 uniform float u_timeout;
 // uniform float u_threshold;
+uniform float uWavesX;
+uniform float uWavesY;
 uniform float u_waves;
 
 uniform sampler2D u_noise;

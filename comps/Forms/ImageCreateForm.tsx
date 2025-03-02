@@ -11,17 +11,18 @@ interface ICreateForm {
   uploaderId: string,
   btnColor?: string,
   mutate?: any,
-  isCollection?: any,
+  isCollection?: string,
+  selection?: any
 }
 
-export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollection } : ICreateForm ) {
+export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollection, selection } : ICreateForm ) {
   const [songs, setSongs] = useState(null)
   const [images, setImages] = useState(null)
   const [shaders, setShaders] = useState(null)
   return (
     <form className="flex flex-col gap-4"
       action={ async formData => {
-        await uploadImageAction(formData)
+        await uploadImageAction(formData, selection)
         mutate()
         setImages(null)
     }}>
@@ -32,7 +33,7 @@ export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollec
       <Input title="displayName" placeholder={"display name"} />
       {/* <ShaderSelect /> */}
       <div className='flex justify-between items-center'>
-        <input className='text-[10px] file:p-1 font-normal file:mr-4 file:text-xs' type="file" name="image" multiple={true} required onChange={ e => {
+        <input className='text-[10px] file:p-1 font-normal file:mr-4 file:text-xs' type="file" name="image" multiple={true} onChange={ e => {
           e.preventDefault()
           const files = Array.from( e.target.files)
           const urls = files.map( file => URL.createObjectURL(file))

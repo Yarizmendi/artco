@@ -1,26 +1,44 @@
 
 "use client"
 import Image from "next/image"
+import Link from "next/link"
 import { ImageDeleteIcon } from "../Buttons/ImageDeleteIcon"
 import { Input } from "../Forms/FormInput"
 import { useState } from "react"
 import { ICONLINED } from "data/css"
 import { updateImageAction } from "actions/images/updateImageAction"
 import { ActionButton } from "../Buttons/ActionButton"
-import Link from "next/link"
 
-export function Painting({ id, positionIdx, uploaderId, blob, title, description, displayName, mutate }) {
+
+interface IPainting {
+  id: string,
+  positionIdx: number,
+  uploaderId: string,
+  blob: string,
+  title: string,
+  description: string,
+  displayName: string,
+  mutate: any,
+  selected?: any,
+  setSelected?: any,
+  isSelecting?: string
+}
+
+export function Painting({ id, positionIdx, uploaderId, blob, title, description, displayName, mutate, selected, setSelected, isSelecting }: IPainting) {
   const [isEditing, setIsEditing] = useState(false)
 
-  return (
-  <div className="p-4">
+  const selectionHandler = () => {
+    const selection = { id, title, blob }
+    console.log(selection)
+    selected = selected ? selected : []
+    selected.length && selected.find( s => s.id == id ) ? setSelected(selected.filter( s => s.id !== id )) : setSelected([...selected, selection])
+    // console.log(selected)
+  }
 
-    <Link href={{
-      pathname: `sketches/${id}-painting-${title}`,
-      // query: { type: "collection" }
-    }} 
-    replace={true}
-    prefetch={false}
+  return (
+  <div 
+    className={`p-4  ${selected ? selected.find( s => s.id == id ) ? "border-2 border-orange-500" : "border-2 border-transparent" : ""}`}
+    onClick={selectionHandler} 
     >
       <Image 
         src= {blob} 
@@ -30,12 +48,25 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
         quality={ 100 }
         className="w-fill h-[260px] md:w-[240px] md:h-[220px] rounded"
       />
-    </Link>
 
-    <form action={ async formData => {
-      await updateImageAction( formData )
-      mutate()
-    }} className="w-full flex flex-col dark:bg-slate-950">
+      <Link 
+        href={{ pathname: `sketches/${id}-painting-${title}`,
+        // query: { type: "collection" } 
+        }} 
+        replace={true}
+        prefetch={false}
+        > View
+      </Link>
+
+    <form 
+      action={ async formData => {
+        await updateImageAction( formData )
+        mutate()
+      }}
+    
+     className="w-full flex flex-col dark:bg-slate-950"
+    >
+
   <input name={"id"} defaultValue={id} hidden />
 
       <div className="flex items-center dark:bg-slate-950">

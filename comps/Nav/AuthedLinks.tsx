@@ -12,6 +12,7 @@ export function AuthedLinks() {
         { title: "uploads", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
         { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
         { title: "tests", path: `/${"66bd62276d3999b70d5fd91b"}/sketches/tests`},
+        { title: "collections", path: `/${"66bd62276d3999b70d5fd91b"}/collections`},
         // { title: "Login", path: "/auth/login"},
         // { title: "SignUp", path: "/auth/create"},
       ]

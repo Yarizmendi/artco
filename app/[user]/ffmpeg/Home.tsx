@@ -48,11 +48,12 @@ export default function Home() {
     const ffmpeg = ffmpegRef.current;
     // u can use 'https://ffmpegwasm.netlify.app/video/video-15s.avi' to download the video to public folder for testing
     await ffmpeg.writeFile(
-      "input.webm",
-      await fetchFile(vercelWebm)
+      "input.avi",
+      await fetchFile(testAvi)
     );
-    await ffmpeg.exec(["-i", "input.webm", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "23", "output.mp4"]);
-    const data = (await ffmpeg.readFile("output.mp4")) as any;
+    //exec("ffmpeg -i input.mp4 -qscale 0 output.gif");
+    await ffmpeg.exec(["-i", "input.avi", "-qscale", "0", "output.gif"]);
+    const data = (await ffmpeg.readFile("output.gif")) as any;
     if (videoRef.current)
       videoRef.current.src = URL.createObjectURL(
         new Blob([data.buffer], { type: "video/mp4" })

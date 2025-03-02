@@ -6,6 +6,7 @@ import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } f
 export default async function Page({ params }) {
   let frag
   const [id, type, title] = params.path.split("-")
+  console.log( type, title)
   const shaderOptions = await fetch("https://artco.netlify.app/api/shaders", { mode: "cors" }).then(res => res.json())
 
   if ( type == "collection") {

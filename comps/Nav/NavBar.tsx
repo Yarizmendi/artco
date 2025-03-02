@@ -5,8 +5,8 @@ import { AuthedLinks } from './AuthedLinks'
 
 export function NavBar() {
   const routes = [
-    // { title: "blog", path: `/blog`},
-    // { title: "collections", path: `/${"66bd62276d3999b70d5fd91b"}/collections`},
+    { title: "blog", path: `/blog`},
+    { title: "collections", path: `/${"66bd62276d3999b70d5fd91b"}/collections`},
     { title: "uploads", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
     { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
     { title: "tests", path: `/${"66bd62276d3999b70d5fd91b"}/sketches/tests`},
