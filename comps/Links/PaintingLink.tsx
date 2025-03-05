@@ -40,6 +40,16 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
     className={`p-4  ${selected ? selected.find( s => s.id == id ) ? "border-2 border-orange-500" : "border-2 border-transparent" : ""}`}
     onClick={selectionHandler} 
     >
+      <Link 
+        href={{ pathname: `sketches/${id}-painting-${title}`,
+        // query: { type: "collection" } 
+        }} 
+        className="flex justify-center border p-4 rounded-md"
+        replace={true}
+        prefetch={false}
+        > View
+      </Link>
+
       <Image 
         src= {blob} 
         alt={title} 
@@ -49,14 +59,7 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
         className="w-fill h-[260px] md:w-[240px] md:h-[220px] rounded"
       />
 
-      <Link 
-        href={{ pathname: `sketches/${id}-painting-${title}`,
-        // query: { type: "collection" } 
-        }} 
-        replace={true}
-        prefetch={false}
-        > View
-      </Link>
+
 
     <form 
       action={ async formData => {
@@ -67,7 +70,7 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
      className="w-full flex flex-col dark:bg-slate-950"
     >
 
-  <input name={"id"} defaultValue={id} hidden />
+    <input name={"id"} defaultValue={id} hidden />
 
       <div className="flex items-center dark:bg-slate-950">
         <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
