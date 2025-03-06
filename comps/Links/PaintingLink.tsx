@@ -28,17 +28,17 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
   const [isEditing, setIsEditing] = useState(false)
 
 
-  const selectionHandler = () => {
-    const selection = { id, title, blob }
-    console.log(selection)
-    selected = selected ? selected : []
-    selected.length && selected.find( s => s.id == id ) ? setSelected(selected.filter( s => s.id !== id )) : setSelected([...selected, selection])
-  }
+  // const selectionHandler = () => {
+  //   const selection = { id, title, blob }
+  //   console.log(selection)
+  //   selected = selected ? selected : []
+  //   selected.length && selected.find( s => s.id == id ) ? setSelected(selected.filter( s => s.id !== id )) : setSelected([...selected, selection])
+  // }
 
   return (
   <div 
     className={`p-4  ${selected ? selected.find( s => s.id == id ) ? "border-2 border-orange-500" : "border-2 border-transparent" : ""}`}
-    onClick={selectionHandler} 
+    // onClick={selectionHandler} 
     >
       <Link 
         href={`paintings/${id}`} 

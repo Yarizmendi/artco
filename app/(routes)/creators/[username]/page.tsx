@@ -7,6 +7,7 @@ export default function CreatorPage({ params }) {
             <p>Welcome, {username}</p>
             <Link href={`${username}/sketches`}>sketches</Link>
             <Link href={`${username}/paintings`}>paintings</Link>
+            <Link href={`${username}/collections`}>collections</Link>
         </div>
     )
 }

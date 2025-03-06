@@ -5,7 +5,7 @@ export default function LandingPage() {
     return (
         <div className="w-full border">
 
-            <div className="w-full flex flex-col border gap-2 p-2">
+            <div className="w-full flex flex-col border gap-4 p-2">
                 {/* <Link href="/ffmpeg">ffmpeg</Link> */}
                 <Link href="/blog">Blog</Link>
                 <Link href="/auth/login">Login</Link>
@@ -13,6 +13,11 @@ export default function LandingPage() {
                 <Link href="/creators">Creators</Link>
                 <Link href="/shaders">Shaders</Link>
                 <Link href="/sketches">Sketches</Link>
+
+                <Link href="/creators/Benji/sketches">Ben Sketches</Link>
+                <Link href="/creators/Benji/paintings">Ben Paintings</Link>
+                <Link href="/creators/Benji/collections">Ben Collections</Link>
+           
 
                 {/* <Link href="/playground">Create</Link> */}
                 {/* <Link href="/collections">Create</Link> */}

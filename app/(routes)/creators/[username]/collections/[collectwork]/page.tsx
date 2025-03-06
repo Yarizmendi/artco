@@ -1,8 +1,8 @@
 import { getMongoImageById, getUserImgCollectionById } from "actions/images/getImages"
 import { getPreviewCollectionSketch, getPreviewPaintingSketch } from "actions/sketches/getSketchActions"
-import Sketch from "../../../../[user]/sketches/[path]/Refactor"
 import { getVercelShadersAction } from "actions/blobs/getVercelShadersAction"
 import NoSSR from "app/NoSSR"
+import Sketch from "../../Refactor"
 
 export default async function CollectionSketch({ params }) {
   const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewCollectionSketch()
