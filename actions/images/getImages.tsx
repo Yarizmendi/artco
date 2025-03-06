@@ -42,7 +42,14 @@ export async function getMongoImageByBlob(blob) {
 
 export async function getMongoImages() {
     await connect()
-    return ImageModel.find().select("-_id -uploaderId -__v").exec()
+    return ImageModel.find().select("-uploaderId -__v").exec()
+}
+
+export async function updateMongoImageBlobs() {
+    await connect()
+    const allMongoImages = await ImageModel.find().select("-_id -uploaderId -__v").exec()
+    console.log(allMongoImages)
+    return allMongoImages
 }
 
  

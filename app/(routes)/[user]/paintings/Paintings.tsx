@@ -10,6 +10,8 @@ import { useEffect, useState } from "react"
 export function PaintingsList({ uploaderId }) {
   const paintingsRes = UsePaintings({ uploaderId })
   const paintings = paintingsRes && paintingsRes.data
+  // console.log(paintings)
+
 
   const [selected, setSelected] = useState([])
   const [isSelecting, setIsSelecting] = useState("0")

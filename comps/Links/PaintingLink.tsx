@@ -26,7 +26,7 @@ interface IPainting {
 
 export function Painting({ id, positionIdx, uploaderId, blob, title, description, displayName, mutate, selected, setSelected, isSelecting }: IPainting) {
   const [isEditing, setIsEditing] = useState(false)
-
+  console.log(id)
   const selectionHandler = () => {
     const selection = { id, title, blob }
     console.log(selection)

@@ -12,6 +12,7 @@ import { Recorder } from "@/p5/Recorder"
 import { CanvasCapture } from 'canvas-capture'
 import { P5Provider } from "hooks/contexts/useP5"
 import { CreateSliders, HandleSliders, Sliders } from "../helpers/Sliders"
+import { put } from "@vercel/blob"
 
 
 export default function PathSKetch({
@@ -56,9 +57,9 @@ export default function PathSKetch({
       // @ts-ignore
       p.soundFormats('mp3', 'ogg')
       // @ts-ignore
-      song = p.loadSound('/songs/piano.mp3')
+      song = p.loadSound('https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/songs/piano.mp3')
       // @ts-ignore
-      title == "grateful_dead" && (song = p.loadSound('/songs/truckin.mp3'))
+      title == "grateful_dead" && (song = p.loadSound('https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/songs/truckin.mp3'))
     }
 
     const PreloadImages = () => {
@@ -70,7 +71,7 @@ export default function PathSKetch({
     }
 
     const PreloadShaders = () => {
-      ActiveShader = p.loadShader(vert, frag) 
+      ActiveShader = p.loadShader("https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/standard.vert", "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/test.frag") 
     }
     
     const PreloadFFMEPG = async () => {
@@ -261,6 +262,8 @@ export default function PathSKetch({
           const videoMp4Url = URL.createObjectURL(
             new Blob([videoData.buffer], { type: "video/mp4" })
           );
+
+          await put("videos/" + title, videoMp4Url, { access: 'public' } )
 
           videoRef.current.src = videoMp4Url;
 

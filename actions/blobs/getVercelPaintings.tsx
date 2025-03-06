@@ -17,7 +17,7 @@ export async function getBlobMeta(vercelBlob) {
   return blobMetadata
 }
 
-export async function getPaintings() {
+export async function getVercelPaintings() {
   const blobs = await list({ prefix: 'paintings/' })
   return blobs
 }
