@@ -246,16 +246,19 @@ export default function PathSKetch({
 
       try {
         // Run the FFmpeg command to create a video
-        console.log('Creating video...');
-        await ffmpeg.exec([
+         await ffmpeg.exec([
           // Input framerate - how many images per second
           '-framerate', `${frameRate}`,
           // Tell FFmpeg how our files are named
           '-pattern_type', 'glob',
           '-i', 'img*.jpg',
-
+          // Output video settings
+          '-c:v', 'libx264',       // Use H.264 codec
+          '-preset', 'ultrafast',
+          '-pix_fmt', 'yuv420p',   // Standard pixel format for compatibility
+          '-vf', 'scale=1920:1080',// Scale to 1080p
           // Output filename
-          'output.gif'
+          'output.mp4'
         ]);
  
         console.log('Video created!');
@@ -265,11 +268,8 @@ export default function PathSKetch({
         // Create a URL for the video file
         if (videoRef.current) {
 
-          const videoMp4Url = URL.createObjectURL(
-            new Blob([videoData.buffer], { type: "video/mp4" })
-          );
-
-          await put("videos/" + title, videoMp4Url, { access: 'public' } )
+          const rawVideoBlob = new Blob([videoData.buffer], { type: "video/mp4" })
+          const videoMp4Url = URL.createObjectURL(rawVideoBlob)
 
           videoRef.current.src = videoMp4Url;
 
@@ -280,6 +280,15 @@ export default function PathSKetch({
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
+
+          await put(
+            "videos/" + "test.mp4", 
+            rawVideoBlob, 
+            {
+              access: 'public', 
+              token: process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN,
+              contentType: "video/mp4" 
+            })
         }
 
       }

@@ -35,24 +35,27 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  const testAvi = "https://raw.githubusercontent.com/ffmpegwasm/testdata/master/video-15s.avi"
+  const testMp4 = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/videos/bunny_yawn.mp4"
+  const testWebm = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/videos/tree.webm"
 
   const transcode = async () => {
     const ffmpeg = ffmpegRef.current;
     
     await ffmpeg.writeFile(
-      "input.avi",
-      await fetchFile(testAvi)
+      "video.webm",
+      await fetchFile(testWebm)
     );
 
-    await ffmpeg.exec(["-i", "input.avi", "output.mp4"]);
+    await ffmpeg.exec(["-i","video.webm","video.mp4"]);
 
-    const data = (await ffmpeg.readFile("output.mp4")) as any;
+    const data = (await ffmpeg.readFile("video.mp4")) as any;
     
     if (videoRef.current)
       videoRef.current.src = URL.createObjectURL(
         new Blob([data.buffer], { type: "video/mp4" })
       );
+
+      console.log(videoRef.current.src)
   };
 
   return loaded ? (
