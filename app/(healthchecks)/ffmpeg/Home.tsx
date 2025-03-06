@@ -35,25 +35,20 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  const publicWebM = "https://artco.netlify.app//videos/highway.webm"
   const testAvi = "https://raw.githubusercontent.com/ffmpegwasm/testdata/master/video-15s.avi"
-  const vercelWebm = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/highway.webm"
 
-  // WEBM Conversion Commands 
-  const webmConversions = {
-    "fasterLower": ["-i", "input.webm", ""]
-  }
-  
   const transcode = async () => {
     const ffmpeg = ffmpegRef.current;
-    // u can use 'https://ffmpegwasm.netlify.app/video/video-15s.avi' to download the video to public folder for testing
+    
     await ffmpeg.writeFile(
       "input.avi",
       await fetchFile(testAvi)
     );
-    //exec("ffmpeg -i input.mp4 -qscale 0 output.gif");
-    await ffmpeg.exec(["-i", "input.avi", "-qscale", "0", "output.gif"]);
-    const data = (await ffmpeg.readFile("output.gif")) as any;
+
+    await ffmpeg.exec(["-i", "input.avi", "output.mp4"]);
+
+    const data = (await ffmpeg.readFile("output.mp4")) as any;
+    
     if (videoRef.current)
       videoRef.current.src = URL.createObjectURL(
         new Blob([data.buffer], { type: "video/mp4" })
