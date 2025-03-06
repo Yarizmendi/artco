@@ -9,7 +9,6 @@ export function NavBar() {
     { title: "collections", path: `/${"66bd62276d3999b70d5fd91b"}/collections`},
     { title: "uploads", path: `/${"66bd62276d3999b70d5fd91b"}/paintings`},
     { title: "sketches", path: `/${"66bd62276d3999b70d5fd91b"}/sketches`},
-    { title: "tests", path: `/${"66bd62276d3999b70d5fd91b"}/sketches/tests`},
   ]
   
   return (
