@@ -2,9 +2,14 @@
 import connect from 'mongo/index.js'
 import SketchModel from '@/mongo/models/sketch.model.js'
 
-export async function getSKetches () {
+interface ISketchRequest {
+    title?: string
+    creatorId?: string
+}
+
+export async function getSKetches({ creatorId }: ISketchRequest) {
     await connect()
-    return SketchModel.find().select("-__v -creatorId -uploaderId").sort({ createdAt: "desc"}).exec()
+    return SketchModel.find({ creatorId }).select("-__v -creatorId -uploaderId").sort({ createdAt: "desc"}).exec()
 }
 
 export async function getSKetchesByCreatorId ({ creatorId }) {
