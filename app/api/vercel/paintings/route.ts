@@ -1,5 +1,5 @@
 
-import { getPaintings } from "actions/blobs/paintings/getVercelPaintings"
+import { getPaintings } from "actions/blobs/getVercelPaintings"
 import { getMongoImages, getMongoImagesByUploaderId } from "actions/images/getImages"
 import { NextRequest, NextResponse } from "next/server"
 

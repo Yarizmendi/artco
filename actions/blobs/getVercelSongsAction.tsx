@@ -3,7 +3,7 @@
 
 import { list } from "@vercel/blob"
 
-export async function getVercelSongBlobs() {
+export async function getVercelSongsAction() {
     const songBlobs = await list({ prefix: 'songs/' })
     return songBlobs
 
