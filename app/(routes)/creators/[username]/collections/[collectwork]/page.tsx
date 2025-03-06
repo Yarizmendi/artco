@@ -1,12 +1,15 @@
-import { getMongoImageById } from "actions/images/getImages"
-import { getPreviewPaintingSketch } from "actions/sketches/getSketchActions"
+import { getMongoImageById, getUserImgCollectionById } from "actions/images/getImages"
+import { getPreviewCollectionSketch, getPreviewPaintingSketch } from "actions/sketches/getSketchActions"
 import Sketch from "../../../../[user]/sketches/[path]/Refactor"
 import { getVercelShadersAction } from "actions/blobs/getVercelShadersAction"
 import NoSSR from "app/NoSSR"
 
-export default async function ArtworkSketch({ params }) {
-  let {vert, noises, inputs, displayName, description, textures, transitions, frag} = getPreviewPaintingSketch("preview")
-  const images = [await getMongoImageById(params.artwork)]
+export default async function CollectionSketch({ params }) {
+  const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewCollectionSketch()
+  
+  let {images} = await getUserImgCollectionById(params.collectwork)
+  images = images.sort((a,b) => Number(a.positionIdx) - Number(b.positionIdx))
+
   // shader option dropdown has empty value because vercel returns folder first
   let shaderOptions = await getVercelShadersAction()
   shaderOptions = shaderOptions.splice(1)

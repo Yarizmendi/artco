@@ -3,11 +3,9 @@
 import Link from "next/link"
 import Image from "next/image"
 
-export default function Collection({ id, blob, title }) {
+export default function Collection({ id, blob, title, uploaderId }) {
     return (
-        <Link href={{ pathname: `sketches/${id}-collection-${title}`,
-         // query: { type: "collection" } 
-        }} 
+        <Link href={ `collections/${id}`}
         replace={true}
         prefetch={false}
         >  

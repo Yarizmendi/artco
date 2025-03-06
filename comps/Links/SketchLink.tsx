@@ -22,7 +22,7 @@ export default function SketchLink({
   return (
     <div className="px-4 pb-4">
       <Link href={{
-      pathname: `sketches/${id}-sketch`,
+      pathname: `sketches/${id}`,
     }} 
     replace={true}
     prefetch={false}

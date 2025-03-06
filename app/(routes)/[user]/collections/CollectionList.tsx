@@ -39,7 +39,7 @@ export function CollectionList({ uploaderId }) {
             id={art._id} 
             title={art.title}
             blob={art.blob} 
-            // uploaderId={uploaderId} 
+            uploaderId={uploaderId} 
             // description={art.description} 
             // displayName={art.displayName}
               /> })}

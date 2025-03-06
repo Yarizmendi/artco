@@ -15,10 +15,7 @@ export function CollectionLink({ id, positionIdx, uploaderId, blob, title, descr
   return (
   <div className="p-4">
 
-    <Link href={{
-      pathname: `sketches/${id}-collection`,
-      // query: { type: "collection" }
-    }}
+    <Link href={`collections/${id}`}
     replace={true}
     prefetch={false}>
       <Image 
