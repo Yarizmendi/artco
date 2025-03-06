@@ -33,6 +33,7 @@ export default function PathSKetch({
     let amp = 0    
     let fft = null
     let song = null
+    let songUrl = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/songs/piano.mp3"
     let spectrum = null
 
     let idx = 0
@@ -56,7 +57,7 @@ export default function PathSKetch({
       // @ts-ignore
       p.soundFormats('mp3', 'ogg')
       // @ts-ignore
-      song = p.loadSound('https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/songs/piano.mp3')
+      song = p.loadSound(songUrl)
       // @ts-ignore
       title == "grateful_dead" && (song = p.loadSound('https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/songs/truckin.mp3'))
     }
@@ -105,6 +106,7 @@ export default function PathSKetch({
           "text/javascript"
         ),
       });
+
       setLoaded(true);
       setIsLoading(false);
     }
@@ -169,12 +171,9 @@ export default function PathSKetch({
       // @ts-ignore
       document.getElementById('defaultCanvas0'),
       { 
-        showRecDot: true,
         verbose: true,
-        showAlerts: true, // Default is false.
-        // Show informational dialogs during export.
-        showDialogs: true, // Default is false.
-        // ffmpegCorePath: './node_modules/@ffmpeg/core/dist/ffmpeg-core.js', 
+        showAlerts: true, 
+        showDialogs: true,
        }, 
     );
 
@@ -195,8 +194,8 @@ export default function PathSKetch({
           Overlay.recordBtnLabel.html("record");
           Overlay.recordBtn.removeClass("text-red-500");
           isRecording = false;
+
           setTimeout(()=>{
-            console.log(p.frameCount, arrayBuffers)
             createMP4Video()
           }, 1000)
     
@@ -215,7 +214,6 @@ export default function PathSKetch({
      // create a fragment shader input switcher
      p.shader(ActiveShader)
 
-     const testFrag = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders"
      fragSelect = p.createSelect().parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
      fragSelect.selected("/test.frag")
 
@@ -244,6 +242,7 @@ export default function PathSKetch({
        * Write files to FFmpeg filesystem
        */
       const ffmpeg = ffmpegRef.current;
+      // await ffmpeg.writeFile("song.mpeg", songUrl+"?download=1")
 
       try {
         // Run the FFmpeg command to create a video
@@ -253,6 +252,8 @@ export default function PathSKetch({
           // Tell FFmpeg how our files are named
           '-pattern_type', 'glob',
           '-i', 'img*.jpg',
+          // Adds audio to video track
+          // '-i', 'song.mpeg', '-map', '0:v', '-map 1:a', '-shortest',
           // Output video settings
           '-c:v', 'libx264',       // Use H.264 codec
           '-preset', 'ultrafast',
@@ -295,6 +296,7 @@ export default function PathSKetch({
         await ffmpeg.exec([
           '-pattern_type', 'glob',
           '-i', 'img*.jpg',
+          '-framerate', `${frameRate}`,
           'output.gif'
         ]);
 
