@@ -8,9 +8,8 @@ import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } f
 
 export default async function Page({ params }) {
   let frag
-  const [id, title] = params.path.split("-")
-  const type = title.split("/")
-  console.log(id, type, title)
+  const [id, type, title] = params.path.split("-")
+  console.log("SKETCHES PATH", id, type, title)
 
 
   const { data, error, isLoading, isValidating, mutate } = UseShaders()
