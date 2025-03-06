@@ -18,7 +18,6 @@ export async function GET( req: NextRequest ) {
         return NextResponse.json(data)
     }
 
-    
     const data = await getMongoImages()
     return NextResponse.json(data)
 }

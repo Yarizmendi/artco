@@ -13,6 +13,7 @@ import { CanvasCapture } from 'canvas-capture'
 import { P5Provider } from "hooks/contexts/useP5"
 import { CreateSliders, HandleSliders, Sliders } from "../helpers/Sliders"
 import { put } from "@vercel/blob"
+import { UseShaders } from "@/api/vercel/shaders/UseShaders"
 
 
 export default function PathSKetch({
@@ -216,7 +217,11 @@ export default function PathSKetch({
      // create a fragment shader input switcher
      p.shader(ActiveShader)
      fragSelect = p.createSelect(frag).parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
-     shaderOptions && shaderOptions.map(shader => fragSelect.option(shader, shader))
+     shaderOptions && shaderOptions.map(shader => {
+        const shaderName = shader.pathname.split("/")[1]
+        const shaderUrl = shader.url
+        return fragSelect.option(shaderName, shaderUrl)
+     })
      fragSelect.changed(() => HandleShaderChange(fragSelect.value()))
      return fragSelect
     }
@@ -342,7 +347,7 @@ export default function PathSKetch({
     }
 
     const HandleShaderChange = (fragUrl) => {
-      p.loadShader(vert, "/" + fragUrl, (shader) => { 
+      p.loadShader(vert, fragUrl, (shader) => { 
         ActiveShader = shader 
         p.shader(ActiveShader)
       })

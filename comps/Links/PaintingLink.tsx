@@ -26,13 +26,13 @@ interface IPainting {
 
 export function Painting({ id, positionIdx, uploaderId, blob, title, description, displayName, mutate, selected, setSelected, isSelecting }: IPainting) {
   const [isEditing, setIsEditing] = useState(false)
-  console.log(id)
+
+
   const selectionHandler = () => {
     const selection = { id, title, blob }
     console.log(selection)
     selected = selected ? selected : []
     selected.length && selected.find( s => s.id == id ) ? setSelected(selected.filter( s => s.id !== id )) : setSelected([...selected, selection])
-    // console.log(selected)
   }
 
   return (
@@ -41,9 +41,7 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
     onClick={selectionHandler} 
     >
       <Link 
-        href={{ pathname: `sketches/${id}/${title}`,
-        // query: { type: "collection" } 
-        }} 
+        href={`paintings/${id}`} 
         className="flex justify-center border p-4 rounded-md"
         replace={true}
         prefetch={false}

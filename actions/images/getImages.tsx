@@ -20,7 +20,7 @@ export async function getUserImgCollectionById (id ) {
     return data.toObject()
 }
 
-export async function getMongoImagesByUploaderId ({ uploaderId }) {
+export async function getMongoImagesByUploaderId (uploaderId) {
     await connect()
     return ImageModel.find({ uploaderId }).select("-uploaderId -__v").sort({ createdAt: "desc"}).exec()
 }

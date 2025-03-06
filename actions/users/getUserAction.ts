@@ -10,6 +10,12 @@ export async function getUsersAction () {
     return UserModel.find().exec()
 }
 
+export async function getUserByUsernameAction({ username }) {
+    await connect()
+    return UserModel.findOne({ username }).exec()
+}
+
+
 export async function createUserAction(formData: FormData) {
     await connect()
     const username = formData.get("username")
