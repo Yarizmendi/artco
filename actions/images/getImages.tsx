@@ -48,8 +48,13 @@ export async function getMongoImages() {
 export async function updateMongoImageBlobs() {
     await connect()
     const allMongoImages = await ImageModel.find().select("-_id -uploaderId -__v").exec()
-    console.log(allMongoImages)
     return allMongoImages
 }
+
+export async function deleteMongoImages() {
+    await connect()
+    const images = await ImageModel.deleteMany()
+}
+
 
  

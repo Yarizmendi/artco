@@ -8,7 +8,10 @@ import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } f
 
 export default async function Page({ params }) {
   let frag
-  const [id, type, title] = params.path.split("-")
+  const [id, title] = params.path.split("-")
+  const type = title.split("/")
+  console.log(id, type, title)
+
 
   const { data, error, isLoading, isValidating, mutate } = UseShaders()
   const shaderOptions = data
@@ -37,7 +40,7 @@ export default async function Page({ params }) {
     )
   }
 
-  if ( type == "painting") {
+  if ( type == "paintings") {
     let {vert, noises, inputs, displayName, description, textures, transitions} = getPreviewPaintingSketch(title)
     const images = [await getMongoImageById(id)]
 

@@ -41,7 +41,7 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
     onClick={selectionHandler} 
     >
       <Link 
-        href={{ pathname: `sketches/${id}-painting-${title}`,
+        href={{ pathname: `sketches/${id}-${title}`,
         // query: { type: "collection" } 
         }} 
         className="flex justify-center border p-4 rounded-md"

@@ -57,7 +57,7 @@ export async function uploadImageAction(formData: FormData, selection: any) {
       for (let i=0; i<imageFiles.length; i++) {
         const imageFile = imageFiles[i]
         // @ts-ignore
-        await put(imageFile.name, imageFile, {
+        await put("paintings/"+imageFile.name, imageFile, {
           access: 'public',
           addRandomSuffix: false
         }).then( blob => {
