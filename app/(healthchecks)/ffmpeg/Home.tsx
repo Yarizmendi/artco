@@ -3,12 +3,14 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import { useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const ffmpegRef = useRef(new FFmpeg());
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const gifRef = useRef<HTMLImageElement | null>(null);
   const messageRef = useRef<HTMLParagraphElement | null>(null);
 
   const load = async () => {
@@ -35,38 +37,52 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  const testMp4 = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/videos/bunny_yawn.mp4"
-  const testWebm = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/videos/tree.webm"
+  // const testMp4 = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/videos/bunny_yawn.mp4"
+  // const testWebm = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/videos/tree.webm"
+  const testAvi = "https://raw.githubusercontent.com/ffmpegwasm/testdata/master/video-15s.avi"
 
   const transcode = async () => {
     const ffmpeg = ffmpegRef.current;
+    const contentType = "image/gif"
     
     await ffmpeg.writeFile(
-      "video.webm",
-      await fetchFile(testWebm)
+      "test.avi",
+      await fetchFile(testAvi)
     );
+  
+    await ffmpeg.exec(["-i","test.avi", "test.gif"]);
 
-    await ffmpeg.exec(["-i","video.webm","video.mp4"]);
+    const data = (await ffmpeg.readFile("test.gif")) as any;
+    const createdUrl = URL.createObjectURL(new Blob([data.buffer], { type: contentType }))
 
-    const data = (await ffmpeg.readFile("video.mp4")) as any;
+    if (contentType == "image/gif") {
+      if (gifRef.current) {
+        gifRef.current.src = createdUrl
+      }
+    }
+
+    else {
+      if (videoRef.current)
+        videoRef.current.src = URL.createObjectURL(
+          new Blob([data.buffer], { type: contentType })
+        );
+    }
     
-    if (videoRef.current)
-      videoRef.current.src = URL.createObjectURL(
-        new Blob([data.buffer], { type: "video/mp4" })
-      );
 
-      console.log(videoRef.current.src)
+
   };
 
   return loaded ? (
     <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-      <video ref={videoRef} controls></video>
+      {/* <video ref={videoRef} controls></video> */}
+      {/* @ts-ignore */}
+      <Image ref={gifRef} alt={"gif"} width={100} height={100} className="w-[100px] h-[100px]"></Image>
       <br />
       <button
         onClick={transcode}
         className="bg-green-500 hover:bg-green-700 text-white py-3 px-6 rounded"
       >
-        Transcode avi to mp4
+        Transcode avi to gif
       </button>
       <p ref={messageRef}></p>
     </div>

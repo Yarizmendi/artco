@@ -23,6 +23,7 @@ export default function PathSKetch({
     const [isLoading, setIsLoading] = useState(false);
     const ffmpegRef = useRef(new FFmpeg());
     const videoRef = useRef<HTMLVideoElement | null>(null);
+    const gifRef = useRef<HTMLImageElement | null>(null);
     const messageRef = useRef<HTMLParagraphElement | null>(null);
 
   function sketch(
@@ -260,8 +261,7 @@ export default function PathSKetch({
           // Output filename
           'output.mp4'
         ]);
- 
-        console.log('Video created!');
+
         // Read the video file from FFmpeg's virtual filesystem
         const videoData = (await ffmpeg.readFile("output.mp4")) as any;
 
@@ -270,7 +270,6 @@ export default function PathSKetch({
 
           const rawVideoBlob = new Blob([videoData.buffer], { type: "video/mp4" })
           const videoMp4Url = URL.createObjectURL(rawVideoBlob)
-
           videoRef.current.src = videoMp4Url;
 
           const videoElement = document.querySelector('video');
@@ -281,14 +280,38 @@ export default function PathSKetch({
           link.click();
           document.body.removeChild(link);
 
-          await put(
-            "videos/" + "test.mp4", 
-            rawVideoBlob, 
-            {
-              access: 'public', 
-              token: process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN,
-              contentType: "video/mp4" 
-            })
+          await ffmpeg.exec([
+            '-pattern_type', 'glob',
+            '-i', 'img*.jpg',
+            'output.gif'
+          ]);
+  
+          // Read the video file from FFmpeg's virtual filesystem
+          const gifData = (await ffmpeg.readFile("output.gif")) as any;
+
+          if ( gifRef.current) {
+            const rawGifData = new Blob([gifData.buffer], { type: "image/gif" })
+            const gifSrcUrl = URL.createObjectURL(rawGifData)
+            gifRef.current.src = gifSrcUrl
+
+            const gifElement = document.getElementById('gif');
+            const link = document.createElement('a');
+            // @ts-ignore
+            link.href = gifElement.src;
+            link.download = 'video.gif';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+
+        //   await put(
+        //     "videos/" + "test.mp4", 
+        //     rawVideoBlob, 
+        //     {
+        //       access: 'public', 
+        //       token: process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN,
+        //       contentType: "video/mp4" 
+        //     })
         }
 
       }
@@ -435,6 +458,8 @@ export default function PathSKetch({
         <div>
           {/* <p ref={messageRef}></p> */}
           <video ref={videoRef} id="mp4" controls className="max-w-[300px]"></video>
+           {/* @ts-ignore */}
+          <Image id="gif" ref={gifRef} alt={"gif"} width={100} height={100} className="w-[100px] h-[100px]"></Image>
         </div>
 
       </div>
