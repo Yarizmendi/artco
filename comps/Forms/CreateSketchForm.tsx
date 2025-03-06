@@ -4,7 +4,7 @@ import { Input } from "@/comps/Forms/FormInput"
 import { ActionButton } from "@/comps/Buttons/ActionButton"
 import { createSketchAction } from "actions/sketches/createSketchAction"
 import { ImageSelect } from "./ImageSelect"
-import { UseSketches } from "../../app/[user]/sketches/api/UseSketches"
+import { UseSketches } from "../../app/api/sketches/UseSketches"
 
 export function CreateSketchForm ({ user }) {
     const { mutate } = UseSketches({ creatorId: user })

@@ -1,17 +1,28 @@
+import Link from "next/link";
 
-import ArtistPage from "./[user]/page"
-// import Sketch from "./[user]/sketches/[path]/Stealth"
-import { getSketchById } from "actions/sketches/getSketchActions"
+export default function LandingPage() {
+    
+    return (
+        <div className="w-full border">
 
-export default ArtistPage
+            <div className="w-full flex justify-between border m-4">
+                <div className="flex flex-col space-y-2 border">
+                  <Link href="/creators">See Creators</Link>
+                  <Link href="/api/creators">Creators Api</Link>
+                </div>
+                
 
-// export default async function Sketches({ params }) {
-//     const { images, vert, frag, title, noises, inputs, displayName, description, textures, transitions} = await getSketchById({ _id: "66d4cb0699a46a507d37e31d" })
-//     return ( 
-//         <Sketch images={images}
-//         vert={vert} frag={frag} transitions={transitions} 
-//         title={title} displayName={displayName} description={description} 
-//         noises={noises} inputs={inputs} textures={textures} />
-//       )
-// }
+                <Link href="/explore">Explore Creations</Link>
+                <Link href="/auth/login">Login</Link>
+                <Link href="/auth/signup">SignUp</Link>
+                <Link href="/playground">Get Started</Link>
+            </div>
 
+            <div className="w-full flex justify-between border m-4">
+                <Link href="/api/shaders">Shaders from public</Link>
+                <Link href="/api/stocks">Stocks APi</Link>
+                <Link href="/api/vercel">Vercel APi</Link>
+            </div>
+        </div>
+    )
+}
