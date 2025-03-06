@@ -9,9 +9,9 @@ export default function LandingPage() {
                 <Link href="/ffmpeg">ffmpeg</Link>
                 
                 <Link href="/blog">Blog</Link>
-                <Link href="/auth/login">Login</Link>
-                <Link href="/auth/signup">SignUp</Link>
-                <Link href="/creators">Creators</Link>
+                {/* <Link href="/auth/login">Login</Link>
+                <Link href="/auth/signup">SignUp</Link> */}
+                {/* <Link href="/creators">Creators</Link> */}
                 <Link href="/shaders">Shaders</Link>
                 <Link href="/sketches">Sketches</Link>
 
