@@ -34,6 +34,7 @@ export function P5Provider({ sketch, children }) {
   }}, [isMounted]) 
 
   return (
+    // @ts-ignore
     <P5Context.Provider value={{ isMounted }}>
         <div className={classnames([
           "flex flex-col md:flex-row w-full"

@@ -122,7 +122,7 @@ export default function PathSKetch({
     const SetupCanvas = () => {
       p.frameRate(frameRate)
       // ensures canvas is sized to parent on all screen sizes
-      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").addClass("min-h-[500px]")
+      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").class("min-h-[500px] dark:border-[40px] dark:border-zinc-900 dark:rounded-xl")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
     }
 
@@ -181,7 +181,6 @@ export default function PathSKetch({
       Overlay.recordBtn.mouseClicked(() => {
         if (!isRecording) {
           song && song.play()
-          song.S
           isRecording = true;
           isPlaying = true;
           Overlay.playBtnLabel.html("pause")
@@ -194,12 +193,7 @@ export default function PathSKetch({
           Overlay.playBtnLabel.html("play")
           Overlay.recordBtnLabel.html("record");
           Overlay.recordBtn.removeClass("text-red-500");
-          isRecording = false;
-          setTimeout(()=>{
-            console.log(p.frameCount, arrayBuffers)
-            createMP4Video().then(res => alert("video created!"))
-          }, 1000)
-    
+          isRecording = false;   
         }
       })
 
@@ -214,9 +208,7 @@ export default function PathSKetch({
     const CreateShaderDropdown = ({ ActiveShader, shaderOptions }): { fragSelect } => {
      // create a fragment shader input switcher
      p.shader(ActiveShader)
-
-     const testFrag = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders"
-     fragSelect = p.createSelect().parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
+     fragSelect = p.createSelect().parent("menu").class("bg-slate-200 dark:bg-slate-950 h-[30px] w-[100px]")
      fragSelect.selected("/test.frag")
 
      shaderOptions && shaderOptions.map(shader => {
@@ -412,10 +404,6 @@ export default function PathSKetch({
           y = p.map( waveform[i]*100000, -1, 1, 0, Parent.offsetHeight);
           ActiveShader.setUniform("uWavesX", amp)
           ActiveShader.setUniform("uWavesY", amp)
-
-          // console.log("waveform", x, y)
-    
-          // console.log("waveform", waveform[i])
         }
       }
       return(y)
@@ -440,26 +428,29 @@ export default function PathSKetch({
   return (
     <P5Provider sketch={sketch}>
       <div className={classnames(
-       "flex flex-col grow p-4"
+       "flex flex-col grow p-6 w-full gap-4"
       )}>
         <div>
           {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
         </div>
 
-        <div id="menu" className={classnames("w-full h-[50px]")} />
+        <div id="menu" className={classnames("flex flex-row-reverse items-center gap-4")} />
 
-        <Sliders inputs={inputs} />
+       {/* <div className="border"> */}
+         <Sliders inputs={inputs} />
+       {/* </div> */}
+    
 
         <div className={classnames(
-         "flex gap-4 overflow-auto p-4 w-full"
-          )}> {images && images.map((img, key) => <Image key={key} src={img.blob} width={100} alt={"img"} height={100} placeholder={"blur"} blurDataURL={"blur64"} />)}
+         "flex gap-4 overflow-auto w-full"
+          )}> {images && images.map((img, key) => <Image className="h-[175px] w-[200px]" key={key} src={img.blob} width={175} alt={"img"} height={175} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
 
-        <div>
+        <div className="flex gap-8 items-center">
           {/* <p ref={messageRef}></p> */}
-          <video ref={videoRef} id="mp4" controls className="max-w-[300px]"></video>
+          <video ref={videoRef} id="mp4" controls className="w-[200px] h-[200px]"></video>
            {/* @ts-ignore */}
-          <Image id="gif" ref={gifRef} alt={"gif"} width={100} height={100} className="w-[100px] h-[100px]"></Image>
+          <Image id="gif" ref={gifRef} alt={"gif"} width={100} height={100} className="w-[200px] h-[180px]"></Image>
         </div>
 
       </div>
