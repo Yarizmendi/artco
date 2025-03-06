@@ -7,10 +7,12 @@ export default function LandingPage() {
 
             <div className="w-full flex flex-col border gap-2 p-2">
                 {/* <Link href="/ffmpeg">ffmpeg</Link> */}
-                <Link href="/creators">Creators</Link>
-                <Link href="/sketches">Sketches</Link>
+                <Link href="/blog">Blog</Link>
                 <Link href="/auth/login">Login</Link>
                 <Link href="/auth/signup">SignUp</Link>
+                <Link href="/creators">Creators</Link>
+                <Link href="/shaders">Shaders</Link>
+                <Link href="/sketches">Sketches</Link>
 
                 {/* <Link href="/playground">Create</Link> */}
                 {/* <Link href="/collections">Create</Link> */}

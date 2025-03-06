@@ -2,8 +2,9 @@
 "use client"
 import { Loading } from "@/comps/Loading"
 import { NotFound } from "@/comps/NotFound"
-import { UseSketches } from "../../api/sketches/UseSketches"
+import { UseSketches } from "../../../api/sketches/UseSketches"
 import SketchLink from "@/comps/Links/SketchLink"
+
 
 export function SketchesList({ creatorId }) {
   const { data, error, isLoading, isValidating, mutate } = UseSketches({ creatorId })

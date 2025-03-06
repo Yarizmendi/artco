@@ -2,7 +2,7 @@
 "use client"
 import { Loading } from "@/comps/Loading"
 import { NotFound } from "@/comps/NotFound"
-import { UsePaintings } from "../../api/vercel/paintings/UsePaintings"
+import { UsePaintings } from "@/api/vercel/paintings/UsePaintings"
 import { Painting } from "@/comps/Links/PaintingLink"
 import { ImageCreateForm } from "@/comps/Forms/ImageCreateForm"
 import { useEffect, useState } from "react"
