@@ -16,6 +16,12 @@ export async function getBlobMeta(vercelBlob) {
   }
   return blobMetadata
 }
+
+export async function getVercelBlobs() {
+  const blobs = await list()
+  return blobs
+}
+
 // const listOfBlobs = await list({
 //     cursor,
 //     limit: 10,
