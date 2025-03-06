@@ -1,5 +1,5 @@
 
-import { getVercelBlobs } from "actions/blobs/getVercelBlobs"
+import { getPaintings } from "actions/blobs/paintings/getVercelPaintings"
 import { getMongoImages, getMongoImagesByUploaderId } from "actions/images/getImages"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -8,7 +8,7 @@ export async function GET( req: NextRequest ) {
     const vercelFlag = req.nextUrl.searchParams.get("vercel")
 
     if (vercelFlag) {
-        const data = await getVercelBlobs()
+        const data = await getPaintings()
         return NextResponse.json(data)
     }
 

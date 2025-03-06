@@ -1,7 +1,6 @@
 
 "use server"
-import connect from 'mongo/index.js'
-import ImageModel from '@/mongo/models/image.model'
+
 import { list } from '@vercel/blob'
 import { head, BlobAccessError } from '@vercel/blob'
  
@@ -17,8 +16,8 @@ export async function getBlobMeta(vercelBlob) {
   return blobMetadata
 }
 
-export async function getVercelBlobs() {
-  const blobs = await list()
+export async function getPaintings() {
+  const blobs = await list({ prefix: 'paintings/' })
   return blobs
 }
 
