@@ -1,4 +1,7 @@
 
+"use client"
+
+import { UseShaders } from "@/api/vercel/shaders/UseShaders"
 import Sketch from "./Refactor"
 import { getUserImgCollectionById, getMongoImageById } from "actions/images/getImages"
 import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } from "actions/sketches/getSketchActions"
@@ -6,7 +9,10 @@ import { getPreviewCollectionSketch, getPreviewPaintingSketch, getSketchById } f
 export default async function Page({ params }) {
   let frag
   const [id, type, title] = params.path.split("-")
-  const shaderOptions = await fetch("https://artco.netlify.app/api/shaders", { mode: "cors" }).then(res => res.json())
+
+  const { data, error, isLoading, isValidating, mutate } = UseShaders()
+  const shaderOptions = data
+  console.log(shaderOptions)
 
   if ( type == "collection") {
     const {vert, frag, title, noises, inputs, displayName, description, textures, transitions} = getPreviewCollectionSketch()
