@@ -5,6 +5,7 @@ import "@/styles/github-dark.css"
 
 export default function Articles() {
   return (
+    // @ts-ignore
     <TestMdxPage />
   )
 }

@@ -2,6 +2,7 @@
 
 import classNames from 'classnames'
 import { ICONLINED } from 'data/css'
+// @ts-ignore
 import { useFormStatus } from 'react-dom'
 
 export const ImageUpdateIcon = ({

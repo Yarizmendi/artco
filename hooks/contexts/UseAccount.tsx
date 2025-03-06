@@ -10,6 +10,7 @@ export const UserAccountContxt = createContext({
 export function UserAccountProvider() {
     const [ user, setUser ] = useState(null)
     return (
+      // @ts-ignore
       <UserAccountContxt.Provider value={{ user, setUser}}>
         <div>
             { user && <h1> Welcome, {user["username"]} </h1>}

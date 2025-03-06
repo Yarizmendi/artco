@@ -10,6 +10,7 @@ export const DarkModeContext = createContext({
 export function DarkModeProvider({children}) {
     const [ themeClass, setThemeClass ] = useState("dark")
     return (
+      // @ts-ignore
       <DarkModeContext.Provider value={{themeClass, setThemeClass}}>
         <body className={themeClass}>{children}</body>
       </DarkModeContext.Provider>

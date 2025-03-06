@@ -1,6 +1,7 @@
 
 'use client'
 import classNames from 'classnames'
+// @ts-ignore
 import { useFormStatus } from 'react-dom'
 
 export const ActionButton = ({

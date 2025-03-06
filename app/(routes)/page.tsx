@@ -28,7 +28,7 @@ export default function LandingPage() {
                 <Link href="/api/shaders">Shaders Api</Link>
                 <Link href="/api/sketches">Sketches Api</Link>
                 <Link href="/api/stocks">Stocks Api</Link>
-                <Link href="/api/vercel">Vercel Api</Link>
+                {/* <Link href="/api/vercel">Vercel Api</Link> */}
             </div>
 
           
