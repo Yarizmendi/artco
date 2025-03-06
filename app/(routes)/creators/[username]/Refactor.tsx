@@ -181,6 +181,7 @@ export default function PathSKetch({
       Overlay.recordBtn.mouseClicked(() => {
         if (!isRecording) {
           song && song.play()
+          song.S
           isRecording = true;
           isPlaying = true;
           Overlay.playBtnLabel.html("pause")
@@ -193,7 +194,12 @@ export default function PathSKetch({
           Overlay.playBtnLabel.html("play")
           Overlay.recordBtnLabel.html("record");
           Overlay.recordBtn.removeClass("text-red-500");
-          isRecording = false;   
+          isRecording = false;
+          setTimeout(()=>{
+            console.log(p.frameCount, arrayBuffers)
+            createMP4Video()
+          }, 1000)
+    
         }
       })
 
@@ -208,7 +214,9 @@ export default function PathSKetch({
     const CreateShaderDropdown = ({ ActiveShader, shaderOptions }): { fragSelect } => {
      // create a fragment shader input switcher
      p.shader(ActiveShader)
-     fragSelect = p.createSelect().parent("menu").class("bg-slate-200 dark:bg-slate-950 h-[30px] w-[100px]")
+
+     const testFrag = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders"
+     fragSelect = p.createSelect().parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
      fragSelect.selected("/test.frag")
 
      shaderOptions && shaderOptions.map(shader => {
@@ -253,7 +261,8 @@ export default function PathSKetch({
           // Output filename
           'output.mp4'
         ]);
-
+ 
+        console.log('Video created!');
         // Read the video file from FFmpeg's virtual filesystem
         const videoData = (await ffmpeg.readFile("output.mp4")) as any;
 
@@ -262,6 +271,7 @@ export default function PathSKetch({
 
           const rawVideoBlob = new Blob([videoData.buffer], { type: "video/mp4" })
           const videoMp4Url = URL.createObjectURL(rawVideoBlob)
+
           videoRef.current.src = videoMp4Url;
 
           const videoElement = document.querySelector('video');
@@ -272,30 +282,6 @@ export default function PathSKetch({
           link.click();
           document.body.removeChild(link);
 
-          await ffmpeg.exec([
-            '-pattern_type', 'glob',
-            '-i', 'img*.jpg',
-            'output.gif'
-          ]);
-  
-          // Read the video file from FFmpeg's virtual filesystem
-          const gifData = (await ffmpeg.readFile("output.gif")) as any;
-
-          if ( gifRef.current) {
-            const rawGifData = new Blob([gifData.buffer], { type: "image/gif" })
-            const gifSrcUrl = URL.createObjectURL(rawGifData)
-            gifRef.current.src = gifSrcUrl
-
-            const gifElement = document.getElementById('gif');
-            const link = document.createElement('a');
-            // @ts-ignore
-            link.href = gifElement.src;
-            link.download = 'video.gif';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }
-
         //   await put(
         //     "videos/" + "test.mp4", 
         //     rawVideoBlob, 
@@ -304,7 +290,32 @@ export default function PathSKetch({
         //       token: process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN,
         //       contentType: "video/mp4" 
         //     })
+        // }
+
+        await ffmpeg.exec([
+          '-pattern_type', 'glob',
+          '-i', 'img*.jpg',
+          'output.gif'
+        ]);
+
+        // Read the video file from FFmpeg's virtual filesystem
+        const gifData = (await ffmpeg.readFile("output.gif")) as any;
+
+        if ( gifRef.current) {
+          const rawGifData = new Blob([gifData.buffer], { type: "image/gif" })
+          const gifSrcUrl = URL.createObjectURL(rawGifData)
+          gifRef.current.src = gifSrcUrl
+
+          const gifElement = document.getElementById('gif');
+          const link = document.createElement('a');
+          // @ts-ignore
+          link.href = gifElement.src;
+          link.download = 'video.gif';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         }
+      }
 
       }
       catch (error) {
@@ -428,29 +439,25 @@ export default function PathSKetch({
   return (
     <P5Provider sketch={sketch}>
       <div className={classnames(
-       "flex flex-col grow p-6 w-full gap-4"
+       "flex flex-col grow p-6 w-8/12 gap-4"
       )}>
         <div>
           {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
         </div>
 
         <div id="menu" className={classnames("flex flex-row-reverse items-center gap-4")} />
-
-       {/* <div className="border"> */}
          <Sliders inputs={inputs} />
-       {/* </div> */}
-    
-
+     
         <div className={classnames(
          "flex gap-4 overflow-auto w-full"
-          )}> {images && images.map((img, key) => <Image className="h-[175px] w-[200px]" key={key} src={img.blob} width={175} alt={"img"} height={175} placeholder={"blur"} blurDataURL={"blur64"} />)}
+          )}> {images && images.map((img, key) => <Image className="h-[175px] w-[170px]" key={key} src={img.blob} width={175} alt={"img"} height={175} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
 
         <div className="flex gap-8 items-center">
           {/* <p ref={messageRef}></p> */}
           <video ref={videoRef} id="mp4" controls className="w-[200px] h-[200px]"></video>
            {/* @ts-ignore */}
-          <Image id="gif" ref={gifRef} alt={"gif"} width={100} height={100} className="w-[200px] h-[180px]"></Image>
+          <Image id="gif" ref={gifRef} alt={"gif"} width={100} height={100} className="w-[200px] h-[170px]"></Image>
         </div>
 
       </div>
