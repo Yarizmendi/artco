@@ -104,8 +104,10 @@ export function getPreviewCollectionSketch() {
 export function getPreviewPaintingSketch(title) {
 
     return {
-        vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
-        frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/walking.frag",
+        // vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
+        frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/test.frag",
+        vert: "/basic.vert",
+        // frag: "/test.frag",
         title: title,
         displayName: title ?? "Painting",
         description: "Preview Painting Sketch -" + title,

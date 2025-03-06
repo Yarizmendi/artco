@@ -13,8 +13,6 @@ import { CanvasCapture } from 'canvas-capture'
 import { P5Provider } from "hooks/contexts/useP5"
 import { CreateSliders, HandleSliders, Sliders } from "../helpers/Sliders"
 import { put } from "@vercel/blob"
-import { UseShaders } from "@/api/vercel/shaders/UseShaders"
-
 
 export default function PathSKetch({
   title, vert, frag, displayName, description,
@@ -53,7 +51,6 @@ export default function PathSKetch({
     let isPlaying = false, isRecording = false
     let drawPlayTimer = 0, drawPauseTimer = 0
 
-
     const PreloadSong = () => {
       // @ts-ignore
       p.soundFormats('mp3', 'ogg')
@@ -72,7 +69,7 @@ export default function PathSKetch({
     }
 
     const PreloadShaders = () => {
-      ActiveShader = p.loadShader("https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/standard.vert", "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/test.frag") 
+      ActiveShader = p.loadShader(vert, frag) 
     }
     
     const PreloadFFMEPG = async () => {
@@ -216,7 +213,11 @@ export default function PathSKetch({
     const CreateShaderDropdown = ({ ActiveShader, shaderOptions }): { fragSelect } => {
      // create a fragment shader input switcher
      p.shader(ActiveShader)
-     fragSelect = p.createSelect(frag).parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
+
+     const testFrag = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders"
+     fragSelect = p.createSelect().parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
+     fragSelect.selected("/test.frag")
+
      shaderOptions && shaderOptions.map(shader => {
         const shaderName = shader.pathname.split("/")[1]
         const shaderUrl = shader.url

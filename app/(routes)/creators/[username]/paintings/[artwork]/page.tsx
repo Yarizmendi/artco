@@ -8,8 +8,9 @@ export default async function ArtworkSketch({ params }) {
   let {vert, noises, inputs, displayName, description, textures, transitions, frag} = getPreviewPaintingSketch("preview")
   const images = [await getMongoImageById(params.artwork)]
 
-  const shaderOptions = await getVercelShadersAction()
-  console.log(images,noises, vert, frag, shaderOptions)
+  let shaderOptions = await getVercelShadersAction()
+  // shader option dropdown has empty value because vercel returns folder first
+  shaderOptions = shaderOptions.splice(1)
 
      return ( 
       <NoSSR>
