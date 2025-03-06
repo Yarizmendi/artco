@@ -5,7 +5,7 @@ export default async function UserCollectionsPage({ params }) {
     const username = params.username;
     const creator = await getUserByUsernameAction({ username });
     return (
-        <div>
+        <div className="w-full">
             <CollectionList uploaderId={creator.id} />
         </div>
     )

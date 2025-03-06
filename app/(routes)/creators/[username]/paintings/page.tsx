@@ -6,7 +6,7 @@ export default async function UserPaintingsPage({ params }) {
     const username = params.username;
     const creator = await getUserByUsernameAction({ username });
     return (
-        <div>
+        <div className="w-full">
             <PaintingsList uploaderId={creator.id} />
         </div>
     )

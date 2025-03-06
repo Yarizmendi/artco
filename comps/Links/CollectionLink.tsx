@@ -8,6 +8,7 @@ export default function CollectionLink({ id, blob, title, uploaderId }) {
         <Link href={ `collections/${id}`}
         replace={true}
         prefetch={false}
+        className="p-4"
         >  
         <Image 
             src= {blob} 
