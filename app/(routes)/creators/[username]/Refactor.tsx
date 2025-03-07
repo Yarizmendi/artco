@@ -15,7 +15,7 @@ import { CreateSliders, HandleSliders, Sliders } from "../helpers/Sliders"
 import { put } from "@vercel/blob"
 
 export default function PathSKetch({
-  title, vert, frag, displayName, description,
+  title, vert, frag, displayName, description, notes,
   images, inputs, textures, noises, transitions, shaderOptions
 }) {
 
@@ -64,6 +64,7 @@ export default function PathSKetch({
 
     const PreloadImages = () => {
       images && images.length && images.map(img => img["Image"] = p.loadImage(img.blob))
+      notes && notes.length && notes.map(note => note["Note"] = p.loadImage(note.blob))
     }
 
     const PreloadNoise = () => {
@@ -113,9 +114,10 @@ export default function PathSKetch({
 
  
     p.preload = () => {
-      PreloadSong()
+      // PreloadSong()
       PreloadNoise()
       PreloadImages()
+      console.log(notes)
       PreloadFFMEPG()
       PreloadShaders()
     }
@@ -180,7 +182,6 @@ export default function PathSKetch({
       Overlay.recordBtn.mouseClicked(() => {
         if (!isRecording) {
           song && song.play()
-          song.S
           isRecording = true;
           isPlaying = true;
           Overlay.playBtnLabel.html("pause")
@@ -226,14 +227,25 @@ export default function PathSKetch({
      return fragSelect
     }
 
+    const duration = 6000
+    let cur = notes[0]
+    let nxt = notes[cur.next]
+    console.log("begin", cur, nxt)
+    // notes0, notes1
+    // notes1, notes2
+    // notes2, notes3
+    // notes3, notes0
+    // notes0, notes1
+
 
     p.setup = () => {
       SetupCanvas()
       CreateControls()
-      InitializeAudio()
-
+      // InitializeAudio()
       CreateSliders({ inputs, p })
       CreateShaderDropdown({ ActiveShader, shaderOptions})
+      ActiveShader.setUniform("u_first_image", cur["Note"])
+      ActiveShader.setUniform("u_second_image", nxt["Note"])
     }
 
 
@@ -329,19 +341,18 @@ export default function PathSKetch({
     }
 
     const HandleTimer = () => {
-      // if (startMillis == null) {
-      //   startMillis = p.millis();
-      // }
+      if (startMillis == null) {
+        startMillis = p.millis();
+      }
 
-      // const elapsed = p.millis() - startMillis;
-      // const t = p.map(elapsed, 0, duration, 0, 1);
+      const elapsed = p.millis() - startMillis;
+      const t = p.map(elapsed, 0, duration, 0, 1);
 
-      // if (t > 1) {
-        // console.log('finished one elapse.');
-        // startMillis = null;
-        // p.noLoop();
-        // CanvasCapture.stopRecord();
-      // }
+      if (t > 1) {
+        cur = notes[cur.next]
+        nxt = notes[cur.next]
+        startMillis = null;
+      }
     }
 
     function HandleControls() {
@@ -351,14 +362,13 @@ export default function PathSKetch({
         else if (drawPauseTimer) drawPlayTimer = p.millis() - drawPauseTimer
         seconds = drawPlayTimer/1000 
         ActiveShader.setUniform("u_time", seconds)
+        HandleTimer()
       } 
 
       if (!isPlaying) {
         drawPauseTimer = p.millis() - drawPlayTimer
         seconds = drawPauseTimer/1000
       }
-
-      if (transitions) HandleTransitions()
 
     }
 
@@ -391,10 +401,13 @@ export default function PathSKetch({
       })
     }
 
+ 
 
     const HandleShaderDraw = () => {
       noises && noises.length && ActiveShader.setUniform("u_noise", noises[0]["Noise"])
       textures && textures.map((texture, i) => ActiveShader.setUniform(texture.uniform, images[i + idx]["Image"]))
+      ActiveShader.setUniform("u_first_image", cur["Note"])
+      ActiveShader.setUniform("u_second_image", nxt["Note"])
     }
 
     
@@ -427,8 +440,7 @@ export default function PathSKetch({
       HandleRecording()
       HandleShaderDraw()
       HandleSketchTimer()
-
-      HandleSongDraw(song)
+      // HandleSongDraw(song)
       HandleSliders({ inputs, ActiveShader })
 
       p.rectMode(p.CENTER)
@@ -452,7 +464,7 @@ export default function PathSKetch({
      
         <div className={classnames(
          "flex gap-4 overflow-auto w-full"
-          )}> {images && images.map((img, key) => <Image className="h-[175px] w-[170px]" key={key} src={img.blob} width={175} alt={"img"} height={175} placeholder={"blur"} blurDataURL={"blur64"} />)}
+          )}> {images && images.concat(notes).map((img, key) => <Image className="h-[175px] w-[170px]" key={key} src={img.blob} width={175} alt={"img"} height={175} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
 
         <div className="flex gap-8 items-center">

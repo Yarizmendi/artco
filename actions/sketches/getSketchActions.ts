@@ -105,9 +105,9 @@ export function getPreviewPaintingSketch(title) {
 
     return {
         // vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
-        frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/test.frag",
+        // frag: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/test.frag",
         vert: "/basic.vert",
-        // frag: "/test.frag",
+        frag: "/test.frag",
         title: title,
         displayName: title ?? "Painting",
         description: "Preview Painting Sketch -" + title,
@@ -142,7 +142,8 @@ export function getPreviewPaintingSketch(title) {
         ],
         textures: [
             { "uniform": "u_texture"},
-            // { "uniform": "u_foreground"},
+            // { "uniform": "u_first_image"},
+            // { "uniform": "u_second_image"},
         ],
 
         noises: [{ blob:"https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/paintings/perlin.png"}]
