@@ -38,6 +38,7 @@ export default function PathSKetch({
     let idx = 0
     let Overlay
     let seconds = 0
+    let MediaRecorder
 
     let arrayBuffers = []
     let startMillis = null
