@@ -40,9 +40,20 @@ export async function getMongoImageByBlob(blob) {
     return ImageModel.findOne({ blob: blob }).select("-_id -uploaderId -__v").exec()
 }
 
-export async function getMongoImages() {
+export async function getMongoImages({ uploaderId }: { uploaderId?: string }) {
     await connect()
-    return ImageModel.find().select("-uploaderId -__v").exec()
+    if ( uploaderId ) {
+        return ImageModel
+        .find({ uploaderId })
+        .find({ type: "painting" })
+        .sort({ createdAt: "desc"}).exec()
+    }
+    else {
+        return ImageModel
+        .find({ type: "painting" })
+        .sort({ createdAt: "desc"}).exec()
+    }
+
 }
 
 export async function updateMongoImageBlobs() {

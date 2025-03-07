@@ -19,14 +19,28 @@ interface IPainting {
   description: string,
   displayName: string,
   mutate: any,
-  selected?: any,
+  type: "note" | "painting" | "noise" ,
+  selected?: Array<IPainting>,
   setSelected?: any,
   isSelecting?: string
 }
 
-export function Painting({ id, positionIdx, uploaderId, blob, title, description, displayName, mutate, selected, setSelected, isSelecting }: IPainting) {
+export function Painting({ 
+  id, 
+  positionIdx, 
+  uploaderId, 
+  blob, 
+  title,
+  description, 
+  displayName, 
+  mutate, 
+  selected, 
+  type,
+  setSelected, 
+  isSelecting 
+}: IPainting ) {
+  
   const [isEditing, setIsEditing] = useState(false)
-
 
   // const selectionHandler = () => {
   //   const selection = { id, title, blob }
@@ -43,28 +57,24 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
       <Link 
         href={`paintings/${id}`} 
         replace={true}
-        prefetch={false}
-        > 
+        prefetch={false} > 
         <Image 
           src= {blob} 
           alt={title} 
           width={ 300 }
           height={ 300 }
           quality={ 100 }
-          className="w-fill h-[260px] md:w-[240px] md:h-[220px] rounded"
-        />
+          className="w-fill h-[260px] md:w-[240px] md:h-[220px] rounded" />
       </Link>
 
     <form 
+      className="w-full flex flex-col dark:bg-slate-950"
       action={ async formData => {
         await updateImageAction( formData )
         mutate()
-      }}
+      }}>
     
-     className="w-full flex flex-col dark:bg-slate-950"
-    >
-
-    <input name={"id"} defaultValue={id} hidden />
+      <input name={"id"} defaultValue={id} hidden />
 
       <div className="flex items-center dark:bg-slate-950">
         <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
@@ -76,6 +86,15 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
           <Input title="positionIdx" value={positionIdx} placeholder='position' required={false} />
           <Input title="description" value={description} placeholder='description' required={false} />
           <Input title="displayName" value={displayName} placeholder='display name'/>
+
+          <select defaultValue={type}
+            className='text-sm font-light flex w-full dark:bg-slate-950 bg-slate-200 px-2 py-1 rounded w-full'
+            name="type" id="type" >
+            <option value="painting">painting</option>
+            <option value="note">note</option>
+            <option value="noise">noise</option>
+          </select> 
+          
           <div className="flex items-end justify-between p-2">
             <ImageDeleteIcon id={id} uploaderId={uploaderId} blob={blob} mutate={mutate} />
             <ActionButton mutate={mutate} idleTxt={"update"} loadingTxt={"...updating"} color={"orange"} btnType={"submit"} />

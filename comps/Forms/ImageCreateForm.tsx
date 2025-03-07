@@ -26,12 +26,23 @@ export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollec
         mutate()
         setImages(null)
     }}>
+
       <input type="hidden" name="uploaderId" defaultValue={uploaderId} />
       <input type="hidden" name="isCollection" defaultValue={isCollection} />
       <Input title="title" placeholder={"title"} />
       <Input title="description" placeholder={"description"} />
-      <Input title="displayName" placeholder={"display name"} />
-      {/* <ShaderSelect /> */}
+
+      {/* <Input title="displayName" placeholder={"display name"} /> */}
+      {/* <label htmlFor="type">choose a type:</label> */}
+      
+      <select 
+        className='text-sm font-light flex w-full dark:bg-slate-950 bg-slate-200 px-2 py-1 rounded w-full'
+        name="type" id="type" >
+        <option value="painting">painting</option>
+        <option value="note">note</option>
+        <option value="noise">noise</option>
+      </select>
+
       <div className='flex justify-between items-center'>
         <input className='text-[10px] file:p-1 font-normal file:mr-4 file:text-xs' type="file" name="image" multiple={true} onChange={ e => {
           e.preventDefault()
@@ -41,6 +52,7 @@ export function ImageCreateForm({ uploaderId, btnColor="green", mutate, isCollec
         }} />   
         <ActionButton idleTxt={"create"} loadingTxt='...creating' color={btnColor} btnType={"submit"}/>
       </div>
+
       { images && <div className='h-[280px] w-full my-2 flex flex-wrap gap-8 overflow-auto'>
         { images.map( (url, idx) => <Image className={"w-[100px] h-[100px]"} key={idx} src={url} width={100} height={100} alt={"img"} /> )}
       </div>}

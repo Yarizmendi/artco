@@ -10,11 +10,18 @@ import { Input } from "../Forms/FormInput"
 import { SketchDeleteIcon } from "../sketches/buttons/SketchDeleteIcon"
 
 export default function SketchLink({ 
-  id, vert, frag, 
-  description, blob, title, displayName,
-  tags, images, inputs, textures,
+  id, 
+  vert, 
+  frag, 
+  description,
+  blob, 
+  title, 
+  displayName,
+  tags, 
+  images, 
+  inputs, 
+  textures,
   mutate
-
  }) {
 
   const [isEditing, setIsEditing] = useState(false)

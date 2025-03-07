@@ -9,9 +9,7 @@ const imageSchema = new mongoose.Schema({
     pathname: String,
     description: String,
     downloadUrl: String,
-    contentType: String,
     displayName: String,
-
     positionIdx: String || Number,
 
     createdAt: {

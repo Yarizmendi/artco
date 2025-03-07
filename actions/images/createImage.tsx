@@ -18,6 +18,7 @@ export async function uploadImageAction(formData: FormData, selection: any) {
     const uploaderId = formData.get("uploaderId")
     const description = formData.get('description')
     const displayName = formData.get('displayName')
+    const type = formData.get('type')
     const isCollection = formData.get('isCollection')
 
     let imageFiles = formData.getAll('image')
@@ -33,7 +34,6 @@ export async function uploadImageAction(formData: FormData, selection: any) {
       for (let i=0; i<selection.length; i++) {
         const imageId = selection[i].id
         const image = await ImageModel.findById(imageId)
-        console.log(image)
         mongoImages.push(image)
         imageMongoIds.push(image._id)
         console.log(imageMongoIds, mongoImages)
@@ -50,7 +50,6 @@ export async function uploadImageAction(formData: FormData, selection: any) {
         displayName: "new collection",
       })
 
-      console.log(createdCollectionId)
     }
 
     else {
@@ -66,6 +65,7 @@ export async function uploadImageAction(formData: FormData, selection: any) {
             imageMongo["displayname"] = displayName
             imageMongo["description"] = description
             imageMongo["uploaderId"] = uploaderId
+            imageMongo["type"] = type
             imageMongo["blob"] = url
             imageMongo["pathname"] = pathname
             imageMongo["downloadUrl"] = downloadUrl
