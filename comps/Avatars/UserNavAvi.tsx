@@ -10,7 +10,7 @@ interface IUser {
 export default function UserNavAvi({ username, avatar }: IUser ) {
     const userInitial = username[0]
     return (
-      <Link href={`/creators/${username}`} className="rounded-full w-12 h-12 border flex items-center justify-center">
+      <Link href={`/creators/${username}`} className="rounded-full w-12 h-12 border border-black dark:border-white flex items-center justify-center">
         { avatar 
           ? <Image 
               height={100}
