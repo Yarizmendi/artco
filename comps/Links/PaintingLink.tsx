@@ -42,22 +42,18 @@ export function Painting({ id, positionIdx, uploaderId, blob, title, description
     >
       <Link 
         href={`paintings/${id}`} 
-        className="flex justify-center border p-4 rounded-md"
         replace={true}
         prefetch={false}
-        > View
+        > 
+        <Image 
+          src= {blob} 
+          alt={title} 
+          width={ 300 }
+          height={ 300 }
+          quality={ 100 }
+          className="w-fill h-[260px] md:w-[240px] md:h-[220px] rounded"
+        />
       </Link>
-
-      <Image 
-        src= {blob} 
-        alt={title} 
-        width={ 300 }
-        height={ 300 }
-        quality={ 100 }
-        className="w-fill h-[260px] md:w-[240px] md:h-[220px] rounded"
-      />
-
-
 
     <form 
       action={ async formData => {
