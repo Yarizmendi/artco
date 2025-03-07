@@ -1,8 +1,7 @@
 
 "use client"
 
-import { UsePaintings, UseBlobs } from "@/api/vercel/paintings/UsePaintings";
-import { UseShaders } from "@/api/vercel/shaders/UseShaders";
+import {  UseBlobs } from "@/api/vercel/paintings/UsePaintings";
 import { Loading } from "@/comps/Loading";
 import { NotFound } from "@/comps/NotFound";
 import Image from "next/image";
