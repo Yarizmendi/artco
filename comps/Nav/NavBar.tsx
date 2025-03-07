@@ -2,6 +2,7 @@ import { LogoName } from './Logo'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
 import { AuthedLinks } from './AuthedLinks'
+import UserNavAvi from '../Avatars/UserNavAvi'
 
 export function NavBar() {
   return (
@@ -14,7 +15,8 @@ export function NavBar() {
         <ThemeButton />
         <LogoName />
       </div>
-      <nav>
+      <nav className='flex gap-4'>
+        <UserNavAvi username='Benji' />
         <AuthedLinks />
       </nav>
     </header>

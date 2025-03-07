@@ -11,7 +11,7 @@ export default function PaintingsList({ uploaderId }) {
   const { data, error, isLoading, isValidating, mutate } = UsePaintings({ uploaderId })
 
   if ( error ) return <NotFound />
-  if ( isLoading || isValidating ) return <Loading />
+  if ( isLoading ) return <Loading />
 
   if ( data ) return (
     <div className="w-full h-full flex flex-col items-center justify-center md:flex-row md:items-start m-2 p-2 gap-2">
