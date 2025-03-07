@@ -53,7 +53,21 @@ export async function getMongoImages({ uploaderId }: { uploaderId?: string }) {
         .find({ type: "painting" })
         .sort({ createdAt: "desc"}).exec()
     }
+}
 
+export async function getUserNotes({ uploaderId }: { uploaderId?: string }) {
+    await connect()
+    if ( uploaderId ) {
+        return ImageModel
+        .find({ uploaderId })
+        .find({ type: "note" })
+        .sort({ createdAt: "desc"}).exec()
+    }
+    else {
+        return ImageModel
+        .find({ type: "note" })
+        .sort({ createdAt: "desc"}).exec()
+    }
 }
 
 export async function updateMongoImageBlobs() {

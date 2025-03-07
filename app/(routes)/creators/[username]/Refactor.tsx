@@ -11,7 +11,7 @@ import { Controls } from "@/p5/Controls"
 import { Recorder } from "@/p5/Recorder"
 import { CanvasCapture } from 'canvas-capture'
 import { P5Provider } from "hooks/contexts/useP5"
-import { CreateSliders, HandleSliders, Sliders } from "../helpers/Sliders"
+import { CreateSliders, HandleSliders, Sliders } from "../../../../comps/P5/helpers/Sliders"
 import { put } from "@vercel/blob"
 
 export default function PathSKetch({

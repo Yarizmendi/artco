@@ -9,9 +9,9 @@ export function AuthedLinks() {
     const { user } = useContext(UserAccountContxt)
 
     let routes = [
-        { title: "sketches", path: `/creators/Benji/sketches`},
+        { title: "artbook", path: `/creators/Benji/sketches`},
         { title: "paintings", path: `/creators/Benji/paintings`},
-        { title: "collections", path: `/creators/Benji/collections`},
+        { title: "notes", path: `/creators/Benji/notes`},
         // { title: "Login", path: "/auth/login"},
         // { title: "SignUp", path: "/auth/create"},
       ]
