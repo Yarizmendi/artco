@@ -12,7 +12,7 @@ import { Recorder } from "@/p5/Recorder"
 import { CanvasCapture } from 'canvas-capture'
 import { P5Provider } from "hooks/contexts/useP5"
 import { CreateSliders, HandleSliders, Sliders } from "../../../../comps/P5/helpers/Sliders"
-import { put } from "@vercel/blob"
+// import { put } from "@vercel/blob"
 
 export default function PathSKetch({
   title, vert, frag, displayName, description, notes,
@@ -34,12 +34,10 @@ export default function PathSKetch({
     let fft = null
     let song = null
     let songUrl = "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/songs/piano.mp3"
-    let spectrum = null
 
     let idx = 0
     let Overlay
     let seconds = 0
-    let MediaRecorder
 
     let arrayBuffers = []
     let startMillis = null
@@ -117,7 +115,6 @@ export default function PathSKetch({
       // PreloadSong()
       PreloadNoise()
       PreloadImages()
-      console.log(notes)
       PreloadFFMEPG()
       PreloadShaders()
     }
@@ -230,13 +227,21 @@ export default function PathSKetch({
     const duration = 6000
     let cur = notes[0]
     let nxt = notes[cur.next]
-    console.log("begin", cur, nxt)
-    // notes0, notes1
-    // notes1, notes2
-    // notes2, notes3
-    // notes3, notes0
-    // notes0, notes1
 
+    const HandleTimer = () => {
+      if (startMillis == null) {
+        startMillis = p.millis();
+      }
+
+      const elapsed = p.millis() - startMillis;
+      const t = p.map(elapsed, 0, duration, 0, 1);
+
+      if (t > 1) {
+        cur = notes[cur.next]
+        nxt = notes[cur.next]
+        startMillis = null;
+      }
+    }
 
     p.setup = () => {
       SetupCanvas()
@@ -340,20 +345,7 @@ export default function PathSKetch({
       return true
     }
 
-    const HandleTimer = () => {
-      if (startMillis == null) {
-        startMillis = p.millis();
-      }
-
-      const elapsed = p.millis() - startMillis;
-      const t = p.map(elapsed, 0, duration, 0, 1);
-
-      if (t > 1) {
-        cur = notes[cur.next]
-        nxt = notes[cur.next]
-        startMillis = null;
-      }
-    }
+  
 
     function HandleControls() {
 

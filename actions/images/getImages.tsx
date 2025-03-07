@@ -27,7 +27,7 @@ export async function getMongoImagesByUploaderId (uploaderId) {
 
 export async function getMongoImageById(imageId) {
     await connect()
-    return ImageModel.findOne({ _id: imageId }).select("-_id -uploaderId -__v").exec()
+    return ImageModel.findOne({ _id: imageId }).select("-_id -uploaderId -__v").lean().exec()
 }
 
 export async function getMongoImageByTitle(title) {
@@ -61,12 +61,17 @@ export async function getUserNotes({ uploaderId }: { uploaderId?: string }) {
         return ImageModel
         .find({ uploaderId })
         .find({ type: "note" })
-        .sort({ createdAt: "desc"}).exec()
+        .sort({ createdAt: "desc"})
+        .select("-_id -uploaderId -__v")
+        .exec()
     }
     else {
         return ImageModel
         .find({ type: "note" })
-        .sort({ createdAt: "desc"}).exec()
+        .limit(5)
+        .sort({ createdAt: "desc"})
+        .select("-_id -uploaderId -__v")
+        .exec()
     }
 }
 
