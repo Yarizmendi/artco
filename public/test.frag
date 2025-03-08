@@ -1,6 +1,6 @@
 
 
-precision mediump float;
+precision highp float;
 
 uniform float u_time;
 uniform float u_waves;

@@ -49,6 +49,23 @@ export default function PathSKetch({
     let isPlaying = false, isRecording = false
     let drawPlayTimer = 0, drawPauseTimer = 0
 
+    let mainCanvas
+    let pixelColor
+    let mappedPixelColor
+    
+    p.mouseClicked = () => {
+      pixelColor = mainCanvas.get( p.mouseX, p.mouseY )
+      mappedPixelColor = [
+        p.map( pixelColor[0], 0, 255, 0, 1, true ), 
+        p.map( pixelColor[1], 0, 255, 0, 1, true ), 
+        p.map( pixelColor[2], 0, 255, 0, 1, true ), 
+        p.map( pixelColor[3], 0, 255, 0, 1, true ), 
+      ]
+      console.log(pixelColor)
+      console.log(mappedPixelColor)
+      ActiveShader.setUniform( 'u_pixel', mappedPixelColor );
+    }
+
     const PreloadSong = () => {
       // @ts-ignore
       p.soundFormats('mp3', 'ogg')
@@ -69,6 +86,7 @@ export default function PathSKetch({
 
     const PreloadShaders = () => {
       ActiveShader = p.loadShader(vert, frag) 
+      ActiveShader.setUniform( "u_pixel", [ .35, .35, .35, 1 ] )
     }
     
     const PreloadFFMEPG = async () => {
@@ -120,7 +138,7 @@ export default function PathSKetch({
     const SetupCanvas = () => {
       p.frameRate(frameRate)
       // ensures canvas is sized to parent on all screen sizes
-      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").addClass("dark:border-[30px] dark:border-zinc-900 dark:rounded-xl")
+      mainCanvas = p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").class("min-h-[500px] dark:border-[30px] dark:border-zinc-900 dark:rounded-xl")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
     }
 
