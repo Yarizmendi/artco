@@ -11,7 +11,7 @@ export default async function SavedSketches({ params }) {
       shaderOptions = shaderOptions.splice(1)
     return ( 
         <NoSSR>
-           <Sketch frag={frag} shaderOptions={shaderOptions}
+           <Sketch frag={frag} notes={[]} shaderOptions={shaderOptions}
            images={images}
            vert={vert}  transitions={transitions} 
            title={"preview"} displayName={displayName} description={description} 

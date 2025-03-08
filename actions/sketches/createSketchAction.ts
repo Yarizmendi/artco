@@ -10,6 +10,7 @@ export async function createSketchAction ( formData: FormData ) {
     const image = await getMongoImageById(imageId)
 
     const sketchInputBody = {
+        // @ts-ignore
         blob: image.blob,
         vert: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/shaders/basic.vert",
         frag: formData.get("frag"),

@@ -11,8 +11,8 @@ export const metadata = {
 #### This error comes when getting data from the mongo database using mongoose schema instead of using swr toJson method. 
 - Use `toObject()` to resolve on client side
 - use .lean() before .exec() on server side when querying by mongoose schema
-Warning: Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props.
-  [{$__: ..., $isNew: false, _doc: ...}]
+- Warning: Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props.
+
 
 ##### Can only render plain object error 
 - caused by server responses containing data types that are not React Serializable
