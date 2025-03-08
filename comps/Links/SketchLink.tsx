@@ -6,7 +6,7 @@ import { useState } from "react"
 import { updateSketchAction } from "actions/sketches/updateSketchAction"
 import { ActionButton } from "../Buttons/ActionButton"
 import { Input } from "../Forms/FormInput"
-import { SketchDeleteIcon } from "../sketches/buttons/SketchDeleteIcon"
+import { SketchDeleteIcon } from "@/comps/Buttons/SketchDeleteIcon"
 
 export default function SketchLink({ 
   id, 
