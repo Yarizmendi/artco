@@ -1,7 +1,7 @@
 
 'use client'
 import { deleteCollectionAction, deleteImageAction } from 'actions/images/deleteImageAction'
-import { ICONLINED } from 'data/css'
+
 
 export const ImageDeleteIcon = ({ id, blob, uploaderId, mutate }: { id?, uploaderId?,  blob?, mutate? }) => {
   return (
@@ -11,7 +11,7 @@ export const ImageDeleteIcon = ({ id, blob, uploaderId, mutate }: { id?, uploade
         await deleteImageAction(id, blob, uploaderId)
         mutate()
       }}> 
-      <span className={ICONLINED + " text-[16px] p-1" }>{"delete"}</span>
+      <span className={"material-symbols-outlined text-[16px] p-1" }>{"delete"}</span>
    </button>
   )
 }
@@ -24,7 +24,7 @@ export const CollectionDeleteIcon = ({ id, uploaderId, images, mutate }: { id?, 
         await deleteCollectionAction({ id, images, uploaderId })
         mutate()
       }}> 
-      <span className={ICONLINED + " text-[16px] p-1" }>{"delete"}</span>
+      <span className={"material-symbols-outlined text-[16px] p-1" }>{"delete"}</span>
    </button>
   )
 }

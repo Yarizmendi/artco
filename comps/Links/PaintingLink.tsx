@@ -5,7 +5,6 @@ import Link from "next/link"
 import { ImageDeleteIcon } from "../Buttons/ImageDeleteIcon"
 import { Input } from "../Forms/FormInput"
 import { useState } from "react"
-import { ICONLINED } from "data/css"
 import { updateImageAction } from "actions/images/updateImageAction"
 import { ActionButton } from "../Buttons/ActionButton"
 
@@ -77,7 +76,7 @@ export function Painting({
       <input name={"id"} defaultValue={id} hidden />
 
       <div className="flex items-center dark:bg-slate-950">
-        <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
+        <span onClick={() => setIsEditing(!isEditing)} className={"material-symbols-outlined text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
         <Input title="title" value={title} placeholder="title"/>
       </div>
 

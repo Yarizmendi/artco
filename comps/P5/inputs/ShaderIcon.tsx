@@ -1,6 +1,6 @@
 
 import classNames from "classnames"
-import { ICONLINED } from "data/css"
+import { ICONLINED } from "data/constants"
 
 export const shaderIconWithLabelStyle = classNames(
     "rounded cursor-pointer",

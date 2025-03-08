@@ -4,7 +4,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { updateSketchAction } from "actions/sketches/updateSketchAction"
-import { ICONLINED } from "data/css"
 import { ActionButton } from "../Buttons/ActionButton"
 import { Input } from "../Forms/FormInput"
 import { SketchDeleteIcon } from "../sketches/buttons/SketchDeleteIcon"
@@ -51,7 +50,7 @@ export default function SketchLink({
         <input name={"id"} defaultValue={id} hidden />
 
         <div className="flex items-center bg-slate-200 dark:bg-slate-950">
-          <span onClick={() => setIsEditing(!isEditing)} className={ICONLINED + " text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
+          <span onClick={() => setIsEditing(!isEditing)} className={"material-symbols-outlined text-[20px] p-1 cursor-pointer" }>{ isEditing ? "cancel" : "edit" }</span>
           <Input title="title" value={title} placeholder="title"/>
         </div>
   

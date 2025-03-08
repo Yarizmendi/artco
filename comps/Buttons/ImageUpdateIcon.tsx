@@ -1,7 +1,7 @@
 
 
 import classNames from 'classnames'
-import { ICONLINED } from 'data/css'
+import { ICONLINED } from 'data/constants'
 // @ts-ignore
 import { useFormStatus } from 'react-dom'
 
