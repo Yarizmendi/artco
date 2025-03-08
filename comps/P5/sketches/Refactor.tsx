@@ -10,7 +10,7 @@ import { fetchFile } from "@ffmpeg/util"
 import { Controls } from "@/p5/Controls"
 import { CanvasCapture } from 'canvas-capture'
 import { P5Provider } from "hooks/contexts/useP5"
-import { CreateSliders, HandleSliders, Sliders } from "../../../../comps/P5/helpers/Sliders"
+import { CreateSliders, HandleSliders, Sliders } from "@/p5/helpers/Sliders"
 // import { put } from "@vercel/blob"
 
 export default function PathSKetch({

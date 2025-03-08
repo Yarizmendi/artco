@@ -1,6 +1,6 @@
 import { getMongoImageById, getUserNotes } from "actions/images/getImages"
 import { getPreviewPaintingSketch } from "actions/sketches/getSketchActions"
-import Sketch from "../../Refactor"
+import Sketch from "@/p5/sketches/Refactor"
 import { getVercelShadersAction } from "actions/blobs/getVercelShadersAction"
 import NoSSR from "app/NoSSR"
 

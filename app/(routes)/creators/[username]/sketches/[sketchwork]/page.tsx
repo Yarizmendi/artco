@@ -1,7 +1,7 @@
 
 import { getVercelShadersAction } from "actions/blobs/getVercelShadersAction"
 import { getSketchById } from "actions/sketches/getSketchActions"
-import Sketch from "../../Refactor"
+import Sketch from "@/p5/sketches/Refactor"
 import NoSSR from "app/NoSSR"
 
 export default async function SavedSketches({ params }) {
