@@ -1,7 +1,6 @@
 
 
 import classNames from 'classnames'
-import { ICONLINED } from 'data/constants'
 // @ts-ignore
 import { useFormStatus } from 'react-dom'
 
@@ -36,7 +35,7 @@ export const ImageUpdateIcon = ({
       <button disabled={pending} type={btnType} className={actionBtnStyle} onClick={svrAction}>
         { pending 
           ? loadingTxt
-          : <span className={ICONLINED + " text-[20px] p-1" }>{iconName}</span>
+          : <span className={"material-symbols-outlined text-[20px] p-1" }>{iconName}</span>
         }
       </button>
     </div>
