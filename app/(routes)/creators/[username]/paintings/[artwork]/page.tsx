@@ -15,7 +15,7 @@ function createImagesLinkedList({ transitionImages }) {
   for (let i=0; i<amendedList.length; i++) {
     let imageNode = amendedList[i].toObject()
     if ( i === amendedList.length-1) imageNode.next = 0
-    else imageNode.next = i
+    else imageNode.next = i+1
     imageNodes.push(imageNode)
   } 
 
