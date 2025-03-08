@@ -87,7 +87,6 @@ export default function PathSKetch({
 
     const PreloadShaders = () => {
       ActiveShader = p.loadShader(vert, frag) 
-      ActiveShader.setUniform( "u_pixel", [ .35, .35, .35, 1 ] )
     }
     
     const PreloadFFMEPG = async () => {
@@ -265,6 +264,7 @@ export default function PathSKetch({
       CreateShaderDropdown({ ActiveShader, shaderOptions})
       ActiveShader.setUniform("u_first_image", cur["Note"])
       ActiveShader.setUniform("u_second_image", nxt["Note"])
+      ActiveShader.setUniform( "u_pixel", [.35, .35, .35, .35])
     }
 
 
