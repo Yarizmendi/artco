@@ -8,7 +8,6 @@ import { useRef, useState } from "react"
 import { toBlobURL } from "@ffmpeg/util"
 import { fetchFile } from "@ffmpeg/util"
 import { Controls } from "@/p5/Controls"
-import { Recorder } from "@/p5/Recorder"
 import { CanvasCapture } from 'canvas-capture'
 import { P5Provider } from "hooks/contexts/useP5"
 import { CreateSliders, HandleSliders, Sliders } from "../../../../comps/P5/helpers/Sliders"
@@ -38,7 +37,6 @@ export default function PathSKetch({
     let idx = 0
     let Overlay
     let seconds = 0
-    let MediaRecorder
 
     let arrayBuffers = []
     let startMillis = null
@@ -47,7 +45,6 @@ export default function PathSKetch({
 
     const frameRate = 60
     let fragSelect = null
-    let changeEvery = 2500
     let ActiveShader = null
     let isPlaying = false, isRecording = false
     let drawPlayTimer = 0, drawPauseTimer = 0
@@ -111,7 +108,6 @@ export default function PathSKetch({
       setIsLoading(false);
     }
 
- 
     p.preload = () => {
       // PreloadSong()
       PreloadNoise()
@@ -124,15 +120,13 @@ export default function PathSKetch({
     const SetupCanvas = () => {
       p.frameRate(frameRate)
       // ensures canvas is sized to parent on all screen sizes
-      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").class("min-h-[500px] dark:border-[40px] dark:border-zinc-900 dark:rounded-xl")
+      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").class("min-h-[500px] dark:border-[50px] dark:border-zinc-900 dark:rounded-xl")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
     }
 
     const CreateControls = () => {
-      MediaRecorder = Recorder(title, ffmpegRef.current, videoRef)
       Overlay = Controls(p)
       
-
       Overlay.playBtn.mouseClicked(() => {
         if (!isPlaying) {
           song && song.play()
@@ -166,16 +160,16 @@ export default function PathSKetch({
         p.saveCanvas(title + p.frameCount)
       })
       
-    // Initialize and pass in canvas.
-    CanvasCapture.init(
-      // @ts-ignore
-      document.getElementById('defaultCanvas0'),
-      { 
-        verbose: true,
-        showAlerts: true, 
-        showDialogs: true,
-       }, 
-    );
+      // Initialize and pass in canvas.
+      CanvasCapture.init(
+        // @ts-ignore
+        document.getElementById('defaultCanvas0'),
+        { 
+          verbose: true,
+          showAlerts: true, 
+          showDialogs: true,
+        }, 
+      );
 
       Overlay.recordBtn.mouseClicked(() => {
         if (!isRecording) {
@@ -210,22 +204,22 @@ export default function PathSKetch({
     }
 
     const CreateShaderDropdown = ({ ActiveShader, shaderOptions }): { fragSelect } => {
-     // create a fragment shader input switcher
-     p.shader(ActiveShader)
+      // create a fragment shader input switcher
+      p.shader(ActiveShader)
+      fragSelect = p.createSelect().parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
+      fragSelect.selected("/test.frag")
 
-     fragSelect = p.createSelect().parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
-     fragSelect.selected("/test.frag")
-
-     shaderOptions && shaderOptions.map(shader => {
+      shaderOptions && shaderOptions.map(shader => {
         const shaderName = shader.pathname.split("/")[1]
         const shaderUrl = shader.url
         return fragSelect.option(shaderName, shaderUrl)
-     })
-     fragSelect.changed(() => HandleShaderChange(fragSelect.value()))
-     return fragSelect
+      })
+      
+      fragSelect.changed(() => HandleShaderChange(fragSelect.value()))
+      return fragSelect
     }
 
-    const duration = 6000
+    const duration = 10000
     let cur = notes[0]
     let nxt = notes[cur.next]
 
@@ -404,15 +398,6 @@ export default function PathSKetch({
     }
 
     
-    function HandleTransitions() {
-      if (seconds > changeEvery && images.length-2 > idx) {
-        idx+=1
-        changeEvery += 2500
-        ActiveShader.setUniform("u_timeout", (p.millis() - drawPlayTimer))
-      } 
-    }
-
-    
     function HandleSongDraw(song) {
       let waveform = fft.waveform()
       amp = fft.getEnergy("bass", "treble") 
@@ -462,9 +447,9 @@ export default function PathSKetch({
 
         <div className="flex gap-8 items-center">
           {/* <p ref={messageRef}></p> */}
-          <video ref={videoRef} id="mp4" controls className="w-[200px] h-[200px]"></video>
+          <video ref={videoRef} id="mp4" hidden controls className="w-[200px] h-[200px]"></video>
            {/* @ts-ignore */}
-          <Image id="gif" ref={gifRef} alt={"gif"} width={100} height={100} className="w-[200px] h-[170px]"></Image>
+          <Image id="gif" ref={gifRef} alt={"gif"} hidden width={100} height={100} className="w-[200px] h-[170px]"></Image>
         </div>
 
       </div>

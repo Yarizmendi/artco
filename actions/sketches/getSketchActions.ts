@@ -129,13 +129,39 @@ export function getPreviewPaintingSketch(title) {
             {
                 "icon": "zoom_in_map",
                 "type": "slider",
-                "label": "zoom",
-                "uniform": "u_zoom",
+                "label": "duration",
+                "uniform": "u_duration",
                 "settings": {
-                    "min": 0,
-                    "max": 120,
-                    "step": 1,
-                    "value": 60
+                    "min": 0.01,
+                    "max": 1,
+                    "step": .01,
+                    "value": .33
+                },
+                "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            },
+            {
+                "icon": "zoom_in_map",
+                "type": "slider",
+                "label": "threshold",
+                "uniform": "u_threshold",
+                "settings": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": .01,
+                    "value": .32
+                },
+                "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
+            },
+            {
+                "icon": "zoom_in_map",
+                "type": "slider",
+                "label": "range",
+                "uniform": "u_range",
+                "settings": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": .01,
+                    "value": .25
                 },
                 "description": "Implements zooming into the upper left corner of the canvas. Value controls how long the zoom should run.",
             }
