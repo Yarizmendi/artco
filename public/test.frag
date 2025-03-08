@@ -2,6 +2,7 @@
 
 precision highp float;
 
+uniform vec4 u_pixel;
 uniform float u_time;
 uniform float u_waves;
 
@@ -33,7 +34,9 @@ void main () {
         noise.r
     );
 
-    if ( ogCol.r > .35 && ogCol.g > .35 && ogCol.b > .35 ) {
+    // if ( ogCol.r > .35 && ogCol.g > .35 && ogCol.b > .35 ) {
+    if ( ogCol.r > u_pixel.r && ogCol.g > u_pixel.g && ogCol.b > u_pixel.b ) {
+    //   if ( ogCol.r < u_pixel.r && ogCol.g < u_pixel.g && ogCol.b < u_pixel.b ) {
         pos.x += sin( pos.x * u_waves + u_time ) / ( 60.0 - u_waves + u_time );
         pos.y += sin( pos.x * u_waves + u_time ) / ( 60.0 - u_waves + u_time );
 
@@ -43,8 +46,8 @@ void main () {
     } 
     else {
       
-            // pos.y += sin( pos.y * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
-            // pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
+            pos.y += sin( pos.y * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
+            pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
         
         col = texture2D( u_texture, pos);
     }

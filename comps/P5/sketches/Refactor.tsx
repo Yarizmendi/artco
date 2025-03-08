@@ -54,6 +54,7 @@ export default function PathSKetch({
     let mappedPixelColor
     
     p.mouseClicked = () => {
+      if ( p.mouseX < Parent.offsetWidth && p.mouseY < Parent.offsetHeight )
       pixelColor = mainCanvas.get( p.mouseX, p.mouseY )
       mappedPixelColor = [
         p.map( pixelColor[0], 0, 255, 0, 1, true ), 
