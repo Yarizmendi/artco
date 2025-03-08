@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BlobsPage from "app/(healthchecks)/blobs/page";
+import BlobsPage from "app/(routes)/blobs/page";
 
 export default function LandingPage() {
     
