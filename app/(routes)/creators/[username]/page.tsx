@@ -5,7 +5,7 @@ import Image from "next/image"
 const routes = [
     { title: "artbook", path: "/sketches", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/paintings/ballerina.png" },
     { title: "paintings", path: "/paintings", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/paintings/alice_falls.webp" },
-    { title: "notes", path: "/notes", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/paintings/preview5750.png" },
+    { title: "notes", path: "/notes", blob: "https://qfyy9q32bnwxmali.public.blob.vercel-storage.com/paintings/Screenshot_17-4-2024_55459_www.canva.com.jpeg" },
 ]
 
 export default function ArtistPage({ params }) {

@@ -2,7 +2,7 @@ import { LogoName } from './Logo'
 import classNames from 'classnames'
 import { ThemeButton } from './ThemeButton'
 import { AuthedLinks } from './AuthedLinks'
-import UserNavAvi from '../Avatars/UserNavAvi'
+import UserNavAvi from './UserNavAvi'
 
 export function NavBar() {
   return (

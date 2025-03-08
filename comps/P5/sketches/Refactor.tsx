@@ -120,7 +120,7 @@ export default function PathSKetch({
     const SetupCanvas = () => {
       p.frameRate(frameRate)
       // ensures canvas is sized to parent on all screen sizes
-      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").class("min-h-[500px] dark:border-[50px] dark:border-zinc-900 dark:rounded-xl")
+      p.createCanvas(Parent.offsetWidth, Parent.offsetHeight, p.WEBGL).parent("Parent").addClass("dark:border-[30px] dark:border-zinc-900 dark:rounded-xl")
       p.resizeCanvas(Parent.offsetWidth, Parent.offsetHeight)
     }
 
@@ -206,7 +206,7 @@ export default function PathSKetch({
     const CreateShaderDropdown = ({ ActiveShader, shaderOptions }): { fragSelect } => {
       // create a fragment shader input switcher
       p.shader(ActiveShader)
-      fragSelect = p.createSelect().parent("menu").addClass("bg-slate-200 dark:bg-slate-950")
+      fragSelect = p.createSelect().parent("title").addClass("bg-slate-200 dark:bg-slate-950 pl-2")
       fragSelect.selected("/test.frag")
 
       shaderOptions && shaderOptions.map(shader => {
@@ -431,18 +431,18 @@ export default function PathSKetch({
   return (
     <P5Provider sketch={sketch}>
       <div className={classnames(
-       "flex flex-col grow p-6 w-8/12 gap-4"
+       "flex flex-col grow p-4 w-full lg:w-8/12 gap-4 w-full"
       )}>
-        <div>
+        <div id="title" className="flex gap-6">
           {(displayName) && <p className={classnames("text-lg uppercase")}>{displayName || "Preview"} sketch</p>}
         </div>
 
-        <div id="menu" className={classnames("flex flex-row-reverse items-center gap-4")} />
+        <div id="menu" className={classnames("flex flex-row-reverse items-center gap-4 w-full")} />
          <Sliders inputs={inputs} />
      
         <div className={classnames(
-         "flex gap-4 overflow-auto w-full"
-          )}> {images && images.concat(notes).map((img, key) => <Image className="h-[175px] w-[170px]" key={key} src={img.blob} width={175} alt={"img"} height={175} placeholder={"blur"} blurDataURL={"blur64"} />)}
+         "flex overflow-auto"
+          )}> {images && images.concat(notes).map((img, key) => <Image className="h-[150px] w-[140px] p-4" key={key} src={img.blob} width={175} alt={"img"} height={175} placeholder={"blur"} blurDataURL={"blur64"} />)}
         </div> 
 
         <div className="flex gap-8 items-center">
