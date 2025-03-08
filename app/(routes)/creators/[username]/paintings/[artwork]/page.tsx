@@ -9,7 +9,7 @@ function createImagesLinkedList({ transitionImages }) {
    * creates a linked list for transitioning through images in a closed loop for p5 sketch.
    * Mongoose returns an iterable of mongo documents, so must convert to js primatives
    */
-  const amendedList: any[] = transitionImages.splice(1)
+  const amendedList: any[] = transitionImages
   const imageNodes: Array<object> = []
 
   for (let i=0; i<amendedList.length; i++) {
