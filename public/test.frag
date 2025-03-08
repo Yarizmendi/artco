@@ -34,8 +34,8 @@ void main () {
     );
 
     if ( ogCol.r > .35 && ogCol.g > .35 && ogCol.b > .35 ) {
-        pos.x += sin( pos.x * u_waves + u_time ) / ( 200.0 - u_waves + u_time );
-        // pos.y += sin( pos.x * u_waves + u_time ) / ( 60.0 - u_waves + u_time );
+        pos.x += sin( pos.x * u_waves + u_time ) / ( 60.0 - u_waves + u_time );
+        pos.y += sin( pos.x * u_waves + u_time ) / ( 60.0 - u_waves + u_time );
 
         firstImage = texture2D( u_first_image, pos );
         secondImage = texture2D( u_second_image, pos );
