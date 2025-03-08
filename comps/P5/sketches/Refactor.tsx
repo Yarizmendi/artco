@@ -54,17 +54,16 @@ export default function PathSKetch({
     let mappedPixelColor
     
     p.mouseClicked = () => {
-      if ( p.mouseX < Parent.offsetWidth && p.mouseY < Parent.offsetHeight )
-      pixelColor = mainCanvas.get( p.mouseX, p.mouseY )
-      mappedPixelColor = [
-        p.map( pixelColor[0], 0, 255, 0, 1, true ), 
-        p.map( pixelColor[1], 0, 255, 0, 1, true ), 
-        p.map( pixelColor[2], 0, 255, 0, 1, true ), 
-        p.map( pixelColor[3], 0, 255, 0, 1, true ), 
-      ]
-      console.log(pixelColor)
-      console.log(mappedPixelColor)
-      ActiveShader.setUniform( 'u_pixel', mappedPixelColor );
+      if ( p.mouseX < Parent.offsetWidth && p.mouseY < Parent.offsetHeight ) {
+        pixelColor = mainCanvas.get( p.mouseX, p.mouseY )
+        mappedPixelColor = [
+          p.map( pixelColor[0], 0, 255, 0, 1, true ), 
+          p.map( pixelColor[1], 0, 255, 0, 1, true ), 
+          p.map( pixelColor[2], 0, 255, 0, 1, true ), 
+          p.map( pixelColor[3], 0, 255, 0, 1, true ), 
+        ]
+        ActiveShader.setUniform( 'u_pixel', mappedPixelColor );
+      }
     }
 
     const PreloadSong = () => {
