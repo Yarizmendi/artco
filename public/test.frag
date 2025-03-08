@@ -46,8 +46,8 @@ void main () {
     } 
     else {
       
-            pos.y += sin( pos.y * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
-            pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
+            // pos.y += sin( pos.y * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
+            // pos.x += sin( pos.x * u_waves + u_time ) / ( 30.0 - u_waves + u_time );
         
         col = texture2D( u_texture, pos);
     }
