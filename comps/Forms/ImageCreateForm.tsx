@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { Input } from './FormInput'
-import { ShaderSelect } from "./ImageSelect"
 import { ActionButton } from '../Buttons/ActionButton'
 import { uploadImageAction } from 'actions/images/createImage'
  

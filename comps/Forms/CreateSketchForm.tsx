@@ -3,7 +3,6 @@
 import { Input } from "@/comps/Forms/FormInput"
 import { ActionButton } from "@/comps/Buttons/ActionButton"
 import { createSketchAction } from "actions/sketches/createSketchAction"
-import { ImageSelect } from "./ImageSelect"
 import { UseSketches } from "../../app/api/sketches/UseSketches"
 
 export function CreateSketchForm ({ user }) {
@@ -19,7 +18,6 @@ export function CreateSketchForm ({ user }) {
         <Input title={"frag"} value={"/concept.frag"} />
         <Input title={"displayName"} value={"new test"} />
         <Input title={"description"} value={"test description"} />
-        <ImageSelect uploaderId={user} />
         <ActionButton idleTxt="create sketch" btnType={"disabled"}/>
         </form>
     )
