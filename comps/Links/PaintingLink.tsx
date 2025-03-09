@@ -54,7 +54,7 @@ export function Painting({
     // onClick={selectionHandler} 
     >
       <Link 
-        href={`paintings/${id}`} 
+        href={`/artbook/${id}`} 
         replace={true}
         prefetch={false} > 
         <Image 
